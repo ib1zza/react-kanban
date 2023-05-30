@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import s from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../../context/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { logIn } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    navigate("/");
+    e.preventDefault();
+    try {
+      await logIn(email, password);
+      navigate("/");
+    } catch (error: any) {
+      console.log(error);
+      setError(error.message);
+    }
   };
   return (
     <div className={s.wrapper}>
       <div className={s.login}>
         <div className="max-w-[320px] mx-auto py-16">
           <h1 className="text-3xl font-bold">Вход</h1>
-          {error ? <p className="p-3 bg-red-400 my-2"> {error}</p> : null}
+          {error ? <p className=""> {error}</p> : null}
           <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
             <p className={s.login__label}>E-mail</p>
             <input
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={s.login__input}
               type="email"
@@ -28,6 +38,7 @@ const Login = () => {
 
             <p className={s.login__label}>Password</p>
             <input
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               className={s.login__input}
               type="password"
