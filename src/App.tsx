@@ -1,12 +1,13 @@
 import "./App.css";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import TaskPage from "./components/TaskPage/TaskPage";
-import Layout from "./components/Layout/Layout";
-import TaskColumn from "./components/TaskColumn";
+import TaskPage from "./pages/Home/components/TaskPage/TaskPage";
+import Layout from "./pages/Home/components/Layout/Layout";
+import TaskColumn from "./pages/Home/components/TaskColumn";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import { AuthContextProvider } from "./context/AuthContext";
+import Home from "./pages/Home";
 function getLocalStorageItem(key: any) {
   return JSON.parse(localStorage.getItem(key) as any);
 }
@@ -79,79 +80,7 @@ function App() {
   return (
     <AuthContextProvider>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Layout
-              active={tasksAll[TYPES.Backlog].length}
-              finished={tasksAll[TYPES.Finished].length}
-            />
-          }
-        >
-          <Route
-            index
-            element={
-              <div className={"blocks__container"}>
-                <div className={"block"}>
-                  <TaskColumn
-                    title={TYPES.Backlog}
-                    tasks={tasksAll[TYPES.Backlog]}
-                    onAdd={addTaskToBacklog}
-                    withSelect={undefined}
-                    prevList={undefined}
-                  />
-                </div>
-                <div className={"block"}>
-                  <TaskColumn
-                    title={TYPES.Ready}
-                    prevList={tasksAll[TYPES.Backlog]}
-                    tasks={tasksAll[TYPES.Ready]}
-                    onAdd={(id: any) =>
-                      insertTaskToList(TYPES.Backlog, TYPES.Ready, id)
-                    }
-                    withSelect
-                  />
-                </div>
-                <div className={"block"}>
-                  <TaskColumn
-                    title={TYPES.Inprogress}
-                    prevList={tasksAll[TYPES.Ready]}
-                    tasks={tasksAll[TYPES.Inprogress]}
-                    onAdd={(id: any) =>
-                      insertTaskToList(TYPES.Ready, TYPES.Inprogress, id)
-                    }
-                    withSelect
-                  />
-                </div>
-                <div className={"block"}>
-                  <TaskColumn
-                    title={TYPES.Finished}
-                    prevList={tasksAll[TYPES.Inprogress]}
-                    tasks={tasksAll[TYPES.Finished]}
-                    onAdd={(id: any) =>
-                      insertTaskToList(TYPES.Inprogress, TYPES.Finished, id)
-                    }
-                    withSelect
-                  />
-                </div>
-              </div>
-            }
-          />
-          <Route
-            path="tasks/:id"
-            element={
-              <TaskPage
-                tasks={[
-                  ...Object.keys(tasksAll).reduce(
-                    (acc, key) => acc.concat(tasksAll[key]),
-                    []
-                  ),
-                ]}
-                changeDescription={changeDescription}
-              />
-            }
-          />
-        </Route>
+        <Route path="/*" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
       </Routes>

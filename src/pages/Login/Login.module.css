@@ -25,6 +25,7 @@
   width: 100%;
 }
 .login__btn {
+  border: 1px solid black;
   margin-top: 4px;
   padding: 8px;
   width: 100%;
