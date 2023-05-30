@@ -1,0 +1,68 @@
+ .header {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0067A3;
+    height: 55px;
+    font-size: 28px;
+    color: white;
+ }
+
+ .footer {
+   padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0067A3;
+    font-size: 18px;
+    height: 55px;
+    color: white;
+ }
+
+ .tasksInfo > span {
+    margin-right: 36px;
+ }
+
+ .header__cabinet {
+   cursor: pointer;
+   background-color: transparent;
+   border: none;
+   display: flex;
+   align-items: center;
+ }
+
+ .header__cabinet > .avatar {
+   margin-right: 6px;
+   position: relative;
+ }
+ 
+
+ .menu {
+   width: 140px;
+   padding: 8px 7px;
+   background-color: #fff;
+   border-radius: 5px;
+   position: absolute;
+   bottom: -60px;
+   left: -80px;
+   z-index: 10;
+ }
+
+ .menu > div {
+   text-align: left;
+   font-weight: 400;
+   font-size: 14px;
+   line-height: 16px;
+   cursor: pointer;
+   color: #000000;
+ }
+
+ .menu > div:hover {
+   color: #676767;
+ 
+ }
+
+ .menu>div:first-child {
+   margin-bottom: 7px;
+ }

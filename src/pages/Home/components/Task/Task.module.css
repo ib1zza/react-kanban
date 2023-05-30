@@ -1,0 +1,16 @@
+.container{
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    padding: 7px 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+  font-size: 18px;
+}
+
+.button {
+  background-color: transparent;
+  padding: 5px 10px;
+}

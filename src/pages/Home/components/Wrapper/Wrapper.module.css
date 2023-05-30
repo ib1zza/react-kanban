@@ -1,0 +1,8 @@
+.wrapper {
+ 
+    padding: 22px 25px;
+    width: 100%;
+    min-height: calc(100vh - 110px);
+
+    background-color: #0079BF;
+}
