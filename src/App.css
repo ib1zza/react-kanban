@@ -4,7 +4,20 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
 }
+
+button {
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
 
 body {
   font-family: 'Roboto', sans-serif;
