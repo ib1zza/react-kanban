@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "@ramonak/react-progress-bar";
 import s from "./SignUp.module.css";
-import { UserAuth } from "../../context/AuthContext";
-import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   let navigate = useNavigate();
@@ -12,29 +10,16 @@ const SignUp = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [dbPassword, setDbPassword] = useState("");
-  const { user, signUp } = UserAuth();
   let [name, setName] = useState("");
   let [error, setError] = useState("");
   useEffect(() => {
     setProgress((step / 3) * 100);
   }, [step]);
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      await signUp(email, password);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const handleContinue = async (e: any) => {
     console.log(email);
     switch (step) {
       case 3: {
-        handleSubmit(e);
-        if (user) {
-          await updateProfile(user, { displayName: name });
-        }
         navigate("/");
         break;
       }
@@ -50,6 +35,9 @@ const SignUp = () => {
         setStep(step + 1);
         break;
       }
+      // default: {
+      //   setStep(step + 1);
+      // }
     }
   };
   return (
@@ -101,12 +89,14 @@ const SignUp = () => {
             )}
             {step === 3 && (
               <>
-                <div className="">Для чего вам нужен сервис?</div>
-                <select className={s.signup__input} defaultValue={"practice"}>
-                  <option value="practice">Для практики</option>
-                  <option value="work">Для работы</option>
-                  <option value="learning">Для учёбы</option>
-                </select>
+                <div className="">Как вас будут звать?</div>
+                <input
+                  className={s.signup__input}
+                  type="password"
+                  placeholder="Имя"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </>
             )}
             <button
