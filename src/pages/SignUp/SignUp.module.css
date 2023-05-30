@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+}
+.signup {
+  border: 1px solid black;
+  padding: 40px;
+  margin: auto;
+  width: 500px;
+}
+.signup__title {
+  margin-bottom: 16px;
+}
+.signup__progress {
+  margin-bottom: 16px;
+}
+.signup__body {
+  display: flex;
+  flex-direction: column;
+}
+.signup__input {
+  margin-top: 8px;
+  padding: 16px;
+  width: 100%;
+}
+.signup__btn {
+  margin-top: 4px;
+  padding: 8px;
+  width: 100%;
+}
