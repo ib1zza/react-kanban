@@ -2,6 +2,8 @@
     background-color: #EBECF0;
     border-radius: 10px;
     padding: 12px;
+  position: relative;
+  padding-top: 32px;
 }
 
 .title {
@@ -57,4 +59,16 @@
     display: flex;
     outline: none;
     border: none;
+}
+
+.headerColor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.7;
+  height: 20px;
+  border-radius: 10px;
+  /* TODO: color will came from server and user will be able to choose it */
+  background-color: #bf004c;
 }
