@@ -6,7 +6,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const { logIn } = UserAuth();
   const navigate = useNavigate();
 
@@ -22,9 +21,17 @@ const Login = () => {
   };
   return (
     <div className={s.wrapper}>
+      <div className={s.center}>
+        <h1>
+          <span>Awesome Kanban Board</span>
+          <span>Awesome Kanban Board</span>
+          <span>Awesome Kanban Board</span>
+        </h1>
+      </div>
+
       <div className={s.login}>
         <div className="max-w-[320px] mx-auto py-16">
-          <h1 className="text-3xl font-bold">Вход</h1>
+          <h1 className={s.login__title}>Вход</h1>
           {error ? <p className=""> {error}</p> : null}
           <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
             <p className={s.login__label}>E-mail</p>
@@ -47,15 +54,17 @@ const Login = () => {
             />
 
             <button className={s.login__btn}>Войти</button>
-            <div className="flex justify-between items-center text-sm text-gray-600">
+            <div className="">
               <p>
                 <input className={s.login__remember} type="checkbox" />
                 Запомнить меня
               </p>
             </div>
-            <p className="py-8">
-              <span className="text-gray-600">Новенький?</span>
-              <Link to="/signup">Зарегистрироваться</Link>
+            <p className={s.login__linkArea}>
+              <span className={s.login__linkArea_descr}>Новенький?</span>
+              <Link to="/signup" className={s.login__linkArea_link}>
+                Зарегистрироваться
+              </Link>
             </p>
           </form>
         </div>

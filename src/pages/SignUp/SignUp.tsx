@@ -54,6 +54,13 @@ const SignUp = () => {
   };
   return (
     <div className={s.wrapper}>
+      <div className={s.center}>
+        <h1>
+          <span>Awesome Kanban Board</span>
+          <span>Awesome Kanban Board</span>
+          <span>Awesome Kanban Board</span>
+        </h1>
+      </div>
       <div className={s.signup}>
         <div className="">
           {step === 1 && <h1 className={s.signup__title}>Регистрация</h1>}
@@ -64,7 +71,7 @@ const SignUp = () => {
               <ProgressBar
                 completed={progress}
                 isLabelVisible={false}
-                bgColor="#94b591"
+                bgColor="#DE1D6E"
               />
             </div>
             {step === 1 && (
