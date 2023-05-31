@@ -1,6 +1,5 @@
 .container {
   background-color: var(#{--columnBg-default});
-
   border-radius: 10px;
   padding: 12px;
   position: relative;
@@ -27,8 +26,20 @@
       color: #000000;
     }
   }
+
+  .inputColumnTitle {
+    background-color: transparent;
+  }
 }
 
+.createColumnTitle {
+
+}
+
+.createColumnButtons {
+  display: flex;
+  justify-content: space-between;
+}
 
 .button {
   color: #5E6C84;
