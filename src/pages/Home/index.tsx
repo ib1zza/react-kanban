@@ -1,9 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import TaskPage from "./components/TaskPage/TaskPage";
-import Login from "../Login/Login";
-import SignUp from "../SignUp/SignUp";
-import { AuthContextProvider } from "../../context/AuthContext";
 import TaskColumn from "./components/TaskColumn";
 import Layout from "./components/Layout/Layout";
 
@@ -28,8 +25,6 @@ const TYPES = {
   Inprogress: "In progress",
   Finished: "Finished",
 };
-
-
 
 const Home = () => {
   const [tasksAll, setTasksAll] = React.useState(
