@@ -1,5 +1,6 @@
 .container {
-  background-color: #EBECF0;
+  background-color: var(#{--columnBg-default});
+
   border-radius: 10px;
   padding: 12px;
   position: relative;
@@ -13,8 +14,8 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;
+  color: var(#{--taskTextColor-default});
 
-  color: #000000;
   margin-bottom: 7px;
 
 

@@ -1,0 +1,40 @@
+$body-background-light: #C2B8FF;
+$darker-background-light: #666186;
+$columnBg-light: #EBECF0;
+$taskBg-light: #FFFFFF;
+$taskTextColor-light: #000000;
+$buttonTextColor-light: #5E6C84;
+
+$body-background-dark: #19032E;
+$darker-background-dark: rgba(25, 24, 32, 0.76);
+$columnBg-dark: #424242;
+$taskBg-dark: #585858;
+$taskTextColor-dark: #F0F0F0;
+$buttonTextColor-dark: #C7C7C7;
+
+
+:root {
+  --body-bg-light: #{$body-background-light};
+  --body-bg-dark: #{$body-background-dark };
+  --body-bg-default: var(#{--body-bg-dark});
+
+  --darker-bg-light: #{$darker-background-light};
+  --darker-bg-dark: #{$darker-background-dark};
+  --darker-bg-default: var(#{--darker-bg-dark});
+
+  --columnBg-light: #{$columnBg-light};
+  --columnBg-dark: #{$columnBg-dark};
+  --columnBg-default: var(#{--columnBg-dark});
+
+  --taskBg-light: #{$taskBg-light};
+  --taskBg-dark: #{$taskBg-dark};
+  --taskBg-default: var(#{--taskBg-dark});
+
+  --taskTextColor-light: #{$taskTextColor-light};
+  --taskTextColor-dark: #{$taskTextColor-dark};
+  --taskTextColor-default: var(#{--taskTextColor-dark});
+
+  --buttonTextColor-light: #{$buttonTextColor-light};
+  --buttonTextColor-dark: #{$buttonTextColor-dark};
+  --buttonTextColor-default: var(#{--buttonTextColor-dark});
+}

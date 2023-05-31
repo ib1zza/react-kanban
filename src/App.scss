@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import "styles/vars.scss";
 
 * {
   box-sizing: border-box;
@@ -35,6 +36,7 @@ button:hover {
 
 body {
   font-family: "Poppins", sans-serif;
+  background-color: var(#{--body-bg-default});
 }
 
 .blocks__container {
@@ -45,6 +47,17 @@ body {
 .block {
   width: calc(25% - 20px);
 }
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons>*:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+
 html,
 body,
 #root {
