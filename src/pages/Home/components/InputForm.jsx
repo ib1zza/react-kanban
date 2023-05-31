@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import s from "../../../styles/Block.module.css"
+import s from "../../../styles/Block.module.scss"
 
 const InputForm = ({ handleAdd }) => {
   const [value, setValue] = React.useState('');

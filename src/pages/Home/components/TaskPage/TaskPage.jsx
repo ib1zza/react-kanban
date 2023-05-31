@@ -9,7 +9,7 @@ const TaskPage = ({ tasks, changeDescription }) => {
     const [input, setInput] = React.useState("");
     let { id } = useParams();
 
-    const taskToRender = tasks.find(task => task.id == +id);
+    const taskToRender = tasks.find(task => task.id == id);
     console.log(taskToRender);
     const navigate = useNavigate();
 

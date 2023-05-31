@@ -1,5 +1,6 @@
 import React from 'react';
-import s from "../../../styles/Block.module.css";
+import s from "../../../styles/Block.module.scss"
+
 
 const SelectForm = ({ items, handleSelect }) => {
   return (

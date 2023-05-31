@@ -28,6 +28,9 @@ const TYPES = {
   Inprogress: "In progress",
   Finished: "Finished",
 };
+
+
+
 const Home = () => {
   const [tasksAll, setTasksAll] = React.useState(
     getLocalStorageItem("tasks") || tasks
@@ -104,7 +107,7 @@ const Home = () => {
                   title={TYPES.Ready}
                   prevList={tasksAll[TYPES.Backlog]}
                   tasks={tasksAll[TYPES.Ready]}
-                  onAdd={(id: any) =>
+                  onSelect={(id: string) =>
                     insertTaskToList(TYPES.Backlog, TYPES.Ready, id)
                   }
                   withSelect
@@ -115,7 +118,7 @@ const Home = () => {
                   title={TYPES.Inprogress}
                   prevList={tasksAll[TYPES.Ready]}
                   tasks={tasksAll[TYPES.Inprogress]}
-                  onAdd={(id: any) =>
+                  onSelect={(id: string) =>
                     insertTaskToList(TYPES.Ready, TYPES.Inprogress, id)
                   }
                   withSelect
@@ -126,7 +129,7 @@ const Home = () => {
                   title={TYPES.Finished}
                   prevList={tasksAll[TYPES.Inprogress]}
                   tasks={tasksAll[TYPES.Finished]}
-                  onAdd={(id: any) =>
+                  onSelect={(id: string) =>
                     insertTaskToList(TYPES.Inprogress, TYPES.Finished, id)
                   }
                   withSelect
