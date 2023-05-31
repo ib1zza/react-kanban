@@ -9,15 +9,7 @@ import {faPenToSquare, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 import {v4 as uuid} from "uuid";
-
-interface ITask {
-  id: string;
-  title: string;
-  description: string;
-  status: string;
-  timestamp: number;
-}
-
+import {ITask} from "../../../utils/types";
 
 interface ITaskColumnProps {
   title: string;
@@ -30,8 +22,6 @@ interface ITaskColumnProps {
 
 const TaskColumn: React.FC<ITaskColumnProps> = ({ title, tasks, onAdd, onSelect, withSelect, prevList }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-
 
   const handleCreateTask = (title: string) => {
     if (!title.trim()) {
