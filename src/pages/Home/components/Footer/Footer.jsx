@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "../Layout/Layout.module.css";
+import s from "../Layout/Layout.module.scss";
 
 const Footer = ({active, finished}) => {
     return (
@@ -8,7 +8,7 @@ const Footer = ({active, finished}) => {
                 <span>Active tasks: {active}</span>
                 <span>Finished tasks: {finished}</span>
             </div>
-            <div className={s.description}>Kanban board by ,{new Date().getFullYear()}</div> 
+            <div className={s.description}>Kanban board by ,{new Date().getFullYear()}</div>
         </footer>
     )
 }

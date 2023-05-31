@@ -1,6 +1,7 @@
 .container{
     border-radius: 5px;
-    background-color: #FFFFFF;
+  background-color: var(#{--taskBg-default});
+
     padding: 7px 8px;
     display: flex;
     justify-content: space-between;
@@ -10,9 +11,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-
-  color: #000000;
-
+  color: var(#{--taskTextColor-default});
 }
 
 .button {

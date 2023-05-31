@@ -6,6 +6,9 @@ import SignUp from "../SignUp/SignUp";
 import { AuthContextProvider } from "../../context/AuthContext";
 import TaskColumn from "./components/TaskColumn";
 import Layout from "./components/Layout/Layout";
+import Button from "../../components/UI/Button/Button";
+import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function getLocalStorageItem(key: any) {
   return JSON.parse(localStorage.getItem(key) as any);
@@ -135,6 +138,14 @@ const Home = () => {
                   withSelect
                 />
               </div>
+              <div className={"buttons"}>
+                <Button>
+                  <FontAwesomeIcon icon={faPlus} />
+                </Button>
+                <Button>
+                  <FontAwesomeIcon icon={faLink} />
+                </Button>
+                </div>
             </div>
           }
         />
