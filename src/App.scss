@@ -25,6 +25,18 @@ button {
   transition: all 0.2s;
 }
 
+
+  input {
+
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    outline: none;
+  }
+
+
 button:hover {
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -45,7 +57,11 @@ body {
 }
 
 .block {
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
   width: calc(25% - 20px);
+  min-width: 300px;
 }
 
 .buttons {
