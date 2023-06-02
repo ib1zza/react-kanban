@@ -35,6 +35,9 @@
   padding: 8px;
   width: 100%;
 }
+.signup__label_error {
+  color: red;
+}
 .center {
   position: absolute;
   left: 0;

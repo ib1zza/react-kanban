@@ -59,7 +59,9 @@
 .login__linkArea_descr {
   margin-right: 10px;
 }
-
+.login__label_error {
+  color: red;
+}
 .center {
   position: absolute;
   left: 0;
