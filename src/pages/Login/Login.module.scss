@@ -1,9 +1,14 @@
 .wrapper {
   display: flex;
-  background-color: #0067a3;
   width: 100%;
   height: 100%;
-  z-index: 50;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 100%;
 }
 .login {
   background-color: white;
@@ -11,22 +16,10 @@
   padding: 40px;
   margin: auto;
   width: 500px;
-  border-radius: 30px;
 }
 .login__title {
   margin-bottom: 22px;
   letter-spacing: 0.1em;
-}
-.login__logo {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 100px;
-  color: white;
-
-  text-align: center;
 }
 .login__body {
   display: flex;
@@ -39,7 +32,6 @@
 }
 .login__btn {
   background-color: black;
-
   color: white;
   margin-top: 4px;
   padding: 8px;
@@ -48,7 +40,7 @@
 .login__label {
   margin-top: 12px;
 }
-.login__remember {
+.login__remember p input {
   margin: 10px;
 }
 .login__linkArea_link {
@@ -63,13 +55,9 @@
   color: red;
 }
 .center {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 150px;
-  width: 0;
+  position: relative;
+  background-color: black;
+
   transform: prespective(1000px) translate(-50%, -50%);
   transform: skewY(15deg);
   transition: 0.5s;
@@ -88,7 +76,7 @@
   margin: 0;
   padding: 0;
   text-transform: uppercase;
-  font-size: 32px;
+  font-size: 4rem;
   color: #fff;
   transform-style: preserve-3d;
   transition: 0.8s;
@@ -98,15 +86,15 @@
 }
 
 .center h1 span:nth-child(2) {
-  color: black;
+  color: var(#{--taskTextColor-default});
   transform: translate(-50%, -50%) skewX(-60deg);
-  left: -10px;
+  left: -25px;
   clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%);
 }
 
 .center h1 span:nth-child(3) {
   transform: translate(-50%, -50%) skewY(0deg);
-  left: -22px;
+  left: -50px;
   clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
 }
 
@@ -115,4 +103,65 @@
   transform: translate(-50%, -50%) skewX(0deg);
   left: 0;
   color: #fff;
+}
+
+@media screen and (min-width: 800px) and (max-width: 1100px) {
+  .center h1 span {
+    font-size: 3rem;
+  }
+  .center h1 span:nth-child(2) {
+    left: -19px;
+  }
+  .center h1 span:nth-child(3) {
+    left: -38px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .center h1 span {
+    font-size: 2.5rem;
+  }
+  .logo {
+    width: 100%;
+    height: 20%;
+    align-items: flex-end;
+  }
+  .login {
+    background-color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0px;
+    margin: auto;
+    width: 86%;
+    border-radius: 30px;
+  }
+  .login__title {
+    color: white;
+    margin-bottom: 0px;
+  }
+  .login__label {
+    color: white;
+  }
+  .login__remember {
+    color: white;
+  }
+  .login__linkArea_descr {
+    color: white;
+  }
+  .center h1 span:nth-child(2) {
+    left: -15px;
+  }
+  .center h1 span:nth-child(3) {
+    left: -30px;
+  }
+  .login__btn {
+    background-color: white;
+    color: black;
+    margin-top: 4px;
+    padding: 8px;
+    width: 100%;
+  }
 }
