@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import s from "./Login.module.css";
+import s from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
@@ -28,12 +28,14 @@ const Login = () => {
   };
   return (
     <div className={s.wrapper}>
-      <div className={s.center}>
-        <h1>
-          <span>Awesome Kanban Board</span>
-          <span>Awesome Kanban Board</span>
-          <span>Awesome Kanban Board</span>
-        </h1>
+      <div className={s.logo}>
+        <div className={s.center}>
+          <h1>
+            <span>Awesome Kanban Board</span>
+            <span>Awesome Kanban Board</span>
+            <span>Awesome Kanban Board</span>
+          </h1>
+        </div>
       </div>
 
       <div className={s.login}>
@@ -54,8 +56,6 @@ const Login = () => {
               placeholder="Email"
               {...register("email", {
                 required: true,
-                //    pattern:
-                //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               })}
             />
             <p className={s.login__label}>Password</p>
@@ -69,15 +69,14 @@ const Login = () => {
               autoComplete="current-password"
               {...register("password", {
                 required: true,
-                //   pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
               })}
             />
             <button type="submit" className={s.login__btn}>
               Войти
             </button>
-            <div className="">
+            <div className={s.login__remember}>
               <p>
-                <input className={s.login__remember} type="checkbox" />
+                <input type="checkbox" />
                 Запомнить меня
               </p>
             </div>
