@@ -2,21 +2,28 @@ import React, { useState } from "react";
 import s from "./Login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../../context/AuthContext";
+import { useForm } from "react-hook-form";
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { logIn } = UserAuth();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      await logIn(email, password);
-      navigate("/");
-    } catch (error: any) {
-      console.log(error);
-      setError(error.message);
+  const onSubmit = async (data: any) => {
+    if (data.email !== "" && data.password !== "") {
+      try {
+        await logIn(data.email, data.password);
+        navigate("/");
+      } catch (error: any) {
+        console.log(error);
+        setError(error.message);
+      }
+    } else {
+      setError("Какое-то поле незаполнено");
     }
   };
   return (
@@ -33,27 +40,41 @@ const Login = () => {
         <div className="max-w-[320px] mx-auto py-16">
           <h1 className={s.login__title}>Вход</h1>
           {error ? <p className=""> {error}</p> : null}
-          <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full flex flex-col py-4"
+          >
             <p className={s.login__label}>E-mail</p>
+            {errors.email && (
+              <p className={s.login__label_error}>Проверьте поле</p>
+            )}
             <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               className={s.login__input}
               type="email"
               placeholder="Email"
+              {...register("email", {
+                required: true,
+                //    pattern:
+                //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              })}
             />
-
             <p className={s.login__label}>Password</p>
+            {errors.password && (
+              <p className={s.login__label_error}>Проверьте поле</p>
+            )}
             <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               className={s.login__input}
               type="password"
               placeholder="Password"
               autoComplete="current-password"
+              {...register("password", {
+                required: true,
+                //   pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+              })}
             />
-
-            <button className={s.login__btn}>Войти</button>
+            <button type="submit" className={s.login__btn}>
+              Войти
+            </button>
             <div className="">
               <p>
                 <input className={s.login__remember} type="checkbox" />
