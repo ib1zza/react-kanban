@@ -1,5 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 
+
+// объект для работы с локальным хранилищем
 export const storage = {
   setItem: (name: string, item: any) => {
     console.log("setItem", name, item);
@@ -13,9 +15,11 @@ export const storage = {
   },
 };
 
-export function changeCssRootVariables(theme: Theme) {
+// функция, которая меняет css переменные в зависимости от выбранной темы
+function changeCssRootVariables(theme: Theme) {
   const root = document.querySelector(":root") as HTMLElement;
 
+  // тут массив с названиями всех css переменных (они лежат в файле styles/vars.scss)
   const components = [
     "body-bg",
     "darker-bg",
@@ -25,6 +29,10 @@ export function changeCssRootVariables(theme: Theme) {
     "buttonTextColor",
   ];
 
+  // меняем значения переменных
+  // для этого проходимся по всем элементам
+  // и для каждого меняем значение переменной default на light / dark
+  // в зависимости от выбранной темы
   components.forEach((component) => {
     root.style.setProperty(
       `--${component}-default`,
@@ -58,11 +66,13 @@ export const useTheme = () => {
   return React.useContext(ThemeContext);
 };
 
+// Провайдер для темы
 const ThemeProvider: React.FC<Props> = ({ children, ...props }) => {
   const [theme, setTheme] = useState<Theme>(
     storage.getItem("react-kanban/theme") || Theme.LIGHT
   );
 
+  // переключение темы с помощью toggle
   const toggleTheme = () => {
     const propsTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
     setTheme(propsTheme);
@@ -76,6 +86,7 @@ const ThemeProvider: React.FC<Props> = ({ children, ...props }) => {
   useEffect(() => {
     changeTheme(theme);
   }, [theme]);
+
   return (
     <ThemeContext.Provider
       value={{ theme, changeTheme, toggleTheme }}
