@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "@ramonak/react-progress-bar";
-import s from "./SignUp.module.css";
+import s from "./SignUp.module.scss";
 import { UserAuth } from "../../context/AuthContext";
 import { updateProfile } from "firebase/auth";
 import { useForm } from "react-hook-form";
@@ -58,12 +58,14 @@ const SignUp = () => {
   };
   return (
     <div className={s.wrapper}>
-      <div className={s.center}>
-        <h1>
-          <span>Awesome Kanban Board</span>
-          <span>Awesome Kanban Board</span>
-          <span>Awesome Kanban Board</span>
-        </h1>
+      <div className={s.logo}>
+        <div className={s.center}>
+          <h1>
+            <span>Awesome Kanban Board</span>
+            <span>Awesome Kanban Board</span>
+            <span>Awesome Kanban Board</span>
+          </h1>
+        </div>
       </div>
       <form onSubmit={handleSubmit(handleContinue)} className={s.signup}>
         {step === 1 && <h1 className={s.signup__title}>Регистрация</h1>}
@@ -79,7 +81,7 @@ const SignUp = () => {
           </div>
           {step === 1 && (
             <>
-              <div className="">Введите вашу почту</div>
+              <div className={s.signup__label}>Введите вашу почту</div>
               {errors.email && (
                 <p className={s.signup__label_error}>
                   Запишите в формате почты
@@ -99,7 +101,7 @@ const SignUp = () => {
           )}
           {step === 2 && (
             <>
-              <div className="">Придумайте пароль</div>
+              <div className={s.signup__label}>Придумайте пароль</div>
               {errors.password && (
                 <p className={s.signup__label_error}>
                   Пароль должен включать в себя латинские буквы, включая
@@ -131,7 +133,7 @@ const SignUp = () => {
           )}
           {step === 3 && (
             <>
-              <div className="">Для чего вам нужен сервис?</div>
+              <div className={s.signup__label}>Для чего вам нужен сервис?</div>
               <select
                 className={s.signup__input}
                 defaultValue={"practice"}
@@ -144,7 +146,7 @@ const SignUp = () => {
             </>
           )}
           <button className={s.signup__btn}>Продолжить</button>
-          <p className="py-2">
+          <p className={s.signup__linkArea}>
             <span
               className="text-gray-500 tracking-widest underline"
               onClick={() => navigate("/login")}
