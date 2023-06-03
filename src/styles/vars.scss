@@ -1,3 +1,6 @@
+// ! scss переменные
+
+// светлая тема
 $body-background-light: #C2B8FF;
 $darker-background-light: #666186;
 $columnBg-light: #EBECF0;
@@ -5,6 +8,8 @@ $taskBg-light: #FFFFFF;
 $taskTextColor-light: #000000;
 $buttonTextColor-light: #5E6C84;
 
+
+// темная тема
 $body-background-dark: #19032E;
 $darker-background-dark: rgba(25, 24, 32, 0.76);
 $columnBg-dark: #424242;
@@ -12,6 +17,17 @@ $taskBg-dark: #585858;
 $taskTextColor-dark: #F0F0F0;
 $buttonTextColor-dark: #C7C7C7;
 
+// для создания темной и светлой версии стилей нужно сначала
+// создать ДВЕ переменных scss с постфиксами light и dark, далее
+// создать ТРИ css переменных с постфиксами light, dark и default
+// далее в компонентах мы используем ТОЛЬКО переменные CSS с постфиксом DEFAULT
+// таким образом мы как бы используем значение одной переменной, но при этом саму
+// переменную можно менять, используя ThemeContext. Контекст просто переключает значение
+// переменной default на значение той же группы с постфиксом light / dark
+// в зависимости от выбранной темы
+
+
+// ! css переменные
 
 :root {
   --body-bg-light: #{$body-background-light};
