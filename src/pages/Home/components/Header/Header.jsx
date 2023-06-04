@@ -40,7 +40,7 @@ const Header = () => {
         </svg>
         {isOpen &&
           <div className={s.menu}>
-            {user && <> <div>Profile</div>
+            {user && <> <div onClick={() => navigate('/profile[n')}>Profile</div>
               <div onClick={() => logOut()}>Log Out</div></>}
             {!user && <> <div onClick={() => navigate('/login')}>login</div>
               <div onClick={() => navigate('/signup')}>signup</div></>}
