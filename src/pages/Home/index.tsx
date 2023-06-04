@@ -109,6 +109,7 @@ const Home = () => {
                     </div>
                   }
                 />
+                <Route path="/profile" element={<Profile />} />
                 <Route
                   path="tasks/:id"
                   element={
@@ -132,7 +133,6 @@ const Home = () => {
           </div>
         }
       />
-      <Route path="profile" element={<Profile />}></Route>
     </Routes>
   );
 };
