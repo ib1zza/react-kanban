@@ -1,0 +1,29 @@
+.profile {
+  display: flex;
+  padding: 16px;
+  background-color: white;
+  border-radius: 12px;
+  width: 535px;
+}
+.profile__avatar {
+  margin-right: 16px;
+  svg {
+    filter: drop-shadow(0px 6px 2px rgb(0 0 0 / 0.1));
+  }
+}
+.profile__name {
+  font-weight: bold;
+  font-size: 22px;
+}
+.profile__email {
+  letter-spacing: 2px;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.profile__company {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.profile__descr {
+  font-size: 16px;
+}
