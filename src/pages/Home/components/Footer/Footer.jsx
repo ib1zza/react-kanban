@@ -1,7 +1,7 @@
 import React from 'react';
-import s from "../Layout/Layout.module.scss";
+import s from "../../Home.module.scss";
 
-const Footer = ({active, finished}) => {
+const Footer = ({ active, finished }) => {
     return (
         <footer className={s.footer}>
             <div className={s.tasksInfo}>

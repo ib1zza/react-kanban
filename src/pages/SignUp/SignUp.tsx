@@ -10,7 +10,6 @@ const SignUp = () => {
   let navigate = useNavigate();
   let [progress, setProgress] = useState(0);
   let [step, setStep] = useState(1);
-  let [dbPassword, setDbPassword] = useState("");
   const { user, signUp } = UserAuth();
   let [name, setName] = useState("");
   let [error, setError] = useState("");
@@ -34,7 +33,6 @@ const SignUp = () => {
   const handleContinue = async (data: any, e: any) => {
     switch (step) {
       case 3: {
-        console.log(data);
         onSubmit(data);
         if (user) {
           await updateProfile(user, { displayName: name });
