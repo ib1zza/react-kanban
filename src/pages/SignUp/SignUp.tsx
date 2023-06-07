@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "@ramonak/react-progress-bar";
 import s from "./SignUp.module.scss";
-import { UserAuth } from "../../context/AuthContext";
-import { updateProfile } from "firebase/auth";
+import { useAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
+import {AppRoute} from "../../utils/AppRoute";
 
 const SignUp = () => {
-  let navigate = useNavigate();
-  let [progress, setProgress] = useState(0);
-  let [step, setStep] = useState(1);
-  const { user, signUp } = UserAuth();
-  let [name, setName] = useState("");
-  let [error, setError] = useState("");
+  const navigate = useNavigate();
+  const [progress, setProgress] = useState(0);
+  const [step, setStep] = useState(1);
+  const { user, signUp } = useAuth();
+  const [error, setError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -22,29 +22,30 @@ const SignUp = () => {
   useEffect(() => {
     setProgress((step / 3) * 100);
   }, [step]);
+
   const onSubmit = async (data: any) => {
     try {
-      await signUp(data.email, data.password);
+      await signUp( data.email, data.password, data.displayName, data.select);
       navigate("/");
     } catch (error) {
       setError(error);
     }
   };
+
   const handleContinue = async (data: any, e: any) => {
     switch (step) {
       case 3: {
-        onSubmit(data);
-        if (user) {
-          await updateProfile(user, { displayName: name });
-        }
-        navigate("/");
+        await onSubmit(data);
+        // if (user) {
+        //   await updateProfile(user, { displayName: name });
+        // }
         break;
       }
       case 2: {
         if (data.password === data.secondPassword) {
           setStep(step + 1);
         } else {
-          setError("Разные пароли");
+          setError("Пароли должны совпадать.");
         }
         break;
       }
@@ -95,6 +96,27 @@ const SignUp = () => {
                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 })}
               />
+              <div className={s.signup__label}>Придумайте имя пользователя</div>
+
+              {errors.displayName && (
+                  <p className={s.signup__label_error}>
+                    Допускается только латиница в нижнем регистре
+                    и нижнee подчеркивание.
+                    Минимальное количество символов 3, максимальное - 20.
+                  </p>
+              )}
+              <div className="">{error}</div>
+              <input
+                  className={s.signup__input}
+                  type="text"
+                  placeholder="Имя пользователя"
+                  {...register("displayName", {
+                    required: true,
+                    minLength: 3,
+                    maxLength: 20,
+                    pattern: /^[a-z0-9_]+$/,
+                  })}
+              />
             </>
           )}
           {step === 2 && (
@@ -113,7 +135,8 @@ const SignUp = () => {
                 placeholder="Пароль"
                 {...register("password", {
                   required: true,
-                  pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                  // TODO enable password validation pattern
+                  // pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
                 })}
               />
               {errors.secondPassword && (
@@ -139,7 +162,8 @@ const SignUp = () => {
               >
                 <option value="practice">Для практики</option>
                 <option value="work">Для работы</option>
-                <option value="learning">Для учёбы</option>
+                <option value="study">Для учёбы</option>
+                <option value="other">Другое</option>
               </select>
             </>
           )}
@@ -147,7 +171,7 @@ const SignUp = () => {
           <p className={s.signup__linkArea}>
             <span
               className="text-gray-500 tracking-widest underline"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate(AppRoute.LOGIN)}
             >
               У меня есть аккаунт
             </span>

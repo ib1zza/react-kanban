@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import s from "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 const Login = () => {
   const [error, setError] = useState("");
-  const { logIn } = UserAuth();
+  const { logIn } = useAuth();
   const navigate = useNavigate();
   const {
     register,

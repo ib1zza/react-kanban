@@ -4,46 +4,45 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+    User,
   onAuthStateChanged,
 } from "firebase/auth";
+import {signUpEmailPass} from "../queries/signUp";
+import {loginByEmailPass} from "../queries/logIn";
+
 // import { setDoc, doc, getDocs, collection } from "firebase/firestore";
+type ISelect = "practice" | "work" | "study" | "other";
 
-type context = {
-  signUp: () => void;
-  logIn: () => void;
+interface IAuthContext {
+  signUp: (email: string, password: string, displayName: string, select: ISelect, photoFile?: any) => void;
+  logIn: (email: string, password: string) => void;
   logOut: () => void;
-  user: any;
-};
-const AuthContext = createContext<any>(null);
+  user: User | null;
+}
+
+
+
+const AuthContext = createContext<IAuthContext>({
+  signUp: () => {},
+  logIn: () => {},
+  logOut: () => {},
+  user: null,
+});
+
+export const useAuth = () => useContext(AuthContext);
+
 export function AuthContextProvider({ children }: any) {
-  const [user, setUser] = useState({});
-  const [store, setStore] = useState<any>();
-  function signUp(email: string, password: string) {
-    createUserWithEmailAndPassword(auth, email, password);
-    // setDoc(doc(db, "users", email), {
-
-    // });
-  }
-  // const getCollection = async () => {
-  //   const citiesRef = collection(db, "users");
-  //   const docsSnap = await getDocs(citiesRef);
-  //   docsSnap.forEach((doc) => {
-  //     setStore(doc.data());
-  //   });
-  // };
-
-  function logIn(email: string, password: string) {
-    return signInWithEmailAndPassword(auth, email, password);
-  }
+  const [user, setUser] = useState<User>({} as User);
+  // const [store, setStore] = useState<any>();
+  const signUp = signUpEmailPass;
+  const logIn = loginByEmailPass;
 
   function logOut() {
     return signOut(auth);
   }
-  // useEffect(() => {
-  //   getCollection();
-  // }, []);
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser: any) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser: User) => {
       setUser(currentUser);
     });
     return () => {
@@ -52,7 +51,7 @@ export function AuthContextProvider({ children }: any) {
   });
 
   return (
-    <AuthContext.Provider value={{ signUp, logIn, logOut, user, store }}>
+    <AuthContext.Provider value={{ signUp, logIn, logOut, user }}>
       {children}
     </AuthContext.Provider>
   );
