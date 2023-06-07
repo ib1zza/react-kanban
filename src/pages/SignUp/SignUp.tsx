@@ -4,12 +4,14 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import s from "./SignUp.module.scss";
 import { useAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
-import {AppRoute} from "../../utils/AppRoute";
+import { AppRoute } from "../../utils/AppRoute";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [step, setStep] = useState(1);
+
+  //TODO: add username
   const { user, signUp } = useAuth();
   const [error, setError] = useState("");
 
@@ -25,7 +27,7 @@ const SignUp = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      await signUp( data.email, data.password, data.displayName, data.select);
+      await signUp(data.email, data.password, data.displayName, data.select);
       navigate("/");
     } catch (error) {
       setError(error);
@@ -99,23 +101,23 @@ const SignUp = () => {
               <div className={s.signup__label}>Придумайте имя пользователя</div>
 
               {errors.displayName && (
-                  <p className={s.signup__label_error}>
-                    Допускается только латиница в нижнем регистре
-                    и нижнee подчеркивание.
-                    Минимальное количество символов 3, максимальное - 20.
-                  </p>
+                <p className={s.signup__label_error}>
+                  Допускается только латиница в нижнем регистре и нижнee
+                  подчеркивание. Минимальное количество символов 3, максимальное
+                  - 20.
+                </p>
               )}
               <div className="">{error}</div>
               <input
-                  className={s.signup__input}
-                  type="text"
-                  placeholder="Имя пользователя"
-                  {...register("displayName", {
-                    required: true,
-                    minLength: 3,
-                    maxLength: 20,
-                    pattern: /^[a-z0-9_]+$/,
-                  })}
+                className={s.signup__input}
+                type="text"
+                placeholder="Имя пользователя"
+                {...register("displayName", {
+                  required: true,
+                  minLength: 3,
+                  maxLength: 20,
+                  pattern: /^[a-z0-9_]+$/,
+                })}
               />
             </>
           )}
