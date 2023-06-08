@@ -9,6 +9,7 @@ import { ITask } from "../../utils/types";
 import Profile from "../Profile";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import { useSelector, useDispatch } from "react-redux";
 import s from "./Home.module.scss";
 import {
   arrayUnion,
@@ -22,6 +23,14 @@ import {
 } from "@firebase/firestore";
 import { db } from "../../firebase";
 import { UserAuth } from "../../context/AuthContext";
+import TaskColumnCreate from "./components/TaskColumnCreate";
+import { addBoardTrue } from "../../store/Reducers/addBoardSlice";
+import { RootState } from "../../store/store";
+import {
+  setBoardColumns,
+  setBoardName,
+} from "../../store/Reducers/boardCollectionSlice";
+import { useNavigate } from "react-router-dom";
 // function getLocalStorageItem(key: any) {
 //   return JSON.parse(localStorage.getItem(key) as any);
 // }
@@ -38,21 +47,59 @@ const TYPES = {
 };
 
 const Home = () => {
-  const [tasksAll, setTasksAll] = React.useState<any>();
+  const [tasksAll, setTasksAll] = React.useState<any>([]);
+  const navigate = useNavigate();
+  const addBoardStatus = useSelector(
+    (state: RootState) => state.addBoard.opened
+  );
+  const boardName = useSelector(
+    (state: RootState) => state.boardCollection.name
+  );
+  const dispatch = useDispatch();
+
   const { user } = UserAuth();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getBoards = async () => {
+    const dataRef = query(
+      collection(db, "boards"),
+      where("ownerId", "==", `${user?.uid}`)
+    );
+
+    const docsSnap = await getDocs(dataRef);
+    const res: any[] = [];
+    docsSnap.forEach((doc) => {
+      res.push({ ...doc.data() });
+    });
+    setTasksAll(res);
+  };
   const getCollection = async () => {
     const dataRef = query(
-      collection(db, "users"),
-      where("email", "==", `${user?.email}`)
+      collection(db, "boards"),
+      where("ownerId", "==", `${user?.uid}`),
+      where("title", "==", `${boardName}`)
     );
+
     const docsSnap = await getDocs(dataRef);
+    const res: any[] = [];
     docsSnap.forEach((doc) => {
-      setTasksAll(doc.data());
+      res.push({ ...doc.data() });
     });
+    console.log(res);
+    dispatch(setBoardColumns(res[0].columns));
   };
+
   useEffect(() => {
-    getCollection();
-  }, []);
+    if (boardName) {
+      getCollection();
+    }
+  }, [getCollection, tasksAll.length]);
+  useEffect(() => {
+    if (tasksAll.length === 0) {
+      getBoards();
+    }
+    //
+  }, [getBoards, tasksAll.length]);
+
   // function setState(newState: ITask[]) {
   //   setTasksAll(newState);
   //   setLocalStorageItem("tasks", newState);
@@ -101,30 +148,47 @@ const Home = () => {
             <div className={s.body}>
               <Routes>
                 <Route
+                  path="/board"
+                  element={
+                    <div>
+                      {/* <TaskColumn
+                              title={item.title}
+                              // tasks={tasksAll[key]}
+                              withSelect={undefined}
+                              prevList={undefined}
+                            /> */}
+                    </div>
+                  }
+                />
+                <Route
                   index
                   element={
                     <div className={"blocks__container"}>
-                      {/* {Object.keys(TYPES).map((key: keyof typeof TYPES) => {
+                      {addBoardStatus && <TaskColumnCreate />}
+                      {tasksAll.map((item: any, index: any) => {
                         return (
-                          <div className={"block"}>
-                            <TaskColumn
-                              title={TYPES[key]}
-                              tasks={tasksAll[TYPES[key]]}
-                              onAdd={(task) => addTaskToList(task, TYPES[key])}
-                              withSelect={undefined}
-                              prevList={undefined}
-                            />
+                          <div
+                            key={index}
+                            className={"block"}
+                            onClick={() => {
+                              dispatch(setBoardName(item.title));
+                              navigate("/board");
+                            }}
+                          >
+                            {item.title}
                           </div>
                         );
-                      })} */}
-                      <div className={"buttons"}>
-                        <Button onClick={() => addTaskToList()}>
-                          <FontAwesomeIcon icon={faPlus} />
-                        </Button>
-                        <Button>
-                          <FontAwesomeIcon icon={faLink} />
-                        </Button>
-                      </div>
+                      })}
+                      {!addBoardStatus && (
+                        <div className={"buttons"}>
+                          <Button onClick={() => dispatch(addBoardTrue())}>
+                            <FontAwesomeIcon icon={faPlus} />
+                          </Button>
+                          <Button>
+                            <FontAwesomeIcon icon={faLink} />
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   }
                 />
