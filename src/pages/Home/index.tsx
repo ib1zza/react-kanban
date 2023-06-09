@@ -31,14 +31,16 @@ import {
   setBoardName,
 } from "../../store/Reducers/boardCollectionSlice";
 import { useNavigate } from "react-router-dom";
+
+//TODO: delete this function or replace them to folder with utilities ur hooks
 // function getLocalStorageItem(key: any) {
 //   return JSON.parse(localStorage.getItem(key) as any);
 // }
-
 // function setLocalStorageItem(key: any, value: any) {
 //   localStorage.setItem(key, JSON.stringify(value));
 // }
 
+//TODO: delete this, or remake
 const TYPES = {
   Backlog: "Backlog",
   Ready: "Ready",
@@ -47,18 +49,20 @@ const TYPES = {
 };
 
 const Home = () => {
+  //TODO: rename to boards and replace to redux storage
   const [tasksAll, setTasksAll] = React.useState<any>([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = UserAuth();
   const addBoardStatus = useSelector(
     (state: RootState) => state.addBoard.opened
   );
   const boardName = useSelector(
     (state: RootState) => state.boardCollection.name
   );
-  const dispatch = useDispatch();
 
-  const { user } = UserAuth();
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //getting boards
   const getBoards = async () => {
     const dataRef = query(
       collection(db, "boards"),
@@ -72,6 +76,7 @@ const Home = () => {
     });
     setTasksAll(res);
   };
+  //getting columns from board
   const getCollection = async () => {
     const dataRef = query(
       collection(db, "boards"),
@@ -87,23 +92,19 @@ const Home = () => {
     console.log(res);
     dispatch(setBoardColumns(res[0].columns));
   };
-
+  //getting columns, If board picked
   useEffect(() => {
     if (boardName) {
       getCollection();
     }
   }, [getCollection, tasksAll.length]);
+  //getting boards
   useEffect(() => {
     if (tasksAll.length === 0) {
       getBoards();
     }
     //
   }, [getBoards, tasksAll.length]);
-
-  // function setState(newState: ITask[]) {
-  //   setTasksAll(newState);
-  //   setLocalStorageItem("tasks", newState);
-  // }
 
   function removeTaskFromList(prevListName: keyof typeof tasksAll, id: string) {
     return tasksAll[prevListName].filter((item: ITask) => item.id !== id);
