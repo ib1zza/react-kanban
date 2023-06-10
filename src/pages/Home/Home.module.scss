@@ -77,3 +77,27 @@
 .menu > div:first-child {
   margin-bottom: 7px;
 }
+
+
+.blocks__container {
+  min-width: calc(100% - 50px);
+  margin-right: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 16px;
+  justify-content: space-between;
+}
+
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons>*:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.boardPageContainer {
+  display: flex;
+}

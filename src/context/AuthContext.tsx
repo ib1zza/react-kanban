@@ -33,7 +33,6 @@ export const useAuth = () => useContext(AuthContext);
 
 export function AuthContextProvider({ children }: any) {
   const [user, setUser] = useState<User>({} as User);
-  // const [store, setStore] = useState<any>();
   const signUp = signUpEmailPass;
   const logIn = loginByEmailPass;
 

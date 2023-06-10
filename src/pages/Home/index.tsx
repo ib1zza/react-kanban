@@ -1,36 +1,37 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router";
+import React, {useEffect} from "react";
+import {Route, Routes} from "react-router";
 import TaskPage from "./components/TaskPage/TaskPage";
 import TaskColumn from "./components/TaskColumn";
 import Button from "../../components/UI/Button/Button";
-import { faLink, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ITask } from "../../utils/types";
+import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {ITask} from "../../utils/types";
 import Profile from "../Profile";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import { useSelector, useDispatch } from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import s from "./Home.module.scss";
 import {
-  arrayUnion,
-  collection,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  updateDoc,
-  where,
+    arrayUnion,
+    collection,
+    doc,
+    getDocs,
+    query,
+    setDoc,
+    updateDoc,
+    where,
 } from "@firebase/firestore";
-import { db } from "../../firebase";
-import { UserAuth } from "../../context/AuthContext";
+import {db} from "../../firebase";
+import {UserAuth} from "../../context/AuthContext";
 import TaskColumnCreate from "./components/TaskColumnCreate";
-import { addBoardTrue } from "../../store/Reducers/addBoardSlice";
-import { RootState } from "../../store/store";
+import {addBoardTrue} from "../../store/Reducers/addBoardSlice";
+import {RootState} from "../../store/store";
 import {
-  setBoardColumns,
-  setBoardName,
+    setBoardColumns,
+    setBoardName,
 } from "../../store/Reducers/boardCollectionSlice";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import BoardPreview from "./components/BoardPreview/BoardPreview";
 
 //TODO: delete this function or replace them to folder with utilities ur hooks
 // function getLocalStorageItem(key: any) {
@@ -40,185 +41,153 @@ import { useNavigate } from "react-router-dom";
 //   localStorage.setItem(key, JSON.stringify(value));
 // }
 
-//TODO: delete this, or remake
-const TYPES = {
-  Backlog: "Backlog",
-  Ready: "Ready",
-  Inprogress: "In progress",
-  Finished: "Finished",
-};
+export const enum GuestPermission {
+    READ = "read",
+    FULL = "full",
+    NONE = "none"
+}
+
+export interface IBoard {
+    uid: string,
+    chatId?: string;
+    columns: { [x: string]: any },
+    guestPermissions: GuestPermission[],
+    ownerId: string,
+    title: string,
+    usersAllowed: string[],
+    timeCreated: string,
+    timeUpdated: string,
+}
 
 const Home = () => {
-  //TODO: rename to boards and replace to redux storage
-  const [tasksAll, setTasksAll] = React.useState<any>([]);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { user } = UserAuth();
-  const addBoardStatus = useSelector(
-    (state: RootState) => state.addBoard.opened
-  );
-  const boardName = useSelector(
-    (state: RootState) => state.boardCollection.name
-  );
+    //TODO: rename to boards and replace to redux storage
+    const [boards, setBoards] = React.useState<IBoard[]>([]);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {user} = UserAuth();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  //getting boards
-  const getBoards = async () => {
-    const dataRef = query(
-      collection(db, "boards"),
-      where("ownerId", "==", `${user?.uid}`)
+    const addBoardStatus = useSelector(
+        (state: RootState) => state.addBoard.opened
     );
 
-    const docsSnap = await getDocs(dataRef);
-    const res: any[] = [];
-    docsSnap.forEach((doc) => {
-      res.push({ ...doc.data() });
-    });
-    setTasksAll(res);
-  };
-  //getting columns from board
-  const getCollection = async () => {
-    const dataRef = query(
-      collection(db, "boards"),
-      where("ownerId", "==", `${user?.uid}`),
-      where("title", "==", `${boardName}`)
+    const boardName = useSelector(
+        (state: RootState) => state.boardCollection.name
     );
 
-    const docsSnap = await getDocs(dataRef);
-    const res: any[] = [];
-    docsSnap.forEach((doc) => {
-      res.push({ ...doc.data() });
-    });
-    console.log(res);
-    dispatch(setBoardColumns(res[0].columns));
-  };
-  //getting columns, If board picked
-  useEffect(() => {
-    if (boardName) {
-      getCollection();
-    }
-  }, [getCollection, tasksAll.length]);
-  //getting boards
-  useEffect(() => {
-    if (tasksAll.length === 0) {
-      getBoards();
-    }
-    //
-  }, [getBoards, tasksAll.length]);
+    //getting boards
+    const getBoards = async () => {
+        const dataRef = query(
+            collection(db, "boards"),
+            where("ownerId", "==", `${user?.uid}`)
+        );
 
-  function removeTaskFromList(prevListName: keyof typeof tasksAll, id: string) {
-    return tasksAll[prevListName].filter((item: ITask) => item.id !== id);
-  }
-  //task: ITask, listName: keyof typeof tasksAll
-  async function addTaskToList() {
-    await setDoc(doc(db, "boards", "23"), {
-      chatId: "",
-    });
-    // setState({
-    //   ...tasksAll,
-    //   [listName]: tasksAll[listName].concat(task),
-    // });
-  }
+        const docsSnap = await getDocs(dataRef);
+        const res: any[] = [];
+        docsSnap.forEach((doc) => {
+            res.push({...doc.data()});
+        });
+        setBoards(res);
+    };
+    //getting columns from board
+    const getColumnsFromBoard = async () => {
+        const dataRef = query(
+            collection(db, "boards"),
+            where("ownerId", "==", `${user?.uid}`),
+            where("title", "==", `${boardName}`)
+        );
 
-  // const changeDescription = (
-  //   id: string,
-  //   columnName: string,
-  //   description: string
-  // ) => {
-  //   let taskToEdit = tasksAll[columnName].findIndex(
-  //     (item: any) => item.id == id
-  //   );
-  //   if (taskToEdit === -1) return;
+        const docsSnap = await getDocs(dataRef);
+        const res: any[] = [];
+        docsSnap.forEach((doc) => {
+            res.push({...doc.data()});
+        });
+        console.log(res);
+        dispatch(setBoardColumns(res[0].columns));
+    };
 
-  //   let temp = tasksAll[columnName][taskToEdit];
-  //   temp.description = description;
+    //getting columns, If board picked
+    useEffect(() => {
+        if (boardName) {
+            getColumnsFromBoard();
+        }
+    }, [getColumnsFromBoard, boards.length]);
 
-  // setState({
-  //   ...tasksAll,
-  //   [temp.status]: removeTaskFromList(temp.status, id).concat(temp),
-  // });
-  // };
+    //getting boards
+    useEffect(() => {
+        if (boards.length === 0) {
+            getBoards();
+        }
+        //
+    }, [getBoards, boards.length]);
 
-  return (
-    <Routes>
-      <Route
-        path="/*"
-        element={
-          <div className={s.home}>
-            <Header />
-            <div className={s.body}>
-              <Routes>
-                <Route
-                  path="/board"
-                  element={
-                    <div>
-                      {/* <TaskColumn
+    if( !user) return null
+
+    return (
+        <Routes>
+            <Route
+                path="/*"
+                element={
+                    <div className={s.home}>
+                        <Header/>
+                        <div className={s.body}>
+                            <Routes>
+                                <Route
+                                    path="/board"
+                                    element={
+                                        <div>
+                                            {/* <TaskColumn
                               title={item.title}
                               // tasks={tasksAll[key]}
                               withSelect={undefined}
                               prevList={undefined}
                             /> */}
-                    </div>
-                  }
-                />
-                <Route
-                  index
-                  element={
-                    <div className={"blocks__container"}>
-                      {addBoardStatus && <TaskColumnCreate />}
-                      {tasksAll.map((item: any, index: any) => {
-                        return (
-                          <div
-                            key={index}
-                            className={"block"}
-                            onClick={() => {
-                              dispatch(setBoardName(item.title));
-                              navigate("/board");
-                            }}
-                          >
-                            {item.title}
-                          </div>
-                        );
-                      })}
-                      {!addBoardStatus && (
-                        <div className={"buttons"}>
-                          <Button onClick={() => dispatch(addBoardTrue())}>
-                            <FontAwesomeIcon icon={faPlus} />
-                          </Button>
-                          <Button>
-                            <FontAwesomeIcon icon={faLink} />
-                          </Button>
+                                        </div>
+                                    }
+                                />
+                                <Route
+                                    index
+                                    element={
+                                        <div className={s.boardPageContainer}><div className={s.blocks__container}>
+                                            {addBoardStatus && <TaskColumnCreate onCreated={getBoards}/>}
+                                            {boards.map((item, index) => {
+                                                return (
+                                                    <BoardPreview
+                                                        onDelete={
+                                                            getBoards
+                                                        }
+                                                        onClick={() => {
+                                                            dispatch(setBoardName(item.title));
+                                                            navigate("/board");
+                                                        }}
+                                                        key={index}
+                                                        board={item}
+                                                        userId={user?.uid}
+                                                    />
+                                                );
+                                            })}
+                                        </div>
+                                            {!addBoardStatus && (
+                                                <div className={s.buttons}>
+                                                    <Button onClick={() => dispatch(addBoardTrue())}>
+                                                        <FontAwesomeIcon icon={faPlus}/>
+                                                    </Button>
+                                                    <Button>
+                                                        <FontAwesomeIcon icon={faLink}/>
+                                                    </Button>
+                                                </div>
+                                            )}
+                                        </div>
+                                    }
+                                />
+
+                                <Route path="/profile" element={<Profile/>}/>
+                            </Routes>
                         </div>
-                      )}
                     </div>
-                  }
-                />
-                <Route path="/profile" element={<Profile />} />
-                {/* <Route
-                  path="tasks/:id"
-                  element={
-                    <TaskPage
-                      tasks={[
-                        ...Object.keys(tasksAll).reduce(
-                          (acc, key) => acc.concat(tasksAll[key]),
-                          []
-                        ),
-                      ]}
-                      changeDescription={changeDescription}
-                    />
-                  }
-                /> */}
-              </Routes>
-            </div>
-            {/* <Footer
-              // active={tasksAll[TYPES.Backlog].length}
-              // finished={tasksAll[TYPES.Finished].length}
-            /> */}
-          </div>
-        }
-      />
-    </Routes>
-  );
+                }
+            />
+        </Routes>
+    );
 };
 
 export default Home;
