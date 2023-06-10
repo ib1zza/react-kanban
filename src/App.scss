@@ -51,10 +51,6 @@ body {
   background-color: var(#{--body-bg-default});
 }
 
-.blocks__container {
-  display: flex;
-  justify-content: space-between;
-}
 
 .block {
   &:not(:last-child) {
@@ -64,14 +60,6 @@ body {
   min-width: 300px;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-}
-
-.buttons>*:not(:last-child) {
-  margin-bottom: 6px;
-}
 
 
 html,
