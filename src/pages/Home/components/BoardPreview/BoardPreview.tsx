@@ -12,14 +12,14 @@ interface IBoardPreviewProps {
   onClick: () => void,
   onDelete: () => void
 }
-const BoardPreview:React.FC<IBoardPreviewProps> = ({userId, onClick, board,onDelete}) => {
+const BoardPreview:React.FC<IBoardPreviewProps> = ({userId, onClick, board, onDelete}) => {
   const [user, setUser] = React.useState<FirebaseUserInfo | null>(null);
 
   useEffect(() => {
     getUserInfo(board.ownerId).then((res) => {
       setUser(res);
     })
-  })
+  }, [userId])
 
   const handleDelete = async (e: React.MouseEvent) => {
       e.stopPropagation();

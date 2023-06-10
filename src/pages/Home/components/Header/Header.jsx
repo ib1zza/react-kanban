@@ -43,7 +43,7 @@ const Header = () => {
         {isOpen &&
           <div className={s.menu}>
             {user && <> <div onClick={() => navigate(AppRoute.PROFILE)}>Profile</div>
-              <div onClick={() => logOut()}>Log Out</div></>}
+              <div onClick={logOut}>Log Out</div></>}
             {!user && <> <div onClick={() => navigate(AppRoute.LOGIN)}>login</div>
               <div onClick={() => navigate(AppRoute.SIGNUP)}>signup</div></>}
           </div>}
