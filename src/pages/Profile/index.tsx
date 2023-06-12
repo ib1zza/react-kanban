@@ -2,23 +2,41 @@ import React, { useEffect, useState } from "react";
 import s from "./Profile.module.scss";
 import { UserAuth } from "../../context/AuthContext";
 import { User, updateProfile } from "firebase/auth";
+import {FirebaseUserInfo, getUserInfo} from "../../queries/getUserInfo";
+import {editDisplayName} from "../../queries/editDisplayName";
 const Profile = () => {
   const { user, refetch } = UserAuth();
   const [editStatus, setEditStatus] = useState(false);
   const [name, setName] = useState<any>("");
 
-  //TODO: изменение значения сразу после сабмита
-  const handleSubmit = async () => {
-    await updateProfile(user as User, { displayName: name });
-    refetch();
-  };
+  const [userInfo, setUserInfo] = useState<FirebaseUserInfo | null>(null)
 
   useEffect(() => {
-    if (user?.displayName) {
-      setName(user?.displayName);
-    }
-  }, [user?.displayName]);
+    if(!user?.uid) return
+    getUserInfo(user.uid).then((res) => {
+      setUserInfo(res)
+      console.log(res)
+    })
+  },[user])
 
+  //TODO: изменение значения сразу после сабмита
+  const handleSubmit = async () => {
+    if(!user || !(/^[a-z0-9_]+$/).test(name)) return
+    await  editDisplayName(user.uid, name)
+    getUserInfo(user.uid).then((res) => {
+      setUserInfo(res)
+    })
+    // await updateProfile(user as User, { displayName: name });
+    // refetch();
+  };
+
+  // useEffect(() => {
+  //   if (user?.displayName) {
+  //     setName(user?.displayName);
+  //   }
+  // }, [user?.displayName]);
+
+  if(!user || !userInfo) return null
   return (
     <div>
       <div className={s.profile}>
@@ -61,12 +79,12 @@ const Profile = () => {
                 className={s.profile__input}
               />
             ) : (
-              user?.displayName || "user"
+                userInfo.displayName
             )}
           </div>
           <div className={s.profile__email}>
             Почта:
-            {user?.email}
+            {user.email}
           </div>
           {editStatus ? (
             <button
