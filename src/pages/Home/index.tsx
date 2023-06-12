@@ -32,6 +32,7 @@ import {
 } from "../../store/Reducers/boardCollectionSlice";
 import {useNavigate} from "react-router-dom";
 import BoardPreview from "./components/BoardPreview/BoardPreview";
+import BoardPage from "../BoardPage/BoardPage";
 
 //TODO: delete this function or replace them to folder with utilities ur hooks
 // function getLocalStorageItem(key: any) {
@@ -110,15 +111,14 @@ const Home = () => {
         if (boardName) {
             getColumnsFromBoard();
         }
-    }, [getColumnsFromBoard, boards.length]);
+    }, [boards.length]);
 
     //getting boards
     useEffect(() => {
         if (boards.length === 0) {
             getBoards();
         }
-        //
-    }, [getBoards, boards.length]);
+    }, [boards.length]);
 
     if( !user) return null
 
@@ -132,16 +132,9 @@ const Home = () => {
                         <div className={s.body}>
                             <Routes>
                                 <Route
-                                    path="/board"
+                                    path="/board/:boardId"
                                     element={
-                                        <div>
-                                            {/* <TaskColumn
-                              title={item.title}
-                              // tasks={tasksAll[key]}
-                              withSelect={undefined}
-                              prevList={undefined}
-                            /> */}
-                                        </div>
+                                        <BoardPage/>
                                     }
                                 />
                                 <Route
@@ -157,7 +150,7 @@ const Home = () => {
                                                         }
                                                         onClick={() => {
                                                             dispatch(setBoardName(item.title));
-                                                            navigate("/board");
+                                                            navigate("/board/" + item.uid);
                                                         }}
                                                         key={index}
                                                         board={item}
