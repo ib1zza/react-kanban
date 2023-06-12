@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Profile.module.scss";
+import { UserAuth } from "../../context/AuthContext";
+import { User, updateProfile } from "firebase/auth";
 const Profile = () => {
+  const { user, refetch } = UserAuth();
+  const [editStatus, setEditStatus] = useState(false);
+  const [name, setName] = useState<any>("");
+
+  //TODO: изменение значения сразу после сабмита
+  const handleSubmit = async () => {
+    await updateProfile(user as User, { displayName: name });
+    refetch();
+  };
+
+  useEffect(() => {
+    if (user?.displayName) {
+      setName(user?.displayName);
+    }
+  }, [user?.displayName]);
+
   return (
     <div>
       <div className={s.profile}>
@@ -34,13 +52,40 @@ const Profile = () => {
           </svg>
         </div>
         <div>
-          <p className={s.profile__name}>Имя: Nickname</p>
-          <p className={s.profile__email}>Почта: example@mail.com</p>
-          <p className={s.profile__company}>Название компании: компания</p>
-          <p className={s.profile__descr}>
-            Данный аккаунт создан и был зарегистрирован по адресу
-            react-kanban-six.vercel.app
-          </p>
+          <div className={s.profile__name}>
+            Имя:{" "}
+            {editStatus ? (
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={s.profile__input}
+              />
+            ) : (
+              user?.displayName || "user"
+            )}
+          </div>
+          <div className={s.profile__email}>
+            Почта:
+            {user?.email}
+          </div>
+          {editStatus ? (
+            <button
+              onClick={() => {
+                setEditStatus(false);
+                handleSubmit();
+              }}
+              className={s.profile__save}
+            >
+              Сохранить
+            </button>
+          ) : (
+            <button
+              onClick={() => setEditStatus(true)}
+              className={s.profile__edit}
+            >
+              Изменить
+            </button>
+          )}
         </div>
       </div>
     </div>
