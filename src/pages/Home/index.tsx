@@ -77,6 +77,7 @@ const Home = () => {
 
     //getting boards
     const getBoards = async () => {
+        console.log(user && user?.uid)
         const dataRef = query(
             collection(db, "boards"),
             where("ownerId", "==", `${user?.uid}`)
@@ -118,7 +119,7 @@ const Home = () => {
         if (boards.length === 0) {
             getBoards();
         }
-    }, [boards.length]);
+    }, [boards.length, user]);
 
     if( !user) return null
 
