@@ -1,0 +1,33 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .buttons>*:not(:last-child) {
+      margin-bottom: 6px;
+    }
+}
+
+.title {
+  text-align: center;
+  color: var(#{--taskTextColor-default});
+  margin-bottom: 20px;
+}
+
+.columnsWrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-right: 15px;
+  gap: 15px;
+  flex-wrap: nowrap;
+
+  & > * {
+    flex-basis: 250px;
+    flex-shrink: 0;
+  }
+}
