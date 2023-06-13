@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {Route, Routes} from "react-router";
 import TaskPage from "./components/TaskPage/TaskPage";
-import TaskColumn from "./components/TaskColumn";
 import Button from "../../components/UI/Button/Button";
 import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -24,7 +23,7 @@ import {
 import {db} from "../../firebase";
 import {UserAuth} from "../../context/AuthContext";
 import TaskColumnCreate from "./components/TaskColumnCreate";
-import {addBoardTrue} from "../../store/Reducers/addBoardSlice";
+import {addBoardFalse, addBoardTrue} from "../../store/Reducers/addBoardSlice";
 import {RootState} from "../../store/store";
 import {
     setBoardColumns,
@@ -32,7 +31,8 @@ import {
 } from "../../store/Reducers/boardCollectionSlice";
 import {useNavigate} from "react-router-dom";
 import BoardPreview from "./components/BoardPreview/BoardPreview";
-import BoardPage from "../BoardPage/BoardPage";
+import BoardPage, {IColumn} from "../BoardPage/BoardPage";
+import {createBoard} from "../../queries/createBoard";
 
 //TODO: delete this function or replace them to folder with utilities ur hooks
 // function getLocalStorageItem(key: any) {
@@ -51,7 +51,7 @@ export const enum GuestPermission {
 export interface IBoard {
     uid: string,
     chatId?: string;
-    columns: { [x: string]: any },
+    columns: { [key: string]: IColumn },
     guestPermissions: GuestPermission[],
     ownerId: string,
     title: string,
@@ -91,28 +91,28 @@ const Home = () => {
         setBoards(res);
     };
     //getting columns from board
-    const getColumnsFromBoard = async () => {
-        const dataRef = query(
-            collection(db, "boards"),
-            where("ownerId", "==", `${user?.uid}`),
-            where("title", "==", `${boardName}`)
-        );
-
-        const docsSnap = await getDocs(dataRef);
-        const res: any[] = [];
-        docsSnap.forEach((doc) => {
-            res.push({...doc.data()});
-        });
-        console.log(res);
-        dispatch(setBoardColumns(res[0].columns));
-    };
+    // const getColumnsFromBoard = async () => {
+    //     const dataRef = query(
+    //         collection(db, "boards"),
+    //         where("ownerId", "==", `${user?.uid}`),
+    //         where("title", "==", `${boardName}`)
+    //     );
+    //
+    //     const docsSnap = await getDocs(dataRef);
+    //     const res: any[] = [];
+    //     docsSnap.forEach((doc) => {
+    //         res.push({...doc.data()});
+    //     });
+    //     console.log(res);
+    //     dispatch(setBoardColumns(res[0].columns));
+    // };
 
     //getting columns, If board picked
-    useEffect(() => {
-        if (boardName) {
-            getColumnsFromBoard();
-        }
-    }, [boards.length]);
+    // useEffect(() => {
+    //     if (boardName) {
+    //         getColumnsFromBoard();
+    //     }
+    // }, [boards.length]);
 
     //getting boards
     useEffect(() => {
@@ -121,8 +121,13 @@ const Home = () => {
         }
     }, [boards.length, user]);
 
-    if( !user) return null
+    if (!user) return null
 
+    const createBoardAction = (title: string) => {
+        createBoard(title, user.uid).then((res: any) => getBoards())
+
+        dispatch(addBoardFalse());
+    }
     return (
         <Routes>
             <Route
@@ -141,25 +146,31 @@ const Home = () => {
                                 <Route
                                     index
                                     element={
-                                        <div className={s.boardPageContainer}><div className={s.blocks__container}>
-                                            {addBoardStatus && <TaskColumnCreate onCreated={getBoards}/>}
-                                            {boards.map((item, index) => {
-                                                return (
-                                                    <BoardPreview
-                                                        onDelete={
-                                                            getBoards
-                                                        }
-                                                        onClick={() => {
-                                                            dispatch(setBoardName(item.title));
-                                                            navigate("/board/" + item.uid);
-                                                        }}
-                                                        key={index}
-                                                        board={item}
-                                                        userId={user?.uid}
-                                                    />
-                                                );
-                                            })}
-                                        </div>
+                                        <div className={s.boardPageContainer}>
+                                            <div className={s.blocks__container}>
+                                                {addBoardStatus &&
+                                                    <TaskColumnCreate
+                                                        forBoard
+                                                        onCreateBoard={createBoardAction}
+                                                        onAbort={() => dispatch(addBoardFalse())}
+                                                    />}
+                                                {boards.map((item, index) => {
+                                                    return (
+                                                        <BoardPreview
+                                                            onDelete={
+                                                                getBoards
+                                                            }
+                                                            onClick={() => {
+                                                                dispatch(setBoardName(item.title));
+                                                                navigate("/board/" + item.uid);
+                                                            }}
+                                                            key={index}
+                                                            board={item}
+                                                            userId={user?.uid}
+                                                        />
+                                                    );
+                                                })}
+                                            </div>
                                             {!addBoardStatus && (
                                                 <div className={s.buttons}>
                                                     <Button onClick={() => dispatch(addBoardTrue())}>

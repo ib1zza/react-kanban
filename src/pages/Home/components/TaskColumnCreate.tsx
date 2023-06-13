@@ -12,28 +12,43 @@ import {addDoc, collection} from "firebase/firestore";
 import {db} from "../../../firebase";
 import {UserAuth} from "../../../context/AuthContext";
 import {createBoard} from "../../../queries/createBoard";
+import {CirclePicker, SwatchesPicker} from "react-color"
 
-interface  Props {
-    onCreated: () => void
+interface Props {
+    onAbort?: () => void,
+    forColumn?: boolean
+    forBoard?: boolean,
+    onCreateColumn?: (title: string, color: string) => void,
+    onCreateBoard?: (title: string) => void
 }
-const TaskColumnCreate: React.FC<Props> = ({onCreated}) => {
+
+const TaskColumnCreate: React.FC<Props> = ({onAbort, forColumn, forBoard, onCreateColumn, onCreateBoard}) => {
     const [title, setTitle] = useState("");
     const {user} = UserAuth();
+    const [color, setColor] = useState("#f44336");
 
-    const dispatch = useDispatch();
     // TODO: add create column action
 
     const addBoard = () => {
         if (!title.trim() || !user) return;
+        onCreateBoard && onCreateBoard(title)
 
-        createBoard(title, user.uid).then((res: any) => onCreated())
-
-        dispatch(addBoardFalse());
     };
+
+    const addColumn = () => {
+        onCreateColumn && onCreateColumn(title, color);
+    }
+
+    const handler = () => {
+        if (forColumn) addColumn();
+        if (forBoard) addBoard();
+    }
+
+    console.log(color)
 
     return (
         <div className={s.container}>
-            <div className={s.headerColor}/>
+            {forColumn && <div className={s.headerColor} style={{backgroundColor: color}}/>}
             <h6 className={s.title}>
                 <input
                     placeholder={"Enter name..."}
@@ -42,9 +57,17 @@ const TaskColumnCreate: React.FC<Props> = ({onCreated}) => {
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </h6>
+            {
+                forColumn && (
+                    <div className={s.colorPicker}>
+                        <p>Choose color:</p>
+                        <CirclePicker onChange={(color) => setColor(color.hex)}/>
+                    </div>
+                )
+            }
             <div className={s.createColumnButtons}>
                 <Button
-                    onClick={() => addBoard()}
+                    onClick={handler}
                     icon={
                         <FontAwesomeIcon
                             icon={faCircleCheck}
@@ -56,7 +79,7 @@ const TaskColumnCreate: React.FC<Props> = ({onCreated}) => {
                 </Button>
 
                 <Button
-                    onClick={() => dispatch(addBoardFalse())}
+                    onClick={onAbort}
                     icon={
                         <FontAwesomeIcon
                             icon={faCircleXmark}
