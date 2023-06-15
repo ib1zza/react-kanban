@@ -19,6 +19,8 @@ import {
 import TaskColumnEdit from "./TaskColumnEdit";
 import { editColumn } from "../../../queries/editColumn";
 import AddTaskForm from "./AddTaskForm/AddTaskForm";
+import { deleteColumn } from "../../../queries/deleteColumn";
+import { UserAuth } from "../../../context/AuthContext";
 
 interface ITaskColumnProps {
   // title?: string;
@@ -39,7 +41,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
 }) => {
   const [isEditColumn, setIsEditColumn] = useState(false);
   const [isAddingTask, setIsAddingTask] = useState(false);
-
+  const { user } = UserAuth();
   // ! pls don't delete this
   // const handleCreateTask = (title: string) => {
   //   if (!title.trim()) {
@@ -90,6 +92,14 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
               onClick={() => setIsEditColumn(true)}
             >
               <FontAwesomeIcon icon={faPenToSquare} height={20} />
+            </button>
+            {/* //TODO: STYLE */}
+            <button
+              onClick={() =>
+                deleteColumn(boardId, user?.uid as string, column.uid)
+              }
+            >
+              del
             </button>
           </h6>
           {!isAddingTask && (
