@@ -4,9 +4,14 @@ import s from './TaskList.module.css';
 
 const TaskList = ({ tasks }) => {
 
+    const getTasksFromColumn = (tasks) => {
+        return Object.values(tasks).sort(
+            (a, b) => +a.timeCreated - +b.timeCreated
+        )
+    }
     return (
         <div className={s.tasks}>
-            {tasks && tasks.length > 0 && tasks.map(el =>
+            {tasks && getTasksFromColumn(tasks).map(el =>
                 <Task task={el} key={el.id} />)
             }
         </div>
