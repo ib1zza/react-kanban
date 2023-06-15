@@ -15,6 +15,7 @@ import {CirclePicker} from "react-color";
 import {faCircleCheck, faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import TaskColumnEdit from "./TaskColumnEdit";
 import {editColumn} from "../../../queries/editColumn";
+import AddTaskForm from "./AddTaskForm/AddTaskForm";
 
 interface ITaskColumnProps {
     // title?: string;
@@ -28,13 +29,11 @@ interface ITaskColumnProps {
     boardId: string
 }
 
-const TaskColumn: React.FC<ITaskColumnProps> = ({
-                                                    column, onEdit, boardId
-                                                }) => {
+const TaskColumn: React.FC<ITaskColumnProps> = ({column, onEdit, boardId}) => {
+    const [isEditColumn, setIsEditColumn] = useState(false);
+    const [isAddingTask, setIsAddingTask] = useState(false);
+
     // ! pls don't delete this
-
-    const [isOpen, setIsOpen] = useState(false);
-
     // const handleCreateTask = (title: string) => {
     //   if (!title.trim()) {
     //     setIsOpen(false);
@@ -66,21 +65,32 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
         });
         console.log(res)
         onEdit();
-        setIsOpen(false)
+        setIsEditColumn(false)
     }
 
     return (
         <div className={s.container}>
             <div className={s.headerColor} style={{backgroundColor: column.color}}/>
-            {!isOpen && (<h6 className={s.title}>
-                <span>{column.title}</span>
-                <button className={s.editButton} onClick={() => setIsOpen(true)}>
-                    <FontAwesomeIcon icon={faPenToSquare} height={20}/>
-                </button>
-
-            </h6>)}
-            {isOpen && (
-                <TaskColumnEdit title={ column.title} color={column.color} onEdit={editHandler} onAbort={() => setIsOpen(false)}/>
+            {!isEditColumn && (
+                <>
+                    <h6 className={s.title}>
+                        <span>{column.title}</span>
+                        <button className={s.editButton} onClick={() => setIsEditColumn(true)}>
+                            <FontAwesomeIcon icon={faPenToSquare} height={20}/>
+                        </button>
+                    </h6>
+                    {!isAddingTask && <div>
+                        <button className={s.addButton} onClick={() => setIsAddingTask(true)}>
+                            <FontAwesomeIcon icon={faPlus} height={20}/>
+                            <span>Add task</span>
+                        </button>
+                    </div>}
+                    {isAddingTask && <AddTaskForm onAbort={() => setIsAddingTask(false)} onSubmit={() => {}}/>}
+                </>
+            )}
+            {isEditColumn && (
+                <TaskColumnEdit title={column.title} color={column.color} onEdit={editHandler}
+                                onAbort={() => setIsEditColumn(false)}/>
             )}
             <TaskList tasks={column.tasks}/>
 
