@@ -1,0 +1,44 @@
+.wrapper {
+  background-color: var(#{--taskBg-default});
+  color: var(#{--taskTextColor-default});
+  box-shadow: 0px 0px 3px 0px var(#{--taskTextColor-default});
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 16px;
+
+  .inputBlock {
+    margin-bottom: 10px;
+
+    label {
+      //display: block;
+      //text-align: center;
+      font-size: 18px;
+    }
+
+    input {
+      font-size: 16px;
+
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      resize: none;
+      border: none;
+      font-size: 16px;
+
+      &.min {
+        min-height: 70px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.createColumnButtons {
+  display: flex;
+  justify-content: space-between;
+}
