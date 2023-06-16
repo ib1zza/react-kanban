@@ -31,7 +31,7 @@ const TaskColumnEdit:React.FC<Props> = ({title: initTitle, color: initColor, onE
 
             <div className={s.colorPicker}>
                 <p>Choose color:</p>
-                <CirclePicker color={color} onChange={(color) => setColor(color.hex)}/>
+                <CirclePicker className={s.pickerBlock} color={color} onChange={(color) => setColor(color.hex)}/>
             </div>
 
             <div className={s.createColumnButtons}>

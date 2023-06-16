@@ -128,6 +128,14 @@
 .colorPicker {
   padding: 15px 0;
 
+  .pickerBlock {
+    margin-left: 0px;
+    margin-right: -14px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
   p {
     text-align: center;
     font-size: 18px;
