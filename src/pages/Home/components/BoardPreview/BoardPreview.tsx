@@ -7,32 +7,38 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 interface IBoardPreviewProps {
-  userId: string,
-  board: IBoard,
-  onClick: () => void,
-  onDelete: () => void
+    userId: string,
+    board: IBoard,
+    onClick: () => void,
+    onDelete: () => void
 }
-const BoardPreview:React.FC<IBoardPreviewProps> = ({userId, onClick, board, onDelete}) => {
-  const [user, setUser] = React.useState<FirebaseUserInfo | null>(null);
 
-  useEffect(() => {
-    getUserInfo(board.ownerId).then((res) => {
-      setUser(res);
-    })
-  }, [userId])
+const BoardPreview: React.FC<IBoardPreviewProps> = ({userId, onClick, board, onDelete}) => {
+    const [user, setUser] = React.useState<FirebaseUserInfo | null>(null);
 
-  const handleDelete = async (e: React.MouseEvent) => {
-      e.stopPropagation();
-      await deleteBoard(board.uid, board.ownerId)
-      onDelete();
-  }
+    useEffect(() => {
+        getUserInfo(board.ownerId).then((res) => {
+            setUser(res);
+        })
+    }, [userId])
 
-  return (
-    <div className={s.container} onClick={onClick}>
-      <h3 className={s.heading}><span>{board.title}</span> { userId === board.ownerId && <button onClick={handleDelete}><FontAwesomeIcon icon={faTrash} style={{color: "#e32400",}} /></button>} </h3>
-      <p>by {user?.displayName || "loading..."}</p>
-    </div>
-  );
+    const handleDelete = async (e: React.MouseEvent) => {
+        e.stopPropagation();
+        await deleteBoard(board.uid, board.ownerId)
+        onDelete();
+    }
+
+    return (
+        <div className={s.container}>
+            <h3 className={s.heading}>
+                <span onClick={onClick}>{board.title}</span>
+                {userId === board.ownerId &&
+                    <button onClick={handleDelete}><FontAwesomeIcon icon={faTrash} style={{color: "#e32400",}}/>
+                    </button>}
+            </h3>
+            <p>by {user?.displayName || "loading..."}</p>
+        </div>
+    );
 };
 
 export default BoardPreview;

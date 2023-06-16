@@ -17,7 +17,7 @@ const Header = () => {
   }
 
   return (<header className={s.header}>
-    <div className={s.header__logo}>Awesome Kanban Board</div>
+    <div className={s.header__logo} onClick={() => navigate(AppRoute.HOME)}>Awesome Kanban Board</div>
     <button className={s.button__theme} onClick={handleTheme}>
       {theme === Theme.LIGHT ? (
         <FontAwesomeIcon icon={faSun} />
