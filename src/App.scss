@@ -2,11 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import "styles/vars.scss";
 
+
+$transitionDuration: 0.3s;
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
+  -webkit-transition: background-color $transitionDuration;
+  -moz-transition: background-color $transitionDuration;
+  -ms-transition: background-color $transitionDuration;
+  -o-transition: background-color $transitionDuration;
+  transition: background-color $transitionDuration;
 }
 
 button {
@@ -37,13 +44,13 @@ button {
   }
 
 
-button:hover {
-  -webkit-transition: all 0.2s;
-  -moz-transition: all 0.2s;
-  -ms-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s;
-}
+//button:hover {
+//  -webkit-transition: all 0.2s;
+//  -moz-transition: all 0.2s;
+//  -ms-transition: all 0.2s;
+//  -o-transition: all 0.2s;
+//  transition: all 0.2s;
+//}
 
 
 body {
