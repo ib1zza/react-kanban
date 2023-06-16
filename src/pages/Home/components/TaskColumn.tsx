@@ -96,7 +96,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
             {/* //TODO: STYLE */}
             <button
               onClick={() =>
-                deleteColumn(boardId, user?.uid as string, column.uid)
+                deleteColumn(boardId, column.uid).then(onEdit)
               }
             >
               del
@@ -115,9 +115,13 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
           )}
           {isAddingTask && (
             <AddTaskForm
-              onAbort={() => setIsAddingTask(false)}
+              onAbort={() => {
+                setIsAddingTask(false);
+              }}
               onSubmit={() => {
                 setIsAddingTask(false);
+                onEdit();
+
               }}
               boardId={boardId}
               columnId={column.uid}
@@ -133,7 +137,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
           onAbort={() => setIsEditColumn(false)}
         />
       )}
-      <TaskList tasks={column.tasks} />
+      <TaskList boardId={boardId} columnId={column.uid} tasks={column.tasks} rerender={onEdit} />
 
       {/*{isOpen ? (*/}
       {/*  !withSelect ? (*/}

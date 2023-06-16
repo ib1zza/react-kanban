@@ -1,5 +1,5 @@
 import { updateDocument } from "./utils/updateDocument";
-import { deleteDoc, doc, arrayRemove } from "firebase/firestore";
+import {deleteDoc, doc, arrayRemove, deleteField} from "firebase/firestore";
 import { db } from "../firebase";
 
 export const deleteTask = async (
@@ -9,10 +9,15 @@ export const deleteTask = async (
 ) => {
   try {
     console.log(boardId);
-    //TODO: check why this does not work
-    await deleteDoc(
-      doc(db, "boards", boardId, "columns", columnId, "tasks", taskId)
-    );
+    // TODO: check why this does not work
+    // await deleteDoc(
+    //   doc(db, "boards", boardId, "columns", columnId, "tasks", taskId)
+    // );
+
+
+    await updateDocument("boards", boardId, {
+      ["columns." + columnId + ".tasks." + taskId]: deleteField(),
+    })
 
     // await updateDocument("users", userId, {
     //   boardsIds: arrayRemove(boardId),
