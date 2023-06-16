@@ -20,10 +20,10 @@ const TaskColumnEdit:React.FC<Props> = ({title: initTitle, color: initColor, onE
     }
     return (
         <div className={s.createColumn}>
-            <h6 className={s.title}>
+            <h6 className={""}>
                 <input
                     placeholder={"Enter name..."}
-                    className={s.createColumnTitle}
+                    className={s.createColumnTitle + " " + s.title}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />

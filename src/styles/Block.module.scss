@@ -6,25 +6,46 @@
   padding-top: 32px;
   max-width: 400px;
 }
-
 .title {
-  display: flex;
-  justify-content: space-between;
-
+  //padding-top: 5px;
   font-weight: 500;
   font-size: 18px;
-  line-height: 27px;
   color: var(#{--taskTextColor-default});
+
+  //line-height: 27px;
+}
+.titleBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  color: var(#{--taskTextColor-default});
+
 
   margin-bottom: 7px;
 
 
-  .editButton {
+
+  .columnButtons {
+    display: flex;
+    gap: 10px;
+  }
+  .editButton , .deleteButton {
+    svg {
+      width: 20px;
+    }
+    //font-size: 20px;
     padding: 5px;
     color: #888888;
 
-    &:hover {
-      color: #000000;
+    //&:hover {
+    //  color: #000000;
+    //}
+  }
+
+  .deleteButton {
+    svg {
+      //height: 25px;
     }
   }
 
@@ -105,10 +126,12 @@
 }
 
 .colorPicker {
-  padding-bottom: 15px;
+  padding: 15px 0;
+
   p {
     text-align: center;
     font-size: 18px;
+    color: var(#{--taskTextColor-default});
 
     margin-bottom: 10px;
   }
