@@ -1,34 +1,20 @@
 import React, {useState} from "react";
-import s from "../../../styles/Block.module.scss";
-
-import TaskList from "./TaskList/TaskList";
-import InputForm from "./InputForm";
-import SelectForm from "./SelectForm";
-import Button from "../../../components/UI/Button/Button";
-import {faPenToSquare, faPlus, faXmark} from "@fortawesome/free-solid-svg-icons";
+import s from "./TaskColumn.module.scss";
+import TaskList from "../TaskList/TaskList";
+import {faPenToSquare, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {IColumn} from "../../../BoardPage/BoardPage";
 
-import {v4 as uuid} from "uuid";
-import {ITask} from "../../../utils/types";
-import {IColumn} from "../../BoardPage/BoardPage";
-import {CirclePicker} from "react-color";
 import {
-    faCircleCheck,
-    faCircleXmark, faTrashCan,
+    faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import TaskColumnEdit from "./TaskColumnEdit";
-import {editColumn} from "../../../queries/editColumn";
-import AddTaskForm from "./AddTaskForm/AddTaskForm";
-import {deleteColumn} from "../../../queries/deleteColumn";
-import {UserAuth} from "../../../context/AuthContext";
+import {editColumn} from "../../../../queries/editColumn";
+import AddTaskForm from "../AddTaskForm/AddTaskForm";
+import {deleteColumn} from "../../../../queries/deleteColumn";
+import {UserAuth} from "../../../../context/AuthContext";
 
 interface ITaskColumnProps {
-    // title?: string;
-    // tasks?: ITask[];
-    // onAdd?: (taskName: ITask) => void;
-    // withSelect?: boolean;
-    // prevList?: ITask[];
-    // onSelect?: (value: string) => void;
     column: IColumn;
     onEdit: () => void;
     boardId: string;
@@ -42,30 +28,6 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
     const [isEditColumn, setIsEditColumn] = useState(false);
     const [isAddingTask, setIsAddingTask] = useState(false);
     const {user} = UserAuth();
-    // ! pls don't delete this
-    // const handleCreateTask = (title: string) => {
-    //   if (!title.trim()) {
-    //     setIsOpen(false);
-    //     return;
-    //   }
-    //
-    //   const newTask = {
-    //     id: uuid(),
-    //     title: title,
-    //     description: "",
-    //     status: "backlog",
-    //     timestamp: Date.now(),
-    //   };
-    //
-    //   onAdd && onAdd(newTask);
-    //   setIsOpen(false);
-    // };
-
-    // const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    //   console.log(e.target.value);
-    //   onSelect && onSelect(e.target.value);
-    //   setIsOpen(false);
-    // };
 
     const editHandler = async (title: string, color: string) => {
         const res = await editColumn(boardId, column.uid, {
@@ -78,7 +40,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
     };
 
     return (
-        <div className={s.container}>
+        <div className={s.container + " " + s.withColor}>
             <div
                 className={s.headerColor}
                 style={{backgroundColor: column.color}}
@@ -94,7 +56,6 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                             >
                                 <FontAwesomeIcon icon={faPenToSquare}/>
                             </button>
-                            {/* //TODO: STYLE */}
                             <button className={s.deleteButton}
                                     onClick={() =>
                                         deleteColumn(boardId, column.uid).then(onEdit)
@@ -140,21 +101,6 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                 />
             )}
             <TaskList boardId={boardId} columnId={column.uid} tasks={column.tasks} rerender={onEdit}/>
-
-            {/*{isOpen ? (*/}
-            {/*  !withSelect ? (*/}
-            {/*    <InputForm handleAdd={handleCreateTask} />*/}
-            {/*  ) : (*/}
-            {/*    <SelectForm items={prevList} handleSelect={handleSelect} />*/}
-            {/*  )*/}
-            {/*) : (*/}
-            {/*  <Button*/}
-            {/*    onClick={() => setIsOpen(!isOpen)}*/}
-            {/*    icon={<FontAwesomeIcon icon={faPlus} />}*/}
-            {/*  >*/}
-            {/*    Add card*/}
-            {/*  </Button>*/}
-            {/*)}*/}
         </div>
     );
 };

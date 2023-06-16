@@ -3,11 +3,11 @@ import s from './BoardPage.module.scss';
 import {IBoard} from "../Home";
 import {useParams} from "react-router-dom";
 import {getBoard} from "../../queries/getBoard";
-import TaskColumn from "../Home/components/TaskColumn";
+import TaskColumn from "../Home/components/TaskColumn/TaskColumn";
 import Button from "../../components/UI/Button/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
-import TaskColumnCreate from "../Home/components/TaskColumnCreate";
+import TaskColumnCreate from "../Home/components/TaskColumn/TaskColumnCreate";
 import {createColumn} from "../../queries/createColumn";
 import {ITask} from "../../queries/createTask";
 

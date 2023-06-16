@@ -26,6 +26,8 @@
       resize: none;
       border: none;
       font-size: 16px;
+      background-color: transparent;
+      color: var(#{--taskTextColor-default});
 
       &.min {
         min-height: 70px;
@@ -33,6 +35,11 @@
 
       &:focus {
         outline: none;
+      }
+
+      &::placeholder {
+        color: var(#{--taskTextColor-default});
+        opacity: 0.5;
       }
     }
   }

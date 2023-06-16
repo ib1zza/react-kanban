@@ -1,0 +1,23 @@
+
+.colorPicker {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .pickerBlock {
+
+    margin-right: -14px !important;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  p {
+    text-align: center;
+    font-size: 18px;
+    color: var(#{--taskTextColor-default});
+
+    margin-bottom: 10px;
+  }
+}

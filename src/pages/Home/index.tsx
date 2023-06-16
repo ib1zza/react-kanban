@@ -7,7 +7,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {ITask} from "../../utils/types";
 import Profile from "../Profile";
 import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
 import {useSelector, useDispatch} from "react-redux";
 import s from "./Home.module.scss";
 import {
@@ -22,7 +21,7 @@ import {
 } from "@firebase/firestore";
 import {db} from "../../firebase";
 import {UserAuth} from "../../context/AuthContext";
-import TaskColumnCreate from "./components/TaskColumnCreate";
+import TaskColumnCreate from "./components/TaskColumn/TaskColumnCreate";
 import {addBoardFalse, addBoardTrue} from "../../store/Reducers/addBoardSlice";
 import {RootState} from "../../store/store";
 import {
@@ -174,10 +173,7 @@ const Home = () => {
                                             {!addBoardStatus && (
                                                 <div className={s.buttons}>
                                                     <Button onClick={() => dispatch(addBoardTrue())}>
-                                                        <FontAwesomeIcon icon={faPlus}/>
-                                                    </Button>
-                                                    <Button>
-                                                        <FontAwesomeIcon icon={faLink}/>
+                                                        <FontAwesomeIcon size={"lg"} icon={faPlus}/>
                                                     </Button>
                                                 </div>
                                             )}

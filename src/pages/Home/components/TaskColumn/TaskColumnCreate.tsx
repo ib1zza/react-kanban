@@ -1,21 +1,23 @@
 import React, {useState} from "react";
-import s from "../../../styles/Block.module.scss";
-import Button from "../../../components/UI/Button/Button";
+import s from "./TaskColumn.module.scss";
+import Button from "../../../../components/UI/Button/Button";
 import {
     faCircleCheck,
     faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
 import {useDispatch} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {addBoardFalse} from "../../../store/Reducers/addBoardSlice";
+import {addBoardFalse} from "../../../../store/Reducers/addBoardSlice";
 import {addDoc, collection} from "firebase/firestore";
-import {db} from "../../../firebase";
-import {UserAuth} from "../../../context/AuthContext";
-import {createBoard} from "../../../queries/createBoard";
+import {db} from "../../../../firebase";
+import {UserAuth} from "../../../../context/AuthContext";
+import {createBoard} from "../../../../queries/createBoard";
 import {CirclePicker, SwatchesPicker} from "react-color"
+import ColorPicker from "./ColorPicker/ColorPicker";
+import ConfirmButtons from "./ConfirmButtons/ConfirmButtons";
 
 interface Props {
-    onAbort?: () => void,
+    onAbort: () => void,
     forColumn?: boolean
     forBoard?: boolean,
     onCreateColumn?: (title: string, color: string) => void,
@@ -47,7 +49,7 @@ const TaskColumnCreate: React.FC<Props> = ({onAbort, forColumn, forBoard, onCrea
     console.log(color)
 
     return (
-        <div className={s.container}>
+        <div className={s.container + " " + (forColumn && s.withColor)}>
             {forColumn && <div className={s.headerColor} style={{backgroundColor: color}}/>}
             <h6 className={s.title}>
                 <input
@@ -59,37 +61,10 @@ const TaskColumnCreate: React.FC<Props> = ({onAbort, forColumn, forBoard, onCrea
             </h6>
             {
                 forColumn && (
-                    <div className={s.colorPicker}>
-                        <p>Choose color:</p>
-                        <CirclePicker onChange={(color) => setColor(color.hex)}/>
-                    </div>
+                    <ColorPicker color={color} onChange={setColor}/>
                 )
             }
-            <div className={s.createColumnButtons}>
-                <Button
-                    onClick={handler}
-                    icon={
-                        <FontAwesomeIcon
-                            icon={faCircleCheck}
-                            style={{color: "#5CD43E"}}
-                        />
-                    }
-                >
-                    Confirm
-                </Button>
-
-                <Button
-                    onClick={onAbort}
-                    icon={
-                        <FontAwesomeIcon
-                            icon={faCircleXmark}
-                            style={{color: "#DE2525"}}
-                        />
-                    }
-                >
-                    Cancel
-                </Button>
-            </div>
+            <ConfirmButtons onConfirm={handler} onAbort={onAbort}/>
         </div>
     );
 };
