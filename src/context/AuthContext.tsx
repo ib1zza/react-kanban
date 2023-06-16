@@ -15,6 +15,9 @@ import {
 } from "firebase/auth";
 import { signUpEmailPass } from "../queries/signUp";
 import { loginByEmailPass } from "../queries/logIn";
+import { setUserInfo } from "../store/Reducers/userInfoSlice";
+import { useDispatch } from "react-redux";
+import { getUserInfo } from "../queries/getUserInfo";
 
 // import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 type ISelect = "practice" | "work" | "study" | "other";
@@ -49,7 +52,7 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
   const [user, setUser] = useState<User>({} as User);
   const signUp = signUpEmailPass;
   const logIn = loginByEmailPass;
-
+  const dispatch = useDispatch();
   function logOut() {
     signOut(auth);
   }
@@ -61,6 +64,13 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser: User) => {
       setUser(currentUser);
+      if (user?.uid) {
+        getUserInfo(user.uid).then((res) => {
+          if (res) {
+            dispatch(setUserInfo(res));
+          }
+        });
+      }
     });
     return () => {
       unsubscribe();
