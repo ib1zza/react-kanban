@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import s from "./Task.module.scss";
 import { useNavigate } from "react-router-dom";
 import { deleteTask } from "../../../../queries/deleteTask";
+import {ITask} from "../../../../queries/createTask";
 
-const Task = ({ task, boardId, columnId }: any) => {
-  const navigate = useNavigate();
+
+interface ITaskProps {
+  task: ITask;
+  boardId: string;
+  columnId: string;
+  rerender: () => void;
+}
+const Task = ({ task, boardId, columnId , rerender}: ITaskProps) => {
+  // const navigate = useNavigate();
   const handler = () => {
     // navigate(`/tasks/${task.id}`);
   };
@@ -48,7 +56,7 @@ const Task = ({ task, boardId, columnId }: any) => {
       {editedStatus && (
         <div>
           <button onClick={() => console.log(task.uid)}>Изменить</button>
-          <button onClick={() => deleteTask(boardId, columnId, task.uid)}>
+          <button onClick={() => deleteTask(boardId, columnId, task.uid).then(rerender)}>
             Удалить
           </button>
         </div>

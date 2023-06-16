@@ -1,14 +1,18 @@
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, deleteField } from "firebase/firestore";
 import { db } from "../firebase";
+import {updateDocument} from "./utils/updateDocument";
 
 export const deleteColumn = async (
   boardId: string,
-  userId: string,
+  // userId: string,
   columnId: string
 ) => {
   try {
     //TODO: check why this want to work
-    await deleteDoc(doc(db, "boards", boardId, "columns", columnId));
+    await updateDocument("boards", boardId, {
+      ["columns." + columnId]: deleteField(),
+    })
+    // await deleteDoc(doc(db, "boards", boardId, "columns", columnId));
     // await updateDocument("users", userId, {
     //     boardsIds: arrayRemove(boardId),
     // });

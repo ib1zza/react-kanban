@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
 import TaskColumnCreate from "../Home/components/TaskColumnCreate";
 import {createColumn} from "../../queries/createColumn";
+import {ITask} from "../../queries/createTask";
 
 interface IBoardPageProps {
     // board: IBoard
@@ -17,7 +18,7 @@ interface IBoardPageProps {
 export interface IColumn {
     uid: string,
     title: string,
-    tasks: { [x: string]: any },
+    tasks: { [x: string]: ITask },
     timeCreated: string,
     timeUpdated: string,
     color: string
