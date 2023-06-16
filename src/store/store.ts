@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import addBoardReducer from "./Reducers/addBoardSlice";
 import boardCollectionReducer from "./Reducers/boardCollectionSlice";
+import userInfoReducer from "./Reducers/userInfoSlice";
 export const store = configureStore({
   reducer: {
-    addBoard: addBoardReducer,
     boardCollection: boardCollectionReducer,
+    userInfo: userInfoReducer,
   },
 });
 
