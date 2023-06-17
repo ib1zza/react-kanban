@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import s from './BoardPage.module.scss';
-import {IBoard} from "../Home";
+
 import {useParams} from "react-router-dom";
 import {getBoard} from "../../queries/getBoard";
 import TaskColumn from "../Home/components/TaskColumn/TaskColumn";
@@ -9,24 +9,13 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
 import TaskColumnCreate from "../Home/components/TaskColumn/TaskColumnCreate";
 import {createColumn} from "../../queries/createColumn";
-import {ITask} from "../../queries/createTask";
+import {Board} from "../../types/Board";
 
-interface IBoardPageProps {
-    // board: IBoard
-}
 
-export interface IColumn {
-    uid: string,
-    title: string,
-    tasks: { [x: string]: ITask },
-    timeCreated: string,
-    timeUpdated: string,
-    color: string
-}
 
-const BoardPage: React.FC<IBoardPageProps> = () => {
+const BoardPage: React.FC = () => {
     const {boardId} = useParams()
-    const [board, setBoard] = React.useState<IBoard>()
+    const [board, setBoard] = React.useState<Board>()
     const [isCreating, setIsCreating] = React.useState(false)
     useEffect(() => {
         if (!boardId) return
@@ -37,8 +26,7 @@ const BoardPage: React.FC<IBoardPageProps> = () => {
 
     if (!board) return null;
 
-
-    const getColumnsFromBoard = (board: IBoard) => {
+    const getColumnsFromBoard = (board: Board) => {
         return Object.values(board.columns).sort(
             (a, b) => +a.timeCreated - +b.timeCreated
         )

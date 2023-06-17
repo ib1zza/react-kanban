@@ -1,20 +1,22 @@
 import React, {useEffect} from 'react';
 import s from './BoardPreview.module.scss';
-import {FirebaseUserInfo, getUserInfo} from "../../../../queries/getUserInfo";
+import {getUserInfo} from "../../../../queries/getUserInfo";
 import {deleteBoard} from "../../../../queries/deleteBoard";
-import {IBoard} from "../../index";
+
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Board} from "../../../../types/Board";
+import {IUserInfo} from "../../../../types/User";
 
 interface IBoardPreviewProps {
     userId: string,
-    board: IBoard,
+    board: Board,
     onClick: () => void,
     onDelete: () => void
 }
 
 const BoardPreview: React.FC<IBoardPreviewProps> = ({userId, onClick, board, onDelete}) => {
-    const [user, setUser] = React.useState<FirebaseUserInfo | null>(null);
+    const [user, setUser] = React.useState<IUserInfo | null>(null);
 
     useEffect(() => {
         getUserInfo(board.ownerId).then((res) => {

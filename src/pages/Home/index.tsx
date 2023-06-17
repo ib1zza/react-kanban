@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
-import TaskPage from "./components/TaskPage/TaskPage";
 import Button from "../../components/UI/Button/Button";
-import { faLink, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ITask } from "../../utils/types";
 import Profile from "../Profile";
 import Header from "./components/Header/Header";
 import { useSelector, useDispatch } from "react-redux";
 import s from "./Home.module.scss";
 import {
-  arrayUnion,
   collection,
-  doc,
   getDocs,
   query,
-  setDoc,
-  updateDoc,
   where,
 } from "@firebase/firestore";
 import { db } from "../../firebase";
@@ -30,38 +24,13 @@ import {
 } from "../../store/Reducers/boardCollectionSlice";
 import { useNavigate } from "react-router-dom";
 import BoardPreview from "./components/BoardPreview/BoardPreview";
-import BoardPage, { IColumn } from "../BoardPage/BoardPage";
+import BoardPage from "../BoardPage/BoardPage";
 import { createBoard } from "../../queries/createBoard";
-
-//TODO: delete this function or replace them to folder with utilities ur hooks
-// function getLocalStorageItem(key: any) {
-//   return JSON.parse(localStorage.getItem(key) as any);
-// }
-// function setLocalStorageItem(key: any, value: any) {
-//   localStorage.setItem(key, JSON.stringify(value));
-// }
-
-export const enum GuestPermission {
-  READ = "read",
-  FULL = "full",
-  NONE = "none",
-}
-
-export interface IBoard {
-  uid: string;
-  chatId?: string;
-  columns: { [key: string]: IColumn };
-  guestPermissions: GuestPermission[];
-  ownerId: string;
-  title: string;
-  usersAllowed: string[];
-  timeCreated: string;
-  timeUpdated: string;
-}
+import {Board} from "../../types/Board";
 
 const Home = () => {
   //TODO: rename to boards and replace to redux storage
-  const [boards, setBoards] = React.useState<IBoard[]>([]);
+  const [boards, setBoards] = React.useState<Board[]>([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = UserAuth();
@@ -89,29 +58,6 @@ const Home = () => {
     });
     setBoards(res);
   };
-  //getting columns from board
-  // const getColumnsFromBoard = async () => {
-  //     const dataRef = query(
-  //         collection(db, "boards"),
-  //         where("ownerId", "==", `${user?.uid}`),
-  //         where("title", "==", `${boardName}`)
-  //     );
-  //
-  //     const docsSnap = await getDocs(dataRef);
-  //     const res: any[] = [];
-  //     docsSnap.forEach((doc) => {
-  //         res.push({...doc.data()});
-  //     });
-  //     console.log(res);
-  //     dispatch(setBoardColumns(res[0].columns));
-  // };
-
-  //getting columns, If board picked
-  // useEffect(() => {
-  //     if (boardName) {
-  //         getColumnsFromBoard();
-  //     }
-  // }, [boards.length]);
 
   //getting boards
   useEffect(() => {

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import s from "./Task.module.scss";
 import { useNavigate } from "react-router-dom";
 import { deleteTask } from "../../../../queries/deleteTask";
-import {ITask} from "../../../../queries/createTask";
+import {ITask} from "../../../../types/Board";
+
 
 
 interface ITaskProps {

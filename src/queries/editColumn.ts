@@ -1,5 +1,6 @@
 import { updateDocument } from "./utils/updateDocument";
-import {IColumn} from "../pages/BoardPage/BoardPage";
+import {IColumn} from "../types/Board";
+
 
 export async function editColumn(boardId: string, columnId: string, newData: {[key in keyof IColumn]?: IColumn[key]}) {
     const updatedData = Object.keys(newData).reduce(

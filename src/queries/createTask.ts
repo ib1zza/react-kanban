@@ -1,17 +1,7 @@
 import { updateDocument } from "./utils/updateDocument";
 import { v4 as uuid } from "uuid";
 
-export interface ITask {
-  uid: string;
-  title: string;
-  description: string;
-  timeCreated: string;
-  isCompleted: boolean;
-  tags: string[];
-  chatId?: string;
-  creatorId: string;
-  subtasks: { [id: string]: any };
-}
+
 
 interface ITaskForCreate {
   title: string;

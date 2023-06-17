@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import s from "./Profile.module.scss";
 import { UserAuth } from "../../context/AuthContext";
-import { User, updateProfile } from "firebase/auth";
-import {FirebaseUserInfo, getUserInfo} from "../../queries/getUserInfo";
+import {getUserInfo} from "../../queries/getUserInfo";
 import {editDisplayName} from "../../queries/editDisplayName";
+import {IUserInfo} from "../../types/User";
+
 const Profile = () => {
   const { user, refetch } = UserAuth();
   const [editStatus, setEditStatus] = useState(false);
   const [name, setName] = useState<any>("");
 
-  const [userInfo, setUserInfo] = useState<FirebaseUserInfo | null>(null)
+  const [userInfo, setUserInfo] = useState<IUserInfo | null>(null)
 
   useEffect(() => {
     if(!user?.uid) return

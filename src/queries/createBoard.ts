@@ -1,8 +1,9 @@
 import {db} from "../firebase";
 import {updateDocument} from "./utils/updateDocument";
-import {GuestPermission} from "../pages/Home";
+
 import {arrayUnion, doc, setDoc} from "@firebase/firestore";
 import {v4 as uuid} from "uuid";
+import {GuestPermission} from "../types/Board";
 
 export const createBoard = async (title: string, userId: string) => {
     try {

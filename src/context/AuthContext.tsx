@@ -7,8 +7,6 @@ import React, {
 } from "react";
 import { auth } from "../firebase";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   signOut,
   User,
   onAuthStateChanged,

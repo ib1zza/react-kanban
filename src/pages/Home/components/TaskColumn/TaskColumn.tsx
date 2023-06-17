@@ -3,7 +3,7 @@ import s from "./TaskColumn.module.scss";
 import TaskList from "../TaskList/TaskList";
 import {faPenToSquare, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {IColumn} from "../../../BoardPage/BoardPage";
+
 
 import {
     faTrashCan,
@@ -13,6 +13,7 @@ import {editColumn} from "../../../../queries/editColumn";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import {deleteColumn} from "../../../../queries/deleteColumn";
 import {UserAuth} from "../../../../context/AuthContext";
+import {IColumn} from "../../../../types/Board";
 
 interface ITaskColumnProps {
     column: IColumn;

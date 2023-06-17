@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import s from "./TaskColumn.module.scss";
-import Button from "../../../../components/UI/Button/Button";
-import {
-  faCircleCheck,
-  faCircleXmark,
-} from "@fortawesome/free-regular-svg-icons";
-import { useDispatch } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "../../../../firebase";
 import { UserAuth } from "../../../../context/AuthContext";
-import { createBoard } from "../../../../queries/createBoard";
-import { CirclePicker, SwatchesPicker } from "react-color";
 import ColorPicker from "./ColorPicker/ColorPicker";
 import ConfirmButtons from "./ConfirmButtons/ConfirmButtons";
 
