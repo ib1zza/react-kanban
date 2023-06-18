@@ -27,6 +27,7 @@ function changeCssRootVariables(theme: Theme) {
     "taskBg",
     "taskTextColor",
     "buttonTextColor",
+      "popupBg"
   ];
 
   // меняем значения переменных

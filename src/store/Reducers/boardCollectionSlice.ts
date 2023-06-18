@@ -1,29 +1,48 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IBoard, ITask} from "../../types/IBoard";
 
 export interface boardCollectionState {
-  name: string;
-  columns: any[];
+    selectedBoardId: string;
+    selectedColumnId: string;
+    selectedBoard: IBoard | null;
+    selectedTask: ITask | null;
 }
 
 const initialState: boardCollectionState = {
-  name: "",
-  columns: [],
+    selectedBoardId: "",
+    selectedColumnId: "",
+    selectedBoard: null,
+    selectedTask: null,
 };
 
 export const boardCollectionSlice = createSlice({
-  name: "boardCollection",
-  initialState,
-  reducers: {
-    setBoardName: (state, action) => {
-      state.name = action.payload;
+    name: "boardCollection",
+    initialState,
+    reducers: {
+        setCurrentBoard: (state, action: PayloadAction<IBoard>) => {
+            state.selectedBoard = action.payload;
+            state.selectedBoardId = action.payload.uid;
+
+            console.log("board selected:", action.payload);
+        },
+        removeSelectedBoard: (state) => {
+            state.selectedBoard = null;
+            state.selectedBoardId = "";
+            console.log("board unselected:");
+        },
+        setCurrentTask: (state, action: PayloadAction<ITask>) => {
+            state.selectedTask = action.payload;
+            if(!state.selectedBoard) return
+            state.selectedColumnId = Object.values(state.selectedBoard.columns).find(col => Object.keys(col.tasks).includes(action.payload.uid))?.uid || "";
+            console.log("task selected:", action.payload);
+        },
+        removeSelectedTask: (state) => {
+            state.selectedTask = null;
+            console.log("task unselected:");
+        }
     },
-    setBoardColumns: (state, action) => {
-      state.columns = action.payload;
-      console.log(state.columns);
-    },
-  },
 });
 
-export const { setBoardName, setBoardColumns } = boardCollectionSlice.actions;
+export const {setCurrentBoard, setCurrentTask, removeSelectedTask, removeSelectedBoard} = boardCollectionSlice.actions;
 
 export default boardCollectionSlice.reducer;

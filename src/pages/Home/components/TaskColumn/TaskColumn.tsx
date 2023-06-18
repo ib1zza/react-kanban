@@ -12,8 +12,7 @@ import TaskColumnEdit from "./TaskColumnEdit";
 import {editColumn} from "../../../../queries/editColumn";
 import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import {deleteColumn} from "../../../../queries/deleteColumn";
-import {UserAuth} from "../../../../context/AuthContext";
-import {IColumn} from "../../../../types/Board";
+import {IColumn} from "../../../../types/IBoard";
 
 interface ITaskColumnProps {
     column: IColumn;
@@ -28,7 +27,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                                                 }) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
     const [isAddingTask, setIsAddingTask] = useState(false);
-    const {user} = UserAuth();
+
 
     const editHandler = async (title: string, color: string) => {
         const res = await editColumn(boardId, column.uid, {

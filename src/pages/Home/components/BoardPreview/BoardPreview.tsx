@@ -5,12 +5,12 @@ import {deleteBoard} from "../../../../queries/deleteBoard";
 
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Board} from "../../../../types/Board";
+import {IBoard} from "../../../../types/IBoard";
 import {IUserInfo} from "../../../../types/User";
 
 interface IBoardPreviewProps {
     userId: string,
-    board: Board,
+    board: IBoard,
     onClick: () => void,
     onDelete: () => void
 }

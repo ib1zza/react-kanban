@@ -1,6 +1,14 @@
+.wrapperContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+}
+
 .wrapper {
   display: flex;
   width: 100%;
+  flex-basis: 100%;
 
     .buttons {
       margin-left: 15px;

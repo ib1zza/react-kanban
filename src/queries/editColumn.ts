@@ -1,5 +1,5 @@
 import { updateDocument } from "./utils/updateDocument";
-import {IColumn} from "../types/Board";
+import {IColumn} from "../types/IBoard";
 
 
 export async function editColumn(boardId: string, columnId: string, newData: {[key in keyof IColumn]?: IColumn[key]}) {

@@ -4,10 +4,10 @@ export const enum GuestPermission {
     NONE = "none",
 }
 
-export interface Board {
+export interface IBoard {
     uid: string;
     chatId?: string;
-    columns: { [key: string]: IColumn };
+    columns: { [columnId: string]: IColumn };
     guestPermissions: GuestPermission[];
     ownerId: string;
     title: string;
@@ -19,7 +19,7 @@ export interface Board {
 export interface IColumn {
     uid: string,
     title: string,
-    tasks: { [x: string]: ITask },
+    tasks: { [taskId: string]: ITask },
     timeCreated: string,
     timeUpdated: string,
     color: string

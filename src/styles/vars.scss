@@ -7,7 +7,7 @@ $columnBg-light: #EBECF0;
 $taskBg-light: #FFFFFF;
 $taskTextColor-light: #000000;
 $buttonTextColor-light: #5E6C84;
-
+$popupBg-light: #FFFFFF;
 
 // темная тема
 $body-background-dark: #19032E;
@@ -16,6 +16,7 @@ $columnBg-dark: #424242;
 $taskBg-dark: #585858;
 $taskTextColor-dark: #F0F0F0;
 $buttonTextColor-dark: #C7C7C7;
+$popupBg-dark: #424242;
 
 // для создания темной и светлой версии стилей нужно сначала
 // создать ДВЕ переменных scss с постфиксами light и dark, далее
@@ -53,4 +54,8 @@ $buttonTextColor-dark: #C7C7C7;
   --buttonTextColor-light: #{$buttonTextColor-light};
   --buttonTextColor-dark: #{$buttonTextColor-dark};
   --buttonTextColor-default: var(#{--buttonTextColor-dark});
+
+  --popupBg-light: #{$popupBg-light};
+  --popupBg-dark: #{$popupBg-dark};
+  --popupBg-default: var(#{--popupBg-dark});
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Task from '../Task/Task';
 import s from './TaskList.module.css';
-import {ITask} from "../../../../types/Board";
+import {ITask} from "../../../../types/IBoard";
 
 
 interface ITaskListProps {

@@ -3,7 +3,7 @@ import {updateDocument} from "./utils/updateDocument";
 
 import {arrayUnion, doc, setDoc} from "@firebase/firestore";
 import {v4 as uuid} from "uuid";
-import {GuestPermission} from "../types/Board";
+import {GuestPermission} from "../types/IBoard";
 
 export const createBoard = async (title: string, userId: string) => {
     try {

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect, useLayoutEffect, useState} from 'react';
 import s from './BoardPage.module.scss';
 
 import {useParams} from "react-router-dom";
@@ -9,24 +9,45 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
 import TaskColumnCreate from "../Home/components/TaskColumn/TaskColumnCreate";
 import {createColumn} from "../../queries/createColumn";
-import {Board} from "../../types/Board";
+import {IBoard} from "../../types/IBoard";
+import PopupTaskInfo from "./PopupTaskInfo/PopupTaskInfo";
+import {removeSelectedBoard, setCurrentBoard} from "../../store/Reducers/boardCollectionSlice";
+import {useAppDispatch, useAppSelector} from "../../store/store";
 
 
 
-const BoardPage: React.FC = () => {
-    const {boardId} = useParams()
-    const [board, setBoard] = React.useState<Board>()
-    const [isCreating, setIsCreating] = React.useState(false)
+const BoardPage: React.FC = memo(() => {
+    const {boardId} = useParams();
+    const {selectedBoard, selectedTask} = useAppSelector(state => state.boardCollection);
+    const [isCreating, setIsCreating] = useState(false)
+    const dispatch = useAppDispatch()
+
+    const getBoardFromId = () => {
+        if(!boardId) return
+        return getBoard(boardId).then((board) => {
+            dispatch(setCurrentBoard(board))
+            return board;
+        });
+    }
+
+    // useLayoutEffect(() => {
+    //     return () => {
+    //         dispatch(removeSelectedBoard())
+    //     }
+    // }, [])
+
     useEffect(() => {
-        if (!boardId) return
-        getBoard(boardId).then((board) => {
-            setBoard(board)
-        })
+        console.log(boardId)
+        getBoardFromId();
+        console.log("useEffect")
     }, [boardId])
 
-    if (!board) return null;
+    const rerender = () => {
+        getBoardFromId()
+        console.log("rerender")
+    }
 
-    const getColumnsFromBoard = (board: Board) => {
+    const getColumnsFromBoard = (board: IBoard) => {
         return Object.values(board.columns).sort(
             (a, b) => +a.timeCreated - +b.timeCreated
         )
@@ -38,21 +59,16 @@ const BoardPage: React.FC = () => {
         setIsCreating(false)
         rerender();
     }
-    const rerender = () => {
-        if (!boardId) return
-        getBoard(boardId).then((board) => {
-            setBoard(board);
-        })
-    }
 
-    console.log(board);
+    if (!selectedBoard) return <></>;
+
     return (
-        <div>
-            <h1 className={s.title}>{board.title}</h1>
+        <div className={s.wrapperContainer}>
+            <h1 className={s.title}>{selectedBoard.title}</h1>
             <div className={s.wrapper}>
                 <div className={s.columnsWrapper}>
-                    {getColumnsFromBoard(board).map((column) => (
-                        <TaskColumn key={column.uid} column={column} onEdit={rerender} boardId={board.uid}/>
+                    {getColumnsFromBoard(selectedBoard).map((column) => (
+                        <TaskColumn key={column.uid} column={column} onEdit={rerender} boardId={selectedBoard.uid}/>
                     ))}
                     {isCreating && (
                         <TaskColumnCreate
@@ -72,9 +88,12 @@ const BoardPage: React.FC = () => {
                         </Button>
                     </div>
                 )}
+                {selectedTask && (
+                    <PopupTaskInfo/>
+                )}
             </div>
         </div>
     );
-};
+})
 
 export default BoardPage;
