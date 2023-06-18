@@ -5,6 +5,11 @@ import { deleteTask } from "../../../../queries/deleteTask";
 import {ITask} from "../../../../types/IBoard";
 import {useAppDispatch} from "../../../../store/store";
 import {setCurrentTask} from "../../../../store/Reducers/boardCollectionSlice";
+import {faCircleCheck as iconCheckRegular} from "@fortawesome/free-regular-svg-icons";
+import {faCircleCheck as iconCheckSolid} from "@fortawesome/free-solid-svg-icons";
+
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {toggleTaskComplete} from "../../../../queries/toggleTaskComplete";
 
 
 
@@ -21,24 +26,30 @@ const Task = ({ task, boardId, columnId , rerender}: ITaskProps) => {
     dispatch(setCurrentTask(task));
   };
 
-  const [editedStatus, setEditedStatus] = useState(false);
-  const [title, setTitle] = useState(task.title);
+
   const handleEdit = () => {};
   const handleDelete = () => {};
+
+  const handleComplete = () => {
+      toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted).then(rerender);
+  }
   return (
-    <div className={s.container} onClick={clickHandler}>
+    <div className={s.container} >
       <div className={s.title}>
-        {editedStatus ? (
-          //TODO: class for input
-          <input value={title} onChange={(e) => setTitle(e.target.value)} />
-        ) : (
-          task.title
-        )}
+      <div className={s.icon} onClick={handleComplete}>
+        {!task.isCompleted ?
+            (<FontAwesomeIcon icon={iconCheckRegular} />)
+            : (<FontAwesomeIcon icon={iconCheckSolid} />)
+        }
       </div>
-      {!editedStatus && (
+
+          <span>{task.title}</span>
+
+      </div>
+
         <button
           className={s.button}
-          onClick={() => setEditedStatus(!editedStatus)}
+          onClick={clickHandler}
         >
           <svg
             width="4"
@@ -55,8 +66,8 @@ const Task = ({ task, boardId, columnId , rerender}: ITaskProps) => {
               strokeLinejoin="round"
             />
           </svg>
-        </button>
-      )}
+        </button >
+
 
     </div>
   );
