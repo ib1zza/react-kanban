@@ -89,7 +89,7 @@ const BoardPage: React.FC = memo(() => {
                     </div>
                 )}
                 {selectedTask && (
-                    <PopupTaskInfo/>
+                    <PopupTaskInfo rerender={rerender} />
                 )}
             </div>
         </div>

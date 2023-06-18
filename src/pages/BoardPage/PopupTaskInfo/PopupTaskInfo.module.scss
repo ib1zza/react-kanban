@@ -9,3 +9,11 @@ border-radius: 10px 0 0px 10px;
   background-color: var(--popupBg-default);
   padding: 20px;
 }
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  & > *:not(:last-child) {
+    margin-right: 10px;
+  }
+}

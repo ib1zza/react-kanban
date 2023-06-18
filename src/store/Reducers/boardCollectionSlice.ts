@@ -38,6 +38,7 @@ export const boardCollectionSlice = createSlice({
         },
         removeSelectedTask: (state) => {
             state.selectedTask = null;
+            state.selectedColumnId = "";
             console.log("task unselected:");
         }
     },
