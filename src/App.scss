@@ -58,6 +58,12 @@ body {
   background-color: var(#{--body-bg-default});
 }
 
+textarea {
+  resize: none;
+  font-family: "Poppins", sans-serif;
+
+}
+
 
 .block {
   &:not(:last-child) {

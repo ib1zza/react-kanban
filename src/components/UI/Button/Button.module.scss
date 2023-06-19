@@ -1,6 +1,6 @@
 $background: #FFFFFF;
-$hover: #F2F2F2;
-$hoverBorder: #5d5d5d;
+$hover: var(--iconColorHover-default);
+$hoverBorder: var(--iconColorHover-default);
 //@keyframes pulse {
 //  0% {
 //    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
@@ -61,7 +61,7 @@ $hoverBorder: #5d5d5d;
   }
 
   &:hover {
-    background: $hover;
+    //background: $hover;
     border: 1px solid $hoverBorder;
   }
 

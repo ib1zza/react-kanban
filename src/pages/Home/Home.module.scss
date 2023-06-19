@@ -15,6 +15,7 @@
   margin-right: 15px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  align-items: start;
   grid-gap: 16px;
   justify-content: space-between;
 }

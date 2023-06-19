@@ -8,6 +8,8 @@ $taskBg-light: #FFFFFF;
 $taskTextColor-light: #000000;
 $buttonTextColor-light: #5E6C84;
 $popupBg-light: #FFFFFF;
+$iconColor-light: #888888;
+$iconColorHover-light: #313131;
 
 // темная тема
 $body-background-dark: #19032E;
@@ -17,6 +19,8 @@ $taskBg-dark: #585858;
 $taskTextColor-dark: #F0F0F0;
 $buttonTextColor-dark: #C7C7C7;
 $popupBg-dark: #424242;
+$iconColor-dark: #888888;
+$iconColorHover-dark: #d8d8d8;
 
 // для создания темной и светлой версии стилей нужно сначала
 // создать ДВЕ переменных scss с постфиксами light и dark, далее
@@ -58,4 +62,12 @@ $popupBg-dark: #424242;
   --popupBg-light: #{$popupBg-light};
   --popupBg-dark: #{$popupBg-dark};
   --popupBg-default: var(#{--popupBg-dark});
+
+  --iconColor-light: #{$iconColor-light};
+  --iconColor-dark: #{$iconColor-dark};
+  --iconColor-default: var(#{--iconColor-dark});
+
+  --iconColorHover-light: #{$iconColorHover-light};
+  --iconColorHover-dark: #{$iconColorHover-dark};
+  --iconColorHover-default: var(#{--iconColorHover-dark});
 }

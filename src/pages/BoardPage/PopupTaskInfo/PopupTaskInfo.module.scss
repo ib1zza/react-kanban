@@ -6,7 +6,7 @@
   margin-left: 25px;
   margin-right: -24px;
 border-radius: 10px 0 0px 10px;
-  background-color: var(--popupBg-default);
+  background-color: var(--columnBg-default);
   padding: 20px;
 }
 
@@ -18,12 +18,21 @@ border-radius: 10px 0 0px 10px;
   }
 }
 
+.title, .description {
+  color: var(--taskTextColor-default);
+}
+
 .title{
   display: flex;
   justify-content: space-between;
 
   .icon {
     font-size: 25px;
+
+    color: var(#{--iconColor-default});
+    &:hover {
+      color: var(#{--iconColorHover-default});
+    }
   }
 
 }

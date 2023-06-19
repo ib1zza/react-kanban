@@ -11,14 +11,15 @@ import TaskColumnCreate from "../Home/components/TaskColumn/TaskColumnCreate";
 import {createColumn} from "../../queries/createColumn";
 import {IBoard} from "../../types/IBoard";
 import PopupTaskInfo from "./PopupTaskInfo/PopupTaskInfo";
-import {removeSelectedBoard, setCurrentBoard} from "../../store/Reducers/boardCollectionSlice";
+import {removeSelectedBoard, setCurrentBoard, setCurrentTask} from "../../store/Reducers/boardCollectionSlice";
 import {useAppDispatch, useAppSelector} from "../../store/store";
+import {getTaskInfo} from "../../queries/getTaskInfo";
 
 
 
 const BoardPage: React.FC = memo(() => {
     const {boardId} = useParams();
-    const {selectedBoard, selectedTask} = useAppSelector(state => state.boardCollection);
+    const {selectedBoard, selectedTask, selectedColumnId} = useAppSelector(state => state.boardCollection);
     const [isCreating, setIsCreating] = useState(false)
     const dispatch = useAppDispatch()
 
@@ -39,12 +40,16 @@ const BoardPage: React.FC = memo(() => {
     useEffect(() => {
         console.log(boardId)
         getBoardFromId();
-        console.log("useEffect")
     }, [boardId])
 
     const rerender = () => {
         getBoardFromId()
-        console.log("rerender")
+    }
+
+    const refetchTask = async () => {
+        if(!boardId || !selectedColumnId || !selectedTask) return
+        const res = await getTaskInfo(boardId, selectedColumnId, selectedTask.uid)
+        dispatch(setCurrentTask(res));
     }
 
     const getColumnsFromBoard = (board: IBoard) => {
@@ -89,7 +94,7 @@ const BoardPage: React.FC = memo(() => {
                     </div>
                 )}
                 {selectedTask && (
-                    <PopupTaskInfo rerender={rerender} />
+                    <PopupTaskInfo rerender={refetchTask} />
                 )}
             </div>
         </div>

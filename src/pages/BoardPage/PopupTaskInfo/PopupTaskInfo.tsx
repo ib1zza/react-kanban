@@ -7,6 +7,8 @@ import Button from "../../../components/UI/Button/Button";
 import {faCircleXmark, faTrashCan} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import EditTaskForm from "./EditTaskForm/EditTaskForm";
+import {editTask} from "../../../queries/editTask";
 
 interface Props {
     rerender: () => void;
@@ -16,7 +18,7 @@ const PopupTaskInfo: React.FC<Props> = ({rerender}) => {
     const {selectedTask: task, selectedBoardId, selectedColumnId} = useAppSelector(state => state.boardCollection);
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState("");
-
+    const [isEditing, setEditing] = useState(false);
     if (!task) return null;
     const onDeleteTask = async () => {
         setLoading('delete')
@@ -25,8 +27,12 @@ const PopupTaskInfo: React.FC<Props> = ({rerender}) => {
         rerender();
     }
 
-    const onEditTask = () => {
+    const onEditTask = async (title: string, description: string) => {
         setLoading('edit')
+        await editTask(selectedBoardId, selectedColumnId, task.uid, {title, description});
+        setLoading("");
+        setEditing(false);
+        rerender();
     }
 
     return (
@@ -37,15 +43,16 @@ const PopupTaskInfo: React.FC<Props> = ({rerender}) => {
                     <FontAwesomeIcon icon={faCircleXmark} onClick={() => dispatch(removeSelectedTask())}/>
                 </button>
             </div>
-            <p>{task.description || "No description provided"}</p>
-            <div className={s.buttons}>
-                <Button icon={<FontAwesomeIcon icon={faPenToSquare}/>} onClick={() => console.log(task.uid)}
+            <p className={s.description}>{task.description || "No description provided"}</p>
+            {!isEditing &&<div className={s.buttons}>
+                <Button icon={<FontAwesomeIcon icon={faPenToSquare}/>} onClick={() => setEditing(true)}
                         loading={loading === 'edit'}>Изменить</Button>
                 <Button icon={<FontAwesomeIcon icon={faTrashCan}/>} onClick={onDeleteTask}
                         loading={loading === "delete"}>
                     Удалить
                 </Button>
-            </div>
+            </div>}
+            {isEditing && <EditTaskForm onEdit={onEditTask} loading={loading === 'edit'} prevTask={task} onAbort={() => setEditing(false)}  />}
         </div>
     );
 };
