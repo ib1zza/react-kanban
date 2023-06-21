@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import Button from "../../components/UI/Button/Button";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Profile from "../Profile";
 import Header from "./components/Header/Header";
 import s from "./Home.module.scss";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-} from "@firebase/firestore";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 import { db } from "../../firebase";
 import { UserAuth } from "../../context/AuthContext";
 import TaskColumnCreate from "./components/TaskColumn/TaskColumnCreate";
@@ -19,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 import BoardPreview from "./components/BoardPreview/BoardPreview";
 import BoardPage from "../BoardPage/BoardPage";
 import { createBoard } from "../../queries/createBoard";
-import {IBoard} from "../../types/IBoard";
+import { IBoard } from "../../types/IBoard";
+import TaskColumnLink from "./components/TaskColumn/TaskColumnLink";
 
 const Home = () => {
   //TODO: rename to boards and replace to redux storage
@@ -27,13 +23,9 @@ const Home = () => {
   const navigate = useNavigate();
   const { user } = UserAuth();
   const [addBoardStatus, setAddBoardStatus] = useState(false);
-  //   const addBoardStatus = useSelector(
-  //     (state: RootState) => state.addBoard.opened
-  //   );
+  const [linkBoardStatus, setLinkBoardStatus] = useState(false);
 
-
-
-  //getting boards
+  //getting boards | function
   const getBoards = async () => {
     console.log(user && user?.uid);
     const dataRef = query(
@@ -83,13 +75,19 @@ const Home = () => {
                             onAbort={() => setAddBoardStatus(false)}
                           />
                         )}
+                        {linkBoardStatus && (
+                          <TaskColumnLink
+                            forBoard
+                            onCreateBoard={createBoardAction}
+                            onAbort={() => setLinkBoardStatus(false)}
+                          />
+                        )}
                         {boards.map((item, index) => {
                           return (
                             <BoardPreview
                               onDelete={getBoards}
                               onClick={() => {
                                 navigate("/board/" + item.uid);
-
                               }}
                               key={index}
                               board={item}
@@ -102,6 +100,9 @@ const Home = () => {
                         <div className={s.buttons}>
                           <Button onClick={() => setAddBoardStatus(true)}>
                             <FontAwesomeIcon size={"lg"} icon={faPlus} />
+                          </Button>
+                          <Button onClick={() => setLinkBoardStatus(true)}>
+                            <FontAwesomeIcon size={"lg"} icon={faLink} />
                           </Button>
                         </div>
                       )}

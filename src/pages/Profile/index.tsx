@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react";
 import s from "./Profile.module.scss";
 import { UserAuth } from "../../context/AuthContext";
-import {getUserInfo} from "../../queries/getUserInfo";
-import {editDisplayName} from "../../queries/editDisplayName";
-import {IUserInfo} from "../../types/User";
+import { getUserInfo } from "../../queries/getUserInfo";
+import { editDisplayName } from "../../queries/editDisplayName";
+import { IUserInfo } from "../../types/User";
 
 const Profile = () => {
   const { user, refetch } = UserAuth();
   const [editStatus, setEditStatus] = useState(false);
   const [name, setName] = useState<any>("");
 
-  const [userInfo, setUserInfo] = useState<IUserInfo | null>(null)
+  const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
 
   useEffect(() => {
-    if(!user?.uid) return
+    if (!user?.uid) return;
     getUserInfo(user.uid).then((res) => {
-      setUserInfo(res)
-      console.log(res)
-    })
-  },[user])
+      setUserInfo(res);
+      console.log(res);
+    });
+  }, [user]);
 
   //TODO: изменение значения сразу после сабмита
   const handleSubmit = async () => {
-    if(!user || !(/^[a-z0-9_]+$/).test(name)) return
-    await  editDisplayName(user.uid, name)
+    if (!user || !/^[a-z0-9_]+$/.test(name)) return;
+    await editDisplayName(user.uid, name);
     getUserInfo(user.uid).then((res) => {
-      setUserInfo(res)
-    })
+      setUserInfo(res);
+    });
+
     // await updateProfile(user as User, { displayName: name });
     // refetch();
   };
@@ -37,7 +38,7 @@ const Profile = () => {
   //   }
   // }, [user?.displayName]);
 
-  if(!user || !userInfo) return null
+  if (!user || !userInfo) return null;
   return (
     <div>
       <div className={s.profile}>
@@ -80,13 +81,15 @@ const Profile = () => {
                 className={s.profile__input}
               />
             ) : (
-                userInfo.displayName
+              userInfo.displayName
             )}
           </div>
+
           <div className={s.profile__email}>
             Почта:
             {user.email}
           </div>
+          <div>Количество досок: {userInfo.boardsIds.length}</div>
           {editStatus ? (
             <button
               onClick={() => {
