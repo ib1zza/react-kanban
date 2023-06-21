@@ -1,0 +1,28 @@
+.title {
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(#{--taskTextColor-default});
+  margin-bottom: 20px;
+
+
+
+  .button {
+    margin-left: 15px;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 0 5px;
+
+    color: var(#{--iconColor-default});
+
+    &:hover {
+      color: var(#{--iconColorHover-default});
+    }
+  }
+}
+
+.input{
+  width: 100%;
+  max-width: 500px;
+}

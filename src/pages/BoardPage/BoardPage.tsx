@@ -6,7 +6,7 @@ import {getBoard} from "../../queries/getBoard";
 import TaskColumn from "../Home/components/TaskColumn/TaskColumn";
 import Button from "../../components/UI/Button/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLink, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faLink, faPenToSquare, faPlus} from "@fortawesome/free-solid-svg-icons";
 import TaskColumnCreate from "../Home/components/TaskColumn/TaskColumnCreate";
 import {createColumn} from "../../queries/createColumn";
 import {IBoard} from "../../types/IBoard";
@@ -18,6 +18,8 @@ import {
 } from "../../store/Reducers/boardCollectionSlice";
 import {useAppDispatch, useAppSelector} from "../../store/store";
 import {getTaskInfo} from "../../queries/getTaskInfo";
+import BoardPageHeader from "./BoardPageHeader/BoardPageHeader";
+import {editBoard} from "../../queries/editBoard";
 
 
 
@@ -68,11 +70,16 @@ const BoardPage: React.FC = memo(() => {
         refetchBoard();
     }
 
+    const onEditTitle = (newTitle: string) => {
+        if(!boardId) return
+        editBoard(boardId, {title: newTitle}).then(refetchBoard)
+    }
+
     if (!selectedBoard) return <></>;
 
     return (
         <div className={s.wrapperContainer}>
-            <h1 className={s.title}>{selectedBoard.title}</h1>
+            <BoardPageHeader onEdit={onEditTitle} title={selectedBoard.title}/>
             <div className={s.wrapper}>
                 <div className={s.columnsWrapper}>
                     {getColumnsFromBoard(selectedBoard).map((column) => (
