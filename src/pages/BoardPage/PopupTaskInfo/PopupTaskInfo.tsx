@@ -11,10 +11,11 @@ import EditTaskForm from "./EditTaskForm/EditTaskForm";
 import {editTask} from "../../../queries/editTask";
 
 interface Props {
-    rerender: () => void;
+    onEdit: () => void;
+    onDelete: () => void;
 }
 
-const PopupTaskInfo: React.FC<Props> = ({rerender}) => {
+const PopupTaskInfo: React.FC<Props> = ({onEdit, onDelete}) => {
     const {selectedTask: task, selectedBoardId, selectedColumnId} = useAppSelector(state => state.boardCollection);
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState("");
@@ -23,8 +24,7 @@ const PopupTaskInfo: React.FC<Props> = ({rerender}) => {
     const onDeleteTask = async () => {
         setLoading('delete')
         await deleteTask(selectedBoardId, selectedColumnId, task.uid)
-        dispatch(removeSelectedTask());
-        rerender();
+        onDelete();
     }
 
     const onEditTask = async (title: string, description: string) => {
@@ -32,7 +32,7 @@ const PopupTaskInfo: React.FC<Props> = ({rerender}) => {
         await editTask(selectedBoardId, selectedColumnId, task.uid, {title, description});
         setLoading("");
         setEditing(false);
-        rerender();
+        onEdit();
     }
 
     return (

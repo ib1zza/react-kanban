@@ -11,7 +11,11 @@ import TaskColumnCreate from "../Home/components/TaskColumn/TaskColumnCreate";
 import {createColumn} from "../../queries/createColumn";
 import {IBoard} from "../../types/IBoard";
 import PopupTaskInfo from "./PopupTaskInfo/PopupTaskInfo";
-import {removeSelectedBoard, setCurrentBoard, setCurrentTask} from "../../store/Reducers/boardCollectionSlice";
+import {
+    removeSelectedTask,
+    setCurrentBoard,
+    setCurrentTask
+} from "../../store/Reducers/boardCollectionSlice";
 import {useAppDispatch, useAppSelector} from "../../store/store";
 import {getTaskInfo} from "../../queries/getTaskInfo";
 
@@ -31,18 +35,12 @@ const BoardPage: React.FC = memo(() => {
         });
     }
 
-    // useLayoutEffect(() => {
-    //     return () => {
-    //         dispatch(removeSelectedBoard())
-    //     }
-    // }, [])
-
     useEffect(() => {
         console.log(boardId)
         getBoardFromId();
     }, [boardId])
 
-    const rerender = () => {
+    const refetchBoard = () => {
         getBoardFromId()
     }
 
@@ -62,7 +60,12 @@ const BoardPage: React.FC = memo(() => {
         if (!boardId) return
         await createColumn(title, color, boardId)
         setIsCreating(false)
-        rerender();
+        refetchBoard();
+    }
+
+    const onDeleteTask = () => {
+        dispatch(removeSelectedTask());
+        refetchBoard();
     }
 
     if (!selectedBoard) return <></>;
@@ -73,7 +76,7 @@ const BoardPage: React.FC = memo(() => {
             <div className={s.wrapper}>
                 <div className={s.columnsWrapper}>
                     {getColumnsFromBoard(selectedBoard).map((column) => (
-                        <TaskColumn key={column.uid} column={column} onEdit={rerender} boardId={selectedBoard.uid}/>
+                        <TaskColumn key={column.uid} column={column} onEdit={refetchBoard} boardId={selectedBoard.uid}/>
                     ))}
                     {isCreating && (
                         <TaskColumnCreate
@@ -94,7 +97,7 @@ const BoardPage: React.FC = memo(() => {
                     </div>
                 )}
                 {selectedTask && (
-                    <PopupTaskInfo rerender={refetchTask} />
+                    <PopupTaskInfo onEdit={refetchTask} onDelete={onDeleteTask}/>
                 )}
             </div>
         </div>
