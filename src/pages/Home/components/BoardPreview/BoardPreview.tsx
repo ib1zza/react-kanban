@@ -7,6 +7,8 @@ import { faLink, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IBoard } from "../../../../types/IBoard";
 import { IUserInfo } from "../../../../types/User";
+import { editBoard } from "../../../../queries/editBoard";
+import { getUserFromEmail } from "../../../../queries/getUserFromEmail";
 
 interface IBoardPreviewProps {
   userId: string;
@@ -22,6 +24,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
   onDelete,
 }) => {
   const [user, setUser] = React.useState<IUserInfo | null>(null);
+
   const [shareStatus, setShareStatus] = React.useState(false);
   const [email, setEmail] = React.useState("");
   useEffect(() => {
@@ -30,6 +33,17 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
     });
   }, [userId]);
 
+  const handleShare = async () => {
+    const userUID = await getUserFromEmail(email).then((res) => {
+      return res.uid;
+    });
+    if (userUID) {
+      editBoard(board.uid as string, {
+        usersAllowed: [...board.usersAllowed, userUID],
+      });
+    } else window.alert("none of email");
+    setShareStatus(false);
+  };
   const handleDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
     await deleteBoard(board.uid, board.ownerId);
@@ -70,7 +84,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button onClick={() => setShareStatus(false)}>Добавить</button>
+          <button onClick={() => handleShare()}>Добавить</button>
         </>
       )}
     </div>
