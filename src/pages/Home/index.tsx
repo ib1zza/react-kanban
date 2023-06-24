@@ -30,7 +30,7 @@ const Home = () => {
     console.log(user && user?.uid);
     const dataRef = query(
       collection(db, "boards"),
-      where("ownerId", "==", `${user?.uid}`)
+      where("usersAllowed", "array-contains", `${user?.uid}`)
     );
 
     const docsSnap = await getDocs(dataRef);

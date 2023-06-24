@@ -3,6 +3,7 @@ import s from "./TaskColumn.module.scss";
 import { UserAuth } from "../../../../context/AuthContext";
 import ColorPicker from "./ColorPicker/ColorPicker";
 import ConfirmButtons from "./ConfirmButtons/ConfirmButtons";
+import { editBoard } from "../../../../queries/editBoard";
 
 interface Props {
   onAbort: () => void;
@@ -10,6 +11,7 @@ interface Props {
   forBoard?: boolean;
   onCreateColumn?: (title: string, color: string) => void;
   onCreateBoard?: (title: string) => void;
+  boardId?: string;
 }
 
 const TaskColumnLink: React.FC<Props> = ({
@@ -18,6 +20,7 @@ const TaskColumnLink: React.FC<Props> = ({
   forBoard,
   onCreateColumn,
   onCreateBoard,
+  boardId,
 }) => {
   const [title, setTitle] = useState("");
   const { user } = UserAuth();
@@ -35,6 +38,7 @@ const TaskColumnLink: React.FC<Props> = ({
   };
 
   const handler = () => {
+    editBoard(boardId as string, {}).then(refetchBoard);
     if (forColumn) addColumn();
     if (forBoard) addBoard();
   };
@@ -61,3 +65,6 @@ const TaskColumnLink: React.FC<Props> = ({
 };
 
 export default TaskColumnLink;
+function refetchBoard(value: void): void | PromiseLike<void> {
+  throw new Error("Function not implemented.");
+}

@@ -89,7 +89,7 @@ const Profile = () => {
             Почта:
             {user.email}
           </div>
-          <div>Количество досок: {userInfo.boardsIds.length}</div>
+          <div>Количество досок: {userInfo.boardsIds?.length || 0}</div>
           {editStatus ? (
             <button
               onClick={() => {
