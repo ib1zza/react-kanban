@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import s from "./TaskColumn.module.scss";
-import { UserAuth } from "../../../../context/AuthContext";
-import ColorPicker from "./ColorPicker/ColorPicker";
-import ConfirmButtons from "./ConfirmButtons/ConfirmButtons";
+import s from "./../components/TaskColumn/TaskColumn.module.scss";
+import { UserAuth } from "../../../context/AuthContext";
+import ColorPicker from "../components/TaskColumn/ColorPicker/ColorPicker";
+import ConfirmButtons from "../components/TaskColumn/ConfirmButtons/ConfirmButtons";
 
 interface Props {
   onAbort: () => void;
@@ -12,7 +12,7 @@ interface Props {
   onCreateBoard?: (title: string) => void;
 }
 
-const TaskColumnCreate: React.FC<Props> = ({
+const FormToCreate: React.FC<Props> = ({
   onAbort,
   forColumn,
   forBoard,
@@ -60,4 +60,4 @@ const TaskColumnCreate: React.FC<Props> = ({
   );
 };
 
-export default TaskColumnCreate;
+export default FormToCreate;

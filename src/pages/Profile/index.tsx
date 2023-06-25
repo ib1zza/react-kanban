@@ -20,23 +20,13 @@ const Profile = () => {
     });
   }, [user]);
 
-  //TODO: изменение значения сразу после сабмита
   const handleSubmit = async () => {
     if (!user || !/^[a-z0-9_]+$/.test(name)) return;
     await editDisplayName(user.uid, name);
     getUserInfo(user.uid).then((res) => {
       setUserInfo(res);
     });
-
-    // await updateProfile(user as User, { displayName: name });
-    // refetch();
   };
-
-  // useEffect(() => {
-  //   if (user?.displayName) {
-  //     setName(user?.displayName);
-  //   }
-  // }, [user?.displayName]);
 
   if (!user || !userInfo) return null;
   return (

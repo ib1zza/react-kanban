@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import s from "./Header.module.scss";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Theme, useTheme } from "../../../../context/ThemeContext";
-import { useAuth } from "../../../../context/AuthContext";
+import { Theme, useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import {AppRoute} from "../../../../utils/AppRoute";
+import { AppRoute } from "../../utils/AppRoute";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
