@@ -9,6 +9,8 @@ import { IBoard } from "../../../../types/IBoard";
 import { IUserInfo } from "../../../../types/User";
 import { editBoard } from "../../../../queries/editBoard";
 import { getUserFromEmail } from "../../../../queries/getUserFromEmail";
+import Button from "../../../../components/UI/Button/Button";
+import Modal from "../../../../components/UI/Modal/Modal";
 
 interface IBoardPreviewProps {
   userId: string;
@@ -52,41 +54,39 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
 
   return (
     <div className={s.container}>
-      {!shareStatus ? (
-        <>
-          {" "}
-          <h3 className={s.heading}>
-            <span onClick={onClick}>{board.title}</span>
-            {userId === board.ownerId && (
-              <div>
-                <button
-                  onClick={() => setShareStatus(true)}
-                  style={{ marginRight: "16px" }}
-                >
-                  <FontAwesomeIcon icon={faLink} />
-                </button>
-                <button onClick={handleDelete}>
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    style={{ color: "#e32400" }}
-                  />
-                </button>
-              </div>
-            )}
-          </h3>
-          <p>by {user?.displayName || "loading..."}</p>{" "}
-        </>
-      ) : (
-        <>
-          Добавление пользователя в общий доступ
-          <input
-            placeholder={"Введите email..."}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button onClick={() => handleShare()}>Добавить</button>
-        </>
+      {shareStatus && (
+        <Modal
+          setIsOpen={() => setShareStatus(false)}
+          children={
+            <div>
+              Добавление пользователя в общий доступ
+              <input
+                placeholder={"Введите email..."}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button onClick={() => handleShare()}>Добавить</button>
+            </div>
+          }
+        />
       )}
+      <h3 className={s.heading}>
+        <span onClick={onClick}>{board.title}</span>
+        {userId === board.ownerId && (
+          <div>
+            <button
+              onClick={() => setShareStatus(true)}
+              style={{ marginRight: "16px" }}
+            >
+              <FontAwesomeIcon icon={faLink} />
+            </button>
+            <button onClick={handleDelete}>
+              <FontAwesomeIcon icon={faTrash} style={{ color: "#e32400" }} />
+            </button>
+          </div>
+        )}
+      </h3>
+      <p>by {user?.displayName || "loading..."}</p>{" "}
     </div>
   );
 };
