@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import TaskColumnEdit from "../../utils/FormToEdit";
 import { editColumn } from "../../../../queries/editColumn";
-import AddTaskForm from "../../../Home/components/AddTaskForm/AddTaskForm";
+import AddTaskForm from "./AddTaskForm/AddTaskForm";
 import { deleteColumn } from "../../../../queries/deleteColumn";
 import { IColumn } from "../../../../types/IBoard";
 

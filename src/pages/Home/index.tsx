@@ -12,6 +12,7 @@ import { createBoard } from "../../queries/createBoard";
 import { IBoard } from "../../types/IBoard";
 import FormToLink from "../BoardPage/utils/FormToLink";
 import { getBoards } from "./utils/getBoards";
+import Modal from "../../components/UI/Modal/Modal";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -68,16 +69,15 @@ const Home = () => {
                 );
               })}
             </div>
-            {!addBoardStatus && (
-              <div className={s.buttons}>
-                <Button onClick={() => setAddBoardStatus(true)}>
-                  <FontAwesomeIcon size={"lg"} icon={faPlus} />
-                </Button>
-                <Button onClick={() => setLinkBoardStatus(true)}>
-                  <FontAwesomeIcon size={"lg"} icon={faLink} />
-                </Button>
-              </div>
-            )}
+
+            <div className={s.buttons}>
+              <Button onClick={() => setAddBoardStatus(true)}>
+                <FontAwesomeIcon size={"lg"} icon={faPlus} />
+              </Button>
+              <Button onClick={() => setLinkBoardStatus(true)}>
+                <FontAwesomeIcon size={"lg"} icon={faLink} />
+              </Button>
+            </div>
           </div>
         }
       />

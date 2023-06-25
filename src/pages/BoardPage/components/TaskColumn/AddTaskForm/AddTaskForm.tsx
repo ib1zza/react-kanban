@@ -1,13 +1,13 @@
 import React from "react";
 import s from "./AddTaskForm.module.scss";
-import Button from "../../../../components/UI/Button/Button";
+import Button from "../../../../../components/UI/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
   faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
-import { createTask } from "../../../../queries/createTask";
-import { UserAuth } from "../../../../context/AuthContext";
+import { createTask } from "../../../../../queries/createTask";
+import { UserAuth } from "../../../../../context/AuthContext";
 
 interface Props {
   onAbort: () => void;
