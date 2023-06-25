@@ -27,10 +27,10 @@ const AddTaskForm: React.FC<Props> = ({
   const { user } = UserAuth();
   const handler = () => {
     createTask(
-        {title, description, creatorId: user?.uid as string, tags: []},
-        boardId,
-        columnId
-    ).then( onSubmit);
+      { title, description, creatorId: user?.uid as string, tags: [] },
+      boardId,
+      columnId
+    ).then(onSubmit);
   };
   return (
     <div className={s.wrapper}>

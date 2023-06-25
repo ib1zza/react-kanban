@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import s from "./TaskColumn.module.scss";
-import { UserAuth } from "../../../../context/AuthContext";
-import ColorPicker from "./ColorPicker/ColorPicker";
-import ConfirmButtons from "./ConfirmButtons/ConfirmButtons";
-import { editBoard } from "../../../../queries/editBoard";
+import s from "./../components/TaskColumn/TaskColumn.module.scss";
+import { UserAuth } from "../../../context/AuthContext";
+import ColorPicker from "../components/TaskColumn/ColorPicker/ColorPicker";
+import ConfirmButtons from "../components/TaskColumn/ConfirmButtons/ConfirmButtons";
+import { editBoard } from "../../../queries/editBoard";
 
 interface Props {
   onAbort: () => void;
@@ -14,7 +14,7 @@ interface Props {
   boardId?: string;
 }
 
-const TaskColumnLink: React.FC<Props> = ({
+const FormToLink: React.FC<Props> = ({
   onAbort,
   forColumn,
   forBoard,
@@ -64,7 +64,7 @@ const TaskColumnLink: React.FC<Props> = ({
   );
 };
 
-export default TaskColumnLink;
+export default FormToLink;
 function refetchBoard(value: void): void | PromiseLike<void> {
   throw new Error("Function not implemented.");
 }

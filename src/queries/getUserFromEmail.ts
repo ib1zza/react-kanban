@@ -1,13 +1,5 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
-import { IUserInfo } from "../types/User";
 
 export async function getUserFromEmail(email: string) {
   const ref = collection(db, "users");
