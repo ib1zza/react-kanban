@@ -5,5 +5,5 @@ export async function getUserFromEmail(email: string) {
   const ref = collection(db, "users");
   const q = query(ref, where("email", "==", `${email}`));
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs[0].data();
+  return querySnapshot.docs[0]?.data();
 }
