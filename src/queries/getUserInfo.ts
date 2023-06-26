@@ -1,8 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import {IUserInfo} from "../types/User";
-
-
+import { IUserInfo } from "../types/User";
 
 export async function getUserInfo(id: string) {
   const ref = doc(db, "users", id);
