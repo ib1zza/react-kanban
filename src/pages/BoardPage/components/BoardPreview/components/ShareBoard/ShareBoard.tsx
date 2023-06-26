@@ -111,7 +111,7 @@ const ShareBoard = ({ handleShare, getUsers }: IShareBoard) => {
               !active ? s.form__category_r : s.form__category_r__active
             }
           >
-            Пользователи
+            Редакторы
           </button>
         </div>
         <div style={{ textAlign: "left" }}>
