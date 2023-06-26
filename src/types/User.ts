@@ -5,4 +5,5 @@ export interface IUserInfo {
   select: string;
   photoURL: string;
   uid: string;
+  email: string;
 }

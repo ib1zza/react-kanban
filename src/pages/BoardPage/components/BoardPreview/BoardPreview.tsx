@@ -42,14 +42,31 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
     if (userUID) {
       if (status === "guest") {
         editBoard(board.uid as string, {
-          guestPermissions: [...board.guestPermissions, userUID],
+          guestsAllowed: [...board.guestsAllowed, userUID],
         });
       } else
         editBoard(board.uid as string, {
           usersAllowed: [...board.usersAllowed, userUID],
         });
+
       return true;
     } else return false;
+  };
+  const getUsers = async (active: boolean) => {
+    let user: any[] = [];
+    if (!active) {
+      board.guestsAllowed.forEach(async (man) => {
+        await getUserInfo(man).then((res) => {
+          user.push(res.email);
+        });
+      });
+      return user;
+    } else {
+      board.usersAllowed.forEach(async (man) => {
+        await getUserInfo(man).then((res) => user.push(res.email));
+      });
+      return user;
+    }
   };
   const handleDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -62,7 +79,9 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
       {shareStatus && (
         <Modal
           setIsOpen={() => setShareStatus(false)}
-          children={<ShareBoard handleShare={handleShare} />}
+          children={
+            <ShareBoard handleShare={handleShare} getUsers={getUsers} />
+          }
         />
       )}
       <h3 className={s.heading}>
