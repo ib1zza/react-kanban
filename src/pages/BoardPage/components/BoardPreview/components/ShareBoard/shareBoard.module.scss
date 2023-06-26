@@ -1,0 +1,22 @@
+.form {
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+.form__title {
+  font-weight: bold;
+  font-size: 16px;
+}
+.form__input {
+  border-bottom: 1px solid black;
+  padding: 4px;
+}
+.form__error {
+  color: red;
+}
+.form__success {
+  color: green;
+}

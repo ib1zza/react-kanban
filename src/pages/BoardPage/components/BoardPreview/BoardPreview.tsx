@@ -9,8 +9,8 @@ import { IBoard } from "../../../../types/IBoard";
 import { IUserInfo } from "../../../../types/User";
 import { editBoard } from "../../../../queries/editBoard";
 import { getUserFromEmail } from "../../../../queries/getUserFromEmail";
-import Button from "../../../../components/UI/Button/Button";
 import Modal from "../../../../components/UI/Modal/Modal";
+import ShareBoard from "./components/ShareBoard/ShareBoard";
 
 interface IBoardPreviewProps {
   userId: string;
@@ -26,25 +26,30 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
   onDelete,
 }) => {
   const [user, setUser] = React.useState<IUserInfo | null>(null);
-
   const [shareStatus, setShareStatus] = React.useState(false);
-  const [email, setEmail] = React.useState("");
+
   useEffect(() => {
     getUserInfo(board.ownerId).then((res) => {
       setUser(res);
     });
   }, [userId]);
 
-  const handleShare = async () => {
+  const handleShare = async (email: string, status: string) => {
     const userUID = await getUserFromEmail(email).then((res) => {
-      return res.uid;
+      return res?.uid;
     });
+    console.log(userUID);
     if (userUID) {
-      editBoard(board.uid as string, {
-        usersAllowed: [...board.usersAllowed, userUID],
-      });
-    } else window.alert("none of email");
-    setShareStatus(false);
+      if (status === "guest") {
+        editBoard(board.uid as string, {
+          guestPermissions: [...board.guestPermissions, userUID],
+        });
+      } else
+        editBoard(board.uid as string, {
+          usersAllowed: [...board.usersAllowed, userUID],
+        });
+      return true;
+    } else return false;
   };
   const handleDelete = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -57,17 +62,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
       {shareStatus && (
         <Modal
           setIsOpen={() => setShareStatus(false)}
-          children={
-            <div>
-              Добавление пользователя в общий доступ
-              <input
-                placeholder={"Введите email..."}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button onClick={() => handleShare()}>Добавить</button>
-            </div>
-          }
+          children={<ShareBoard handleShare={handleShare} />}
         />
       )}
       <h3 className={s.heading}>
