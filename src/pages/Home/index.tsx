@@ -9,10 +9,10 @@ import FormToCreate from "../BoardPage/utils/FormToCreate";
 import { useNavigate } from "react-router-dom";
 import BoardPreview from "../BoardPage/components/BoardPreview/BoardPreview";
 import { createBoard } from "../../queries/createBoard";
-import { IBoard } from "../../types/IBoard";
+import { IBoard, LinkedUserType } from "../../types/IBoard";
 import FormToLink from "../BoardPage/utils/FormToLink";
 import { getBoards } from "./utils/getBoards";
-import Modal from "../../components/UI/Modal/Modal";
+import { addUserToBoard } from "../../queries/addUserToBoard";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -22,21 +22,25 @@ const Home = () => {
   const [linkBoardStatus, setLinkBoardStatus] = useState(false);
 
   //getting boards (only info which we need)
-  const fetchBoards = () => getBoards(user).then((res) => setBoards(res))
+  const fetchBoards = () => getBoards(user).then((res) => setBoards(res));
 
   useEffect(() => {
     if (boards.length === 0) {
-      fetchBoards()
+      fetchBoards();
     }
   }, [boards.length, user]);
 
   const handleCreateBoard = async (title: string) => {
     await createBoard(title, user?.uid as string);
-    await fetchBoards()
+    await fetchBoards();
     setAddBoardStatus(false);
   };
-
-  if(!user?.uid) return null;
+  const handleLinkBoard = async (id: string) => {
+    await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
+    await fetchBoards();
+    setLinkBoardStatus(false);
+  };
+  if (!user?.uid) return null;
   return (
     <Routes>
       <Route
@@ -54,7 +58,7 @@ const Home = () => {
               {linkBoardStatus && (
                 <FormToLink
                   forBoard
-                  onCreateBoard={handleCreateBoard}
+                  onCreateBoard={handleLinkBoard}
                   onAbort={() => setLinkBoardStatus(false)}
                 />
               )}
