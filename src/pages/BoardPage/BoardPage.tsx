@@ -10,6 +10,7 @@ import { createColumn } from "../../queries/createColumn";
 import PopupTaskInfo from "./components/PopupTaskInfo/PopupTaskInfo";
 import {
   removeSelectedTask,
+  setCurrentBoard,
   setCurrentTask,
 } from "../../store/Reducers/boardCollectionSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -17,8 +18,9 @@ import { getTaskInfo } from "../../queries/getTaskInfo";
 import BoardPageHeader from "./components/BoardPageHeader/BoardPageHeader";
 import { editBoard } from "../../queries/editBoard";
 import FormToLink from "./utils/FormToLink";
-import { getBoardFromId } from "./utils/getBoardFromId";
+import { getBoardFromId } from "../../queries/getBoardFromId";
 import { getColumnsFromBoard } from "./utils/getColumnsFromBoard";
+import { IBoard } from "../../types/IBoard";
 
 const BoardPage: React.FC = memo(() => {
   const { boardId } = useParams();
@@ -31,11 +33,14 @@ const BoardPage: React.FC = memo(() => {
 
   useEffect(() => {
     console.log(boardId);
-    getBoardFromId(boardId as string, dispatch);
+    refetchBoard();
   }, [boardId]);
 
-  const refetchBoard = () => {
-    getBoardFromId(boardId as string, dispatch);
+  const refetchBoard = async () => {
+    const board = getBoardFromId(boardId as string);
+    if (board) {
+      dispatch(setCurrentBoard(await (board as Promise<IBoard>)));
+    }
   };
 
   const refetchTask = async () => {

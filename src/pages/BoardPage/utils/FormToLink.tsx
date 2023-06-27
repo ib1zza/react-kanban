@@ -26,8 +26,6 @@ const FormToLink: React.FC<Props> = ({
   const { user } = UserAuth();
   const [color, setColor] = useState("#f44336");
 
-  // TODO: add create column action
-
   const addBoard = () => {
     if (!title.trim() || !user) return;
     onCreateBoard && onCreateBoard(title);
@@ -38,7 +36,6 @@ const FormToLink: React.FC<Props> = ({
   };
 
   const handler = () => {
-    editBoard(boardId as string, {}).then(refetchBoard);
     if (forColumn) addColumn();
     if (forBoard) addBoard();
   };
