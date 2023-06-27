@@ -22,18 +22,21 @@ const Home = () => {
   const [linkBoardStatus, setLinkBoardStatus] = useState(false);
 
   //getting boards (only info which we need)
+  const fetchBoards = () => getBoards(user).then((res) => setBoards(res))
+
   useEffect(() => {
     if (boards.length === 0) {
-      getBoards(user, setBoards);
+      fetchBoards()
     }
   }, [boards.length, user]);
 
-  const handleCreateBoardAction = (title: string) => {
-    createBoard(title, user?.uid as string).then((res: any) =>
-      getBoards(user, setBoards)
-    );
+  const handleCreateBoard = async (title: string) => {
+    await createBoard(title, user?.uid as string);
+    await fetchBoards()
     setAddBoardStatus(false);
   };
+
+  if(!user?.uid) return null;
   return (
     <Routes>
       <Route
@@ -44,14 +47,14 @@ const Home = () => {
               {addBoardStatus && (
                 <FormToCreate
                   forBoard
-                  onCreateBoard={handleCreateBoardAction}
+                  onCreateBoard={handleCreateBoard}
                   onAbort={() => setAddBoardStatus(false)}
                 />
               )}
               {linkBoardStatus && (
                 <FormToLink
                   forBoard
-                  onCreateBoard={handleCreateBoardAction}
+                  onCreateBoard={handleCreateBoard}
                   onAbort={() => setLinkBoardStatus(false)}
                 />
               )}
@@ -64,7 +67,7 @@ const Home = () => {
                     }}
                     key={index}
                     board={item}
-                    userId={user?.uid as string}
+                    userId={user.uid}
                   />
                 );
               })}

@@ -1,7 +1,9 @@
 import { collection, getDocs, or, query, where } from "firebase/firestore";
 import { db } from "../../../firebase";
+import {IUserInfo} from "../../../types/User";
+import {IBoard} from "../../../types/IBoard";
 
-export const getBoards = async (user: any, setBoards: (res: any) => void) => {
+export const getBoards = async (user: any) => {
   const dataRef = query(
     collection(db, "boards"),
     or(
@@ -23,5 +25,5 @@ export const getBoards = async (user: any, setBoards: (res: any) => void) => {
       guestsAllowed: doc.data().guestsAllowed,
     });
   });
-  setBoards(res);
+  return res as IBoard[];
 };

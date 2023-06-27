@@ -1,20 +1,21 @@
-import React from "react";
+import React, {FC} from "react";
 import styles from "./modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRemove } from "@fortawesome/free-solid-svg-icons";
+
 interface IModal {
-  setIsOpen: () => void;
-  children: any;
+  onClose: () => void;
+  children: React.ReactNode;
 }
-const Modal = ({ setIsOpen, children }: IModal) => {
+const Modal:FC<IModal> = ({ onClose, children }) => {
   return (
     <>
-      <div className={styles.darkBG} onClick={() => setIsOpen()} />
+      <div className={styles.darkBG} onClick={() => onClose()} />
       <div className={styles.centered}>
         <div className={styles.modal}>
           <div className={styles.modalContent}>{children}</div>
 
-          <button className={styles.closeBtn} onClick={() => setIsOpen()}>
+          <button className={styles.closeBtn} onClick={() => onClose()}>
             <FontAwesomeIcon icon={faRemove} />
           </button>
         </div>

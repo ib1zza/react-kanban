@@ -4,6 +4,11 @@ export const enum GuestPermission {
   NONE = "none",
 }
 
+export const enum LinkedUserType {
+  USER = "user",
+  GUEST = "guest",
+}
+
 export interface IBoard {
   uid: string;
   chatId?: string;

@@ -7,8 +7,6 @@ import {faLink, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {IBoard} from "../../../../types/IBoard";
 import {IUserInfo} from "../../../../types/User";
-import {editBoard} from "../../../../queries/editBoard";
-import {getUserFromEmail} from "../../../../queries/getUserFromEmail";
 import Modal from "../../../../components/UI/Modal/Modal";
 import ShareBoard from "./components/ShareBoard/ShareBoard";
 
@@ -34,48 +32,6 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
         });
     }, [userId]);
 
-    const handleShare = async (email: string, status: string) => {
-        const userUID = await getUserFromEmail(email).then((res) => {
-            return res?.uid;
-        });
-        console.log(userUID);
-        if (userUID) {
-            if (status === "guest") {
-                editBoard(board.uid as string, {
-                    guestsAllowed: [...board.guestsAllowed, userUID],
-                });
-            } else
-                editBoard(board.uid as string, {
-                    usersAllowed: [...board.usersAllowed, userUID],
-                });
-
-            return true;
-        } else return false;
-    };
-
-
-    const getUsers = async (isSearchForEditors: boolean) =>  {
-        const handleServerResponse = <T extends unknown>({status, value}: { status: string, value?: T }): T | null => {
-           return status === "fulfilled" ? value || null : null;
-        }
-
-        let user: string[] = [];
-
-        const usersInfoResponses = await Promise.allSettled(
-            (!isSearchForEditors ? board.guestsAllowed : board.usersAllowed)
-                .map((userId) => getUserInfo(userId))
-        );
-
-        usersInfoResponses.forEach((userInfoResponse) => {
-            const result = handleServerResponse(userInfoResponse);
-            if (result) {
-                user.push(result.email)
-            }
-        })
-
-        return user
-    };
-
     const handleDelete = async (e: React.MouseEvent) => {
         e.stopPropagation();
         await deleteBoard(board.uid, board.ownerId);
@@ -86,9 +42,9 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
         <div className={s.container}>
             {shareStatus && (
                 <Modal
-                    setIsOpen={() => setShareStatus(false)}
+                    onClose={() => setShareStatus(false)}
                     children={
-                        <ShareBoard handleShare={handleShare} getUsers={getUsers}/>
+                        <ShareBoard board={board}/>
                     }
                 />
             )}
