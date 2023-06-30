@@ -5,6 +5,8 @@ import s from "./SignUp.module.scss";
 import { useAuth } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { AppRoute } from "../../utils/AppRoute";
+import {faImage} from "@fortawesome/free-regular-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -26,8 +28,11 @@ const SignUp = () => {
   }, [step]);
 
   const onSubmit = async (data: any) => {
+    console.log(data)
     try {
-      await signUp(data.email, data.password, data.displayName, data.select);
+      const file = data?.file[0] || undefined;
+      console.log(file)
+      await signUp(data.email, data.password, data.displayName, data.select, file);
       navigate("/");
     } catch (error) {
       setError(error);
@@ -156,6 +161,14 @@ const SignUp = () => {
           )}
           {step === 3 && (
             <>
+              <div className={s.singup__avatar__block}>
+                <input   {...register("file")} type="file" className={s.avatar__fileInput} id="file" />
+                <label htmlFor="file">
+                  <FontAwesomeIcon icon={faImage} />
+                  {/*<img src={Add} alt="" />*/}
+                  <span>Загрузить аватар</span>
+                </label>
+              </div>
               <div className={s.signup__label}>Для чего вам нужен сервис?</div>
               <select
                 className={s.signup__input}

@@ -161,3 +161,20 @@
     color: white;
   }
 }
+
+.singup__avatar__block{
+  margin-bottom: 15px;
+  .avatar__fileInput {
+    display: none;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: black;
+
+    cursor: pointer;
+    font-size: 16px;
+  }
+}

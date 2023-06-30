@@ -20,7 +20,6 @@ import { editBoard } from "../../queries/editBoard";
 import FormToLink from "./utils/FormToLink";
 import { getBoardFromId } from "../../queries/getBoardFromId";
 import { getColumnsFromBoard } from "./utils/getColumnsFromBoard";
-import { IBoard } from "../../types/IBoard";
 
 const BoardPage: React.FC = memo(() => {
   const { boardId } = useParams();
@@ -37,9 +36,9 @@ const BoardPage: React.FC = memo(() => {
   }, [boardId]);
 
   const refetchBoard = async () => {
-    const board = getBoardFromId(boardId as string);
+    const board = await getBoardFromId(boardId as string);
     if (board) {
-      dispatch(setCurrentBoard(await (board as Promise<IBoard>)));
+      dispatch(setCurrentBoard(board));
     }
   };
 
@@ -66,11 +65,13 @@ const BoardPage: React.FC = memo(() => {
     editBoard(boardId, { title: newTitle }).then(refetchBoard);
   };
 
-  if (!selectedBoard) return <></>;
+  if (!selectedBoard ) return <></>;
 
+  console.log(selectedBoard.title)
   return (
     <div className={s.wrapperContainer}>
       <BoardPageHeader onEdit={handleEditTitle} title={selectedBoard.title} />
+
       <div className={s.wrapper}>
         <div className={s.columnsWrapper}>
           {getColumnsFromBoard(selectedBoard).map((column) => (

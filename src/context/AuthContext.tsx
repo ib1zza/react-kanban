@@ -54,10 +54,17 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
   function logOut() {
     signOut(auth);
   }
-  function refetch() {
-    onAuthStateChanged(auth, (currentUser: User) => {
-      setUser(currentUser);
-    });
+  async function refetch() {
+    console.log("refetch");
+    if (user?.uid) {
+      await user.reload();
+      getUserInfo(user.uid).then((res) => {
+        if (res) {
+          dispatch(setUserInfo(res));
+          console.log(res.photoURL)
+        }
+      });
+    }
   }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser: User) => {
@@ -73,7 +80,7 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     return () => {
       unsubscribe();
     };
-  });
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ signUp, logIn, logOut, refetch, user }}>

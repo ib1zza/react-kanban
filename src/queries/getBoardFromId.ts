@@ -1,8 +1,8 @@
 import { getBoard } from "./getBoard";
+import {IBoard} from "../types/IBoard";
 
 export const getBoardFromId = (boardId: string) => {
-  if (!boardId) return [];
   return getBoard(boardId).then((board) => {
-    return board;
+    return board as IBoard;
   });
 };

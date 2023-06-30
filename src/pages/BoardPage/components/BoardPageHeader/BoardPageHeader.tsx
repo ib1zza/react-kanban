@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./BoardPageHeader.module.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons";
@@ -20,6 +20,11 @@ const BoardPageHeader: React.FC<Props> = ({onEdit, title}) => {
         }
         setEditing(false)
     }
+
+    useEffect(() => {
+        setEditingTitle(title)
+    }, [title])
+
     return (
         <h1 className={s.title}>
             {!isEditing && <>
