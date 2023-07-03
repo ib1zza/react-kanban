@@ -1,0 +1,32 @@
+.form {
+  div {
+    label {
+      width: 100%;
+      font-size: 14px;
+    }
+
+    input,
+    textarea {
+      padding: 10px 15px;
+      border-radius: 10px;
+      width: 100%;
+      font-size: 16px;
+      border: none;
+      background-color: var(--taskBg-default);
+    }
+    textarea {
+      resize: none;
+      height: 100px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.buttons {
+  & > *:not(:last-child) {
+    margin-right: 10px;
+  }
+}
