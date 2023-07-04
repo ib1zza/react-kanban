@@ -6,7 +6,7 @@ import { IUserInfo } from "../../../../app/types/User";
 import { getUserInfo } from "../../../../features/users";
 import { deleteBoard } from "../../../../features/boards";
 import Modal from "../../../../shared/ui/Modal/Modal";
-import ShareBoard from "../../../../pages/BoardPage/lib/ShareBoard/ShareBoard";
+import ShareBoard from "../../../../features/boards/ui/ShareBoard/ShareBoard";
 import { IBoard } from "../../../../app/types/IBoard";
 
 interface IBoardPreviewProps {

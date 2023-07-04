@@ -1,3 +1,3 @@
-export * from "./createColumn";
-export * from "./deleteColumn";
-export * from "./editColumn";
+export * from "./API/createColumn";
+export * from "./API/deleteColumn";
+export * from "./API/editColumn";

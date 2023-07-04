@@ -6,11 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import s from "./Home.module.scss";
 import { UserAuth } from "../../../app/providers/authRouter/ui/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { createBoard } from "../../../features/boards/createBoard";
+import { createBoard } from "../../../features/boards";
 import { IBoard, LinkedUserType } from "../../../app/types/IBoard";
 import { getBoards } from "../lib/getBoards";
-import { addUserToBoard } from "../../../features/boards/addUserToBoard";
-import { FormToCreate } from "../../../shared/ui/FormToCreate";
+import { addUserToBoard } from "../../../features/boards";
+import  FormToCreate  from "../../../shared/ui/FormToCreate/FormToCreate";
 import { FormToLink } from "../../../shared/ui/FormToLink";
 import { BoardPreview } from "../../../entities/Board";
 

@@ -5,9 +5,9 @@ import TaskColumn from "../../../entities/Columns/ui/TaskColumn";
 import Button from "../../../shared/ui/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import FormToCreate from "../../../shared/ui/FormToCreate/ui/FormToCreate";
-import { createColumn } from "../../../features/columns/createColumn";
-import PopupTaskInfo from "../../../entities/Tasks/lib/PopupTaskInfo";
+import FormToCreate from "../../../shared/ui/FormToCreate/FormToCreate";
+import { createColumn } from "../../../features/columns";
+import {PopupTaskInfo} from "../../../widgets";
 import {
   removeSelectedTask,
   setCurrentBoard,
@@ -17,10 +17,10 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "../../../app/providers/store/store";
-import { getTaskInfo } from "../../../features/tasks/getTaskInfo";
-import BoardPageHeader from "../lib/BoardPageHeader/BoardPageHeader";
-import { editBoard } from "../../../features/boards/editBoard";
-import { getBoardFromId } from "../../../features/boards/getBoard/getBoardFromId";
+
+import { getTaskInfo } from "../../../features/tasks";
+import { editBoard, BoardPageHeader } from "../../../features/boards";
+import { getBoardFromId } from "../../../entities/Board";
 import { getColumnsFromBoard } from "../lib/getColumnsFromBoard";
 import { FormToLink } from "../../../shared/ui/FormToLink";
 

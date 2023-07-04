@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toggleTaskComplete } from "../../../features/tasks/toggleTaskComplete";
+import { toggleTaskComplete } from "../../../features/tasks/API/toggleTaskComplete";
 
 interface ITaskProps {
   task: ITask;

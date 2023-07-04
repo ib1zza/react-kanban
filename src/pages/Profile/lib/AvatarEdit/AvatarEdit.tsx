@@ -3,7 +3,7 @@ import s from "./AvatarEdit.module.scss";
 
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../../firebase";
-import { updateDocument } from "../../../../features/users/updateDocument";
+import { updateDocument } from "../../../../features/users/API/updateDocument";
 import { updateProfile } from "firebase/auth";
 import { ReactSVG } from "react-svg";
 

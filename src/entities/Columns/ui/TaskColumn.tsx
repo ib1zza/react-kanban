@@ -4,9 +4,9 @@ import TaskList from "../lib/TaskList/TaskList";
 import { faPenToSquare, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { editColumn } from "../../../features/columns/editColumn";
+import { editColumn } from "../../../features/columns/API/editColumn";
 import AddTaskForm from "../lib/AddTaskForm/AddTaskForm";
-import { deleteColumn } from "../../../features/columns/deleteColumn";
+import { deleteColumn } from "../../../features/columns/API/deleteColumn";
 import { IColumn } from "../../../app/types/IBoard";
 import { FormToEdit } from "../../../shared/ui/FormToEdit";
 

@@ -11,7 +11,7 @@ import { signUpEmailPass } from "../../../../pages/SignUp/lib/signUp";
 import { loginByEmailPass } from "../../../../pages/Login/lib/logIn";
 import { setUserInfo } from "../../store/Reducers/userInfoSlice";
 import { useDispatch } from "react-redux";
-import { getUserInfo } from "../../../../features/users/getUserInfo";
+import { getUserInfo } from "../../../../features/users/API/getUserInfo";
 
 // import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 type ISelect = "practice" | "work" | "study" | "other";

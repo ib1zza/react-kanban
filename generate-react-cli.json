@@ -8,8 +8,8 @@
     "default": {
 
       "customTemplates": {
-        "component": "src/templates/TemplateName.tsx",
-        "style": "src/templates/TemplateName.module.scss"
+        "component": "src/shared/templates/TemplateName.tsx",
+        "style": "src/shared/templates/TemplateName.module.scss"
       },
 
       "path": "src/components",

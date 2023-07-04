@@ -6,7 +6,7 @@ import {
   faCircleCheck,
   faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
-import { createTask } from "../../../../features/tasks/createTask";
+import { createTask } from "../../../../features/tasks/API/createTask";
 import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
 
 interface Props {

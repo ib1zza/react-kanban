@@ -1,6 +1,7 @@
-export * from "./addUserToBoard";
-export * from "./createBoard";
-export * from "./deleteBoard";
-export * from "./deleteUserFromBoard";
-export * from "./editBoard";
-export * from "./getBoard";
+export * from "./API/addUserToBoard";
+export * from "./API/createBoard";
+export * from "./API/deleteBoard";
+export * from "./API/deleteUserFromBoard";
+export * from "./API/editBoard";
+
+export {BoardPageHeader} from "./ui/BoardPageHeader/BoardPageHeader"
