@@ -3,10 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(#{--taskTextColor-default});
+  color: var(#{--taskTextColor});
   margin-bottom: 20px;
-
-
 
   .button {
     margin-left: 15px;
@@ -14,15 +12,15 @@
     line-height: 20px;
     padding: 0 5px;
 
-    color: var(#{--iconColor-default});
+    color: var(#{--iconColor});
 
     &:hover {
-      color: var(#{--iconColorHover-default});
+      color: var(#{--iconColorHover});
     }
   }
 }
 
-.input{
+.input {
   width: 100%;
   max-width: 500px;
 }
