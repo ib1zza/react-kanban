@@ -9,27 +9,25 @@ import { SignUp } from "../../../../pages/SignUp";
 
 const AppRouter = () => {
   return (
-    <>
-      <Suspense fallback={<div>Loading..</div>}>
-        <Routes>
-          <Route
-            path="/*"
-            element={
-              <ProtectedRoute>
-                <div className={s.home}>
-                  <Header />
-                  <div className={s.body}>
-                    <MainRouter />
-                  </div>
+    <Suspense fallback={<div>Loading..</div>}>
+      <Routes>
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute>
+              <div className={s.home}>
+                <Header />
+                <div className={s.body}>
+                  <MainRouter />
                 </div>
-              </ProtectedRoute>
-            }
-          />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-        </Routes>
-      </Suspense>
-    </>
+              </div>
+            </ProtectedRoute>
+          }
+        />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+      </Routes>
+    </Suspense>
   );
 };
 

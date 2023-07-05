@@ -1,34 +1,23 @@
 import React, { useState } from "react";
 import s from "./Header.module.scss";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Theme, useTheme } from "../../../app/providers/theme/ui/ThemeContext";
 import { useAuth } from "../../../app/providers/authRouter/ui/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { AppRoute } from "../../../app/providers/router/lib/AppRoute";
 import noAvatar from "../../assets/images/noAvatar.svg"
 import { useAppSelector } from "../../../app/providers/store/store";
+import ThemeSwitcher from "../ThemeSwitcher/ui/ThemeSwitcher";
 const Header = () => {
   const { user } = useAppSelector(state => state.userInfo)
   const [isOpen, setIsOpen] = useState(false);
-  const { toggleTheme, theme } = useTheme();
+
   const { logOut } = useAuth();
   const navigate = useNavigate()
-  function handleTheme() {
-    toggleTheme();
-  }
 
   if (!user) return null;
 
   return (<header className={s.header}>
     <div className={s.header__logo} onClick={() => navigate(AppRoute.HOME)}>Awesome Kanban Board</div>
-    <button className={s.button__theme} onClick={handleTheme}>
-      {theme === Theme.LIGHT ? (
-        <FontAwesomeIcon icon={faSun} />
-      ) : (
-        <FontAwesomeIcon icon={faMoon} />
-      )}
-    </button>
+    <ThemeSwitcher />
     <button className={s.header__cabinet} onClick={() => setIsOpen(prev => !prev)}>
       <p className={s.nickname}>{user?.email}</p>
       <div className={s.avatar}>

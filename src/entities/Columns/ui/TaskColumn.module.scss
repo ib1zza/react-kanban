@@ -1,5 +1,5 @@
 .container {
-  background-color: var(#{--columnBg-default});
+  background-color: var(#{--columnBg});
   border-radius: 10px;
   padding: 12px;
   position: relative;
@@ -28,28 +28,27 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  color: var(#{--taskTextColor-default});
-
+  color: var(#{--taskTextColor});
 
   margin-bottom: 7px;
-
 
   .columnButtons {
     display: flex;
     gap: 10px;
   }
 
-  .editButton, .deleteButton {
+  .editButton,
+  .deleteButton {
     svg {
       width: 20px;
     }
 
     padding: 5px;
 
-    color: var(#{--iconColor-default});
+    color: var(#{--iconColor});
 
     &:hover {
-      color: var(#{--iconColorHover-default});
+      color: var(#{--iconColorHover});
     }
   }
 
@@ -62,26 +61,23 @@
   display: block;
   font-weight: 500;
   font-size: 18px;
-  color: var(#{--taskTextColor-default});
+  color: var(#{--taskTextColor});
   margin-bottom: 15px;
 }
 
-
 .addButton {
-  background-color: var(#{--taskBg-default});
-  color: var(#{--taskTextColor-default});
-  box-shadow: 0px 0px 3px 0px var(#{--taskTextColor-default});
+  background-color: var(#{--taskBg});
+  color: var(#{--taskTextColor});
+  box-shadow: 0px 0px 3px 0px var(#{--taskTextColor});
   padding: 6px 10px;
   border-radius: 10px;
   font-size: 16px;
 
   &:hover {
-    box-shadow: 0px 0px 1px 0px var(#{--taskTextColor-default});
+    box-shadow: 0px 0px 1px 0px var(#{--taskTextColor});
   }
 
   span {
     margin-left: 15px;
   }
 }
-
-

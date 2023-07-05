@@ -1,6 +1,6 @@
-$background: #FFFFFF;
-$hover: var(--iconColorHover-default);
-$hoverBorder: var(--iconColorHover-default);
+$background: #ffffff;
+$hover: var(--iconColorHover);
+$hoverBorder: var(--iconColorHover);
 //@keyframes pulse {
 //  0% {
 //    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
@@ -12,11 +12,9 @@ $hoverBorder: var(--iconColorHover-default);
 
 .button {
   //color: #5E6C84;
-  background-color: var(#{--taskBg-default});
-
+  background-color: var(#{--taskBg});
 
   position: relative;
-
 
   font-size: 18px;
   cursor: pointer;
@@ -34,9 +32,9 @@ $hoverBorder: var(--iconColorHover-default);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(#{--buttonTextColor-default});
+    color: var(#{--buttonTextColor});
 
-    &>.iconContainer {
+    & > .iconContainer {
       margin-right: 5px;
     }
 
@@ -56,7 +54,7 @@ $hoverBorder: var(--iconColorHover-default);
     cursor: default;
     background: $hover;
     &:hover {
-        border: none;
+      border: none;
     }
   }
 
@@ -64,7 +62,4 @@ $hoverBorder: var(--iconColorHover-default);
     //background: $hover;
     border: 1px solid $hoverBorder;
   }
-
-
 }
-
