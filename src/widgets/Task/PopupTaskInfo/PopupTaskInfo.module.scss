@@ -5,8 +5,8 @@
   align-self: stretch;
   margin-left: 25px;
   margin-right: -24px;
-border-radius: 10px 0 0px 10px;
-  background-color: var(--columnBg-default);
+  border-radius: 10px 0 0px 10px;
+  background-color: var(--columnBg);
   padding: 20px;
 }
 
@@ -18,21 +18,21 @@ border-radius: 10px 0 0px 10px;
   }
 }
 
-.title, .description {
-  color: var(--taskTextColor-default);
+.title,
+.description {
+  color: var(--taskTextColor);
 }
 
-.title{
+.title {
   display: flex;
   justify-content: space-between;
 
   .icon {
     font-size: 25px;
 
-    color: var(#{--iconColor-default});
+    color: var(#{--iconColor});
     &:hover {
-      color: var(#{--iconColorHover-default});
+      color: var(#{--iconColorHover});
     }
   }
-
 }

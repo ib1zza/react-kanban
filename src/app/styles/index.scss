@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-@import "./vars.scss";
+@import "./theme/dark.scss";
+@import "./theme/light.scss";
 
 $transitionDuration: 0.3s;
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -48,9 +48,10 @@ input {
 //  transition: all 0.2s;
 //}
 
-body {
+.app {
+  height: 100%;
   font-family: "Poppins", sans-serif;
-  background-color: var(#{--body-bg-default});
+  background-color: var(--body-bg);
 }
 
 textarea {

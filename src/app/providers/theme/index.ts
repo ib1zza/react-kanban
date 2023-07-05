@@ -1,3 +1,3 @@
-import ThemeProvider from "./ui/ThemeContext";
+import ThemeProvider from "./ui/ThemeProvider";
 
 export { ThemeProvider };
