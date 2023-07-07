@@ -4,6 +4,8 @@ import Button from "../../../../shared/ui/Button/Button";
 import { getUserFromEmail } from "../../../users/API/getUserFromEmail";
 import { IBoard, LinkedUserType } from "../../../../app/types/IBoard";
 import { addUserToBoard } from "../../API/addUserToBoard";
+import {sendNotificationInvite} from "../../../../entities/Notifications/API/sendNotificationInvite";
+import {useAuth} from "../../../../app/providers/authRouter/ui/AuthContext";
 
 interface Props {
   board: IBoard;
@@ -17,11 +19,15 @@ const InviteUserForm: FC<Props> = ({ board }) => {
     LinkedUserType.GUEST
   );
 
-  const handleShare = async (email: string) => {
-    const userUID = await getUserFromEmail(email).then((res) => res?.uid);
-    if (!userUID) return false;
+  const {user} = useAuth();
 
-    await addUserToBoard(board.uid, userUID, valueStatus);
+  const handleShare = async (email: string) => {
+    const userToInviteId = await getUserFromEmail(email).then((res) => res?.uid);
+    if (!userToInviteId || !user?.uid) return false;
+
+    await sendNotificationInvite( userToInviteId, user.uid, board.uid, valueStatus);
+    await addUserToBoard(board.uid, userToInviteId, valueStatus);
+
     return true;
   };
 

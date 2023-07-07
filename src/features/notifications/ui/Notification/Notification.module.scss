@@ -1,0 +1,25 @@
+.item {
+    display: flex;
+    background-color: var(--notificationBg);
+    &.read {
+        //background-color: var(--notificationBgRead);
+        opacity: 0.6;
+    }
+}
+
+.messageContainer{
+    display: flex;
+
+    img {
+        margin-right: 15px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+
+    }
+}
+
+.item {
+
+}
