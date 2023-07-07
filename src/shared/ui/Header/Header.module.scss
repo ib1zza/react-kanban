@@ -47,6 +47,10 @@
   }
 }
 
+.header__notifications {
+  cursor: pointer;
+}
+
 .menu {
   width: 140px;
   padding: 8px 7px;
@@ -73,4 +77,9 @@
 
 .menu > div:first-child {
   margin-bottom: 7px;
+}
+
+.leftmenu {
+  display: flex;
+  gap:15px;
 }

@@ -2,11 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import boardCollectionReducer from "./Reducers/boardCollectionSlice";
 import userInfoReducer from "./Reducers/userInfoSlice";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-
+import notificationsReducer from "./Reducers/notificationSlice";
 export const store = configureStore({
   reducer: {
     boardCollection: boardCollectionReducer,
     userInfo: userInfoReducer,
+    notifications: notificationsReducer
   },
 });
 
