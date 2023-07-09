@@ -14,6 +14,7 @@ import { faCircleXmark, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import EditTaskForm from "../../../entities/Tasks/lib/EditTaskForm";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onEdit: () => void;
@@ -29,6 +30,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState("");
     const [isEditing, setEditing] = useState(false);
+    const {t} = useTranslation('buttons')
     if (!task) return null;
     const onDeleteTask = async () => {
         setLoading("delete");
@@ -59,7 +61,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                 </button>
             </div>
             <p className={s.description}>
-                {task.description || "No description provided"}
+                {task.description || `${t('Нет описания')}`}
             </p>
             {!isEditing && (
                 <div className={s.buttons}>
@@ -68,14 +70,14 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                         onClick={() => setEditing(true)}
                         loading={loading === "edit"}
                     >
-                        Изменить
+                        {t('Изменить')}
                     </Button>
                     <Button
                         icon={<FontAwesomeIcon icon={faTrashCan} />}
                         onClick={onDeleteTask}
                         loading={loading === "delete"}
                     >
-                        Удалить
+                        {t('Удалить')}
                     </Button>
                 </div>
             )}

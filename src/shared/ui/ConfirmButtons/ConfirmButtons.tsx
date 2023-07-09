@@ -6,6 +6,7 @@ import {
     faCircleCheck,
     faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onConfirm: () => any;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort }) => {
+    const {t} = useTranslation('Buttons')
     return (
         <div className={s.buttons}>
             <Button
@@ -21,7 +23,7 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort }) => {
                     <FontAwesomeIcon icon={faCircleCheck} style={{ color: "#5CD43E" }} />
                 }
             >
-                Confirm
+                {t("Подтвердить")}
             </Button>
 
             <Button
@@ -30,7 +32,7 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort }) => {
                     <FontAwesomeIcon icon={faCircleXmark} style={{ color: "#DE2525" }} />
                 }
             >
-                Cancel
+                {t("Отменить")}
             </Button>
         </div>
     );

@@ -7,6 +7,8 @@ import {
     faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
+import ConfirmButtons from "../../../../shared/ui/ConfirmButtons/ConfirmButtons";
 
 interface Props {
   onEdit: (title: string, description: string) => void;
@@ -23,6 +25,7 @@ const EditTaskForm: React.FC<Props> = ({
 }) => {
     const [title, setTitle] = useState(prevTask.title);
     const [description, setDescription] = useState(prevTask.description);
+    const {t} = useTranslation()
     const editHandler = () => {
         if (title === "" || description === "") return onAbort();
         if (title === prevTask.title && description === prevTask.description)
@@ -31,43 +34,34 @@ const EditTaskForm: React.FC<Props> = ({
     };
     return (
         <div>
-            <h2>Edit task</h2>
+            <h2>{t('Редактирование')}</h2>
             <div className={s.form}>
                 <div>
-                    <label htmlFor="titleInput">Title</label>
+                    <label htmlFor="titleInput">{t('Заголовок')}</label>
                     <input
                         value={title}
                         id="titleInput"
                         type="text"
                         onChange={(e) => setTitle(e.target.value)}
-                        placeholder="title"
+                        placeholder={t('Заголовок')}
                     />
                 </div>
                 <div>
-                    <label htmlFor="descriptionInput">Description</label>
+                    <label htmlFor="descriptionInput">{t('Описание')}</label>
                     <textarea
                         value={description}
                         id="descriptionInput"
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder="description"
+                        placeholder={t('Описание')}
                     />
                 </div>
             </div>
-            <div className={s.buttons}>
-                <Button
-                    loading={loading}
-                    icon={<FontAwesomeIcon icon={faCircleCheck} />}
-                    onClick={editHandler}
-                >
-                    Save
-                </Button>
-                <Button
-                    icon={<FontAwesomeIcon icon={faCircleXmark} />}
-                    onClick={onAbort}
-                >
-                    Cancel
-                </Button>
-            </div>
+            {/* //TODO: func  */}
+            <ConfirmButtons onConfirm={function () {
+                throw new Error("Function not implemented.");
+            } } onAbort={function () {
+                throw new Error("Function not implemented.");
+            } }/>
         </div>
     );
 };

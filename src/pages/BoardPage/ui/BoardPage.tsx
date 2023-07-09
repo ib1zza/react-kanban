@@ -5,7 +5,7 @@ import TaskColumn from "../../../entities/Columns/ui/TaskColumn";
 import Button from "../../../shared/ui/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import FormToCreate from "../../../shared/ui/FormToCreate/FormToCreate";
+import {FormToCreate} from "../../../shared/ui/FormToCreate";
 import { createColumn } from "../../../features/columns";
 import {PopupTaskInfo} from "../../../widgets";
 import {
@@ -23,6 +23,7 @@ import { editBoard, BoardPageHeader } from "../../../features/boards";
 import { getBoardFromId } from "../../../entities/Board";
 import { getColumnsFromBoard } from "../lib/getColumnsFromBoard";
 import { FormToLink } from "../../../shared/ui/FormToLink";
+
 
 const BoardPage: React.FC = memo(() => {
     const { boardId } = useParams();

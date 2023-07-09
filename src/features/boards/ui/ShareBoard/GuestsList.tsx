@@ -6,6 +6,7 @@ import { IBoard, LinkedUserType } from "../../../../app/types/IBoard";
 import { getUserInfo } from "../../../users/API/getUserInfo";
 import { deleteUserFromBoard } from "../../API/deleteUserFromBoard";
 import { IUserInfo } from "../../../../app/types/User";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   board: IBoard;
@@ -53,7 +54,7 @@ const GuestsList: FC<Props> = ({ board }) => {
 
         return user;
     };
-
+    const {t} = useTranslation()
     useEffect(() => {
         getBoardAllowedPeople(isEditorsOpened).then((res) => {
             setUsersEmails(res);
@@ -62,8 +63,8 @@ const GuestsList: FC<Props> = ({ board }) => {
 
     return (
         <div className={s.form__users}>
-            <div className={s.form__title}>Кто подключён?</div>
-            <div className={s.form__categories}>
+            <div className={s.form__title}>{t('Кто добавлен')}?</div>
+            <div className={s.form__categoris}>
                 <button
                     onClick={() => {
                         setIsEditorsOpened(false);
@@ -72,7 +73,7 @@ const GuestsList: FC<Props> = ({ board }) => {
                         isEditorsOpened ? s.form__category_l : s.form__category_l__active
                     }
                 >
-                    Гости
+                    {t('Гость')}
                 </button>
                 <button
                     onClick={() => {
@@ -82,7 +83,7 @@ const GuestsList: FC<Props> = ({ board }) => {
                         !isEditorsOpened ? s.form__category_r : s.form__category_r__active
                     }
                 >
-                    Редакторы
+                    {t('Редактор')}
                 </button>
             </div>
             <div>

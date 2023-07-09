@@ -8,6 +8,7 @@ import { deleteBoard } from "../../../../features/boards";
 import Modal from "../../../../shared/ui/Modal/Modal";
 import ShareBoard from "../../../../features/boards/ui/ShareBoard/ShareBoard";
 import { IBoard } from "../../../../app/types/IBoard";
+import { useTranslation } from "react-i18next";
 
 interface IBoardPreviewProps {
   userId: string;
@@ -24,7 +25,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
 }) => {
     const [user, setUser] = React.useState<IUserInfo | null>(null);
     const [shareStatus, setShareStatus] = React.useState(false);
-
+    const {t} = useTranslation()
     useEffect(() => {
         getUserInfo(board.ownerId).then((res) => {
             setUser(res);
@@ -61,7 +62,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                     </div>
                 )}
             </h3>
-            <p>by {user?.displayName || "loading..."}</p>{" "}
+            <p>by {user?.displayName || `${t('Загрузка')}`}</p>{" "}
         </div>
     );
 };

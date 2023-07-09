@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { createTask } from "../../../../features/tasks/API/createTask";
 import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onAbort: () => void;
@@ -25,6 +26,7 @@ const AddTaskForm: React.FC<Props> = ({
     const [title, setTitle] = React.useState("");
     const [description, setDescription] = React.useState("");
     const { user } = UserAuth();
+    const {t} = useTranslation() 
     const handler = () => {
         createTask(
             { title, description, creatorId: user?.uid as string, tags: [] },
@@ -32,27 +34,28 @@ const AddTaskForm: React.FC<Props> = ({
             columnId
         ).then(onSubmit);
     };
-    return (
+    
+    return (    
         <div className={s.wrapper}>
             <form>
                 <div className={s.inputBlock}>
-                    <label htmlFor={"title"}>Title:</label>
+                    <label htmlFor={t('Заголовок')}>Title:</label>
                     <textarea
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         className={s.min}
-                        id={"title"}
-                        placeholder={"%title%"}
+                        id={t('Заголовок')}
+                        placeholder={`%${t('Заголовок')}%`}
                         maxLength={50}
                     />
                 </div>
                 <div className={s.inputBlock}>
-                    <label htmlFor={"description"}>Description (optional):</label>
+                    <label htmlFor={t('Описание')}>Description (optional):</label>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        id={"description"}
-                        placeholder={"%description%"}
+                        id={t('Описание')}
+                        placeholder={`%${t('Описание')}%`}
                         maxLength={200}
                     />
                 </div>

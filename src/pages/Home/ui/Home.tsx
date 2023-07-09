@@ -10,7 +10,7 @@ import { createBoard } from "../../../features/boards";
 import { IBoard, LinkedUserType } from "../../../app/types/IBoard";
 import { getBoards } from "../lib/getBoards";
 import { addUserToBoard } from "../../../features/boards";
-import  FormToCreate  from "../../../shared/ui/FormToCreate/FormToCreate";
+import  {FormToCreate}  from "../../../shared/ui/FormToCreate";
 import { FormToLink } from "../../../shared/ui/FormToLink";
 import { BoardPreview } from "../../../entities/Board";
 

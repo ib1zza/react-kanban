@@ -9,6 +9,7 @@ import AddTaskForm from "../lib/AddTaskForm/AddTaskForm";
 import { deleteColumn } from "../../../features/columns/API/deleteColumn";
 import { IColumn } from "../../../app/types/IBoard";
 import { FormToEdit } from "../../../shared/ui/FormToEdit";
+import { useTranslation } from "react-i18next";
 
 interface ITaskColumnProps {
   column: IColumn;
@@ -23,7 +24,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
 }) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
     const [isAddingTask, setIsAddingTask] = useState(false);
-
+    const {t} = useTranslation('buttons')
     const editHandler = async (title: string, color: string) => {
         const res = await editColumn(boardId, column.uid, {
             title,
@@ -66,7 +67,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                                 onClick={() => setIsAddingTask(true)}
                             >
                                 <FontAwesomeIcon icon={faPlus} height={20} />
-                                <span>Add task</span>
+                                <span>{t('Добавить')}</span>
                             </button>
                         </div>
                     )}

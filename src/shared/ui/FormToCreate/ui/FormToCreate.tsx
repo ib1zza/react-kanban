@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import s from "./FormToCreate.module.scss";
-import { UserAuth } from "../../../app/providers/authRouter/ui/AuthContext";
-import ColorPicker from "../ColorPicker/ColorPicker";
-import ConfirmButtons from "../ConfirmButtons/ConfirmButtons";
+import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
+import ColorPicker from "../../ColorPicker/ColorPicker";
+import ConfirmButtons from "../../ConfirmButtons/ConfirmButtons";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onAbort: () => void;
@@ -22,7 +23,7 @@ const FormToCreate: React.FC<Props> = ({
     const [title, setTitle] = useState("");
     const { user } = UserAuth();
     const [color, setColor] = useState("#f44336");
-
+    const {t} = useTranslation('buttons')
     // TODO: add create column action
 
     const addBoard = () => {
@@ -48,7 +49,7 @@ const FormToCreate: React.FC<Props> = ({
             )}
             <h6 className={s.title}>
                 <input
-                    placeholder={"Enter name..."}
+                    placeholder={t("Название")}
                     className={s.createColumnTitle}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
