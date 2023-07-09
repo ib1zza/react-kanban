@@ -17,90 +17,90 @@ interface ITaskColumnProps {
 }
 
 const TaskColumn: React.FC<ITaskColumnProps> = ({
-  column,
-  onEdit,
-  boardId,
+    column,
+    onEdit,
+    boardId,
 }) => {
-  const [isEditColumn, setIsEditColumn] = useState(false);
-  const [isAddingTask, setIsAddingTask] = useState(false);
+    const [isEditColumn, setIsEditColumn] = useState(false);
+    const [isAddingTask, setIsAddingTask] = useState(false);
 
-  const editHandler = async (title: string, color: string) => {
-    const res = await editColumn(boardId, column.uid, {
-      title,
-      color,
-    });
-    console.log(res);
-    onEdit();
-    setIsEditColumn(false);
-  };
+    const editHandler = async (title: string, color: string) => {
+        const res = await editColumn(boardId, column.uid, {
+            title,
+            color,
+        });
+        console.log(res);
+        onEdit();
+        setIsEditColumn(false);
+    };
 
-  return (
-    <div className={s.container + " " + s.withColor}>
-      <div
-        className={s.headerColor}
-        style={{ backgroundColor: column.color }}
-      />
-      {!isEditColumn && (
-        <>
-          <div className={s.titleBlock}>
-            <h6 className={s.title}>{column.title}</h6>
-            <div className={s.columnButtons}>
-              <button
-                className={s.editButton}
-                onClick={() => setIsEditColumn(true)}
-              >
-                <FontAwesomeIcon icon={faPenToSquare} />
-              </button>
-              <button
-                className={s.deleteButton}
-                onClick={() => deleteColumn(boardId, column.uid).then(onEdit)}
-              >
-                <FontAwesomeIcon icon={faTrashCan} />
-              </button>
-            </div>
-          </div>
-          {!isAddingTask && (
-            <div>
-              <button
-                className={s.addButton}
-                onClick={() => setIsAddingTask(true)}
-              >
-                <FontAwesomeIcon icon={faPlus} height={20} />
-                <span>Add task</span>
-              </button>
-            </div>
-          )}
-          {isAddingTask && (
-            <AddTaskForm
-              onAbort={() => {
-                setIsAddingTask(false);
-              }}
-              onSubmit={() => {
-                setIsAddingTask(false);
-                onEdit();
-              }}
-              boardId={boardId}
-              columnId={column.uid}
+    return (
+        <div className={s.container + " " + s.withColor}>
+            <div
+                className={s.headerColor}
+                style={{ backgroundColor: column.color }}
             />
-          )}
-        </>
-      )}
-      {isEditColumn && (
-        <FormToEdit
-          title={column.title}
-          color={column.color}
-          onEdit={editHandler}
-          onAbort={() => setIsEditColumn(false)}
-        />
-      )}
-      <TaskList
-        boardId={boardId}
-        columnId={column.uid}
-        tasks={column.tasks}
-        rerender={onEdit}
-      />
-    </div>
-  );
+            {!isEditColumn && (
+                <>
+                    <div className={s.titleBlock}>
+                        <h6 className={s.title}>{column.title}</h6>
+                        <div className={s.columnButtons}>
+                            <button
+                                className={s.editButton}
+                                onClick={() => setIsEditColumn(true)}
+                            >
+                                <FontAwesomeIcon icon={faPenToSquare} />
+                            </button>
+                            <button
+                                className={s.deleteButton}
+                                onClick={() => deleteColumn(boardId, column.uid).then(onEdit)}
+                            >
+                                <FontAwesomeIcon icon={faTrashCan} />
+                            </button>
+                        </div>
+                    </div>
+                    {!isAddingTask && (
+                        <div>
+                            <button
+                                className={s.addButton}
+                                onClick={() => setIsAddingTask(true)}
+                            >
+                                <FontAwesomeIcon icon={faPlus} height={20} />
+                                <span>Add task</span>
+                            </button>
+                        </div>
+                    )}
+                    {isAddingTask && (
+                        <AddTaskForm
+                            onAbort={() => {
+                                setIsAddingTask(false);
+                            }}
+                            onSubmit={() => {
+                                setIsAddingTask(false);
+                                onEdit();
+                            }}
+                            boardId={boardId}
+                            columnId={column.uid}
+                        />
+                    )}
+                </>
+            )}
+            {isEditColumn && (
+                <FormToEdit
+                    title={column.title}
+                    color={column.color}
+                    onEdit={editHandler}
+                    onAbort={() => setIsEditColumn(false)}
+                />
+            )}
+            <TaskList
+                boardId={boardId}
+                columnId={column.uid}
+                tasks={column.tasks}
+                rerender={onEdit}
+            />
+        </div>
+    );
 };
 
 export default TaskColumn;

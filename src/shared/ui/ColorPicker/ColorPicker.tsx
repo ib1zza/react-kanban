@@ -9,7 +9,10 @@ const ColorPicker: React.FC<IProps> = ({onChange, color}) => {
     return (
         <div className={s.colorPicker}>
             <p>Choose color:</p>
-            <CirclePicker className={s.pickerBlock} color={color} onChange={(color) => onChange(color.hex)}/>
+            <CirclePicker 
+                className={s.pickerBlock} 
+                color={color} 
+                onChange={(color) => onChange(color.hex)}/>
         </div>
     );
 };

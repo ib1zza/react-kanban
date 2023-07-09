@@ -9,12 +9,12 @@ interface IShareBoard {
 }
 
 const ShareBoard: FC<IShareBoard> = ({ board }) => {
-  return (
-    <div className={s.form}>
-      <InviteUserForm board={board} />
-      <GuestsList board={board} />
-    </div>
-  );
+    return (
+        <div className={s.form}>
+            <InviteUserForm board={board} />
+            <GuestsList board={board} />
+        </div>
+    );
 };
 
 export default ShareBoard;

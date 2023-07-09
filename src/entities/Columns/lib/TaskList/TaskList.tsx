@@ -10,28 +10,28 @@ interface ITaskListProps {
   rerender: () => void;
 }
 const TaskList: React.FC<ITaskListProps> = ({
-  tasks,
-  rerender,
-  boardId,
-  columnId,
+    tasks,
+    rerender,
+    boardId,
+    columnId,
 }) => {
-  const getTasksFromColumn = (tasks: { [key: string]: ITask }) => {
-    return Object.values(tasks).sort((a, b) => +a.timeCreated - +b.timeCreated);
-  };
-  return (
-    <div className={s.tasks}>
-      {tasks &&
+    const getTasksFromColumn = (tasks: { [key: string]: ITask }) => {
+        return Object.values(tasks).sort((a, b) => +a.timeCreated - +b.timeCreated);
+    };
+    return (
+        <div className={s.tasks}>
+            {tasks &&
         getTasksFromColumn(tasks).map((el) => (
-          <Task
-            boardId={boardId}
-            columnId={columnId}
-            task={el}
-            key={el.uid}
-            rerender={rerender}
-          />
+            <Task
+                boardId={boardId}
+                columnId={columnId}
+                task={el}
+                key={el.uid}
+                rerender={rerender}
+            />
         ))}
-    </div>
-  );
+        </div>
+    );
 };
 
 export default TaskList;

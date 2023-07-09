@@ -10,27 +10,27 @@ interface ITaskForCreate {
 }
 
 export const createTask = async (
-  taskData: ITaskForCreate,
-  boardId: string,
-  columnId: string
+    taskData: ITaskForCreate,
+    boardId: string,
+    columnId: string
 ) => {
-  try {
-    const newTaskId = uuid();
-    await updateDocument("boards", boardId, {
-      ["columns." + columnId + ".tasks." + newTaskId]: {
-        uid: newTaskId,
-        title: taskData.title,
-        description: taskData.description,
-        timeCreated: Date.now(),
-        isCompleted: false,
-        tags: [],
-        creatorId: taskData.creatorId,
-        subtasks: {},
-      },
-    });
-  } catch (e) {
-    console.log(e);
-    return false;
-  }
-  return true;
+    try {
+        const newTaskId = uuid();
+        await updateDocument("boards", boardId, {
+            ["columns." + columnId + ".tasks." + newTaskId]: {
+                uid: newTaskId,
+                title: taskData.title,
+                description: taskData.description,
+                timeCreated: Date.now(),
+                isCompleted: false,
+                tags: [],
+                creatorId: taskData.creatorId,
+                subtasks: {},
+            },
+        });
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
+    return true;
 };
