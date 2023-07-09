@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AppRoute } from "../../../app/providers/router/lib/AppRoute";
 import { useAuth } from "../../../app/providers/authRouter/ui/AuthContext";
 import { useTranslation } from "react-i18next";
+import ThemeSwitcher from "../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher";
+import { LangSwitcher } from "../../../shared/ui/LangSwitcher/ui/LangSwitcher";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -82,6 +84,12 @@ const SignUp = () => {
                         <span>Awesome Kanban Board</span>
                     </h1>
                 </div>
+            </div>
+            <div className={s.themeSwitcherWrapper}>
+                <ThemeSwitcher className={s.themeSwitcher}/>
+            </div>
+            <div  className={s.langSwitcherWrapper}>
+                <LangSwitcher />
             </div>
             <form onSubmit={handleSubmit(handleContinue)} className={s.signup}>
                 {step === 1 && <h1 className={s.signup__title}>{t('Регистрация')}</h1>}
