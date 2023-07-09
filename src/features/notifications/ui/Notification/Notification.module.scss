@@ -1,8 +1,8 @@
 .item {
     display: flex;
     background-color: var(--notificationBg);
+
     &.read {
-        //background-color: var(--notificationBgRead);
         opacity: 0.6;
     }
 }
@@ -18,8 +18,4 @@
         object-fit: cover;
 
     }
-}
-
-.item {
-
 }

@@ -1,22 +1,22 @@
 .blocks__container {
-  min-width: calc(100% - 50px);
-  margin-right: 15px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  align-items: start;
-  grid-gap: 16px;
-  justify-content: space-between;
+    min-width: calc(100% - 50px);
+    margin-right: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    align-items: start;
+    grid-gap: 16px;
+    justify-content: space-between;
 }
 
 .buttons {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .buttons > *:not(:last-child) {
-  margin-bottom: 6px;
+    margin-bottom: 6px;
 }
 
 .boardPageContainer {
-  display: flex;
+    display: flex;
 }

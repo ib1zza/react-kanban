@@ -1,83 +1,78 @@
 .container {
-  background-color: var(#{--columnBg});
-  border-radius: 10px;
-  padding: 12px;
-  position: relative;
+    background-color: var(#{--columnBg});
+    border-radius: 10px;
+    padding: 12px;
+    position: relative;
+    max-width: 400px;
 
-  max-width: 400px;
-
-  &.withColor {
-    padding-top: 32px;
-  }
+    &.withColor {
+        padding-top: 32px;
+    }
 }
 
 .headerColor {
-  //transition: background-color 0.2s ease-in-out;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  opacity: 0.7;
-  height: 20px;
-  border-radius: 10px;
-  background-color: #9d9d9d;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.7;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #9d9d9d;
 }
 
 .titleBlock {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  color: var(#{--taskTextColor});
-
-  margin-bottom: 7px;
-
-  .columnButtons {
     display: flex;
-    gap: 10px;
-  }
+    justify-content: space-between;
+    align-items: flex-start;
+    color: var(#{--taskTextColor});
+    margin-bottom: 7px;
 
-  .editButton,
-  .deleteButton {
-    svg {
-      width: 20px;
+    .columnButtons {
+        display: flex;
+        gap: 10px;
     }
 
-    padding: 5px;
+    .editButton,
+    .deleteButton {
+        svg {
+            width: 20px;
+        }
 
-    color: var(#{--iconColor});
+        padding: 5px;
+        color: var(#{--iconColor});
 
-    &:hover {
-      color: var(#{--iconColorHover});
+        &:hover {
+            color: var(#{--iconColorHover});
+        }
     }
-  }
 
-  .inputColumnTitle {
-    background-color: transparent;
-  }
+    .inputColumnTitle {
+        background-color: transparent;
+    }
 }
 
 .title {
-  display: block;
-  font-weight: 500;
-  font-size: 18px;
-  color: var(#{--taskTextColor});
-  margin-bottom: 15px;
+    display: block;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(#{--taskTextColor});
+    margin-bottom: 15px;
 }
 
 .addButton {
-  background-color: var(#{--taskBg});
-  color: var(#{--taskTextColor});
-  box-shadow: 0px 0px 3px 0px var(#{--taskTextColor});
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: 16px;
+    background-color: var(#{--taskBg});
+    color: var(#{--taskTextColor});
+    box-shadow: 0 0 3px 0 var(#{--taskTextColor});
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 16px;
 
-  &:hover {
-    box-shadow: 0px 0px 1px 0px var(#{--taskTextColor});
-  }
+    &:hover {
+        box-shadow: 0 0 1px 0 var(#{--taskTextColor});
+    }
 
-  span {
-    margin-left: 15px;
-  }
+    span {
+        margin-left: 15px;
+    }
 }
