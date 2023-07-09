@@ -4,10 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 import { Theme } from "../../../../app/providers/theme/lib/ThemeContext";
 import s from "./ThemeSwitcher.module.scss";
-const ThemeSwitcher = () => {
+import { classNames } from "../../../lib/classNames/classNames";
+interface ThemeSwitcherProps{
+    className?: string
+}
+const ThemeSwitcher = ({className} : ThemeSwitcherProps) => {
     const { toggleTheme, theme } = useTheme();
     return (
-        <button className={s.button__theme} onClick={toggleTheme}>
+        <button className={classNames(s.button__theme,{}, 
+            [className as string])} onClick={toggleTheme}>
             {theme === Theme.LIGHT ? (
                 <FontAwesomeIcon icon={faSun} />
             ) : (

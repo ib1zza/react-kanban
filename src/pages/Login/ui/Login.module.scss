@@ -10,10 +10,13 @@
     justify-content: center;
     width: 40%;
     height: 100%;
+
 }
 
+
+
 .login {
-    background-color: white;
+    background-color: var(--taskBg);
     border: 2px solid black;
     padding: 40px;
     margin: auto;
@@ -23,11 +26,13 @@
 .login__title {
     margin-bottom: 22px;
     letter-spacing: 0.1em;
+    color: var(--taskTextColor)
 }
 
 .login__body {
     display: flex;
     flex-direction: column;
+    color: var(--taskTextColor)
 }
 
 .login__input {
@@ -39,8 +44,9 @@
 }
 
 .login__btn {
-    background-color: black;
-    color: white;
+    
+    background-color: var(--taskTextColor);
+    color: var(--popupBg);
     margin-top: 4px;
     padding: 8px;
     width: 100%;
@@ -48,24 +54,33 @@
 
 .login__label {
     margin-top: 12px;
+    color: var(--taskTextColor);
 }
 
+.login__remember {
+    margin: 10px;
+    color: var(--taskTextColor);
+}
 .login__remember p input {
     margin: 10px;
+    color: var(--taskTextColor);
 }
 
 .login__linkArea_link {
     color: purple;
     text-decoration: underline;
     letter-spacing: 0.05em;
+    color: var(--taskTextColor);
 }
 
 .login__linkArea_descr {
     margin-right: 10px;
+    color: var(--taskTextColor);
 }
 
 .login__label_error {
     color: red;
+    color: var(--taskTextColor);;
 }
 
 .center {
@@ -119,6 +134,26 @@
     color: #fff;
 }
 
+.themeSwitcherWrapper{
+    position: absolute;
+    left: 0;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.langSwitcherWrapper{
+    position: absolute;
+    right: 0;
+    padding: 20px;
+}
+
+.themeSwitcher{
+    svg{
+
+    height: 30px;
+    color: white;
+    }
+}
 @media screen and (width >= 800px) and (width <= 1100px) {
     .center h1 span {
         font-size: 3rem;
@@ -191,3 +226,4 @@
         width: 100%;
     }
 }
+

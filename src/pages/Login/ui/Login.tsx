@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../app/providers/authRouter/ui/AuthContext";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import ThemeSwitcher from "../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher";
+import { LangSwitcher } from "../../../shared/ui/LangSwitcher/ui/LangSwitcher";
 const Login = () => {
     const [error, setError] = useState("");
     const { logIn } = useAuth();
@@ -39,7 +41,12 @@ const Login = () => {
                     </h1>
                 </div>
             </div>
-
+            <div className={s.themeSwitcherWrapper}>
+                <ThemeSwitcher className={s.themeSwitcher}/>
+            </div>
+            <div  className={s.langSwitcherWrapper}>
+                <LangSwitcher />
+            </div>
             <div className={s.login}>
                 <div className="max-w-[320px] mx-auto py-16">
                     <h1 className={s.login__title}>{t('Вход')}</h1>
