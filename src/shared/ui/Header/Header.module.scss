@@ -1,85 +1,84 @@
 .header {
-  font-size: 28px;
+    font-size: 28px;
 }
 
 .header__logo {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .header,
 .footer {
-  height: 55px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background-color: var(#{--darker-bg});
-  color: white;
+    height: 55px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(#{--darker-bg});
+    color: white;
 }
 
 .nickname {
-  font-size: 16px;
-  margin-right: 12px;
+    font-size: 16px;
+    margin-right: 12px;
 }
 
 .header__cabinet {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
 }
 
 .header__cabinet > .avatar {
-  margin-right: 6px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    margin-right: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  img {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    overflow: hidden;
-    border-radius: 50%;
-  }
+    img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 50%;
+    }
 }
 
 .header__notifications {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .menu {
-  width: 140px;
-  padding: 8px 7px;
-  background-color: #fff;
-  border-radius: 5px;
-  position: absolute;
-  bottom: -60px;
-  left: -80px;
-  z-index: 10;
+    width: 140px;
+    padding: 8px 7px;
+    background-color: #fff;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -60px;
+    left: -80px;
+    z-index: 10;
 }
 
 .menu > div {
-  text-align: left;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  cursor: pointer;
-  color: #000000;
+    text-align: left;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    cursor: pointer;
+    color: #000;
 }
 
 .menu > div:hover {
-  color: #676767;
+    color: #676767;
 }
 
 .menu > div:first-child {
-  margin-bottom: 7px;
+    margin-bottom: 7px;
 }
 
 .leftmenu {
-  display: flex;
-  gap:15px;
+    display: flex;
+    gap:15px;
 }

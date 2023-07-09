@@ -1,37 +1,36 @@
 .button {
-  position: relative;
+    position: relative;
 
-  svg {
-    width: 30px;
-    height: 30px;
-  }
+    svg {
+        width: 30px;
+        height: 30px;
+    }
 
-  .count {
-    position: absolute;
-    top: 20px;
-    right: 0px;
-    color: #ffffff;
-    width: 15px;
-    height: 15px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 15px;
-    font-weight: bold;
-    background-color: #ff6767;
-    border-radius: 20px;
-  }
+    .count {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        color: #fff;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: bold;
+        background-color: #ff6767;
+        border-radius: 20px;
+    }
 }
 
 .notificationsContainer {
-  cursor: auto;
-  width: 350px;
-  position: absolute;
-  top: 45px;
-  padding: 15px;
-  border-radius: 15px;
-  right: 0;
-  //background-color: #ff3b3b;
-  background-color: var(--taskBg);
-  color: var(--taskTextColor);
-  font-size: 14px;
+    cursor: auto;
+    width: 350px;
+    position: absolute;
+    top: 45px;
+    padding: 15px;
+    border-radius: 15px;
+    right: 0;
+    background-color: var(--taskBg);
+    color: var(--taskTextColor);
+    font-size: 14px;
 }

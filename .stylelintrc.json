@@ -1,0 +1,11 @@
+{
+  
+    "extends": "stylelint-config-recommended",
+    "rules": {
+      "indentation": [4],
+      "selector-class-pattern": null,
+      "no-invalid-double-slash-comments": null,
+      "function-no-unknown": null
+    }
+  }
+  

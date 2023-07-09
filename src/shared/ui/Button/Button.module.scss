@@ -1,65 +1,55 @@
-$background: #ffffff;
+$background: #fff;
 $hover: var(--iconColorHover);
 $hoverBorder: var(--iconColorHover);
-//@keyframes pulse {
-//  0% {
-//    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
-//  }
-//  100% {
-//    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0);
-//  }
-//}
+
 
 .button {
-  //color: #5E6C84;
-  background-color: var(#{--taskBg});
 
-  position: relative;
+    background-color: var(#{--taskBg});
+    position: relative;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 6px;
+    border-radius: 10px;
 
-  font-size: 18px;
-  cursor: pointer;
-
-  border: 1px solid transparent;
-  padding: 6px;
-  border-radius: 10px;
-
-  &.loadingButton {
-    box-shadow: 0 0 0 0 #000;
-    //animation: pulse 1.5s infinite;
-  }
-
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(#{--buttonTextColor});
-
-    & > .iconContainer {
-      margin-right: 5px;
+    &.loadingButton {
+        box-shadow: 0 0 0 0 #000;
     }
 
-    &.invisible {
-      visibility: hidden;
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(#{--buttonTextColor});
+
+        & > .iconContainer {
+            margin-right: 5px;
+        }
+
+        &.invisible {
+            visibility: hidden;
+        }
     }
-  }
 
-  .loading {
-    display: flex;
-    position: absolute;
-    left: calc(50% - 10px);
-    top: calc(50% - 10px);
-  }
+    .loading {
+        display: flex;
+        position: absolute;
+        left: calc(50% - 10px);
+        top: calc(50% - 10px);
+    }
 
-  &:disabled {
-    cursor: default;
-    background: $hover;
+   
+
     &:hover {
-      border: none;
+        border: 1px solid $hoverBorder;
     }
-  }
+    &:disabled {
+        cursor: default;
+        background: $hover;
 
-  &:hover {
-    //background: $hover;
-    border: 1px solid $hoverBorder;
-  }
+        &:hover {
+            border: none;
+        }
+    }
 }

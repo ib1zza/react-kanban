@@ -1,38 +1,39 @@
 .container {
-  width: 30%;
-  min-width: 300px;
-  height: 100%;
-  align-self: stretch;
-  margin-left: 25px;
-  margin-right: -24px;
-  border-radius: 10px 0 0px 10px;
-  background-color: var(--columnBg);
-  padding: 20px;
+    width: 30%;
+    min-width: 300px;
+    height: 100%;
+    align-self: stretch;
+    margin-left: 25px;
+    margin-right: -24px;
+    border-radius: 10px 0 0 10px;
+    background-color: var(--columnBg);
+    padding: 20px;
 }
 
 .buttons {
-  margin-top: 20px;
-  display: flex;
-  & > *:not(:last-child) {
-    margin-right: 10px;
-  }
+    margin-top: 20px;
+    display: flex;
+
+    & > *:not(:last-child) {
+        margin-right: 10px;
+    }
 }
 
 .title,
 .description {
-  color: var(--taskTextColor);
+    color: var(--taskTextColor);
 }
 
 .title {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 
-  .icon {
-    font-size: 25px;
+    .icon {
+        font-size: 25px;
+        color: var(#{--iconColor});
 
-    color: var(#{--iconColor});
-    &:hover {
-      color: var(#{--iconColorHover});
+        &:hover {
+            color: var(#{--iconColorHover});
+        }
     }
-  }
 }

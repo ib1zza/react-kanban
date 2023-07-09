@@ -1,169 +1,193 @@
 .wrapper {
-  display: flex;
-  width: 100%;
-  height: 100%;
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40%;
-  height: 100%;
-}
-.login {
-  background-color: white;
-  border: 2px solid black;
-  padding: 40px;
-  margin: auto;
-  width: 500px;
-}
-.login__title {
-  margin-bottom: 22px;
-  letter-spacing: 0.1em;
-}
-.login__body {
-  display: flex;
-  flex-direction: column;
-}
-.login__input {
-  margin-top: 8px;
-  padding: 16px;
-  width: 100%;
-  border: 1px solid black;
-  background-color: white;
-}
-.login__btn {
-  background-color: black;
-  color: white;
-  margin-top: 4px;
-  padding: 8px;
-  width: 100%;
-}
-.login__label {
-  margin-top: 12px;
-}
-.login__remember p input {
-  margin: 10px;
-}
-.login__linkArea_link {
-  color: purple;
-  text-decoration: underline;
-  letter-spacing: 0.05em;
-}
-.login__linkArea_descr {
-  margin-right: 10px;
-}
-.login__label_error {
-  color: red;
-}
-.center {
-  position: relative;
-  background-color: black;
 
-  transform: prespective(1000px) translate(-50%, -50%);
-  transform: skewY(15deg);
-  transition: 0.5s;
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+}
+
+.login {
+    background-color: white;
+    border: 2px solid black;
+    padding: 40px;
+    margin: auto;
+    width: 500px;
+}
+
+.login__title {
+    margin-bottom: 22px;
+    letter-spacing: 0.1em;
+}
+
+.login__body {
+    display: flex;
+    flex-direction: column;
+}
+
+.login__input {
+    margin-top: 8px;
+    padding: 16px;
+    width: 100%;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.login__btn {
+    background-color: black;
+    color: white;
+    margin-top: 4px;
+    padding: 8px;
+    width: 100%;
+}
+
+.login__label {
+    margin-top: 12px;
+}
+
+.login__remember p input {
+    margin: 10px;
+}
+
+.login__linkArea_link {
+    color: purple;
+    text-decoration: underline;
+    letter-spacing: 0.05em;
+}
+
+.login__linkArea_descr {
+    margin-right: 10px;
+}
+
+.login__label_error {
+    color: red;
+}
+
+.center {
+    position: relative;
+    background-color: black;
+    transform: prespective(1000px) translate(-50%, -50%);
+    transform: skewY(15deg);
+    transition: 0.5s;
 }
 
 .center:hover {
-  transform: prespective(1000px) translate(-50%, -50%);
-  transform: skewY(0deg);
+    transform: prespective(1000px) translate(-50%, -50%);
+    transform: skewY(0deg);
 }
 
 .center h1 span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-  margin: 0;
-  padding: 0;
-  text-transform: uppercase;
-  font-size: 4rem;
-  color: #fff;
-  transform-style: preserve-3d;
-  transition: 0.8s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 4rem;
+    color: #fff;
+    transform-style: preserve-3d;
+    transition: 0.8s;
 }
+
 .center h1 span:nth-child(1) {
-  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
 }
 
 .center h1 span:nth-child(2) {
-  color: var(#{--taskTextColor});
-  transform: translate(-50%, -50%) skewX(-60deg);
-  left: -25px;
-  clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%);
+    color: var(#{--taskTextColor});
+    transform: translate(-50%, -50%) skewX(-60deg);
+    left: -25px;
+    clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%);
 }
 
 .center h1 span:nth-child(3) {
-  transform: translate(-50%, -50%) skewY(0deg);
-  left: -50px;
-  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(-50%, -50%) skewY(0deg);
+    left: -50px;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
 }
 
 .center:hover h1 span:nth-child(2),
 .center:hover h1 span:nth-child(3) {
-  transform: translate(-50%, -50%) skewX(0deg);
-  left: 0;
-  color: #fff;
+    transform: translate(-50%, -50%) skewX(0deg);
+    left: 0;
+    color: #fff;
 }
 
-@media screen and (min-width: 800px) and (max-width: 1100px) {
-  .center h1 span {
-    font-size: 3rem;
-  }
-  .center h1 span:nth-child(2) {
-    left: -19px;
-  }
-  .center h1 span:nth-child(3) {
-    left: -38px;
-  }
+@media screen and (width >= 800px) and (width <= 1100px) {
+    .center h1 span {
+        font-size: 3rem;
+    }
+
+    .center h1 span:nth-child(2) {
+        left: -19px;
+    }
+
+    .center h1 span:nth-child(3) {
+        left: -38px;
+    }
 }
-@media screen and (max-width: 800px) {
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  .center h1 span {
-    font-size: 2.5rem;
-  }
-  .logo {
-    width: 100%;
-    height: 20%;
-    align-items: flex-end;
-  }
-  .login {
-    background-color: white;
-    border: none;
-    background-color: transparent;
-    padding: 0px;
-    margin: auto;
-    width: 86%;
-    border-radius: 30px;
-  }
-  .login__title {
-    color: white;
-    margin-bottom: 0px;
-  }
-  .login__label {
-    color: white;
-  }
-  .login__remember {
-    color: white;
-  }
-  .login__linkArea_descr {
-    color: white;
-  }
-  .center h1 span:nth-child(2) {
-    left: -15px;
-  }
-  .center h1 span:nth-child(3) {
-    left: -30px;
-  }
-  .login__btn {
-    background-color: white;
-    color: black;
-    margin-top: 4px;
-    padding: 8px;
-    width: 100%;
-  }
+
+@media screen and (width <= 800px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .center h1 span {
+        font-size: 2.5rem;
+    }
+
+    .logo {
+        width: 100%;
+        height: 20%;
+        align-items: flex-end;
+    }
+
+    .login {
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        margin: auto;
+        width: 86%;
+        border-radius: 30px;
+    }
+
+    .login__title {
+        color: white;
+        margin-bottom: 0;
+    }
+
+    .login__label {
+        color: white;
+    }
+
+    .login__remember {
+        color: white;
+    }
+
+    .login__linkArea_descr {
+        color: white;
+    }
+
+    .center h1 span:nth-child(2) {
+        left: -15px;
+    }
+
+    .center h1 span:nth-child(3) {
+        left: -30px;
+    }
+
+    .login__btn {
+        background-color: white;
+        color: black;
+        margin-top: 4px;
+        padding: 8px;
+        width: 100%;
+    }
 }

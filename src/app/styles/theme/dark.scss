@@ -1,14 +1,13 @@
 .app.dark {
-  --body-bg: #19032e;
-  --darker-bg: rgba(25, 24, 32, 0.76);
-  --columnBg: #424242;
-  --taskBg: #585858;
-  --taskTextColor: #f0f0f0;
-  --buttonTextColor: #c7c7c7;
-  --popupBg: #424242;
-  --iconColor: #888888;
-  --iconColorHover: #d8d8d8;
-
-  --notificationBg: #585858;
-  --notificationBgRead: #404040;
+    --body-bg: #19032e;
+    --darker-bg: rgb(25 24 32 / 76%);
+    --columnBg: #424242;
+    --taskBg: #585858;
+    --taskTextColor: #f0f0f0;
+    --buttonTextColor: #c7c7c7;
+    --popupBg: #424242;
+    --iconColor: #888;
+    --iconColorHover: #d8d8d8;
+    --notificationBg: #585858;
+    --notificationBgRead: #404040;
 }

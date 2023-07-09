@@ -1,32 +1,33 @@
 .form {
-  div {
-    label {
-      width: 100%;
-      font-size: 14px;
-    }
+    div {
+        label {
+            width: 100%;
+            font-size: 14px;
+        }
 
-    input,
-    textarea {
-      padding: 10px 15px;
-      border-radius: 10px;
-      width: 100%;
-      font-size: 16px;
-      border: none;
-      background-color: var(--taskBg);
-    }
-    textarea {
-      resize: none;
-      height: 100px;
+        input,
+        textarea {
+            padding: 10px 15px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 16px;
+            border: none;
+            background-color: var(--taskBg);
+        }
 
-      &:focus {
-        outline: none;
-      }
+        textarea {
+            resize: none;
+            height: 100px;
+
+            &:focus {
+                outline: none;
+            }
+        }
     }
-  }
 }
 
 .buttons {
-  & > *:not(:last-child) {
-    margin-right: 10px;
-  }
+    & > *:not(:last-child) {
+        margin-right: 10px;
+    }
 }

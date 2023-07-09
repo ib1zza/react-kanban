@@ -1,40 +1,46 @@
 .profile {
-  display: flex;
-  padding: 16px;
-  background-color: white;
-  border-radius: 12px;
-  width: 535px;
+    display: flex;
+    padding: 16px;
+    background-color: white;
+    border-radius: 12px;
+    width: 535px;
 }
 
 .profile__name {
-  font-weight: bold;
-  font-size: 22px;
+    font-weight: bold;
+    font-size: 22px;
 }
+
 .profile__email {
-  letter-spacing: 2px;
-  font-size: 18px;
-  margin-bottom: 4px;
+    letter-spacing: 2px;
+    font-size: 18px;
+    margin-bottom: 4px;
 }
+
 .profile__company {
-  font-size: 18px;
-  margin-bottom: 4px;
+    font-size: 18px;
+    margin-bottom: 4px;
 }
+
 .profile__descr {
-  font-size: 16px;
+    font-size: 16px;
 }
+
 .profile__edit {
-  margin-top: 12px;
-  border: 1px solid black;
-  padding: 4px;
+    margin-top: 12px;
+    border: 1px solid black;
+    padding: 4px;
 }
+
 .profile__save {
-  margin-top: 12px;
-  border: 1px solid black;
-  padding: 4px;
-  background: #000;
-  color: #fff;
+    margin-top: 12px;
+    border: 1px solid black;
+    padding: 4px;
+    background: #000;
+    color: #fff;
 }
+
 .profile__input {
-  border: 1px solid black;
-  width: 100%;
+    border: 1px solid black;
+    width: 100%;
 }
