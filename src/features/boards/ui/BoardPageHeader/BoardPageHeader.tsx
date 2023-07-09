@@ -37,7 +37,11 @@ const BoardPageHeader: React.FC<Props> = ({onEdit, title}) => {
             </>
             }
             {isEditing && <>
-                <input className={s.input} maxLength={40} type="text" value={editingTitle} onChange={(e) => setEditingTitle(e.target.value)}/>
+                <input 
+                    className={s.input} 
+                    maxLength={40} 
+                    type="text" 
+                    value={editingTitle} onChange={(e) => setEditingTitle(e.target.value)}/>
                 <button className={s.button}
                     onClick={onEditHandler}
                 >

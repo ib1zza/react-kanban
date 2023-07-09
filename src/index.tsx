@@ -5,14 +5,14 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "./app/providers/store/store";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "./app/providers/theme";
-
-let root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+import './shared/config/i18n/i18n'
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
-  </Provider>
+    <Provider store={store}>
+        <BrowserRouter>
+            <ThemeProvider>
+                <App />
+            </ThemeProvider>
+        </BrowserRouter>
+    </Provider>
 );

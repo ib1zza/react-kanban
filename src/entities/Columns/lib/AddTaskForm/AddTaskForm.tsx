@@ -3,8 +3,8 @@ import s from "./AddTaskForm.module.scss";
 import Button from "../../../../shared/ui/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleCheck,
-  faCircleXmark,
+    faCircleCheck,
+    faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
 import { createTask } from "../../../../features/tasks/API/createTask";
 import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
@@ -17,73 +17,73 @@ interface Props {
 }
 
 const AddTaskForm: React.FC<Props> = ({
-  onAbort,
-  onSubmit,
-  boardId,
-  columnId,
+    onAbort,
+    onSubmit,
+    boardId,
+    columnId,
 }) => {
-  const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const { user } = UserAuth();
-  const handler = () => {
-    createTask(
-      { title, description, creatorId: user?.uid as string, tags: [] },
-      boardId,
-      columnId
-    ).then(onSubmit);
-  };
-  return (
-    <div className={s.wrapper}>
-      <form>
-        <div className={s.inputBlock}>
-          <label htmlFor={"title"}>Title:</label>
-          <textarea
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className={s.min}
-            id={"title"}
-            placeholder={"%title%"}
-            maxLength={50}
-          />
-        </div>
-        <div className={s.inputBlock}>
-          <label htmlFor={"description"}>Description (optional):</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            id={"description"}
-            placeholder={"%description%"}
-            maxLength={200}
-          />
-        </div>
-      </form>
-      <div className={s.createColumnButtons}>
-        <Button
-          onClick={handler}
-          icon={
-            <FontAwesomeIcon
-              icon={faCircleCheck}
-              style={{ color: "#5CD43E" }}
-            />
-          }
-        >
-          Confirm
-        </Button>
+    const [title, setTitle] = React.useState("");
+    const [description, setDescription] = React.useState("");
+    const { user } = UserAuth();
+    const handler = () => {
+        createTask(
+            { title, description, creatorId: user?.uid as string, tags: [] },
+            boardId,
+            columnId
+        ).then(onSubmit);
+    };
+    return (
+        <div className={s.wrapper}>
+            <form>
+                <div className={s.inputBlock}>
+                    <label htmlFor={"title"}>Title:</label>
+                    <textarea
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className={s.min}
+                        id={"title"}
+                        placeholder={"%title%"}
+                        maxLength={50}
+                    />
+                </div>
+                <div className={s.inputBlock}>
+                    <label htmlFor={"description"}>Description (optional):</label>
+                    <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        id={"description"}
+                        placeholder={"%description%"}
+                        maxLength={200}
+                    />
+                </div>
+            </form>
+            <div className={s.createColumnButtons}>
+                <Button
+                    onClick={handler}
+                    icon={
+                        <FontAwesomeIcon
+                            icon={faCircleCheck}
+                            style={{ color: "#5CD43E" }}
+                        />
+                    }
+                >
+                    Confirm
+                </Button>
 
-        <Button
-          onClick={onAbort}
-          icon={
-            <FontAwesomeIcon
-              icon={faCircleXmark}
-              style={{ color: "#DE2525" }}
-            />
-          }
-        >
-          Cancel
-        </Button>
-      </div>
-    </div>
-  );
+                <Button
+                    onClick={onAbort}
+                    icon={
+                        <FontAwesomeIcon
+                            icon={faCircleXmark}
+                            style={{ color: "#DE2525" }}
+                        />
+                    }
+                >
+                    Cancel
+                </Button>
+            </div>
+        </div>
+    );
 };
 
 export default AddTaskForm;

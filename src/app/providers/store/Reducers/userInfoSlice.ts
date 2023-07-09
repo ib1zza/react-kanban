@@ -6,17 +6,17 @@ export interface userInfoState {
 }
 
 const initialState: userInfoState = {
-  user: null,
+    user: null,
 };
 
 export const userInfoSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {
-    setUserInfo: (state, action) => {
-      state.user = action.payload;
+    name: "user",
+    initialState,
+    reducers: {
+        setUserInfo: (state, action) => {
+            state.user = action.payload;
+        },
     },
-  },
 });
 
 export const { setUserInfo } = userInfoSlice.actions;

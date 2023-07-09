@@ -9,13 +9,13 @@ import FormToCreate from "../../../shared/ui/FormToCreate/FormToCreate";
 import { createColumn } from "../../../features/columns";
 import {PopupTaskInfo} from "../../../widgets";
 import {
-  removeSelectedTask,
-  setCurrentBoard,
-  setCurrentTask,
+    removeSelectedTask,
+    setCurrentBoard,
+    setCurrentTask,
 } from "../../../app/providers/store/Reducers/boardCollectionSlice";
 import {
-  useAppDispatch,
-  useAppSelector,
+    useAppDispatch,
+    useAppSelector,
 } from "../../../app/providers/store/store";
 
 import { getTaskInfo } from "../../../features/tasks";
@@ -25,94 +25,94 @@ import { getColumnsFromBoard } from "../lib/getColumnsFromBoard";
 import { FormToLink } from "../../../shared/ui/FormToLink";
 
 const BoardPage: React.FC = memo(() => {
-  const { boardId } = useParams();
-  const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
-    (state) => state.boardCollection
-  );
-  const [isCreating, setIsCreating] = useState(false);
-  const [isLinking, setIsLinking] = useState(false);
-  const dispatch = useAppDispatch();
+    const { boardId } = useParams();
+    const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
+        (state) => state.boardCollection
+    );
+    const [isCreating, setIsCreating] = useState(false);
+    const [isLinking, setIsLinking] = useState(false);
+    const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    console.log(boardId);
-    refetchBoard();
-  }, [boardId]);
+    useEffect(() => {
+        console.log(boardId);
+        refetchBoard();
+    }, [boardId]);
 
-  const refetchBoard = async () => {
-    const board = await getBoardFromId(boardId as string);
-    if (board) {
-      dispatch(setCurrentBoard(board));
-    }
-  };
+    const refetchBoard = async () => {
+        const board = await getBoardFromId(boardId as string);
+        if (board) {
+            dispatch(setCurrentBoard(board));
+        }
+    };
 
-  const refetchTask = async () => {
-    if (!boardId || !selectedColumnId || !selectedTask) return;
-    const res = await getTaskInfo(boardId, selectedColumnId, selectedTask.uid);
-    dispatch(setCurrentTask(res));
-  };
+    const refetchTask = async () => {
+        if (!boardId || !selectedColumnId || !selectedTask) return;
+        const res = await getTaskInfo(boardId, selectedColumnId, selectedTask.uid);
+        dispatch(setCurrentTask(res));
+    };
 
-  const createColumnAction = async (title: string, color: string) => {
-    if (!boardId) return;
-    await createColumn(title, color, boardId);
-    setIsCreating(false);
-    refetchBoard();
-  };
+    const createColumnAction = async (title: string, color: string) => {
+        if (!boardId) return;
+        await createColumn(title, color, boardId);
+        setIsCreating(false);
+        refetchBoard();
+    };
 
-  const handleDeleteTask = () => {
-    dispatch(removeSelectedTask());
-    refetchBoard();
-  };
+    const handleDeleteTask = () => {
+        dispatch(removeSelectedTask());
+        refetchBoard();
+    };
 
-  const handleEditTitle = (newTitle: string) => {
-    if (!boardId) return;
-    editBoard(boardId, { title: newTitle }).then(refetchBoard);
-  };
+    const handleEditTitle = (newTitle: string) => {
+        if (!boardId) return;
+        editBoard(boardId, { title: newTitle }).then(refetchBoard);
+    };
 
-  if (!selectedBoard) return <></>;
+    if (!selectedBoard) return <></>;
 
-  console.log(selectedBoard.title);
-  return (
-    <div className={s.wrapperContainer}>
-      <BoardPageHeader onEdit={handleEditTitle} title={selectedBoard.title} />
+    console.log(selectedBoard.title);
+    return (
+        <div className={s.wrapperContainer}>
+            <BoardPageHeader onEdit={handleEditTitle} title={selectedBoard.title} />
 
-      <div className={s.wrapper}>
-        <div className={s.columnsWrapper}>
-          {getColumnsFromBoard(selectedBoard).map((column) => (
-            <TaskColumn
-              key={column.uid}
-              column={column}
-              onEdit={refetchBoard}
-              boardId={selectedBoard.uid}
-            />
-          ))}
-          {isCreating && (
-            <FormToCreate
-              forColumn
-              onCreateColumn={createColumnAction}
-              onAbort={() => setIsCreating(false)}
-            />
-          )}
-          {isLinking && (
-            <FormToLink
-              forColumn
-              onCreateColumn={() => 1}
-              onAbort={() => setIsLinking(false)}
-            />
-          )}
+            <div className={s.wrapper}>
+                <div className={s.columnsWrapper}>
+                    {getColumnsFromBoard(selectedBoard).map((column) => (
+                        <TaskColumn
+                            key={column.uid}
+                            column={column}
+                            onEdit={refetchBoard}
+                            boardId={selectedBoard.uid}
+                        />
+                    ))}
+                    {isCreating && (
+                        <FormToCreate
+                            forColumn
+                            onCreateColumn={createColumnAction}
+                            onAbort={() => setIsCreating(false)}
+                        />
+                    )}
+                    {isLinking && (
+                        <FormToLink
+                            forColumn
+                            onCreateColumn={() => 1}
+                            onAbort={() => setIsLinking(false)}
+                        />
+                    )}
+                </div>
+                {!isCreating && (
+                    <div className={s.buttons}>
+                        <Button onClick={() => setIsCreating(true)}>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </Button>
+                    </div>
+                )}
+                {selectedTask && (
+                    <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />
+                )}
+            </div>
         </div>
-        {!isCreating && (
-          <div className={s.buttons}>
-            <Button onClick={() => setIsCreating(true)}>
-              <FontAwesomeIcon icon={faPlus} />
-            </Button>
-          </div>
-        )}
-        {selectedTask && (
-          <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />
-        )}
-      </div>
-    </div>
-  );
+    );
 });
 
 export default BoardPage;

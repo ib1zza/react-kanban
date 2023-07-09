@@ -3,8 +3,8 @@ import s from "./EditTaskForm.module.scss";
 import { ITask } from "../../../../app/types/IBoard";
 import Button from "../../../../shared/ui/Button/Button";
 import {
-  faCircleCheck,
-  faCircleXmark,
+    faCircleCheck,
+    faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -16,60 +16,60 @@ interface Props {
 }
 
 const EditTaskForm: React.FC<Props> = ({
-  onEdit,
-  onAbort,
-  prevTask,
-  loading,
+    onEdit,
+    onAbort,
+    prevTask,
+    loading,
 }) => {
-  const [title, setTitle] = useState(prevTask.title);
-  const [description, setDescription] = useState(prevTask.description);
-  const editHandler = () => {
-    if (title === "" || description === "") return onAbort();
-    if (title === prevTask.title && description === prevTask.description)
-      return onAbort();
-    onEdit(title, description);
-  };
-  return (
-    <div>
-      <h2>Edit task</h2>
-      <div className={s.form}>
+    const [title, setTitle] = useState(prevTask.title);
+    const [description, setDescription] = useState(prevTask.description);
+    const editHandler = () => {
+        if (title === "" || description === "") return onAbort();
+        if (title === prevTask.title && description === prevTask.description)
+            return onAbort();
+        onEdit(title, description);
+    };
+    return (
         <div>
-          <label htmlFor="titleInput">Title</label>
-          <input
-            value={title}
-            id="titleInput"
-            type="text"
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="title"
-          />
+            <h2>Edit task</h2>
+            <div className={s.form}>
+                <div>
+                    <label htmlFor="titleInput">Title</label>
+                    <input
+                        value={title}
+                        id="titleInput"
+                        type="text"
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="title"
+                    />
+                </div>
+                <div>
+                    <label htmlFor="descriptionInput">Description</label>
+                    <textarea
+                        value={description}
+                        id="descriptionInput"
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="description"
+                    />
+                </div>
+            </div>
+            <div className={s.buttons}>
+                <Button
+                    loading={loading}
+                    icon={<FontAwesomeIcon icon={faCircleCheck} />}
+                    onClick={editHandler}
+                >
+                    Save
+                </Button>
+                <Button
+                    icon={<FontAwesomeIcon icon={faCircleXmark} />}
+                    onClick={onAbort}
+                >
+                    Cancel
+                </Button>
+            </div>
         </div>
-        <div>
-          <label htmlFor="descriptionInput">Description</label>
-          <textarea
-            value={description}
-            id="descriptionInput"
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="description"
-          />
-        </div>
-      </div>
-      <div className={s.buttons}>
-        <Button
-          loading={loading}
-          icon={<FontAwesomeIcon icon={faCircleCheck} />}
-          onClick={editHandler}
-        >
-          Save
-        </Button>
-        <Button
-          icon={<FontAwesomeIcon icon={faCircleXmark} />}
-          onClick={onAbort}
-        >
-          Cancel
-        </Button>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default EditTaskForm;

@@ -13,51 +13,51 @@ interface Props {
 }
 
 const FormToCreate: React.FC<Props> = ({
-  onAbort,
-  forColumn,
-  forBoard,
-  onCreateColumn,
-  onCreateBoard,
+    onAbort,
+    forColumn,
+    forBoard,
+    onCreateColumn,
+    onCreateBoard,
 }) => {
-  const [title, setTitle] = useState("");
-  const { user } = UserAuth();
-  const [color, setColor] = useState("#f44336");
+    const [title, setTitle] = useState("");
+    const { user } = UserAuth();
+    const [color, setColor] = useState("#f44336");
 
-  // TODO: add create column action
+    // TODO: add create column action
 
-  const addBoard = () => {
-    if (!title.trim() || !user) return;
-    onCreateBoard && onCreateBoard(title);
-  };
+    const addBoard = () => {
+        if (!title.trim() || !user) return;
+        onCreateBoard && onCreateBoard(title);
+    };
 
-  const addColumn = () => {
-    onCreateColumn && onCreateColumn(title, color);
-  };
+    const addColumn = () => {
+        onCreateColumn && onCreateColumn(title, color);
+    };
 
-  const handler = () => {
-    if (forColumn) addColumn();
-    if (forBoard) addBoard();
-  };
+    const handler = () => {
+        if (forColumn) addColumn();
+        if (forBoard) addBoard();
+    };
 
-  console.log(color);
+    console.log(color);
 
-  return (
-    <div className={s.container + " " + (forColumn && s.withColor)}>
-      {forColumn && (
-        <div className={s.headerColor} style={{ backgroundColor: color }} />
-      )}
-      <h6 className={s.title}>
-        <input
-          placeholder={"Enter name..."}
-          className={s.createColumnTitle}
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </h6>
-      {forColumn && <ColorPicker color={color} onChange={setColor} />}
-      <ConfirmButtons onConfirm={handler} onAbort={onAbort} />
-    </div>
-  );
+    return (
+        <div className={s.container + " " + (forColumn && s.withColor)}>
+            {forColumn && (
+                <div className={s.headerColor} style={{ backgroundColor: color }} />
+            )}
+            <h6 className={s.title}>
+                <input
+                    placeholder={"Enter name..."}
+                    className={s.createColumnTitle}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+            </h6>
+            {forColumn && <ColorPicker color={color} onChange={setColor} />}
+            <ConfirmButtons onConfirm={handler} onAbort={onAbort} />
+        </div>
+    );
 };
 
 export default FormToCreate;

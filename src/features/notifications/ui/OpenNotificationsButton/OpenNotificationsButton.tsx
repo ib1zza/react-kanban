@@ -26,11 +26,16 @@ const OpenNotificationsButton = () => {
     useEffect(() => {
         async function getNotifs() {
             if (!user?.uid) return;
-            const res = await getUserNotifications(user.uid)
-            const notifs = Object.values(res).sort((a, b) => a.timestamp - b.timestamp);
-            console.log(notifs);
+            await getUserNotifications(user.uid).then(res => 
+                res && 
+              dispatch(setNotifications(Object.values(res).sort((a, b) => 
+                  a.timestamp - b.timestamp
+              ))));
+            
+            // const notifs = Object.values(res).sort((a, b) => a.timestamp - b.timestamp);
+            // console.log(notifs);
             // setNotifs(notifs);
-            dispatch(setNotifications(notifs));
+            // dispatch(setNotifications(notifs));
         }
         getNotifs();
     }, [user]);
