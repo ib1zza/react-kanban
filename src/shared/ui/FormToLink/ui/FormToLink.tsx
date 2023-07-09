@@ -3,6 +3,7 @@ import s from "./../../../../entities/Columns/ui/TaskColumn.module.scss";
 import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
 import ConfirmButtons from "../../ConfirmButtons/ConfirmButtons";
 import ColorPicker from "../../ColorPicker/ColorPicker";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onAbort: () => void;
@@ -21,6 +22,7 @@ const FormToLink: React.FC<Props> = ({
     onCreateBoard,
     boardId,
 }) => {
+    const {t} = useTranslation('buttons')
     const [title, setTitle] = useState("");
     const { user } = UserAuth();
     const [color, setColor] = useState("#f44336");
@@ -48,7 +50,7 @@ const FormToLink: React.FC<Props> = ({
             )}
             <h6 className={s.title}>
                 <input
-                    placeholder={"Enter your link..."}
+                    placeholder={t("Ссылка")}
                     className={s.createColumnTitle}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}

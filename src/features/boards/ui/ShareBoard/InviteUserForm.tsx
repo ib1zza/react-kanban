@@ -7,6 +7,7 @@ import { addUserToBoard } from "../../API/addUserToBoard";
 import {sendNotificationInvite} 
     from "../../../../entities/Notifications/API/sendNotificationInvite";
 import {useAuth} from "../../../../app/providers/authRouter/ui/AuthContext";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   board: IBoard;
@@ -21,7 +22,7 @@ const InviteUserForm: FC<Props> = ({ board }) => {
     );
 
     const {user} = useAuth();
-
+    const {t} = useTranslation();''
     const handleShare = async (email: string) => {
         const userToInviteId = await getUserFromEmail(email).then((res) => res?.uid);
         if (!userToInviteId || !user?.uid) return false;
@@ -36,14 +37,14 @@ const InviteUserForm: FC<Props> = ({ board }) => {
         if (email.trim() !== "") {
             handleShare(email).then((res) => {
                 if (res) {
-                    setSuccess("пользователь добавлен");
+                    setSuccess(t('Добавлен'));
                 } else {
-                    setError("пользователь не найден");
+                    setError("Не найден");
                 }
             });
             // console.log(valueStatus, email);
         } else {
-            setError("Поле не содержит данных");
+            setError("Нет данных");
             setTimeout(() => {
                 setError("");
             }, 1000);
@@ -61,11 +62,11 @@ const InviteUserForm: FC<Props> = ({ board }) => {
     return (
         <div className={s.form__share}>
             <div className={s.form__title}>
-                Добавление пользователя в общий доступ
+                {t('Добавление в общий доступ')}
             </div>
 
             <div className={s.form__checkboxes}>
-                <p style={{ marginRight: "4px" }}>Статус:</p>
+                <p style={{ marginRight: "4px" }}>{t('Статус')}:</p>
                 <label style={{ marginRight: "10px" }}>
                     <input
                         type="radio"
@@ -75,7 +76,7 @@ const InviteUserForm: FC<Props> = ({ board }) => {
                         style={{ marginRight: "4px" }}
                         onChange={(e) => setValueStatus(e.target.value as LinkedUserType)}
                     />
-                    Гость
+                    {t('Гость')}
                 </label>
                 <label>
                     <input
@@ -86,17 +87,17 @@ const InviteUserForm: FC<Props> = ({ board }) => {
                         style={{ marginRight: "4px" }}
                         onChange={(e) => setValueStatus(e.target.value as LinkedUserType)}
                     />
-                    Редактор
+                    {t('Редактор')}
                 </label>
             </div>
             <div className={s.form__error}>{error}</div>
             <input
                 className={s.form__input}
-                placeholder={"Введите email..."}
+                placeholder={t('Введите почту')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <Button onClick={() => handleSubmit()}>Добавить</Button>
+            <Button onClick={() => handleSubmit()}>{t("Добавить")}</Button>
             <div className={s.form__success}>{success}</div>
         </div>
     );

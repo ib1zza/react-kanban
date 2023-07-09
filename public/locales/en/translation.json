@@ -3,5 +3,19 @@
     "Выйти":"Log out",
     "Войти":"Login",
     "Зарегистрироваться":"Sign in",
-    "Язык":"English"
+    "Язык":"English",
+    "Загрузка":"Loading...",
+    "Заголовок":"Title",
+    "Описание":"Description",
+    "Редактирование": "Editing",
+    "Добавлен":"User is added",
+    "Не найден":"User is not found",
+    "Нет данных":"There is not info",
+    "Гость":"Guest",
+    "Редактор":"Editor",
+    "Введите почту":"Enter email",
+    "Статус":"Status",
+    "Добавить":"Add",
+    "Добавление в общий доступ": "Sharing",
+    "Кто добавлен":"Who is added"
 }
