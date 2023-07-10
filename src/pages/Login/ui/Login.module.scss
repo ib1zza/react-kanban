@@ -115,21 +115,7 @@
     color: var(--taskTextColor);
   
 }
-.langSwitcher{
-    display: flex;
-    border-radius: 6px;
-    justify-content: center;
-    align-items: center;
-    font-style: normal;
-    font-weight: 800;        
-    line-height: normal;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    width: 50px;
-    height: 30px;
-    flex-shrink: 0;
-    background-color: var(--LRLangColor)
-}
+
 .login__linkArea_link {
     text-decoration: underline;
     letter-spacing: 0.05em;
@@ -204,6 +190,22 @@
     transform: translate(-50%, -50%) skewX(0deg);
     left: 0;
     color: #fff;
+}
+
+.langSwitcher{
+    display: flex;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: 800;        
+    line-height: normal;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    width: 50px;
+    height: 30px;
+    flex-shrink: 0;
+    background-color: var(--LRLangColor)
 }
 
 .themeSwitcherWrapper{

@@ -13,6 +13,7 @@ import { useAuth } from "../../../app/providers/authRouter/ui/AuthContext";
 import { useTranslation } from "react-i18next";
 import ThemeSwitcher from "../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher";
 import { LangSwitcher } from "../../../shared/ui/LangSwitcher/ui/LangSwitcher";
+import Arrow from './../../../shared/assets/images/Arrow 1.svg'
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -89,11 +90,24 @@ const SignUp = () => {
                 <ThemeSwitcher className={s.themeSwitcher}/>
             </div>
             <div  className={s.langSwitcherWrapper}>
-                <LangSwitcher />
+                <LangSwitcher  className={s.langSwitcher}/>
             </div>
             <form onSubmit={handleSubmit(handleContinue)} className={s.signup}>
-                {step === 1 && <h1 className={s.signup__title}>{t('Регистрация')}</h1>}
-
+               
+                <div className={s.title_wrapper}>
+                    <img src={Arrow as unknown as string}/>
+                    <div>
+                        <h1 className={s.signup__title}>{t('Регистрация')}</h1> 
+                        <p className={s.signup__linkArea}>
+                            <span
+                                onClick={() => navigate(AppRoute.LOGIN)}
+                            >
+                                {t("У меня есть аккаунт")}
+                            </span>
+                        </p>
+                      
+                    </div>
+                </div>
                 <div className={s.signup__body}>
                     <div className={s.signup__progress}>
                         <div className="">{t('Шаг')} {step} из 3</div>
@@ -207,15 +221,9 @@ const SignUp = () => {
                             </select>
                         </>
                     )}
-                    <button className={s.signup__btn}>{t("Продолжить")}</button>
-                    <p className={s.signup__linkArea}>
-                        <span
-                            className="text-gray-500 tracking-widest underline"
-                            onClick={() => navigate(AppRoute.LOGIN)}
-                        >
-                            {t("У меня есть аккаунт")}
-                        </span>
-                    </p>
+                    <div className={s.signup__btn_wrapper}>
+                        <button className={s.signup__btn}>{t("Продолжить")}</button>
+                    </div>
                 </div>
             </form>
         </div>
