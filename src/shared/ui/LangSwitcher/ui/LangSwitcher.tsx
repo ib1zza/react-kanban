@@ -17,11 +17,11 @@ export const LangSwitcher = ({ className }: LangSwitcherProps) => {
     };
 
     return (
-        <Button
+        <button
             className={classNames('', {}, [className as string])}
             onClick={toggle}
         >
             {t('Язык')}
-        </Button>
+        </button>
     );
 };
