@@ -42,6 +42,7 @@
 
 .signup__progress {
     margin-bottom: 8px;
+    
     margin-top: 20px;;
     color: white;
 }
@@ -216,39 +217,47 @@
     }
 
     .center h1 span {
-        font-size: 2.5rem;
+        font-size: 1.5rem;
     }
 
+    .title_wrapper {
+        img {
+           display: none;
+        }
+    }
     .logo {
-        width: 100%;
-        height: 20%;
-        align-items: flex-end;
+        display: flex;
+        width: 75%;
+        justify-content: center;
+        height: 30%;
     }
 
     .signup {
-        border: none;
-        background-color: transparent;
-        padding: 0;
-        margin: auto;
-        width: 86%;
+        margin-left: auto;
+        margin-top: 1px;
+        height: 460px;
+        width: 90%;
         border-radius: 30px;
+        padding: 28px;
     }
 
     .signup__title {
         color: white;
         margin-bottom: 0;
+        font-size: 18px;
     }
 
     .signup__label {
         color: white;
+        font-size: 12px;
     }
 
     .center h1 span:nth-child(2) {
-        left: -15px;
+        left: -9px;
     }
 
     .center h1 span:nth-child(3) {
-        left: -30px;
+        left: -18px;
     }
 
     .signup__btn {
@@ -260,7 +269,23 @@
     }
 
     .signup__progress {
+        margin-top: 4px;
+        height: 40px;
+    
         color: white;
+        font-size: 12px;
+    }
+    .signup__label {
+        color: white;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    .signup__input{
+        font-size: 12px;
+        padding: 12px;
+    }
+    .signup__label_error {
+        font-size: 10px;
     }
 }
 
@@ -278,5 +303,6 @@
         color: white;
         cursor: pointer;
         font-size: 16px;
+        font-size: 12px;
     }
 }
