@@ -3,14 +3,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBell as faSolidBell} from "@fortawesome/free-solid-svg-icons";
 import {faBell as faRegularBell} from "@fortawesome/free-regular-svg-icons";
 import s from "./OpenNotificationsButton.module.scss";
-import {NotificationItem, NotificationType} from "../../../../app/types/Notifications";
 import {useAuth} from "../../../../app/providers/authRouter/ui/AuthContext";
 import {getUserNotifications} from "../../../../entities/Notifications/API/getUserNotifications";
 import {useAppDispatch, useAppSelector} from "../../../../app/providers/store/store";
 import {setNotifications} from "../../../../app/providers/store/Reducers/notificationSlice";
-import {createNotificationText} from "../../lib/createNotificationText";
 import Notification from "../Notification/Notification";
 import {readNotification} from "../../../../entities/Notifications/API/readNotification";
+import {db} from "../../../../firebase";
+import {doc, setDoc} from "firebase/firestore";
 
 interface Props {
     notificationsCount: number;
@@ -26,41 +26,42 @@ const OpenNotificationsButton = () => {
     useEffect(() => {
         async function getNotifs() {
             if (!user?.uid) return;
-            await getUserNotifications(user.uid).then(res => 
-                res && 
-              dispatch(setNotifications(Object.values(res).sort((a, b) => 
-                  a.timestamp - b.timestamp
-              ))));
-            
-            // const notifs = Object.values(res).sort((a, b) => a.timestamp - b.timestamp);
-            // console.log(notifs);
-            // setNotifs(notifs);
-            // dispatch(setNotifications(notifs));
+            await getUserNotifications(user.uid).then(res => {
+                console.log(res)
+                if(!res) {
+                    setDoc(doc(db, "notifications", user.uid), {})
+                    dispatch(setNotifications([]))
+                    return;
+                }
+                dispatch(setNotifications(Object.values(res).sort((a, b) =>
+                    b.timestamp - a.timestamp
+                )))
+            });
         }
+
         getNotifs();
-    }, [user]);
+    }, [user?.uid]);
+
+    console.log(notifications.map(notif => notif.timestamp))
 
     useEffect(() => {
         setUnreadCount(notifications.filter(notif => !notif.read).length)
     }, [notifications])
 
     const toggler = () => {
-        if(open) {
-            dispatch(setNotifications(notifications.map(notif => ({...notif, read: true}))));
-        }
-
         setOpen(prev => !prev);
     }
 
     useEffect(() => {
-        if(open) readAll();
+        if (open) readAll();
     }, [open])
 
     const readAll = () => {
-        if(!user?.uid || !notifications.length || !unreadCount) return;
+        if (!user?.uid || !notifications.length || !unreadCount) return;
         notifications.filter(notif => !notif.read).forEach(notif => {
             readNotification(user.uid, notif.uid)
         })
+        dispatch(setNotifications(notifications.map(notif => ({...notif, read: true}))));
     }
 
     return (

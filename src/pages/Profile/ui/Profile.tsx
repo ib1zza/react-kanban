@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import s from "./Profile.module.scss";
 import { UserAuth } from "../../../app/providers/authRouter/ui/AuthContext";
-import { getUserInfo } from "../../../features/users/API/getUserInfo";
-import { editDisplayName } from "../../../features/users/API/editDisplayName";
+import { getUserInfo } from "../../../features/users";
+import { editDisplayName } from "../../../features/users";
 import { IUserInfo } from "../../../app/types/User";
 import AvatarEdit from "../lib/AvatarEdit/AvatarEdit";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../../firebase";
-import { updateDocument } from "../../../features/users/API/updateDocument";
+import { updateDocument } from "../../../features/users";
 import { updateProfile } from "firebase/auth";
 import { useTranslation } from "react-i18next";
 

@@ -13,14 +13,17 @@ import { addUserToBoard } from "../../../features/boards";
 import  {FormToCreate}  from "../../../shared/ui/FormToCreate";
 import { FormToLink } from "../../../shared/ui/FormToLink";
 import { BoardPreview } from "../../../entities/Board";
+import {getUserBoards} from "../lib/getUserBoards";
+import {useAppSelector} from "../../../app/providers/store/store";
 
 const Home = () => {
     const navigate = useNavigate();
-    const { user } = UserAuth();
+    const { user } = useAppSelector(state => state.userInfo)
     const [boards, setBoards] = React.useState<IBoard[]>([]);
     const [addBoardStatus, setAddBoardStatus] = useState(false);
     const [linkBoardStatus, setLinkBoardStatus] = useState(false);
 
+    const getBoards = getUserBoards;
     //getting boards (only info which we need)
     const fetchBoards = () => getBoards(user).then((res) => setBoards(res));
 
