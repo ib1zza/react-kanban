@@ -78,6 +78,7 @@ export const signUpEmailPass = async (
                 boardInvitedIds: [],
                 select,
             });
+            await setDoc(doc(db, "notifications", response.user.uid), {})
         }
     } catch (error) {
         return Promise.reject(error);

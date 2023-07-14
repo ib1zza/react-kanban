@@ -22,6 +22,7 @@ export const sendNotificationInvite = async (
                 },
                 timestamp: Date.now(),
                 read: false,
+                isAccepted: false,
             },
         });
     } catch (e) {

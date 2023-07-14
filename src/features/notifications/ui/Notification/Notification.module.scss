@@ -1,21 +1,57 @@
 .item {
+    padding: 5px 15px;
     display: flex;
     background-color: var(--notificationBg);
+
 
     &.read {
         opacity: 0.6;
     }
+
+    &:hover {
+        background-color: var(--notificationBgRead);
+    }
 }
 
 .messageContainer{
-    display: flex;
 
-    img {
-        margin-right: 15px;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        object-fit: cover;
 
+
+    .messageInfo {
+        display: flex;
+        align-items: center;
+        img {
+            margin-right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+
+        }
+    }
+
+
+    .buttons {
+        display: flex;
+        gap: 15px;
+
+        button {
+            padding: 4px 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+
+
+            svg {
+                transition: all 0.2s linear;
+                width: 18px;
+            }
+            &:hover svg {
+                text-decoration: underline;
+                width: 22px;
+            }
+        }
     }
 }

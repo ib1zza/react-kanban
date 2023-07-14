@@ -10,6 +10,7 @@ export type NotificationPayloadBoardInvited = {
     userInvitedId: string;
     type: NotificationType.BOARD_INVITED;
     invitedRole: LinkedUserType;
+    isAccepted: boolean;
 }
 
 export type NotificationPayloadChatMessage = {
