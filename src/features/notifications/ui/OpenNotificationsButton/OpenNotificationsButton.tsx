@@ -33,7 +33,9 @@ const OpenNotificationsButton = () => {
                     dispatch(setNotifications([]));
                     return;
                 }
-                dispatch(setNotifications(Object.values(res).sort((a, b) => b.timestamp - a.timestamp)));
+                dispatch(setNotifications(
+                    Object.values(res).sort((a, b) => b.timestamp - a.timestamp))
+                );
             });
         }
 

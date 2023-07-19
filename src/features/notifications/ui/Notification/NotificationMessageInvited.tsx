@@ -14,7 +14,11 @@ import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
 import { acceptInviteNotification } from '../../API/acceptInviteNotification';
 import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import { declineInviteNotification } from '../../API/declineInviteNotification';
-import { useAppDispatch, acceptNotification, removeNotification } from '../../../../app/providers/store';
+import { 
+    useAppDispatch, 
+    acceptNotification, 
+    removeNotification 
+} from '../../../../app/providers/store';
 
 interface Props {
     data: NotificationPayloadBoardInvited;

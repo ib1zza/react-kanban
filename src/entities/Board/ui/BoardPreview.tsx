@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import React, { useEffect } from 'react';
 import { faLink, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
