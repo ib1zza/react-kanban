@@ -1,11 +1,13 @@
-import { updateDocument } from "../../../users/API/updateDocument";
-import { deleteDoc, doc, arrayRemove, deleteField } from "firebase/firestore";
-import { db } from "../../../../firebase";
+import {
+    deleteDoc, doc, arrayRemove, deleteField,
+} from 'firebase/firestore';
+import { updateDocument } from '../../../users/API/updateDocument';
+import { db } from '../../../../firebase';
 
 export const deleteTask = async (
     boardId: string,
     columnId: string,
-    taskId: string
+    taskId: string,
 ) => {
     try {
         console.log(boardId);
@@ -14,8 +16,8 @@ export const deleteTask = async (
         //   doc(db, "boards", boardId, "columns", columnId, "tasks", taskId)
         // );
 
-        await updateDocument("boards", boardId, {
-            ["columns." + columnId + ".tasks." + taskId]: deleteField(),
+        await updateDocument('boards', boardId, {
+            [`columns.${columnId}.tasks.${taskId}`]: deleteField(),
         });
 
     // await updateDocument("users", userId, {

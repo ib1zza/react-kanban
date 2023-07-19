@@ -2,18 +2,18 @@ import {
     setCurrentBoard,
     setCurrentTask,
     removeSelectedTask,
-    removeSelectedBoard
-} from "./Reducers/boardCollectionSlice";
+    removeSelectedBoard,
+} from './Reducers/boardCollectionSlice';
 
 import {
     setNotifications,
     removeNotification,
-    acceptNotification
-} from "./Reducers/notificationSlice";
+    acceptNotification,
+} from './Reducers/notificationSlice';
 
-import { setUserInfo } from "./Reducers/userInfoSlice";
+import { setUserInfo } from './Reducers/userInfoSlice';
 
-import {useAppDispatch, useAppSelector} from "./store";
+import { useAppDispatch, useAppSelector } from './store';
 
 export {
     setCurrentBoard,
@@ -26,5 +26,5 @@ export {
     acceptNotification,
     setUserInfo,
     useAppSelector,
-    useAppDispatch
-}
+    useAppDispatch,
+};

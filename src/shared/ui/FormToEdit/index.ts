@@ -1,2 +1,3 @@
-import FormToEdit from "./ui/FormToEdit";
+import FormToEdit from './ui/FormToEdit';
+
 export { FormToEdit };

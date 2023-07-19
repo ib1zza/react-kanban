@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
-import s from "./ShareBoard.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { IBoard, LinkedUserType } from "../../../../app/types/IBoard";
-import { getUserInfo } from "../../../users/API/getUserInfo";
-import { deleteUserFromBoard } from "../../API/deleteUserFromBoard";
-import { IUserInfo } from "../../../../app/types/User";
-import { useTranslation } from "react-i18next";
+import React, { FC, useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import s from './ShareBoard.module.scss';
+import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
+import { getUserInfo } from '../../../users/API/getUserInfo';
+import { deleteUserFromBoard } from '../../API/deleteUserFromBoard';
+import { IUserInfo } from '../../../../app/types/User';
 
 interface Props {
   board: IBoard;
@@ -20,29 +20,27 @@ const GuestsList: FC<Props> = ({ board }) => {
         await deleteUserFromBoard(
             board.uid,
             userId,
-            isEditorsOpened ? LinkedUserType.USER : LinkedUserType.GUEST
+            isEditorsOpened ? LinkedUserType.USER : LinkedUserType.GUEST,
         );
     };
 
     const getBoardAllowedPeople = async (
-        isSearchForEditors: boolean
+        isSearchForEditors: boolean,
     ): Promise<IUserInfo[]> => {
-        const handleServerResponse = <T,>({
+        const handleServerResponse = <T, >({
             status,
             value,
         }: {
       status: string;
       value?: T;
-    }): T | null => {
-            return status === "fulfilled" ? value || null : null;
-        };
+    }): T | null => (status === 'fulfilled' ? value || null : null);
 
         const user: IUserInfo[] = [];
 
         const usersInfoResponses = await Promise.allSettled(
             (!isSearchForEditors ? board.guestsAllowed : board.usersAllowed).map(
-                (userId) => getUserInfo(userId)
-            )
+                (userId) => getUserInfo(userId),
+            ),
         );
 
         usersInfoResponses.forEach((userInfoResponse) => {
@@ -54,7 +52,7 @@ const GuestsList: FC<Props> = ({ board }) => {
 
         return user;
     };
-    const {t} = useTranslation()
+    const { t } = useTranslation();
     useEffect(() => {
         getBoardAllowedPeople(isEditorsOpened).then((res) => {
             setUsersEmails(res);
@@ -63,7 +61,10 @@ const GuestsList: FC<Props> = ({ board }) => {
 
     return (
         <div className={s.form__users}>
-            <div className={s.form__title}>{t('Кто добавлен')}?</div>
+            <div className={s.form__title}>
+                {t('Кто добавлен')}
+                ?
+            </div>
             <div className={s.form__categoris}>
                 <button
                     onClick={() => {

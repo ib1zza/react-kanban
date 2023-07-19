@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import s from "./EditTaskForm.module.scss";
-import { ITask } from "../../../../app/types/IBoard";
-import Button from "../../../../shared/ui/Button/Button";
+import React, { useState } from 'react';
 import {
     faCircleCheck,
     faCircleXmark,
-} from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslation } from "react-i18next";
-import ConfirmButtons from "../../../../shared/ui/ConfirmButtons/ConfirmButtons";
+} from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
+import s from './EditTaskForm.module.scss';
+import { ITask } from '../../../../app/types/IBoard';
+import Button from '../../../../shared/ui/Button/Button';
+import ConfirmButtons from '../../../../shared/ui/ConfirmButtons/ConfirmButtons';
 
 interface Props {
   onEdit: (title: string, description: string) => void;
@@ -25,11 +25,10 @@ const EditTaskForm: React.FC<Props> = ({
 }) => {
     const [title, setTitle] = useState(prevTask.title);
     const [description, setDescription] = useState(prevTask.description);
-    const {t} = useTranslation()
+    const { t } = useTranslation();
     const editHandler = () => {
-        if (title === "" || description === "") return onAbort();
-        if (title === prevTask.title && description === prevTask.description)
-            return onAbort();
+        if (title === '' || description === '') return onAbort();
+        if (title === prevTask.title && description === prevTask.description) return onAbort();
         onEdit(title, description);
     };
     return (
@@ -57,11 +56,14 @@ const EditTaskForm: React.FC<Props> = ({
                 </div>
             </div>
             {/* //TODO: func  */}
-            <ConfirmButtons onConfirm={function () {
-                throw new Error("Function not implemented.");
-            } } onAbort={function () {
-                throw new Error("Function not implemented.");
-            } }/>
+            <ConfirmButtons
+                onConfirm={function () {
+                    throw new Error('Function not implemented.');
+                }}
+                onAbort={function () {
+                    throw new Error('Function not implemented.');
+                }}
+            />
         </div>
     );
 };

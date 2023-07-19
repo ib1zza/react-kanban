@@ -1,34 +1,34 @@
-import React, { memo, useEffect, useState } from "react";
-import s from "./BoardPage.module.scss";
-import { useParams } from "react-router-dom";
-import TaskColumn from "../../../entities/Column/ui/TaskColumn";
-import Button from "../../../shared/ui/Button/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import {FormToCreate} from "../../../shared/ui/FormToCreate";
-import { createColumn } from "../../../features/columns";
-import {PopupTaskInfo} from "../../../widgets";
+/* eslint-disable react/display-name */
+import React, { memo, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import s from './BoardPage.module.scss';
+import TaskColumn from '../../../entities/Column/ui/TaskColumn';
+import Button from '../../../shared/ui/Button/Button';
+import { FormToCreate } from '../../../shared/ui/FormToCreate';
+import { createColumn } from '../../../features/columns';
+import { PopupTaskInfo } from '../../../widgets';
 import {
     removeSelectedTask,
     setCurrentBoard,
     setCurrentTask,
-} from "../../../app/providers/store/Reducers/boardCollectionSlice";
+} from '../../../app/providers/store/Reducers/boardCollectionSlice';
 import {
     useAppDispatch,
     useAppSelector,
-} from "../../../app/providers/store/store";
+} from '../../../app/providers/store/store';
 
-import { getTaskInfo } from "../../../features/tasks";
-import { editBoard, BoardPageHeader } from "../../../features/boards";
-import { getBoardFromId } from "../../../entities/Board";
-import { getColumnsFromBoard } from "../lib/getColumnsFromBoard";
-import { FormToLink } from "../../../shared/ui/FormToLink";
-
+import { getTaskInfo } from '../../../features/tasks';
+import { editBoard, BoardPageHeader } from '../../../features/boards';
+import { getBoardFromId } from '../../../entities/Board';
+import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
+import { FormToLink } from '../../../shared/ui/FormToLink';
 
 const BoardPage: React.FC = memo(() => {
     const { boardId } = useParams();
     const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
-        (state) => state.boardCollection
+        (state) => state.boardCollection,
     );
     const [isCreating, setIsCreating] = useState(false);
     const [isLinking, setIsLinking] = useState(false);

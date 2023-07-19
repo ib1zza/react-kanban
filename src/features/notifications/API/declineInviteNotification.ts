@@ -1,21 +1,20 @@
-import {updateDocument} from "../../users";
-import {arrayRemove} from "firebase/firestore";
-import {deleteNotification} from "../../../entities/Notifications";
-
+import { arrayRemove } from 'firebase/firestore';
+import { updateDocument } from '../../users';
+import { deleteNotification } from '../../../entities/Notifications';
 
 export async function declineInviteNotification(
     notificationId: string,
     userId: string,
-    boardId: string
+    boardId: string,
 ) {
     try {
         // если пользователь отклоняет приглашение, то
         // удаляем уведомление и удаляем его из списка гостей
         await deleteNotification(userId, notificationId);
-        await updateDocument("boards", boardId, {
-            "guestsAllowed": arrayRemove(userId),
-            "usersAllowed": arrayRemove(userId),
-        })
+        await updateDocument('boards', boardId, {
+            guestsAllowed: arrayRemove(userId),
+            usersAllowed: arrayRemove(userId),
+        });
     } catch (e) {
         console.log(e);
         return false;

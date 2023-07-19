@@ -1,1 +1,1 @@
-export {PopupTaskInfo} from "./Task/PopupTaskInfo/PopupTaskInfo"
+export { PopupTaskInfo } from './Task/PopupTaskInfo/PopupTaskInfo';

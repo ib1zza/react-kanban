@@ -1,2 +1,3 @@
-import Task from "./ui/Task";
+import Task from './ui/Task';
+
 export { Task };
