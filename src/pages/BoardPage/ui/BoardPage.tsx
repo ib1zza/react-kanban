@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import s from "./BoardPage.module.scss";
 import { useParams } from "react-router-dom";
-import TaskColumn from "../../../entities/Columns/ui/TaskColumn";
+import TaskColumn from "../../../entities/Column/ui/TaskColumn";
 import Button from "../../../shared/ui/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";

@@ -2,12 +2,11 @@ import React, { useEffect } from "react";
 import s from "./BoardPreview.module.scss";
 import { faLink, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IUserInfo } from "../../../../app/types/User";
-import { getUserInfo } from "../../../../features/users";
-import { deleteBoard } from "../../../../features/boards";
-import Modal from "../../../../shared/ui/Modal/Modal";
-import ShareBoard from "../../../../features/boards/ui/ShareBoard/ShareBoard";
-import { IBoard } from "../../../../app/types/IBoard";
+import { getUserInfo } from "../../../features/users";
+import { deleteBoard } from "../../../features/boards";
+import Modal from "../../../shared/ui/Modal/Modal";
+import ShareBoard from "../../../features/boards/ui/ShareBoard/ShareBoard";
+import { IBoard } from "../../../app/types/IBoard";
 import { useTranslation } from "react-i18next";
 
 interface IBoardPreviewProps {
@@ -23,12 +22,13 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
     board,
     onDelete,
 }) => {
-    const [user, setUser] = React.useState<IUserInfo | null>(null);
+    const [username, setUsername] = React.useState<string>('');
     const [shareStatus, setShareStatus] = React.useState(false);
     const {t} = useTranslation()
+    
     useEffect(() => {
         getUserInfo(board.ownerId).then((res) => {
-            setUser(res);
+            setUsername(res?.displayName);
         });
     }, [userId]);
 
@@ -37,12 +37,17 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
         await deleteBoard(board.uid, board.ownerId);
         onDelete();
     };
-
+    const onCloseShare = () => {
+        setShareStatus(false)
+    }
+    const onOpenShare = () => {
+        setShareStatus(true)
+    }
     return (
         <div className={s.container}>
             {shareStatus && (
                 <Modal
-                    onClose={() => setShareStatus(false)}
+                    onClose={onCloseShare}
                     children={<ShareBoard board={board} />}
                 />
             )}
@@ -51,7 +56,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                 {userId === board.ownerId && (
                     <div>
                         <button
-                            onClick={() => setShareStatus(true)}
+                            onClick={onOpenShare }
                             style={{ marginRight: "16px" }}
                         >
                             <FontAwesomeIcon icon={faLink} />
@@ -62,7 +67,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                     </div>
                 )}
             </h3>
-            <p>by {user?.displayName || `${t('Загрузка')}`}</p>{" "}
+            <p>by {username || `${t('Загрузка')}`}</p>{" "}
         </div>
     );
 };
