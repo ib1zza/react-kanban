@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IUserInfo } from "../../../types/User";
+import { createSlice } from '@reduxjs/toolkit';
+import { IUserInfo } from '../../../types/User';
 
 export interface userInfoState {
   user: IUserInfo | null;
@@ -10,7 +10,7 @@ const initialState: userInfoState = {
 };
 
 export const userInfoSlice = createSlice({
-    name: "user",
+    name: 'user',
     initialState,
     reducers: {
         setUserInfo: (state, action) => {

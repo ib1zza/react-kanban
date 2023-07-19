@@ -1,21 +1,21 @@
-import { updateDocument } from "../../../users/API/updateDocument";
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
+import { updateDocument } from '../../../users/API/updateDocument';
 
 export const createColumn = async (
     title: string,
     color: string,
-    boardId: string
+    boardId: string,
 ) => {
     try {
         const newColumnId = uuid();
-        await updateDocument("boards", boardId, {
-            ["columns." + newColumnId]: {
+        await updateDocument('boards', boardId, {
+            [`columns.${newColumnId}`]: {
                 uid: newColumnId,
-                title: title,
+                title,
                 tasks: {},
                 timeCreated: Date.now(),
                 timeUpdated: Date.now(),
-                color: color,
+                color,
             },
         });
     } catch (e) {

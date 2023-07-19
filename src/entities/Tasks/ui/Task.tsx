@@ -1,18 +1,20 @@
-import React from "react";
-import s from "./Task.module.scss";
-import { ITask } from "../../../app/types/IBoard";
-import { useAppDispatch } from "../../../app/providers/store/store";
-import { removeSelectedTask, 
-    setCurrentTask } from "../../../app/providers/store/Reducers/boardCollectionSlice";
-import { faCircleCheck as iconCheckRegular } from "@fortawesome/free-regular-svg-icons";
+import React from 'react';
+import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
 import {
     faCircleCheck as iconCheckSolid, faTrash,
     faEllipsisVertical,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import s from './Task.module.scss';
+import { ITask } from '../../../app/types/IBoard';
+import { useAppDispatch } from '../../../app/providers/store/store';
+import {
+    removeSelectedTask,
+    setCurrentTask,
+} from '../../../app/providers/store/Reducers/boardCollectionSlice';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toggleTaskComplete } from "../../../features/tasks/API/toggleTaskComplete";
-import { deleteTask } from "../../../features/tasks";
+import { toggleTaskComplete } from '../../../features/tasks/API/toggleTaskComplete';
+import { deleteTask } from '../../../features/tasks';
 
 interface ITaskProps {
   task: ITask;
@@ -20,7 +22,9 @@ interface ITaskProps {
   columnId: string;
   rerender: () => void;
 }
-const Task = ({ task, boardId, columnId, rerender }: ITaskProps) => {
+const Task = ({
+    task, boardId, columnId, rerender,
+}: ITaskProps) => {
     const dispatch = useAppDispatch();
 
     const openTaskHandler = () => {
@@ -30,14 +34,13 @@ const Task = ({ task, boardId, columnId, rerender }: ITaskProps) => {
     const deleteTaskHandler = () => {
         deleteTask(boardId, columnId, task.uid);
         dispatch(removeSelectedTask());
-        rerender()
+        rerender();
     };
     const handleComplete = () => {
         toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted).then(
-            rerender
+            rerender,
         );
     };
-
 
     return (
         <div className={s.container}>

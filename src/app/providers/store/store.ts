@@ -1,13 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import boardCollectionReducer from "./Reducers/boardCollectionSlice";
-import userInfoReducer from "./Reducers/userInfoSlice";
-import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import notificationsReducer from "./Reducers/notificationSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import boardCollectionReducer from './Reducers/boardCollectionSlice';
+import userInfoReducer from './Reducers/userInfoSlice';
+import notificationsReducer from './Reducers/notificationSlice';
+
 export const store = configureStore({
     reducer: {
         boardCollection: boardCollectionReducer,
         userInfo: userInfoReducer,
-        notifications: notificationsReducer
+        notifications: notificationsReducer,
     },
 });
 
@@ -16,5 +17,5 @@ type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
 
 type DispatchFunc = () => AppDispatch
-export const useAppDispatch: DispatchFunc = useDispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppDispatch: DispatchFunc = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

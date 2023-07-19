@@ -1,2 +1,3 @@
-import FormToCreate from "./ui/FormToCreate";
-export {FormToCreate}
+import FormToCreate from './ui/FormToCreate';
+
+export { FormToCreate };

@@ -1,12 +1,12 @@
 export const enum GuestPermission {
-  READ = "read",
-  FULL = "full",
-  NONE = "none",
+  READ = 'read',
+  FULL = 'full',
+  NONE = 'none',
 }
 
 export const enum LinkedUserType {
-  USER = "user",
-  GUEST = "guest",
+  USER = 'user',
+  GUEST = 'guest',
 }
 
 export interface IBoard {

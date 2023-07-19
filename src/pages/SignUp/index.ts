@@ -1,2 +1,3 @@
-import SignUp from "./ui/SignUp";
+import SignUp from './ui/SignUp';
+
 export { SignUp };

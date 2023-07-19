@@ -1,8 +1,8 @@
-import {LinkedUserType} from "./IBoard";
+import { LinkedUserType } from './IBoard';
 
 export const enum NotificationType {
-    BOARD_INVITED = "BOARD_INVITED",
-    CHAT_MESSAGE = "CHAT_MESSAGE",
+    BOARD_INVITED = 'BOARD_INVITED',
+    CHAT_MESSAGE = 'CHAT_MESSAGE',
 }
 
 export type NotificationPayloadBoardInvited = {

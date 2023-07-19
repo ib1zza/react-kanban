@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import s from "./TaskColumn.module.scss";
-import TaskList from "../lib/TaskList/TaskList";
-import { faPenToSquare, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { editColumn } from "../../../features/columns/API/editColumn";
-import AddTaskForm from "../lib/AddTaskForm/AddTaskForm";
-import { deleteColumn } from "../../../features/columns/API/deleteColumn";
-import { IColumn } from "../../../app/types/IBoard";
-import { FormToEdit } from "../../../shared/ui/FormToEdit";
-import { useTranslation } from "react-i18next";
+import React, { useState } from 'react';
+import { faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { useTranslation } from 'react-i18next';
+import s from './TaskColumn.module.scss';
+import TaskList from '../lib/TaskList/TaskList';
+import { editColumn } from '../../../features/columns/API/editColumn';
+import AddTaskForm from '../lib/AddTaskForm/AddTaskForm';
+import { deleteColumn } from '../../../features/columns/API/deleteColumn';
+import { IColumn } from '../../../app/types/IBoard';
+import { FormToEdit } from '../../../shared/ui/FormToEdit';
 
 interface ITaskColumnProps {
   column: IColumn;
@@ -24,7 +24,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
 }) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
     const [isAddingTask, setIsAddingTask] = useState(false);
-    const {t} = useTranslation('buttons')
+    const { t } = useTranslation('buttons');
     const editHandler = async (title: string, color: string) => {
         const res = await editColumn(boardId, column.uid, {
             title,
@@ -36,7 +36,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
     };
 
     return (
-        <div className={s.container + " " + s.withColor}>
+        <div className={`${s.container} ${s.withColor}`}>
             <div
                 className={s.headerColor}
                 style={{ backgroundColor: column.color }}

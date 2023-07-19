@@ -1,30 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router";
-import Button from "../../../shared/ui/Button/Button";
-import { faLink, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import s from "./Home.module.scss";
-import { UserAuth } from "../../../app/providers/authRouter/ui/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { createBoard } from "../../../features/boards";
-import { IBoard, LinkedUserType } from "../../../app/types/IBoard";
-import { getBoards } from "../lib/getBoards";
-import { addUserToBoard } from "../../../features/boards";
-import  {FormToCreate}  from "../../../shared/ui/FormToCreate";
-import { FormToLink } from "../../../shared/ui/FormToLink";
-import { BoardPreview } from "../../../entities/Board";
-import {getUserBoards} from "../lib/getUserBoards";
-import {useAppSelector} from "../../../app/providers/store/store";
+import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router';
+import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+import Button from '../../../shared/ui/Button/Button';
+import s from './Home.module.scss';
+import { UserAuth } from '../../../app/providers/authRouter/ui/AuthContext';
+import { createBoard, addUserToBoard } from '../../../features/boards';
+import { IBoard, LinkedUserType } from '../../../app/types/IBoard';
+import { getBoards } from '../lib/getBoards';
+import { FormToCreate } from '../../../shared/ui/FormToCreate';
+import { FormToLink } from '../../../shared/ui/FormToLink';
+import { BoardPreview } from '../../../entities/Board';
+import { getUserBoards } from '../lib/getUserBoards';
+import { useAppSelector } from '../../../app/providers/store/store';
 
 const Home = () => {
     const navigate = useNavigate();
-    const { user } = useAppSelector(state => state.userInfo)
+    const { user } = useAppSelector((state) => state.userInfo);
     const [boards, setBoards] = React.useState<IBoard[]>([]);
     const [addBoardStatus, setAddBoardStatus] = useState(false);
     const [linkBoardStatus, setLinkBoardStatus] = useState(false);
 
     const getBoards = getUserBoards;
-    //getting boards (only info which we need)
+    // getting boards (only info which we need)
     const fetchBoards = () => getBoards(user).then((res) => setBoards(res));
 
     useEffect(() => {
@@ -48,7 +47,7 @@ const Home = () => {
         <Routes>
             <Route
                 path="/*"
-                element={
+                element={(
                     <div className={s.boardPageContainer}>
                         <div className={s.blocks__container}>
                             {addBoardStatus && (
@@ -65,31 +64,29 @@ const Home = () => {
                                     onAbort={() => setLinkBoardStatus(false)}
                                 />
                             )}
-                            {boards.map((item, index) => {
-                                return (
-                                    <BoardPreview
-                                        onDelete={() => getBoards}
-                                        onClick={() => {
-                                            navigate("/board/" + item.uid);
-                                        }}
-                                        key={index}
-                                        board={item}
-                                        userId={user.uid}
-                                    />
-                                );
-                            })}
+                            {boards.map((item, index) => (
+                                <BoardPreview
+                                    onDelete={() => getBoards}
+                                    onClick={() => {
+                                        navigate(`/board/${item.uid}`);
+                                    }}
+                                    key={index}
+                                    board={item}
+                                    userId={user.uid}
+                                />
+                            ))}
                         </div>
 
                         <div className={s.buttons}>
                             <Button onClick={() => setAddBoardStatus(true)}>
-                                <FontAwesomeIcon size={"lg"} icon={faPlus} />
+                                <FontAwesomeIcon size="lg" icon={faPlus} />
                             </Button>
                             <Button onClick={() => setLinkBoardStatus(true)}>
-                                <FontAwesomeIcon size={"lg"} icon={faLink} />
+                                <FontAwesomeIcon size="lg" icon={faLink} />
                             </Button>
                         </div>
                     </div>
-                }
+                )}
             />
         </Routes>
     );

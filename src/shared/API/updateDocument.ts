@@ -1,10 +1,10 @@
-import { doc, updateDoc } from "firebase/firestore";
-import {db} from "../../firebase";
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 export async function updateDocument(
     path: string,
     pathSegments: string,
-    updateData: { [x: string]: any }
+    updateData: { [x: string]: any },
 ) {
     const ref = doc(db, path, pathSegments);
 
