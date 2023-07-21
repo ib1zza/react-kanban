@@ -15,12 +15,12 @@ const TaskList: React.FC<ITaskListProps> = ({
     boardId,
     columnId,
 }) => {
-    const getTasksFromColumn = (tasks: { [key: string]: ITask }) => 
-        Object.values(tasks).sort((a, b) => +a.timeCreated - +b.timeCreated);
+    // eslint-disable-next-line max-len
+    const getTasksFromColumn = (tasks: { [key: string]: ITask }) => Object.values(tasks).sort((a, b) => +a.timeCreated - +b.timeCreated);
     return (
         <div className={s.tasks}>
             {tasks
-        && getTasksFromColumn(tasks).map((el) => (
+        && getTasksFromColumn(tasks).map((el: ITask) => (
             <Task
                 boardId={boardId}
                 columnId={columnId}

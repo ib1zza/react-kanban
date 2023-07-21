@@ -1,14 +1,14 @@
 import {
+    removeSelectedBoard,
+    removeSelectedTask,
     setCurrentBoard,
     setCurrentTask,
-    removeSelectedTask,
-    removeSelectedBoard,
 } from './Reducers/boardCollectionSlice';
 
 import {
-    setNotifications,
-    removeNotification,
     acceptNotification,
+    removeNotification,
+    setNotifications,
 } from './Reducers/notificationSlice';
 
 import { setUserInfo } from './Reducers/userInfoSlice';

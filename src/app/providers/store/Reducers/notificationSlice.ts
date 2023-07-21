@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NotificationItem } from '../../../types/Notifications';
 
 export interface userInfoState {
@@ -37,10 +37,10 @@ export const notificationSlice = createSlice({
     },
 });
 
-export const { 
-    setNotifications, 
+export const {
+    setNotifications,
     removeNotification,
-    acceptNotification 
+    acceptNotification,
 } = notificationSlice.actions;
 
 export default notificationSlice.reducer;

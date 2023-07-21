@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import React, { memo, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,7 +19,7 @@ import {
 } from '../../../app/providers/store/store';
 
 import { getTaskInfo } from '../../../features/tasks';
-import { editBoard, BoardPageHeader } from '../../../features/boards';
+import { BoardPageHeader, editBoard } from '../../../features/boards';
 import { getBoardFromId } from '../../../entities/Board';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import { FormToLink } from '../../../shared/ui/FormToLink';
@@ -34,17 +33,17 @@ const BoardPage: React.FC = memo(() => {
     const [isLinking, setIsLinking] = useState(false);
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        console.log(boardId);
-        refetchBoard();
-    }, [boardId]);
-
     const refetchBoard = async () => {
         const board = await getBoardFromId(boardId as string);
         if (board) {
             dispatch(setCurrentBoard(board));
         }
     };
+
+    useEffect(() => {
+        console.log(boardId);
+        refetchBoard();
+    }, [boardId]);
 
     const refetchTask = async () => {
         if (!boardId || !selectedColumnId || !selectedTask) return;

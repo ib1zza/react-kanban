@@ -1,5 +1,5 @@
 import {
-    deleteDoc, doc, arrayRemove, deleteField,
+    arrayRemove, deleteDoc, deleteField, doc,
 } from 'firebase/firestore';
 import { updateDocument } from '../../../users/API/updateDocument';
 import { db } from '../../../../firebase';

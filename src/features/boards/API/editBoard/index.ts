@@ -5,6 +5,5 @@ export async function editBoard(
     boardId: string,
     newData: { [key in keyof IBoard]?: IBoard[key] },
 ) {
-    console.log(newData);
-    return await updateDocument('boards', boardId, newData);
+    return updateDocument('boards', boardId, newData);
 }

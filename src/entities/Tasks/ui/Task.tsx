@@ -1,8 +1,8 @@
 import React from 'react';
 import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
 import {
-    faCircleCheck as iconCheckSolid, faTrash,
-    faEllipsisVertical,
+    faEllipsisVertical, faTrash,
+    faCircleCheck as iconCheckSolid,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './Task.module.scss';

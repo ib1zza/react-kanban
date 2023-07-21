@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import {
-    faCircleCheck,
-    faCircleXmark,
-} from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import s from './EditTaskForm.module.scss';
 import { ITask } from '../../../../app/types/IBoard';
-import Button from '../../../../shared/ui/Button/Button';
 import ConfirmButtons from '../../../../shared/ui/ConfirmButtons/ConfirmButtons';
 
 interface Props {
@@ -30,6 +24,11 @@ const EditTaskForm: React.FC<Props> = ({
         if (title === '' || description === '') return onAbort();
         if (title === prevTask.title && description === prevTask.description) return onAbort();
         onEdit(title, description);
+    };
+
+    const onConfirmButtons = () => {
+    };
+    const onAbortButtons = () => {
     };
     return (
         <div>
@@ -57,12 +56,8 @@ const EditTaskForm: React.FC<Props> = ({
             </div>
             {/* //TODO: func  */}
             <ConfirmButtons
-                onConfirm={function () {
-                    throw new Error('Function not implemented.');
-                }}
-                onAbort={function () {
-                    throw new Error('Function not implemented.');
-                }}
+                onConfirm={onConfirmButtons}
+                onAbort={onAbortButtons}
             />
         </div>
     );

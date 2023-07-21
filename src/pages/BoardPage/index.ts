@@ -1,3 +1,3 @@
-import { BoardPageAsync } from "./ui/BoardPage.async";
+import { BoardPageAsync } from './ui/BoardPage.async';
 
-export { BoardPageAsync as BoardPage};
+export { BoardPageAsync as BoardPage };

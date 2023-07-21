@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -5,10 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../shared/ui/Button/Button';
 import s from './Home.module.scss';
-import { UserAuth } from '../../../app/providers/authRouter/ui/AuthContext';
-import { createBoard, addUserToBoard } from '../../../features/boards';
+import { addUserToBoard, createBoard } from '../../../features/boards';
 import { IBoard, LinkedUserType } from '../../../app/types/IBoard';
-import { getBoards } from '../lib/getBoards';
 import { FormToCreate } from '../../../shared/ui/FormToCreate';
 import { FormToLink } from '../../../shared/ui/FormToLink';
 import { BoardPreview } from '../../../entities/Board';

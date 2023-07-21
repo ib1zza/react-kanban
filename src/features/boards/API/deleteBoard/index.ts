@@ -1,4 +1,4 @@
-import { deleteDoc, doc, arrayRemove } from 'firebase/firestore';
+import { arrayRemove, deleteDoc, doc } from 'firebase/firestore';
 import { updateDocument } from '../../../users/API/updateDocument';
 import { db } from '../../../../firebase';
 

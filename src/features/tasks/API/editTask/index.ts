@@ -15,7 +15,5 @@ export async function editTask(
         {},
     );
 
-    console.log(updatedData);
-
-    return await updateDocument('boards', boardId, updatedData);
+    return updateDocument('boards', boardId, updatedData);
 }
