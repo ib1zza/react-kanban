@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '@ramonak/react-progress-bar';
-
 import { useForm } from 'react-hook-form';
-
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
@@ -35,10 +33,8 @@ const SignUp = () => {
     }, [step]);
 
     const onSubmit = async (data: any) => {
-        console.log(data);
         try {
             const file = data?.file[0] || undefined;
-            console.log(file);
             await signUp(
                 data.email,
                 data.password,
@@ -145,13 +141,13 @@ const SignUp = () => {
                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 })}
                             />
-                            <div className={s.signup__label}>{t('Придумайте имя пользователя')}</div>
+                            <div className={s.signup__label}>
+                                {t('Придумайте имя пользователя')}
+                            </div>
 
                             {errors.displayName && (
                                 <p className={s.signup__label_error}>
-
                                     {t('Допускается только латиница в нижнем регистре и нижнee подчеркивание. Минимальное количество символов 3, максимальное - 20.')}
-
                                 </p>
                             )}
                             <div className="">{error}</div>

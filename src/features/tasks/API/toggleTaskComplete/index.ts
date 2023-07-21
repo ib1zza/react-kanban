@@ -5,6 +5,6 @@ export const toggleTaskComplete = async (
     columnId: string,
     boardId: string,
     newStatus: boolean,
-) => await updateDocument('boards', boardId, {
+) => updateDocument('boards', boardId, {
     [`columns.${columnId}.tasks.${taskId}.isCompleted`]: newStatus,
 });

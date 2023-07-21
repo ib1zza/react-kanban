@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IBoard, ITask } from '../../../types/IBoard';
 
 export interface boardCollectionState {
@@ -33,9 +33,9 @@ export const boardCollectionSlice = createSlice({
         setCurrentTask: (state, action: PayloadAction<ITask>) => {
             state.selectedTask = action.payload;
             if (!state.selectedBoard) return;
-            state.selectedColumnId = 
-            Object.values(state.selectedBoard.columns).find((col) =>
-                Object.keys(col.tasks).includes(action.payload.uid))?.uid || '';
+            state.selectedColumnId = Object.values(state.selectedBoard.columns).find(
+                (col) => Object.keys(col.tasks).includes(action.payload.uid),
+            )?.uid || '';
             console.log('task selected:', action.payload);
         },
         removeSelectedTask: (state) => {

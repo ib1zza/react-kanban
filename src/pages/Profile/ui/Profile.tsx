@@ -4,7 +4,7 @@ import { updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 import s from './Profile.module.scss';
 import { UserAuth } from '../../../app/providers/authRouter/ui/AuthContext';
-import { getUserInfo, editDisplayName, updateDocument } from '../../../features/users';
+import { editDisplayName, getUserInfo, updateDocument } from '../../../features/users';
 import { IUserInfo } from '../../../app/types/User';
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import { storage } from '../../../firebase';
@@ -18,9 +18,8 @@ const Profile = () => {
 
     const fetchUserInfo = async () => {
         if (!user?.uid) return;
-        return await getUserInfo(user.uid).then((res) => {
+        return getUserInfo(user.uid).then((res) => {
             setUserInfo(res);
-            console.log(res);
         });
     };
     useEffect(() => {
@@ -79,7 +78,6 @@ const Profile = () => {
                     <div className={s.profile__name}>
                         {t('Имя')}
                         :
-                        {' '}
                         {editStatus ? (
                             <input
                                 value={name}
@@ -97,10 +95,8 @@ const Profile = () => {
                         {user.email}
                     </div>
                     <div>
-                        {' '}
                         {t('Количество досок')}
                         :
-                        {' '}
                         {userInfo.boardsIds?.length || 0}
                     </div>
                     {editStatus ? (

@@ -14,7 +14,5 @@ export async function editColumn(
         {},
     );
 
-    console.log(updatedData);
-
-    return await updateDocument('boards', boardId, updatedData);
+    return updateDocument('boards', boardId, updatedData);
 }

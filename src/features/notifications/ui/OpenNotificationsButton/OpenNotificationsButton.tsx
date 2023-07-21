@@ -34,8 +34,8 @@ const OpenNotificationsButton = () => {
                     return;
                 }
                 dispatch(setNotifications(
-                    Object.values(res).sort((a, b) => b.timestamp - a.timestamp))
-                );
+                    Object.values(res).sort((a, b) => b.timestamp - a.timestamp),
+                ));
             });
         }
 
@@ -52,10 +52,6 @@ const OpenNotificationsButton = () => {
         setOpen((prev) => !prev);
     };
 
-    useEffect(() => {
-        if (open) readAll();
-    }, [open]);
-
     const readAll = () => {
         if (!user?.uid || !notifications.length || !unreadCount) return;
         notifications.filter((notif) => !notif.read).forEach((notif) => {
@@ -63,6 +59,10 @@ const OpenNotificationsButton = () => {
         });
         dispatch(setNotifications(notifications.map((notif) => ({ ...notif, read: true }))));
     };
+
+    useEffect(() => {
+        if (open) readAll();
+    }, [open]);
 
     return (
         <button className={s.button}>

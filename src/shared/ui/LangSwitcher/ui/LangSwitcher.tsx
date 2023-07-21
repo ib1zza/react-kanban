@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { classNames } from '../../../lib/classNames/classNames';
-import Button from '../../Button/Button';
 
 interface LangSwitcherProps {
     className?: string;

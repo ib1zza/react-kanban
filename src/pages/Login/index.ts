@@ -1,3 +1,3 @@
-import { LoginAsync } from "./ui/Login.async";
+import { LoginAsync } from './ui/Login.async';
 
-export { LoginAsync as Login};
+export { LoginAsync as Login };

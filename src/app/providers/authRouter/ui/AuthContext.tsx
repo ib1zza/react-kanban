@@ -1,11 +1,12 @@
 import React, {
-    createContext,
     PropsWithChildren,
+    createContext,
     useContext,
     useEffect,
+    useMemo,
     useState,
 } from 'react';
-import { signOut, User, onAuthStateChanged } from 'firebase/auth';
+import { User, onAuthStateChanged, signOut } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../../../firebase';
 import { signUpEmailPass } from '../../../../pages/SignUp/lib/signUp';
@@ -77,12 +78,11 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
             unsubscribe();
         };
     }, [user]);
-
+    const value = useMemo(() => ({
+        signUp, logIn, logOut, refetch, user,
+    }), [user]);
     return (
-        <AuthContext.Provider value={{
-            signUp, logIn, logOut, refetch, user,
-        }}
-        >
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );

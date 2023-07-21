@@ -8,5 +8,5 @@ export async function updateDocument(
 ) {
     const ref = doc(db, path, pathSegments);
 
-    return await updateDoc(ref, updateData);
+    return updateDoc(ref, updateData);
 }
