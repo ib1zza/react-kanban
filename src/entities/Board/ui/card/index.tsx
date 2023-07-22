@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import s from "./BoardPreview.module.scss";
 import { faLink, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IUserInfo } from "../../../../app/types/User";
+
 import { getUserInfo } from "../../../../features/users";
 import { deleteBoard } from "../../../../features/boards";
 import Modal from "../../../../shared/ui/Modal/Modal";
 import ShareBoard from "../../../../features/boards/ui/ShareBoard/ShareBoard";
 import { IBoard } from "../../../../app/types/IBoard";
 import { useTranslation } from "react-i18next";
+import { IUserInfo } from "../../../../app/types/IUserInfo";
 
 interface IBoardPreviewProps {
   userId: string;

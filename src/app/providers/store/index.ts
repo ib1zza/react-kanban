@@ -1,30 +1,14 @@
-import {
-    setCurrentBoard,
-    setCurrentTask,
-    removeSelectedTask,
-    removeSelectedBoard
-} from "./Reducers/boardCollectionSlice";
-
-import {
-    setNotifications,
-    removeNotification,
-    acceptNotification
-} from "./Reducers/notificationSlice";
-
-import { setUserInfo } from "./Reducers/userInfoSlice";
-
+import type { StateSchema } from "./config/StateSchema";
 import {useAppDispatch, useAppSelector} from "./store";
 
 export {
-    setCurrentBoard,
-    setCurrentTask,
-    removeSelectedTask,
-    removeSelectedBoard,
-    setNotifications,
-
-    removeNotification,
-    acceptNotification,
-    setUserInfo,
+    // setCurrentBoard,
+    // setCurrentTask,
+    // removeSelectedTask,
+    // removeSelectedBoard,
+    // ...notificationsActions
+    // setUserInfo,
+    StateSchema,
     useAppSelector,
     useAppDispatch
 }

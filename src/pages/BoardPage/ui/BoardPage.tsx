@@ -8,11 +8,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import {FormToCreate} from "../../../shared/ui/FormToCreate";
 import { createColumn } from "../../../features/columns";
 import {PopupTaskInfo} from "../../../widgets";
-import {
-    removeSelectedTask,
-    setCurrentBoard,
-    setCurrentTask,
-} from "../../../app/providers/store/Reducers/boardCollectionSlice";
+
 import {
     useAppDispatch,
     useAppSelector,
@@ -23,12 +19,14 @@ import { editBoard, BoardPageHeader } from "../../../features/boards";
 import { getBoardFromId } from "../../../entities/Board";
 import { getColumnsFromBoard } from "../lib/getColumnsFromBoard";
 import { FormToLink } from "../../../shared/ui/FormToLink";
+import { getBoardCollection } from "../../../entities/Board/model/selectors/getBoardCollection";
+import { boardCollectionActions } from "../../../entities/Board/model/slice/boardCollectionSlice";
 
 
 const BoardPage: React.FC = memo(() => {
     const { boardId } = useParams();
     const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
-        (state) => state.boardCollection
+        getBoardCollection
     );
     const [isCreating, setIsCreating] = useState(false);
     const [isLinking, setIsLinking] = useState(false);
@@ -42,14 +40,14 @@ const BoardPage: React.FC = memo(() => {
     const refetchBoard = async () => {
         const board = await getBoardFromId(boardId as string);
         if (board) {
-            dispatch(setCurrentBoard(board));
+            dispatch(boardCollectionActions.setCurrentBoard(board));
         }
     };
 
     const refetchTask = async () => {
         if (!boardId || !selectedColumnId || !selectedTask) return;
         const res = await getTaskInfo(boardId, selectedColumnId, selectedTask.uid);
-        dispatch(setCurrentTask(res));
+        dispatch(boardCollectionActions.setCurrentTask(res));
     };
 
     const createColumnAction = async (title: string, color: string) => {
@@ -60,7 +58,7 @@ const BoardPage: React.FC = memo(() => {
     };
 
     const handleDeleteTask = () => {
-        dispatch(removeSelectedTask());
+        dispatch(boardCollectionActions.removeSelectedTask());
         refetchBoard();
     };
 

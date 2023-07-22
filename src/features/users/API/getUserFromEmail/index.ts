@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../../firebase";
-import { IUserInfo } from "../../../../app/types/User";
+import { IUserInfo } from "../../../../app/types/IUserInfo";
 
 export async function getUserFromEmail(
     email: string

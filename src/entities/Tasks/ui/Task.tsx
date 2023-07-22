@@ -2,7 +2,6 @@ import React from "react";
 import s from "./Task.module.scss";
 import { ITask } from "../../../app/types/IBoard";
 import { useAppDispatch } from "../../../app/providers/store/store";
-import { setCurrentTask } from "../../../app/providers/store/Reducers/boardCollectionSlice";
 import { faCircleCheck as iconCheckRegular } from "@fortawesome/free-regular-svg-icons";
 import {
     faCircleCheck as iconCheckSolid,
@@ -11,6 +10,7 @@ import {
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toggleTaskComplete } from "../../../features/tasks/API/toggleTaskComplete";
+import { boardCollectionActions } from "../../Board/model/slice/boardCollectionSlice";
 
 interface ITaskProps {
   task: ITask;
@@ -20,9 +20,8 @@ interface ITaskProps {
 }
 const Task = ({ task, boardId, columnId, rerender }: ITaskProps) => {
     const dispatch = useAppDispatch();
-
     const clickHandler = () => {
-        dispatch(setCurrentTask(task));
+        dispatch(boardCollectionActions.setCurrentTask(task));
     };
 
     const handleComplete = () => {

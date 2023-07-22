@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import boardCollectionReducer from "./Reducers/boardCollectionSlice";
-import userInfoReducer from "./Reducers/userInfoSlice";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import notificationsReducer from "./Reducers/notificationSlice";
+import { notificationReducer } from "../../../entities/Notifications/model/slice/notificationSlice";
+import { boardCollectionReducer } from "../../../entities/Board/model/slice/boardCollectionSlice";
+import { userInfoReducer } from "../../../entities/Users/model/slice/userInfoSlice";
+
 export const store = configureStore({
     reducer: {
         boardCollection: boardCollectionReducer,
         userInfo: userInfoReducer,
-        notifications: notificationsReducer
+        notifications: notificationReducer
     },
 });
 

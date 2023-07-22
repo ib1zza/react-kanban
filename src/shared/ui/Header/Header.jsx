@@ -7,7 +7,7 @@ import noAvatar from "../../assets/images/noAvatar.svg"
 import { useAppSelector } from "../../../app/providers/store/store";
 import ThemeSwitcher from "../ThemeSwitcher/ui/ThemeSwitcher";
 // eslint-disable-next-line max-len
-import OpenNotificationsButton from "../../../features/notifications/ui/OpenNotificationsButton/OpenNotificationsButton";
+import OpenNotificationsButton from "../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton";
 import { useTranslation } from "react-i18next";
 import { LangSwitcher } from "../LangSwitcher/ui/LangSwitcher";
 

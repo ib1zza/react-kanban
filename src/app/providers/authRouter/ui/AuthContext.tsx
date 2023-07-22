@@ -9,9 +9,9 @@ import { auth } from "../../../../firebase";
 import { signOut, User, onAuthStateChanged } from "firebase/auth";
 import { signUpEmailPass } from "../../../../pages/SignUp/lib/signUp";
 import { loginByEmailPass } from "../../../../pages/Login/lib/logIn";
-import { setUserInfo } from "../../store/Reducers/userInfoSlice";
 import { useDispatch } from "react-redux";
 import { getUserInfo } from "../../../../features/users/API/getUserInfo";
+import { userInfoActions } from "../../../../entities/Users/model/slice/userInfoSlice";
 
 // import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 type ISelect = "practice" | "work" | "study" | "other";
@@ -56,7 +56,7 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
             await user.reload();
             getUserInfo(user.uid).then((res) => {
                 if (res) {
-                    dispatch(setUserInfo(res));
+                    dispatch(userInfoActions.setUserInfo(res));
                     console.log(res.photoURL);
                 }
             });
@@ -68,7 +68,7 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
             if (user?.uid) {
                 getUserInfo(user.uid).then((res) => {
                     if (res) {
-                        dispatch(setUserInfo(res));
+                        dispatch(userInfoActions.setUserInfo(res));
                     }
                 });
             }
