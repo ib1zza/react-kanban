@@ -1,11 +1,13 @@
-import React, { FC, FunctionComponent, SVGAttributes, useEffect } from "react";
-import s from "./AvatarEdit.module.scss";
+import React, {
+    FC, FunctionComponent, SVGAttributes, useEffect,
+} from 'react';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { updateProfile } from 'firebase/auth';
+import { ReactSVG } from 'react-svg';
+import s from './AvatarEdit.module.scss';
 
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "../../../../firebase";
-import { updateDocument } from "../../../../features/users/API/updateDocument";
-import { updateProfile } from "firebase/auth";
-import { ReactSVG } from "react-svg";
+import { storage } from '../../../../firebase';
+import { updateDocument } from '../../../../features/users/API/updateDocument';
 
 interface AvatarEditProps {
   avatar: string;
@@ -27,7 +29,7 @@ const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit }) => {
     useEffect(() => {
         handleUpdateAvatar().finally(() => setLoading(false));
 
-        console.log("work");
+        console.log('work');
     }, [file]);
     return (
         <div className={s.profile__avatar}>
@@ -40,7 +42,7 @@ const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit }) => {
             <label className={s.profile__avatar__edit} htmlFor="changeAva">
                 <input
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
-                    id={"changeAva"}
+                    id="changeAva"
                     type="file"
                     hidden
                 />

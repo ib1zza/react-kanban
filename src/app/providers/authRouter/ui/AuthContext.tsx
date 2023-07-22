@@ -1,20 +1,21 @@
 import React, {
-    createContext,
     PropsWithChildren,
+    createContext,
     useContext,
     useEffect,
+    useMemo,
     useState,
-} from "react";
-import { auth } from "../../../../firebase";
-import { signOut, User, onAuthStateChanged } from "firebase/auth";
-import { signUpEmailPass } from "../../../../pages/SignUp/lib/signUp";
-import { loginByEmailPass } from "../../../../pages/Login/lib/logIn";
-import { useDispatch } from "react-redux";
-import { getUserInfo } from "../../../../features/users/API/getUserInfo";
-import { userInfoActions } from "../../../../entities/Users/model/slice/userInfoSlice";
+} from 'react';
+import { signOut, User, onAuthStateChanged } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { auth } from '../../../../firebase';
+import { signUpEmailPass } from '../../../../pages/SignUp/lib/signUp';
+import { loginByEmailPass } from '../../../../pages/Login/lib/logIn';
+import { getUserInfo } from '../../../../features/users/API/getUserInfo';
+import { userInfoActions } from '../../../../entities/Users/model/slice/userInfoSlice';
 
 // import { setDoc, doc, getDocs, collection } from "firebase/firestore";
-type ISelect = "practice" | "work" | "study" | "other";
+type ISelect = 'practice' | 'work' | 'study' | 'other';
 
 interface IAuthContext {
   signUp: (
@@ -51,7 +52,7 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
         signOut(auth);
     }
     async function refetch() {
-        console.log("refetch");
+        console.log('refetch');
         if (user?.uid) {
             await user.reload();
             getUserInfo(user.uid).then((res) => {
@@ -77,9 +78,11 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
             unsubscribe();
         };
     }, [user]);
-
+    const value = useMemo(() => ({
+        signUp, logIn, logOut, refetch, user,
+    }), [user]);
     return (
-        <AuthContext.Provider value={{ signUp, logIn, logOut, refetch, user }}>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     );

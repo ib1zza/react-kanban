@@ -222,7 +222,7 @@
 
     .title_wrapper {
         img {
-           display: none;
+            display: none;
         }
     }
     .logo {
@@ -275,11 +275,11 @@
         color: white;
         font-size: 12px;
     }
-    .signup__label {
-        color: white;
-        font-size: 12px;
-        margin-top: 10px;
-    }
+    // .signup__label {
+    //     color: white;
+    //     font-size: 12px;
+    //     margin-top: 10px;
+    // }
     .signup__input{
         font-size: 12px;
         padding: 12px;
@@ -302,7 +302,6 @@
         gap: 10px;
         color: white;
         cursor: pointer;
-        font-size: 16px;
         font-size: 12px;
     }
 }

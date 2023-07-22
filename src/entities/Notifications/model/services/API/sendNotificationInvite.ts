@@ -1,25 +1,25 @@
-import {v4 as uuid} from "uuid";
+import { v4 as uuid } from 'uuid';
 
-import {updateDocument} from "../../../../../shared/API/updateDocument";
-import {LinkedUserType} from "../../../../../app/types/IBoard";
-import NotificationType from "../../types/NotificationsSchema";
+import { updateDocument } from '../../../../../shared/API/updateDocument';
+import { LinkedUserType } from '../../../../../app/types/IBoard';
+import NotificationType from '../../types/NotificationsSchema';
 
 export const sendNotificationInvite = async (
     userToInviteId: string,
     userFromInviteId: string,
     boardId: string,
-    role: LinkedUserType
+    role: LinkedUserType,
 ) => {
     try {
         const newColumnId = uuid();
-        await updateDocument("notifications", userToInviteId, {
+        await updateDocument('notifications', userToInviteId, {
             [newColumnId]: {
                 uid: newColumnId,
                 payload: {
-                    boardId: boardId,
+                    boardId,
                     userInvitedId: userFromInviteId,
                     invitedRole: role,
-                    type: NotificationType.BOARD_INVITED
+                    type: NotificationType.BOARD_INVITED,
                 },
                 timestamp: Date.now(),
                 read: false,

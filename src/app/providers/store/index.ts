@@ -1,5 +1,5 @@
-import type { StateSchema } from "./config/StateSchema";
-import {useAppDispatch, useAppSelector} from "./store";
+import type { StateSchema } from './config/StateSchema';
+import { useAppDispatch, useAppSelector } from './store';
 
 export {
     // setCurrentBoard,
@@ -10,5 +10,5 @@ export {
     // setUserInfo,
     StateSchema,
     useAppSelector,
-    useAppDispatch
-}
+    useAppDispatch,
+};

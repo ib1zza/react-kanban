@@ -1,2 +1,3 @@
-import FormToLink from "./ui/FormToLink";
+import FormToLink from './ui/FormToLink';
+
 export { FormToLink };

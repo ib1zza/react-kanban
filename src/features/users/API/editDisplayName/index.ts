@@ -1,7 +1,7 @@
-import { updateDocument } from "../updateDocument";
+import { updateDocument } from '../updateDocument';
 
 export async function editDisplayName(userId: string, newName: string) {
-    return await updateDocument("users", userId, {
+    return updateDocument('users', userId, {
         displayName: newName,
     });
 }

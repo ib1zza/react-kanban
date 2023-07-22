@@ -1,13 +1,13 @@
-import { deleteField} from "firebase/firestore";
+import { deleteField } from 'firebase/firestore';
 
-import {updateDocument} from "../../../../../features/users";
+import { updateDocument } from '../../../../../features/users';
 
 export const deleteNotification = async (
     userId: string,
     notificationId: string,
 ) => {
     try {
-        await updateDocument("notifications", userId, {
+        await updateDocument('notifications', userId, {
             [notificationId]: deleteField(),
         });
     } catch (e) {

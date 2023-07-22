@@ -1,17 +1,17 @@
-import { updateDocument } from "../../../users/API/updateDocument";
-import { LinkedUserType } from "../../../../app/types/IBoard";
-import { arrayRemove } from "firebase/firestore";
+import { arrayRemove } from 'firebase/firestore';
+import { updateDocument } from '../../../users/API/updateDocument';
+import { LinkedUserType } from '../../../../app/types/IBoard';
 
 export const deleteUserFromBoard = async (
     boardId: string,
     userId: string,
-    userPermission: LinkedUserType
+    userPermission: LinkedUserType,
 ) => {
     try {
-        await updateDocument("boards", boardId, {
+        await updateDocument('boards', boardId, {
             [userPermission === LinkedUserType.USER
-                ? "usersAllowed"
-                : "guestsAllowed"]: arrayRemove(userId),
+                ? 'usersAllowed'
+                : 'guestsAllowed']: arrayRemove(userId),
         });
     } catch (e) {
         console.log(e);

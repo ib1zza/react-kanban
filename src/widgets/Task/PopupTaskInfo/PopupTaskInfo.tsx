@@ -1,21 +1,23 @@
-import React, { useState } from "react";
-import s from "./PopupTaskInfo.module.scss";
+import React, { useState } from 'react';
+import { faCircleXmark, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import s from './PopupTaskInfo.module.scss';
 
 import {
     useAppDispatch,
     useAppSelector,
-} from "../../../app/providers/store/store";
+} from '../../../app/providers/store/store';
 
-import { deleteTask, editTask } from "../../../features/tasks";
+import { deleteTask, editTask } from '../../../features/tasks';
 
-import Button from "../../../shared/ui/Button/Button";
-import { faCircleXmark, faTrashCan } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import EditTaskForm from "../../../entities/Tasks/lib/EditTaskForm";
-import { useTranslation } from "react-i18next";
-import { boardCollectionActions } from "../../../entities/Board/model/slice/boardCollectionSlice";
-import { getBoardCollection } from "../../../entities/Board/model/selectors/getBoardCollection";
+import Button from '../../../shared/ui/Button/Button';
+
+import EditTaskForm from '../../../entities/Tasks/lib/EditTaskForm';
+
+import { boardCollectionActions } from '../../../entities/Board/model/slice/boardCollectionSlice';
+import { getBoardCollection } from '../../../entities/Board/model/selectors/getBoardCollection';
 
 interface Props {
   onEdit: () => void;
@@ -29,23 +31,23 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         selectedColumnId,
     } = useAppSelector(getBoardCollection);
     const dispatch = useAppDispatch();
-    const [loading, setLoading] = useState("");
+    const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
-    const {t} = useTranslation('buttons')
+    const { t } = useTranslation('buttons');
     if (!task) return null;
     const onDeleteTask = async () => {
-        setLoading("delete");
+        setLoading('delete');
         await deleteTask(selectedBoardId, selectedColumnId, task.uid);
         onDelete();
     };
 
     const handleEditTask = async (title: string, description: string) => {
-        setLoading("edit");
+        setLoading('edit');
         await editTask(selectedBoardId, selectedColumnId, task.uid, {
             title,
             description,
         });
-        setLoading("");
+        setLoading('');
         setEditing(false);
         onEdit();
     };
@@ -69,14 +71,14 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                     <Button
                         icon={<FontAwesomeIcon icon={faPenToSquare} />}
                         onClick={() => setEditing(true)}
-                        loading={loading === "edit"}
+                        loading={loading === 'edit'}
                     >
                         {t('Изменить')}
                     </Button>
                     <Button
                         icon={<FontAwesomeIcon icon={faTrashCan} />}
                         onClick={onDeleteTask}
-                        loading={loading === "delete"}
+                        loading={loading === 'delete'}
                     >
                         {t('Удалить')}
                     </Button>
@@ -85,7 +87,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
             {isEditing && (
                 <EditTaskForm
                     onEdit={handleEditTask}
-                    loading={loading === "edit"}
+                    loading={loading === 'edit'}
                     prevTask={task}
                     onAbort={() => setEditing(false)}
                 />
@@ -94,4 +96,4 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
     );
 };
 
-export {PopupTaskInfo};
+export { PopupTaskInfo };

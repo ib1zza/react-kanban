@@ -1,14 +1,14 @@
-import React from "react";
-import s from "./AddTaskForm.module.scss";
-import Button from "../../../../shared/ui/Button/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck,
     faCircleXmark,
-} from "@fortawesome/free-regular-svg-icons";
-import { createTask } from "../../../../features/tasks/API/createTask";
-import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
-import { useTranslation } from "react-i18next";
+} from '@fortawesome/free-regular-svg-icons';
+import { useTranslation } from 'react-i18next';
+import s from './AddTaskForm.module.scss';
+import Button from '../../../../shared/ui/Button/Button';
+import { createTask } from '../../../../features/tasks/API/createTask';
+import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 
 interface Props {
   onAbort: () => void;
@@ -23,19 +23,21 @@ const AddTaskForm: React.FC<Props> = ({
     boardId,
     columnId,
 }) => {
-    const [title, setTitle] = React.useState("");
-    const [description, setDescription] = React.useState("");
+    const [title, setTitle] = React.useState('');
+    const [description, setDescription] = React.useState('');
     const { user } = UserAuth();
-    const {t} = useTranslation() 
+    const { t } = useTranslation();
     const handler = () => {
         createTask(
-            { title, description, creatorId: user?.uid as string, tags: [] },
+            {
+                title, description, creatorId: user?.uid as string, tags: [],
+            },
             boardId,
-            columnId
+            columnId,
         ).then(onSubmit);
     };
-    
-    return (    
+
+    return (
         <div className={s.wrapper}>
             <form>
                 <div className={s.inputBlock}>
@@ -63,24 +65,24 @@ const AddTaskForm: React.FC<Props> = ({
             <div className={s.createColumnButtons}>
                 <Button
                     onClick={handler}
-                    icon={
+                    icon={(
                         <FontAwesomeIcon
                             icon={faCircleCheck}
-                            style={{ color: "#5CD43E" }}
+                            style={{ color: '#5CD43E' }}
                         />
-                    }
+                    )}
                 >
                     Confirm
                 </Button>
 
                 <Button
                     onClick={onAbort}
-                    icon={
+                    icon={(
                         <FontAwesomeIcon
                             icon={faCircleXmark}
-                            style={{ color: "#DE2525" }}
+                            style={{ color: '#DE2525' }}
                         />
-                    }
+                    )}
                 >
                     Cancel
                 </Button>

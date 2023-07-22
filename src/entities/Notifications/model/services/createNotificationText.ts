@@ -1,9 +1,6 @@
-
-import {IBoard, LinkedUserType} from "../../../../app/types/IBoard";
-import { IUserInfo } from "../../../../app/types/IUserInfo";
-import NotificationType, { NotificationPayload } from "../types/NotificationsSchema";
-
-
+import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
+import { IUserInfo } from '../../../../app/types/IUserInfo';
+import NotificationType, { NotificationPayload } from '../types/NotificationsSchema';
 
 interface Info {
     board?: IBoard;
@@ -13,11 +10,11 @@ interface Info {
 export const createNotificationText = (notification: NotificationPayload, info: Info) => {
     switch (notification.type) {
     case NotificationType.BOARD_INVITED:
-        return `${info.user?.displayName} invited you to be ${notification.invitedRole === 
-            LinkedUserType.USER ? "editor" : "reader"} in board ${info.board?.title}.`;
+        return `${info.user?.displayName} invited you to be ${notification.invitedRole
+            === LinkedUserType.USER ? 'editor' : 'reader'} in board ${info.board?.title}.`;
     case NotificationType.CHAT_MESSAGE:
         return `${info.user?.displayName} sent you a message`;
     default:
-        return ""
+        return '';
     }
-}
+};

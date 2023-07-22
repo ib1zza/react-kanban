@@ -1,2 +1,3 @@
-import Login from "./ui/Login";
-export { Login };
+import { LoginAsync } from './ui/Login.async';
+
+export { LoginAsync as Login };

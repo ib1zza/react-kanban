@@ -1,19 +1,20 @@
-import { collection, getDocs, or, query, where } from "firebase/firestore";
-import { db } from "../../../firebase";
-import { IBoard } from "../../../app/types/IBoard";
-import {User} from "firebase/auth";
+import {
+    collection, getDocs, or, query, where,
+} from 'firebase/firestore';
+import { User } from 'firebase/auth';
+import { db } from '../../../firebase';
+import { IBoard } from '../../../app/types/IBoard';
 
 export const getBoards = async (user: User | null) => {
-    if(!user) return [];
+    if (!user) return [];
     const dataRef = query(
-        collection(db, "boards"),
+        collection(db, 'boards'),
         or(
-            where("usersAllowed", "array-contains", `${user.uid}`),
-            where("guestsAllowed", "array-contains", `${user.uid}`),
-            where("ownerId", "==", `${user.uid}`)
-        )
+            where('usersAllowed', 'array-contains', `${user.uid}`),
+            where('guestsAllowed', 'array-contains', `${user.uid}`),
+            where('ownerId', '==', `${user.uid}`),
+        ),
     );
-
 
     const docsSnap = await getDocs(dataRef);
     const res: IBoard[] = [];
@@ -27,7 +28,7 @@ export const getBoards = async (user: User | null) => {
             ownerId: doc.data().ownerId,
             guestPermissions: doc.data().guestPermissions,
             guestsAllowed: doc.data().guestsAllowed,
-            columns: doc.data().columns
+            columns: doc.data().columns,
         });
     });
     return res;

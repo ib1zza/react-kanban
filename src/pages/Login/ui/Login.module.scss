@@ -119,7 +119,6 @@
 
 .login__linkArea_link {
     text-decoration: underline;
-    letter-spacing: 0.05em;
     color: var(--LRLinkColor);
     font-weight: 800;
     line-height: normal;
@@ -257,7 +256,7 @@
     }
     .title_wrapper {
         img {
-           display: none;
+            display: none;
         }
     }
     .logo {

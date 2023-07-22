@@ -1,16 +1,17 @@
-import React from "react";
-import s from "./Task.module.scss";
-import { ITask } from "../../../app/types/IBoard";
-import { useAppDispatch } from "../../../app/providers/store/store";
-import { faCircleCheck as iconCheckRegular } from "@fortawesome/free-regular-svg-icons";
+import React from 'react';
+import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
 import {
+    faEllipsisVertical, faTrash,
     faCircleCheck as iconCheckSolid,
-    faEllipsisVertical,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import s from './Task.module.scss';
+import { ITask } from '../../../app/types/IBoard';
+import { useAppDispatch } from '../../../app/providers/store/store';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toggleTaskComplete } from "../../../features/tasks/API/toggleTaskComplete";
-import { boardCollectionActions } from "../../Board/model/slice/boardCollectionSlice";
+import { toggleTaskComplete } from '../../../features/tasks/API/toggleTaskComplete';
+import { deleteTask } from '../../../features/tasks';
+import { boardCollectionActions } from '../../Board/model/slice/boardCollectionSlice';
 
 interface ITaskProps {
   task: ITask;
@@ -18,15 +19,23 @@ interface ITaskProps {
   columnId: string;
   rerender: () => void;
 }
-const Task = ({ task, boardId, columnId, rerender }: ITaskProps) => {
+const Task = ({
+    task, boardId, columnId, rerender,
+}: ITaskProps) => {
     const dispatch = useAppDispatch();
-    const clickHandler = () => {
+
+    const openTaskHandler = () => {
         dispatch(boardCollectionActions.setCurrentTask(task));
     };
 
+    const deleteTaskHandler = () => {
+        deleteTask(boardId, columnId, task.uid);
+        dispatch(boardCollectionActions.removeSelectedTask());
+        rerender();
+    };
     const handleComplete = () => {
         toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted).then(
-            rerender
+            rerender,
         );
     };
 
@@ -43,10 +52,14 @@ const Task = ({ task, boardId, columnId, rerender }: ITaskProps) => {
 
                 <span>{task.title}</span>
             </div>
-
-            <button className={s.button} onClick={clickHandler}>
-                <FontAwesomeIcon icon={faEllipsisVertical} />
-            </button>
+            <div>
+                <button className={s.button} onClick={openTaskHandler}>
+                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                </button>
+                <button className={s.button} onClick={() => deleteTaskHandler()}>
+                    <FontAwesomeIcon icon={faTrash} />
+                </button>
+            </div>
         </div>
     );
 };

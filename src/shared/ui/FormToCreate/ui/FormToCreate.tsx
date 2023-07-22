@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import s from "./FormToCreate.module.scss";
-import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
-import ColorPicker from "../../ColorPicker/ColorPicker";
-import ConfirmButtons from "../../ConfirmButtons/ConfirmButtons";
-import { useTranslation } from "react-i18next";
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import s from './FormToCreate.module.scss';
+import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
+import ColorPicker from '../../ColorPicker/ColorPicker';
+import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
 
 interface Props {
   onAbort: () => void;
@@ -20,10 +20,10 @@ const FormToCreate: React.FC<Props> = ({
     onCreateColumn,
     onCreateBoard,
 }) => {
-    const [title, setTitle] = useState("");
+    const [title, setTitle] = useState('');
     const { user } = UserAuth();
-    const [color, setColor] = useState("#f44336");
-    const {t} = useTranslation('buttons')
+    const [color, setColor] = useState('#f44336');
+    const { t } = useTranslation('buttons');
     // TODO: add create column action
 
     const addBoard = () => {
@@ -43,13 +43,13 @@ const FormToCreate: React.FC<Props> = ({
     console.log(color);
 
     return (
-        <div className={s.container + " " + (forColumn && s.withColor)}>
+        <div className={`${s.container} ${forColumn && s.withColor}`}>
             {forColumn && (
                 <div className={s.headerColor} style={{ backgroundColor: color }} />
             )}
             <h6 className={s.title}>
                 <input
-                    placeholder={t("Название")}
+                    placeholder={t('Название')}
                     className={s.createColumnTitle}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}

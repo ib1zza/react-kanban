@@ -1,12 +1,12 @@
-import { updateDocument } from "../../../users/API/updateDocument";
-import { deleteDoc, doc, arrayRemove } from "firebase/firestore";
-import { db } from "../../../../firebase";
+import { arrayRemove, deleteDoc, doc } from 'firebase/firestore';
+import { updateDocument } from '../../../users/API/updateDocument';
+import { db } from '../../../../firebase';
 
 export const deleteBoard = async (boardId: string, userId: string) => {
     try {
         console.log(boardId);
-        await deleteDoc(doc(db, "boards", boardId));
-        await updateDocument("users", userId, {
+        await deleteDoc(doc(db, 'boards', boardId));
+        await updateDocument('users', userId, {
             boardsIds: arrayRemove(boardId),
         });
     } catch (e) {

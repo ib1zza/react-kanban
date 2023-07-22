@@ -1,13 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { UserInfoSchema } from "../types/UserInfoSchema";
-
+import { createSlice } from '@reduxjs/toolkit';
+import { UserInfoSchema } from '../types/UserInfoSchema';
 
 const initialState: UserInfoSchema = {
     user: null,
 };
 
 export const userInfoSlice = createSlice({
-    name: "user",
+    name: 'user',
     initialState,
     reducers: {
         setUserInfo: (state, action) => {

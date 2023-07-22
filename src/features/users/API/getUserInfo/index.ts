@@ -1,9 +1,8 @@
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../../firebase";
-import { IUserInfo } from "../../../../app/types/IUserInfo";
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../../../firebase';
+import { IUserInfo } from '../../../../app/types/IUserInfo';
+
 export async function getUserInfo(id: string) {
-    const ref = doc(db, "users", id);
-    return await getDoc(ref).then((doc) => {
-        return doc.data() as IUserInfo;
-    });
+    const ref = doc(db, 'users', id);
+    return getDoc(ref).then((doc) => doc.data() as IUserInfo);
 }

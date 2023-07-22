@@ -1,12 +1,10 @@
-import { LinkedUserType } from "../../../../app/types/IBoard";
+import { LinkedUserType } from '../../../../app/types/IBoard';
 
-export interface NotificationsSchema {
-    notifications: NotificationItem[];
-}
 const enum NotificationType {
-    BOARD_INVITED = "BOARD_INVITED",
-    CHAT_MESSAGE = "CHAT_MESSAGE",
+    BOARD_INVITED = 'BOARD_INVITED',
+    CHAT_MESSAGE = 'CHAT_MESSAGE',
 }
+
 export default NotificationType;
 
 export type NotificationPayloadBoardInvited = {
@@ -31,4 +29,7 @@ export interface NotificationItem {
     timestamp: number;
     payload: NotificationPayload;
     read: boolean;
+}
+export interface NotificationsSchema {
+    notifications: NotificationItem[];
 }

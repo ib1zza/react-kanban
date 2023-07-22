@@ -1,2 +1,3 @@
-import Profile from "./ui/Profile";
-export { Profile };
+import { ProfileAsync } from './ui/Profile.async';
+
+export { ProfileAsync as Profile };

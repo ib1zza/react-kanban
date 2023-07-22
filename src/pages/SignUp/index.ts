@@ -1,2 +1,3 @@
-import SignUp from "./ui/SignUp";
-export { SignUp };
+import { SignUpAsync } from './ui/SignUp.async';
+
+export { SignUpAsync as SignUp };

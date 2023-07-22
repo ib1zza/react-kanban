@@ -1,2 +1,3 @@
-import Home from "./ui/Home";
-export { Home };
+import { HomeAsync } from './ui/Home.async';
+
+export { HomeAsync as Home };

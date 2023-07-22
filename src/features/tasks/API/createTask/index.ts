@@ -1,5 +1,5 @@
-import { updateDocument } from "../../../users/API/updateDocument";
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
+import { updateDocument } from '../../../users/API/updateDocument';
 
 interface ITaskForCreate {
   title: string;
@@ -12,12 +12,12 @@ interface ITaskForCreate {
 export const createTask = async (
     taskData: ITaskForCreate,
     boardId: string,
-    columnId: string
+    columnId: string,
 ) => {
     try {
         const newTaskId = uuid();
-        await updateDocument("boards", boardId, {
-            ["columns." + columnId + ".tasks." + newTaskId]: {
+        await updateDocument('boards', boardId, {
+            [`columns.${columnId}.tasks.${newTaskId}`]: {
                 uid: newTaskId,
                 title: taskData.title,
                 description: taskData.description,

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import s from "./../../../../entities/Columns/ui/TaskColumn.module.scss";
-import { UserAuth } from "../../../../app/providers/authRouter/ui/AuthContext";
-import ConfirmButtons from "../../ConfirmButtons/ConfirmButtons";
-import ColorPicker from "../../ColorPicker/ColorPicker";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+import s from '../../../../entities/Column/ui/TaskColumn.module.scss';
+import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
+import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
+import ColorPicker from '../../ColorPicker/ColorPicker';
 
 interface Props {
   onAbort: () => void;
@@ -22,10 +22,10 @@ const FormToLink: React.FC<Props> = ({
     onCreateBoard,
     boardId,
 }) => {
-    const {t} = useTranslation('buttons')
-    const [title, setTitle] = useState("");
+    const { t } = useTranslation('buttons');
+    const [title, setTitle] = useState('');
     const { user } = UserAuth();
-    const [color, setColor] = useState("#f44336");
+    const [color, setColor] = useState('#f44336');
 
     const addBoard = () => {
         if (!title.trim() || !user) return;
@@ -44,13 +44,13 @@ const FormToLink: React.FC<Props> = ({
     console.log(color);
 
     return (
-        <div className={s.container + " " + (forColumn && s.withColor)}>
+        <div className={`${s.container} ${forColumn && s.withColor}`}>
             {forColumn && (
                 <div className={s.headerColor} style={{ backgroundColor: color }} />
             )}
             <h6 className={s.title}>
                 <input
-                    placeholder={t("Ссылка")}
+                    placeholder={t('Ссылка')}
                     className={s.createColumnTitle}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}

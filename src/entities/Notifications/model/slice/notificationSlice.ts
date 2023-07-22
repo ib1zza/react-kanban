@@ -1,12 +1,12 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { NotificationItem, NotificationsSchema } from "../types/NotificationsSchema";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { NotificationItem, NotificationsSchema } from '../types/NotificationsSchema';
 
 const initialState: NotificationsSchema = {
     notifications: [],
 };
 
 export const notificationSlice = createSlice({
-    name: "notifications",
+    name: 'notifications',
     initialState,
     reducers: {
         setNotifications: (state, action: PayloadAction<NotificationItem[]>) => {
@@ -14,20 +14,20 @@ export const notificationSlice = createSlice({
         },
         removeNotification: (state, action: PayloadAction<string>) => {
             state.notifications = state.notifications.filter(
-                notification => notification.uid !== action.payload
+                (notification) => notification.uid !== action.payload,
             ).sort((a, b) => b.timestamp - a.timestamp);
         },
         acceptNotification: (state, action: PayloadAction<string>) => {
             const notif = state.notifications.find(
-                notification => notification.uid === action.payload
-            )
+                (notification) => notification.uid === action.payload,
+            );
             if (!notif) return;
             state.notifications = (state.notifications.filter(
-                notification => notification.uid !== action.payload
+                (notification) => notification.uid !== action.payload,
             )as any[])
-                .concat({...notif, payload: {...notif.payload, isAccepted: true}})
+                .concat({ ...notif, payload: { ...notif.payload, isAccepted: true } })
                 .sort((a, b) => b.timestamp - a.timestamp);
-        } 
+        },
     },
 });
 
