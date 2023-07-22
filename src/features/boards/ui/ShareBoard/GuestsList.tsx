@@ -6,7 +6,8 @@ import s from './ShareBoard.module.scss';
 import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
 import { getUserInfo } from '../../../users/API/getUserInfo';
 import { deleteUserFromBoard } from '../../API/deleteUserFromBoard';
-import { IUserInfo } from '../../../../app/types/User';
+
+import { IUserInfo } from '../../../../app/types/IUserInfo';
 
 interface Props {
   board: IBoard;

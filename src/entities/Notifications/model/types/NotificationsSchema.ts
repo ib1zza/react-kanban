@@ -1,9 +1,11 @@
-import { LinkedUserType } from './IBoard';
+import { LinkedUserType } from '../../../../app/types/IBoard';
 
-export const enum NotificationType {
+const enum NotificationType {
     BOARD_INVITED = 'BOARD_INVITED',
     CHAT_MESSAGE = 'CHAT_MESSAGE',
 }
+
+export default NotificationType;
 
 export type NotificationPayloadBoardInvited = {
     boardId: string;
@@ -27,4 +29,7 @@ export interface NotificationItem {
     timestamp: number;
     payload: NotificationPayload;
     read: boolean;
+}
+export interface NotificationsSchema {
+    notifications: NotificationItem[];
 }

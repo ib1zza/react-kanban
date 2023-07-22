@@ -1,6 +1,6 @@
-import { deleteDoc, deleteField, doc } from 'firebase/firestore';
-import { db } from '../../../firebase';
-import { updateDocument } from '../../../features/users';
+import { deleteField } from 'firebase/firestore';
+
+import { updateDocument } from '../../../../../features/users';
 
 export const deleteNotification = async (
     userId: string,

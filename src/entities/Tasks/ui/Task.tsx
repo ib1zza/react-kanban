@@ -8,13 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './Task.module.scss';
 import { ITask } from '../../../app/types/IBoard';
 import { useAppDispatch } from '../../../app/providers/store/store';
-import {
-    removeSelectedTask,
-    setCurrentTask,
-} from '../../../app/providers/store/Reducers/boardCollectionSlice';
 
 import { toggleTaskComplete } from '../../../features/tasks/API/toggleTaskComplete';
 import { deleteTask } from '../../../features/tasks';
+import { boardCollectionActions } from '../../Board/model/slice/boardCollectionSlice';
 
 interface ITaskProps {
   task: ITask;
@@ -28,12 +25,12 @@ const Task = ({
     const dispatch = useAppDispatch();
 
     const openTaskHandler = () => {
-        dispatch(setCurrentTask(task));
+        dispatch(boardCollectionActions.setCurrentTask(task));
     };
 
     const deleteTaskHandler = () => {
         deleteTask(boardId, columnId, task.uid);
-        dispatch(removeSelectedTask());
+        dispatch(boardCollectionActions.removeSelectedTask());
         rerender();
     };
     const handleComplete = () => {

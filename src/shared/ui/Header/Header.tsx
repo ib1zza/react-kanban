@@ -7,9 +7,9 @@ import { AppRoute } from '../../../app/providers/router/lib/AppRoute';
 import noAvatar from '../../assets/images/noAvatar.svg';
 import { useAppSelector } from '../../../app/providers/store/store';
 import ThemeSwitcher from '../ThemeSwitcher/ui/ThemeSwitcher';
-// eslint-disable-next-line max-len
-import OpenNotificationsButton from '../../../features/notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
 import { LangSwitcher } from '../LangSwitcher/ui/LangSwitcher';
+// eslint-disable-next-line max-len
+import OpenNotificationsButton from '../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
 
 const Header = () => {
     const { user } = useAppSelector((state) => state.userInfo);

@@ -1,10 +1,6 @@
-import {
-    NotificationItem,
-    NotificationPayload,
-    NotificationType,
-} from '../../../app/types/Notifications';
-import { IBoard, LinkedUserType } from '../../../app/types/IBoard';
-import { IUserInfo } from '../../../app/types/User';
+import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
+import { IUserInfo } from '../../../../app/types/IUserInfo';
+import NotificationType, { NotificationPayload } from '../types/NotificationsSchema';
 
 interface Info {
     board?: IBoard;

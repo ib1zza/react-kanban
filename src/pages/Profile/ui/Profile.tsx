@@ -4,10 +4,10 @@ import { updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 import s from './Profile.module.scss';
 import { UserAuth } from '../../../app/providers/authRouter/ui/AuthContext';
-import { editDisplayName, getUserInfo, updateDocument } from '../../../features/users';
-import { IUserInfo } from '../../../app/types/User';
+import { getUserInfo, editDisplayName, updateDocument } from '../../../features/users';
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import { storage } from '../../../firebase';
+import { IUserInfo } from '../../../app/types/IUserInfo';
 
 const Profile = () => {
     const { user, refetch } = UserAuth();

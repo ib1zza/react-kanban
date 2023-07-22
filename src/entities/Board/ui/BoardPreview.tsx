@@ -1,14 +1,13 @@
-/* eslint-disable react/no-children-prop */
 import React, { useEffect } from 'react';
 import { faLink, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import s from './BoardPreview.module.scss';
-import { getUserInfo } from '../../../features/users';
-import { deleteBoard } from '../../../features/boards';
-import Modal from '../../../shared/ui/Modal/Modal';
-import ShareBoard from '../../../features/boards/ui/ShareBoard/ShareBoard';
 import { IBoard } from '../../../app/types/IBoard';
+import { deleteBoard } from '../../../features/boards';
+import ShareBoard from '../../../features/boards/ui/ShareBoard/ShareBoard';
+import { getUserInfo } from '../../../features/users';
+import Modal from '../../../shared/ui/Modal/Modal';
 
 interface IBoardPreviewProps {
   userId: string;
@@ -28,7 +27,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
     const { t } = useTranslation();
 
     useEffect(() => {
-        getUserInfo(board.ownerId).then((res) => {
+        getUserInfo(board.ownerId).then((res: { displayName: React.SetStateAction<string>; }) => {
             setUsername(res?.displayName);
         });
     }, [userId]);
@@ -49,6 +48,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
             {shareStatus && (
                 <Modal
                     onClose={onCloseShare}
+                    // eslint-disable-next-line react/no-children-prop
                     children={<ShareBoard board={board} />}
                 />
             )}

@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-
-    NotificationPayloadBoardInvited,
-} from '../../../../app/types/Notifications';
 import s from './Notification.module.scss';
-import { IUserInfo } from '../../../../app/types/User';
-import { getUserInfo } from '../../../users';
-import { getBoardFromId } from '../../../../entities/Board';
-import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
-import { acceptInviteNotification } from '../../API/acceptInviteNotification';
-import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
-import { declineInviteNotification } from '../../API/declineInviteNotification';
-import {
-    acceptNotification,
-    removeNotification,
-    useAppDispatch,
-} from '../../../../app/providers/store';
+
+import { getUserInfo } from '../../../features/users';
+import { getBoardFromId } from '../../Board';
+import { IBoard, LinkedUserType } from '../../../app/types/IBoard';
+import { acceptInviteNotification } from '../model/services/API/acceptInviteNotification';
+import { useAuth } from '../../../app/providers/authRouter/ui/AuthContext';
+import { declineInviteNotification } from '../model/services/API/declineInviteNotification';
+import { useAppDispatch } from '../../../app/providers/store';
+import { NotificationPayloadBoardInvited } from '../model/types/NotificationsSchema';
+import { IUserInfo } from '../../../app/types/IUserInfo';
+import { notificationsActions } from '../model/slice/notificationSlice';
 
 interface Props {
     data: NotificationPayloadBoardInvited;
@@ -45,7 +41,7 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
         if (!user || !board) return;
         acceptInviteNotification(notificationId, user.uid, board.uid).then(
             () => {
-                dispatch(acceptNotification(notificationId));
+                dispatch(notificationsActions.acceptNotification(notificationId));
             },
         );
     };
@@ -53,7 +49,7 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
         if (!user || !board) return;
         declineInviteNotification(notificationId, user.uid, board.uid).then(
             () => {
-                dispatch(removeNotification(notificationId));
+                dispatch(notificationsActions.removeNotification(notificationId));
             },
         );
     };

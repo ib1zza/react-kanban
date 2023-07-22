@@ -12,9 +12,12 @@ import {
 
 import { deleteTask, editTask } from '../../../features/tasks';
 
-import { removeSelectedTask } from '../../../app/providers/store/Reducers/boardCollectionSlice';
 import Button from '../../../shared/ui/Button/Button';
+
 import EditTaskForm from '../../../entities/Tasks/lib/EditTaskForm';
+
+import { boardCollectionActions } from '../../../entities/Board/model/slice/boardCollectionSlice';
+import { getBoardCollection } from '../../../entities/Board/model/selectors/getBoardCollection';
 
 interface Props {
   onEdit: () => void;
@@ -26,7 +29,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         selectedTask: task,
         selectedBoardId,
         selectedColumnId,
-    } = useAppSelector((state) => state.boardCollection);
+    } = useAppSelector(getBoardCollection);
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
@@ -56,7 +59,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                 <button className={s.icon}>
                     <FontAwesomeIcon
                         icon={faCircleXmark}
-                        onClick={() => dispatch(removeSelectedTask())}
+                        onClick={() => dispatch(boardCollectionActions.removeSelectedTask())}
                     />
                 </button>
             </div>

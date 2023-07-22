@@ -1,4 +1,4 @@
-import { updateDocument } from '../../../shared/API/updateDocument';
+import { updateDocument } from '../../../../../shared/API/updateDocument';
 
 export const readNotification = async (
     userId: string,

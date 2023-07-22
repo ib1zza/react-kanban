@@ -1,14 +1,8 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IBoard, ITask } from '../../../types/IBoard';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IBoard, ITask } from '../../../../app/types/IBoard';
+import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
 
-export interface boardCollectionState {
-  selectedBoardId: string;
-  selectedColumnId: string;
-  selectedBoard: IBoard | null;
-  selectedTask: ITask | null;
-}
-
-const initialState: boardCollectionState = {
+const initialState: BoardCollectionSchema = {
     selectedBoardId: '',
     selectedColumnId: '',
     selectedBoard: null,
@@ -22,7 +16,6 @@ export const boardCollectionSlice = createSlice({
         setCurrentBoard: (state, action: PayloadAction<IBoard>) => {
             state.selectedBoard = action.payload;
             state.selectedBoardId = action.payload.uid;
-
             console.log('board selected:', action.payload);
         },
         removeSelectedBoard: (state) => {
@@ -46,11 +39,5 @@ export const boardCollectionSlice = createSlice({
     },
 });
 
-export const {
-    setCurrentBoard,
-    setCurrentTask,
-    removeSelectedTask,
-    removeSelectedBoard,
-} = boardCollectionSlice.actions;
-
-export default boardCollectionSlice.reducer;
+export const { actions: boardCollectionActions } = boardCollectionSlice;
+export const { reducer: boardCollectionReducer } = boardCollectionSlice;

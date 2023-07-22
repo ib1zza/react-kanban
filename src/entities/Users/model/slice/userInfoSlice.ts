@@ -1,11 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUserInfo } from '../../../types/User';
+import { UserInfoSchema } from '../types/UserInfoSchema';
 
-export interface userInfoState {
-  user: IUserInfo | null;
-}
-
-const initialState: userInfoState = {
+const initialState: UserInfoSchema = {
     user: null,
 };
 
@@ -19,6 +15,5 @@ export const userInfoSlice = createSlice({
     },
 });
 
-export const { setUserInfo } = userInfoSlice.actions;
-
-export default userInfoSlice.reducer;
+export const { actions: userInfoActions } = userInfoSlice;
+export const { reducer: userInfoReducer } = userInfoSlice;

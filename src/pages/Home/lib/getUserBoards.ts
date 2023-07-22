@@ -1,6 +1,6 @@
-import { IUserInfo } from '../../../app/types/User';
 import { getBoardFromId } from '../../../entities/Board';
 import { IBoard } from '../../../app/types/IBoard';
+import { IUserInfo } from '../../../app/types/IUserInfo';
 
 export const getUserBoards = async (user: IUserInfo | null): Promise<IBoard[]> => {
     if (!user) return [];

@@ -1,11 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { NotificationItem } from '../../../types/Notifications';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { NotificationItem, NotificationsSchema } from '../types/NotificationsSchema';
 
-export interface userInfoState {
-    notifications: NotificationItem[];
-}
-
-const initialState: userInfoState = {
+const initialState: NotificationsSchema = {
     notifications: [],
 };
 
@@ -26,21 +22,14 @@ export const notificationSlice = createSlice({
                 (notification) => notification.uid === action.payload,
             );
             if (!notif) return;
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            state.notifications = state.notifications.filter(
+            state.notifications = (state.notifications.filter(
                 (notification) => notification.uid !== action.payload,
-            )
+            )as any[])
                 .concat({ ...notif, payload: { ...notif.payload, isAccepted: true } })
                 .sort((a, b) => b.timestamp - a.timestamp);
         },
     },
 });
 
-export const {
-    setNotifications,
-    removeNotification,
-    acceptNotification,
-} = notificationSlice.actions;
-
-export default notificationSlice.reducer;
+export const { actions: notificationsActions } = notificationSlice;
+export const { reducer: notificationReducer } = notificationSlice;

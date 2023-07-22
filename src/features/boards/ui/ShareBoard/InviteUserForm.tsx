@@ -6,7 +6,7 @@ import { getUserFromEmail } from '../../../users/API/getUserFromEmail';
 import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
 import { addUserToBoard } from '../../API/addUserToBoard';
 import { sendNotificationInvite }
-    from '../../../../entities/Notifications/API/sendNotificationInvite';
+    from '../../../../entities/Notifications/model/services/API/sendNotificationInvite';
 import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 
 interface Props {
