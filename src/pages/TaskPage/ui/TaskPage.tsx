@@ -14,7 +14,7 @@ const TaskPage = ({ tasks, changeDescription }: TaskPageProps) => {
     const [input, setInput] = React.useState('');
     const { id } = useParams();
 
-    const taskToRender = tasks.find((task: any) => task.uid == id);
+    const taskToRender = tasks.find((task: any) => task.uid === id);
     console.log(taskToRender);
     const navigate = useNavigate();
 
