@@ -13,6 +13,7 @@ export async function acceptInviteNotification(
         await addToBoardInvitedIds(userId, boardId);
         await updateDocument('notifications', userId, {
             [`${notificationId}.payload.isAccepted`]: true,
+            [`${notificationId}.read`]: true,
         });
     } catch (e) {
         console.log(e);
