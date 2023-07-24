@@ -12,6 +12,7 @@ import s from './SignUp.module.scss';
 import ThemeSwitcher from '../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
 import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
 import Arrow from '../../../shared/assets/images/Arrow 1.svg';
+import { getUserFromEmail } from '../../../features/users';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -66,7 +67,12 @@ const SignUp = () => {
             break;
         }
         case 1: {
-            setStep(step + 1);
+            const res = await getUserFromEmail(data.email);
+            if (res) {
+                setError(t('Пользователь с такой почтой уже существует'));
+            } else {
+                setStep(step + 1);
+            }
             break;
         }
         }
@@ -121,14 +127,17 @@ const SignUp = () => {
                     </div>
                     {step === 1 && (
                         <>
+
                             <div className={s.signup__label}>
                                 {t('Введите вашу почту')}
                             </div>
+
                             {errors.email && (
                                 <p className={s.signup__label_error}>
                                     {t('Запишите в формате почты')}
                                 </p>
                             )}
+
                             <input
                                 className={s.signup__input}
                                 type="email"
@@ -137,10 +146,12 @@ const SignUp = () => {
                                 {...register('email', {
                                     required: true,
                                     pattern:
-                    // eslint-disable-next-line max-len, no-useless-escape
-                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                    // eslint-disable-next-line max-len, no-useless-escape
+                                        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                                 })}
                             />
+                            <div className="">{error}</div>
+
                             <div className={s.signup__label}>
                                 {t('Придумайте имя пользователя')}
                             </div>
@@ -150,7 +161,6 @@ const SignUp = () => {
                                     {t('Допускается только латиница в нижнем регистре и нижнee подчеркивание. Минимальное количество символов 3, максимальное - 20.')}
                                 </p>
                             )}
-                            <div className="">{error}</div>
                             <input
                                 className={s.signup__input}
                                 type="text"
