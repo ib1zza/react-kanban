@@ -70,9 +70,9 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
             </h3>
             <p>
                 by
+                {' '}
                 {username || `${t('Загрузка')}`}
             </p>
-            {' '}
         </div>
     );
 };

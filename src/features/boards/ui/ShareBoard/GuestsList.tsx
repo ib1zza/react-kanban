@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { faClock } from '@fortawesome/free-regular-svg-icons';
 import s from './ShareBoard.module.scss';
 import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
 import { getUserInfo } from '../../../users/API/getUserInfo';
@@ -91,9 +92,18 @@ const GuestsList: FC<Props> = ({ board }) => {
             <div>
                 {usersEmails.map((user) => (
                     <div key={user.uid} className={s.form__user}>
-                        <div>{user.email}</div>
+                        <div>
+                            <FontAwesomeIcon icon={
+                                user.boardInvitedIds.includes(board.uid) ? faCheck : faClock
+                            }
+                            />
+                            {' '}
+                            {user.email}
+                        </div>
+
+                        {/* <div>{user.boardInvitedIds.includes(board.uid) ? 'yes' : 'no'}</div> */}
                         <button onClick={() => handleRemoveUserFromBoard(user.uid)}>
-                            <FontAwesomeIcon icon={faTrash} />
+                            <FontAwesomeIcon icon={faXmark} />
                         </button>
                     </div>
                 ))}

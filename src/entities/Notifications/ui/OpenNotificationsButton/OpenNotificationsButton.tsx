@@ -15,9 +15,6 @@ import { getNotifications } from '../../model/selectors/getNotifications';
 import { notificationsActions } from '../../model/slice/notificationSlice';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
 
-interface Props {
-    notificationsCount: number;
-}
 const OpenNotificationsButton = () => {
     const { user } = useAuth();
     const dispatch = useAppDispatch();
@@ -44,8 +41,6 @@ const OpenNotificationsButton = () => {
         getNotifs();
     }, [user?.uid]);
 
-    console.log(notifications.map((notif: { timestamp: any; }) => notif.timestamp));
-
     useEffect(() => {
         setUnreadCount(notifications.filter((notif: { read: any; }) => !notif.read).length);
     }, [notifications]);
@@ -65,14 +60,26 @@ const OpenNotificationsButton = () => {
             notifications.map((notif: any) => ({ ...notif, read: true })),
         ));
     };
+    function listener() {
+        setOpen(false);
+    }
+
+    useEffect(() => {
+        if (open) {
+            setTimeout(() => {
+                document.body.addEventListener('click', listener, { once: true });
+            }, 50);
+        }
+    }, [open]);
 
     return (
-        <button className={s.button}>
+        <button className={s.button} onClick={(e) => e.stopPropagation()}>
             <FontAwesomeIcon onClick={toggler} icon={unreadCount ? faSolidBell : faRegularBell} />
             {!!unreadCount && <div className={s.count}>{unreadCount}</div>}
 
             {open && (
                 <div className={s.notificationsContainer}>
+                    {notifications.length ? '' : 'Нет уведомлений'}
                     {notifications.map((notif: NotificationItem) => (
                         <Notification data={notif} key={notif.uid} />
                     ))}
