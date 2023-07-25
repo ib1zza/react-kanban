@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import { signOut, User, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
+import { AsyncThunk } from '@reduxjs/toolkit';
 import { auth } from '../../../../firebase';
 import { signUpEmailPass } from '../../../../pages/SignUp/lib/signUp';
 import { loginByEmailPass } from '../../../../pages/Login/lib/logIn';
@@ -25,15 +26,17 @@ interface IAuthContext {
     select: ISelect,
     photoFile?: any
   ) => void;
-  logIn: (email: string, password: string) => void;
+
+  logIn: (email: string,
+    password: string, rememberMe: boolean) => void
   logOut: () => void;
   refetch: () => void;
   user: User | null;
 }
 
 const AuthContext = createContext<IAuthContext>({
-    signUp: () => {},
     logIn: () => {},
+    signUp: () => {},
     logOut: () => {},
     refetch: () => {},
     user: null,

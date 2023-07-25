@@ -1,0 +1,173 @@
+.input {
+    margin-top: 8px;
+    padding: 16px;
+    width: 100%;
+    border: 1px solid white;
+    background-color: white;
+    border-radius: 4px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 4.8px;
+}
+
+.title_wrapper{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    img {
+        position: absolute;
+        width: 100px;
+        left: 16px;
+        top: 16px;
+    }
+   
+}
+form {
+    background-color: var(--LRbodyBg);
+    border: 2px solid white;
+    border-radius: 6px;
+    padding: 36px;
+    margin: auto;
+    width: 500px;
+    height: 520px;
+
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+    color: var(--LRtitleColor);
+    text-transform: uppercase;
+    
+}
+
+
+.linkArea_link {
+    text-decoration: underline;
+    color: var(--LRLinkColor);
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+}
+
+.linkArea_descr {
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-weight: 800;
+    line-height: normal;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+}
+.btn_wrapper{
+    display: flex;
+    justify-content: center;
+
+}
+.btn {
+    background-color: var(--LRbtnbgColor);
+    border-radius: 10px;
+    color: var(--LRbtnColor);
+    margin-top: 4px;
+    padding: 8px;
+    width:140px;
+    height: 50px;
+    text-align: center;
+    flex-shrink: 0;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+}
+
+.label {
+    margin-top: 30px;
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 4.8px;
+    text-transform: uppercase;
+}
+
+
+.remember p {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: var(--LRtitleColor);
+    margin-bottom: 28px;
+  
+}
+.remember p input {
+    width: 14px;
+    height: 14px;
+    margin-right: 16px;
+    color: var(--taskTextColor);
+  
+}
+.error {
+    color: red;
+    color: var(--taskTextColor);;
+}
+
+@media screen and (width <= 800px) {
+
+    .label {
+        color: white;
+        font-size: 12px;
+    }
+
+    .remember {
+        color: white;
+        font-size: 12px;
+    }
+    .btn {
+     
+
+        margin-top: 4px;
+     
+        width: 100%;
+        font-size: 14px;
+    }
+    .title_wrapper {
+        img {
+            display: none;
+        }
+    }
+    .linkArea_link {
+        font-size: 12px;
+    }
+  
+    form {
+        margin-left: auto;
+        margin-top: 1px;
+        height: 460px;
+        width: 90%;
+        border-radius: 30px;
+        padding: 28px;
+    }
+    .title {
+        color: white;
+        margin-bottom: 0;
+        font-size: 18px;
+    }
+
+
+    .linkArea_descr {
+        color: white;
+        font-size: 12px;
+    }
+    .input{
+        font-size: 12px;
+        padding: 12px;
+    }
+}
+

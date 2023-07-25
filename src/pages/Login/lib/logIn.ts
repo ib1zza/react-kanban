@@ -1,6 +1,16 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../firebase';
+import {
+    browserLocalPersistence,
+    browserSessionPersistence,
+    getAuth,
+    setPersistence,
+    signInWithEmailAndPassword,
+} from 'firebase/auth';
 
-export const loginByEmailPass = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password);
+export const loginByEmailPass = async (email: string, password: string, remember: boolean) => {
+    const auth = getAuth();
+    setPersistence(auth, remember
+        ? browserLocalPersistence
+        : browserSessionPersistence).then(async () => {
+        await signInWithEmailAndPassword(auth, email, password);
+    });
 };
