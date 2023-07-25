@@ -14,132 +14,8 @@
 
 }
 
-.login {
-    background-color: var(--LRbodyBg);
-    border: 2px solid white;
-    border-radius: 6px;
-    padding: 36px;
-    margin: auto;
-    width: 500px;
-    height: 520px;
-
-}
-.title_wrapper{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    img {
-        position: absolute;
-        width: 100px;
-        left: 16px;
-        top: 16px;
-    }
-   
-}
-.login__title {
-    text-align: center;
-    margin-bottom: 6px;
-    letter-spacing: 0.1em;
-    color: var(--LRtitleColor);
-    text-transform: uppercase;
-    
-}
-
-.login__body {
-    display: flex;
-    flex-direction: column;
-    color: var(--taskTextColor)
-}
-
-.login__input {
-    margin-top: 8px;
-    padding: 16px;
-    width: 100%;
-    border: 1px solid white;
-    background-color: white;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 4.8px;
-}
 
 
-.login__btn_wrapper{
-    display: flex;
-    justify-content: center;
-
-}
-.login__btn {
-    background-color: var(--LRbtnbgColor);
-    border-radius: 10px;
-    color: var(--LRbtnColor);
-    margin-top: 4px;
-    padding: 8px;
-    width:140px;
-    height: 50px;
-    text-align: center;
-    flex-shrink: 0;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: 2.8px;
-    text-transform: uppercase;
-}
-
-.login__label {
-    margin-top: 30px;
-    color: white;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 4.8px;
-    text-transform: uppercase;
-}
-
-
-.login__remember p {
-    margin-top: 16px;
-    display: flex;
-    align-items: center;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 2.8px;
-    text-transform: uppercase;
-    color: var(--LRtitleColor);
-    margin-bottom: 28px;
-  
-}
-.login__remember p input {
-    width: 14px;
-    height: 14px;
-    margin-right: 16px;
-    color: var(--taskTextColor);
-  
-}
-
-.login__linkArea_link {
-    text-decoration: underline;
-    color: var(--LRLinkColor);
-    font-weight: 800;
-    line-height: normal;
-    letter-spacing: 2.8px;
-    text-transform: uppercase;
-}
-
-.login__linkArea_descr {
-    margin-left: 10px;
-    margin-right: 10px;
-    color: white;
-    font-weight: 800;
-    line-height: normal;
-    letter-spacing: 2.8px;
-    text-transform: uppercase;
-}
-
-.login__label_error {
-    color: red;
-    color: var(--taskTextColor);;
-}
 
 .center {
     position: relative;
@@ -254,11 +130,7 @@
     
       
     }
-    .title_wrapper {
-        img {
-            display: none;
-        }
-    }
+    
     .logo {
         display: flex;
         width: 75%;
@@ -266,35 +138,9 @@
         height: 30%;
     }
 
-    .login {
-        margin-left: auto;
-        margin-top: 1px;
-        height: 460px;
-        width: 90%;
-        border-radius: 30px;
-        padding: 28px;
-    }
+   
 
-    .login__title {
-        color: white;
-        margin-bottom: 0;
-        font-size: 18px;
-    }
-
-    .login__label {
-        color: white;
-        font-size: 12px;
-    }
-
-    .login__remember {
-        color: white;
-        font-size: 12px;
-    }
-
-    .login__linkArea_descr {
-        color: white;
-        font-size: 12px;
-    }
+   
 
     .center h1 span:nth-child(2) {
         left: -9px;
@@ -304,21 +150,7 @@
         left: -18px;
     }
 
-    .login__btn {
-     
-
-        margin-top: 4px;
-     
-        width: 100%;
-        font-size: 14px;
-    }
-    .login__linkArea_link {
-        font-size: 12px;
-    }
+  
     
-    .login__input{
-        font-size: 12px;
-        padding: 12px;
-    }
 }
 
