@@ -1,8 +1,7 @@
 import s from './Login.module.scss';
 import ThemeSwitcher from '../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
 import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
-
-import LoginForm from '../../../features/auth/login/ui/LoginForm';
+import { LoginForm } from '../../../features/auth/login';
 
 const Login = () => (
     <div className={s.wrapper}>
