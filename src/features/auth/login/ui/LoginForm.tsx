@@ -2,13 +2,13 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { memo } from 'react';
 import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import s from './LoginForm.module.scss';
-import { getLoginState } from '../model/selectors/getLoginState';
-import { loginActions } from '../model/slice/LoginSlice';
 import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
+import { getLoginState, loginActions } from '..';
 
-const LoginForm = () => {
+const LoginForm = memo(() => {
     const { logIn } = useAuth();
     const { t } = useTranslation('auth');
     const navigate = useNavigate();
@@ -101,6 +101,6 @@ const LoginForm = () => {
 
         </form>
     );
-};
+});
 
 export default LoginForm;
