@@ -12,26 +12,26 @@ $transitionDuration: 0.3s;
     transition: background-color $transitionDuration;
 }
 
-button {
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    font: inherit;
-    text-align:inherit;
-    text-decoration: none;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s;
-}
+// button {
+//     border: none;
+//     background-color: transparent;
+//     color: inherit;
+//     font: inherit;
+//     text-align:inherit;
+//     text-decoration: none;
+//     cursor: pointer;
+//     outline: none;
+//     transition: all 0.2s;
+// }
 
-input {
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    font: inherit;
-    text-align: inherit;
-    outline: none;
-}
+// input {
+//     border: none;
+//     background-color: transparent;
+//     color: inherit;
+//     font: inherit;
+//     text-align: inherit;
+//     outline: none;
+// }
 
 
 .app {
@@ -40,10 +40,10 @@ input {
     background-color: var(--body-bg);
 }
 
-textarea {
-    resize: none;
-    font-family: Poppins, sans-serif;
-}
+// textarea {
+//     resize: none;
+//     font-family: Poppins, sans-serif;
+// }
 
 .block {
     &:not(:last-child) {
