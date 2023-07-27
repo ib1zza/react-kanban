@@ -2,31 +2,33 @@ $background: #fff;
 $hover: var(--iconColorHover);
 $hoverBorder: var(--iconColorHover);
 
+.full {
 
-.button {
-
-    background-color: var(#{--taskBg});
+    background-color: var(#{--ButtonBg});
     position: relative;
-    font-size: 18px;
+    font: var(--font-m);
     cursor: pointer;
     border: 1px solid transparent;
     padding: 6px;
     border-radius: 10px;
 
-    &.loadingButton {
-        box-shadow: 0 0 0 0 #000;
+    // &.loadingButton {
+    //     box-shadow: 0 0 0 0 #000;
+    // }
+    .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 18px;
+        height: 18px;
     }
-
     .content {
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(#{--buttonTextColor});
+        color: var(#{--ButtonText});
 
-        & > .iconContainer {
-            margin-right: 5px;
-        }
-
+       
         &.invisible {
             visibility: hidden;
         }
@@ -46,10 +48,22 @@ $hoverBorder: var(--iconColorHover);
     }
     &:disabled {
         cursor: default;
-        background: $hover;
+        background: var(--ButtonBg);
 
-        &:hover {
-            border: none;
-        }
+       
     }
+    .iconContainer {
+        margin-right: 5px;
+        
+    
+   }
+
+}
+
+.clear{
+    border: none;
+    background-color: transparent;
+    font: var(--font-m);
+    cursor: pointer;
+    
 }

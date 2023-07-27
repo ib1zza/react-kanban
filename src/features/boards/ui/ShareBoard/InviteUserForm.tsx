@@ -1,13 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import s from './ShareBoard.module.scss';
-import Button from '../../../../shared/ui/Button/Button';
+import Button, { ButtonTheme } from '../../../../shared/ui/Button/Button';
 import { getUserFromEmail } from '../../../users/API/getUserFromEmail';
 import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
 import { addUserToBoard } from '../../API/addUserToBoard';
 import { sendNotificationInvite }
     from '../../../../entities/Notifications/model/services/API/sendNotificationInvite';
 import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
+import { Input } from '../../../../shared/ui/Input/Input';
 
 interface Props {
   board: IBoard;
@@ -94,13 +95,17 @@ const InviteUserForm: FC<Props> = ({ board }) => {
                 </label>
             </div>
             <div className={s.form__error}>{error}</div>
-            <input
-                className={s.form__input}
+            <Input
                 placeholder={t('Введите почту')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <Button onClick={() => handleSubmit()}>{t('Добавить')}</Button>
+            <Button
+                onClick={() => handleSubmit()}
+            >
+                {t('Добавить')}
+
+            </Button>
             <div className={s.form__success}>{success}</div>
         </div>
     );

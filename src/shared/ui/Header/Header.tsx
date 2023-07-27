@@ -10,6 +10,7 @@ import ThemeSwitcher from '../ThemeSwitcher/ui/ThemeSwitcher';
 import { LangSwitcher } from '../LangSwitcher/ui/LangSwitcher';
 // eslint-disable-next-line max-len
 import OpenNotificationsButton from '../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
+import Button, { ButtonTheme } from '../Button/Button';
 
 const Header = () => {
     const { user } = useAppSelector((state) => state.userInfo);
@@ -32,7 +33,7 @@ const Header = () => {
             <LangSwitcher />
             <div className={s.leftmenu}>
                 <OpenNotificationsButton />
-                <button className={s.header__cabinet} onClick={() => setIsOpen((prev) => !prev)}>
+                <div className={s.header__cabinet} onClick={() => setIsOpen((prev) => !prev)}>
                     <p className={s.nickname}>{user?.email}</p>
                     <div className={s.avatar}>
                         {
@@ -64,40 +65,42 @@ const Header = () => {
                                 </div>
                             )}
                     </div>
-                    {
-                        isOpen
-                            ? (
-                                <svg
-                                    width="12"
-                                    height="8"
-                                    viewBox="0 0 12 8"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
+                    <Button theme={ButtonTheme.CLEAR}>
+                        {
+                            isOpen
+                                ? (
+                                    <svg
+                                        width="12"
+                                        height="8"
+                                        viewBox="0 0 12 8"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
                                         // eslint-disable-next-line max-len
-                                        d="M1.415 7.79001L6 3.20501L10.585 7.79001L12 6.37501L6 0.375008L0 6.37501L1.415 7.79001Z"
-                                        fill="white"
-                                    />
-                                </svg>
-                            )
-                            : (
-                                <svg
-                                    width="12"
-                                    height="8"
-                                    viewBox="0 0 12 8"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
+                                            d="M1.415 7.79001L6 3.20501L10.585 7.79001L12 6.37501L6 0.375008L0 6.37501L1.415 7.79001Z"
+                                            fill="white"
+                                        />
+                                    </svg>
+                                )
+                                : (
+                                    <svg
+                                        width="12"
+                                        height="8"
+                                        viewBox="0 0 12 8"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
                                         // eslint-disable-next-line max-len
-                                        d="M1.415 0.209991L6 4.79499L10.585 0.209991L12 1.62499L6 7.62499L0 1.62499L1.415 0.209991Z"
-                                        fill="white"
-                                    />
-                                </svg>
-                            )
-                    }
-                </button>
+                                            d="M1.415 0.209991L6 4.79499L10.585 0.209991L12 1.62499L6 7.62499L0 1.62499L1.415 0.209991Z"
+                                            fill="white"
+                                        />
+                                    </svg>
+                                )
+                        }
+                    </Button>
+                </div>
             </div>
         </header>
     );

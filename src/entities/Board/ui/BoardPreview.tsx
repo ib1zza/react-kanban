@@ -8,6 +8,7 @@ import { deleteBoard } from '../../../features/boards';
 import ShareBoard from '../../../features/boards/ui/ShareBoard/ShareBoard';
 import { getUserInfo } from '../../../features/users';
 import Modal from '../../../shared/ui/Modal/Modal';
+import Button from '../../../shared/ui/Button/Button';
 
 interface IBoardPreviewProps {
   userId: string;
@@ -56,15 +57,15 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                 <span onClick={onClick}>{board.title}</span>
                 {userId === board.ownerId && (
                     <div>
-                        <button
+                        <Button
                             onClick={onOpenShare}
-                            style={{ marginRight: '16px' }}
-                        >
-                            <FontAwesomeIcon icon={faLink} />
-                        </button>
-                        <button onClick={handleDelete}>
-                            <FontAwesomeIcon icon={faTrash} style={{ color: '#e32400' }} />
-                        </button>
+                            style={{ marginRight: '5px' }}
+                            icon={<FontAwesomeIcon icon={faLink} />}
+                        />
+                        <Button
+                            onClick={handleDelete}
+                            icon={<FontAwesomeIcon icon={faTrash} style={{ color: '#e32400' }} />}
+                        />
                     </div>
                 )}
             </h3>

@@ -4,6 +4,7 @@ import s from '../../../../entities/Column/ui/TaskColumn.module.scss';
 import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
 import ColorPicker from '../../ColorPicker/ColorPicker';
+import { Input } from '../../Input/Input';
 
 interface Props {
   onAbort: () => void;
@@ -49,7 +50,7 @@ const FormToLink: React.FC<Props> = ({
                 <div className={s.headerColor} style={{ backgroundColor: color }} />
             )}
             <h6 className={s.title}>
-                <input
+                <Input
                     placeholder={t('Ссылка')}
                     className={s.createColumnTitle}
                     value={title}

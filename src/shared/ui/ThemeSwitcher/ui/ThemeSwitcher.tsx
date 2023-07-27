@@ -5,6 +5,7 @@ import { useTheme } from '../../../../app/providers/theme/lib/useTheme';
 import { Theme } from '../../../../app/providers/theme/lib/ThemeContext';
 
 import { classNames } from '../../../lib/classNames/classNames';
+import Button, { ButtonTheme } from '../../Button/Button';
 
 interface ThemeSwitcherProps{
     className?: string
@@ -12,7 +13,7 @@ interface ThemeSwitcherProps{
 const ThemeSwitcher = ({ className } : ThemeSwitcherProps) => {
     const { toggleTheme, theme } = useTheme();
     return (
-        <button
+        <Button
             className={classNames(
                 '',
                 {},
@@ -25,7 +26,7 @@ const ThemeSwitcher = ({ className } : ThemeSwitcherProps) => {
             ) : (
                 <FontAwesomeIcon icon={faMoon} />
             )}
-        </button>
+        </Button>
     );
 };
 

@@ -4,6 +4,7 @@ import s from './FormToCreate.module.scss';
 import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import ColorPicker from '../../ColorPicker/ColorPicker';
 import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
+import { Input } from '../../Input/Input';
 
 interface Props {
   onAbort: () => void;
@@ -48,7 +49,7 @@ const FormToCreate: React.FC<Props> = ({
                 <div className={s.headerColor} style={{ backgroundColor: color }} />
             )}
             <h6 className={s.title}>
-                <input
+                <Input
                     placeholder={t('Название')}
                     className={s.createColumnTitle}
                     value={title}

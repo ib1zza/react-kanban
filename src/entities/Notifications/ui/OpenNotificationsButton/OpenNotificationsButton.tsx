@@ -14,6 +14,7 @@ import { db } from '../../../../firebase';
 import { getNotifications } from '../../model/selectors/getNotifications';
 import { notificationsActions } from '../../model/slice/notificationSlice';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
+import Button from '../../../../shared/ui/Button/Button';
 
 const OpenNotificationsButton = () => {
     const { user } = useAuth();
@@ -73,7 +74,7 @@ const OpenNotificationsButton = () => {
     }, [open]);
 
     return (
-        <button className={s.button} onClick={(e) => e.stopPropagation()}>
+        <Button className={s.button} onClick={(e) => e.stopPropagation()}>
             <FontAwesomeIcon onClick={toggler} icon={unreadCount ? faSolidBell : faRegularBell} />
             {!!unreadCount && <div className={s.count}>{unreadCount}</div>}
 
@@ -85,7 +86,7 @@ const OpenNotificationsButton = () => {
                     ))}
                 </div>
             )}
-        </button>
+        </Button>
     );
 };
 
