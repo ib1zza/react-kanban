@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import s from './BoardPageHeader.module.scss';
+import Button from '../../../../shared/ui/Button/Button';
+import { Input } from '../../../../shared/ui/Input/Input';
 
 interface Props {
     title: string;
@@ -30,29 +32,29 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
             {!isEditing && (
                 <>
                     <span>{editingTitle}</span>
-                    <button
+                    <Button
                         className={s.button}
                         onClick={() => setEditing(true)}
                     >
                         <FontAwesomeIcon icon={faPenToSquare} />
-                    </button>
+                    </Button>
                 </>
             )}
             {isEditing && (
                 <>
-                    <input
+                    <Input
                         className={s.input}
                         maxLength={40}
                         type="text"
                         value={editingTitle}
                         onChange={(e) => setEditingTitle(e.target.value)}
                     />
-                    <button
+                    <Button
                         className={s.button}
                         onClick={onEditHandler}
                     >
                         <FontAwesomeIcon icon={faCircleCheck} />
-                    </button>
+                    </Button>
                 </>
             )}
         </h1>

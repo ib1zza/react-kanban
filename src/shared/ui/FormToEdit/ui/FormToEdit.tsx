@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import s from '../../../../entities/Column/ui/TaskColumn.module.scss';
 import ColorPicker from '../../ColorPicker/ColorPicker';
 import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
+import { Input } from '../../Input/Input';
 
 interface Props {
   title: string;
@@ -25,7 +26,7 @@ const FormToEdit: React.FC<Props> = ({
 
     return (
         <div className={s.createColumn}>
-            <input
+            <Input
                 placeholder={t('Название')}
                 className={`${s.createColumnTitle} ${s.title}`}
                 value={title}

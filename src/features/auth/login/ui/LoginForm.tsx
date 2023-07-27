@@ -25,7 +25,8 @@ const LoginForm = memo(() => {
         e?.preventDefault();
         if (data.email !== '' && data.password !== '') {
             await logIn(data.email, data.password, rememberMe);
-            navigate('/home');
+
+            navigate('/');
         } else {
             dispatch(loginActions.setError('Какое-то поле незаполнено'));
         }
@@ -36,6 +37,7 @@ const LoginForm = memo(() => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
+            className={s.form}
         >
             <div className={s.title_wrapper}>
                 <img src={Arrow as unknown as string} />

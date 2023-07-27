@@ -8,11 +8,7 @@
 
     .button {
         margin-left: 15px;
-        font-size: 20px;
-        line-height: 20px;
-        padding: 0 5px;
-        color: var(#{--iconColor});
-
+    
         &:hover {
             color: var(#{--iconColorHover});
         }

@@ -8,6 +8,8 @@ import { getUserInfo, editDisplayName, updateDocument } from '../../../features/
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import { storage } from '../../../firebase';
 import { IUserInfo } from '../../../app/types/IUserInfo';
+import Button from '../../../shared/ui/Button/Button';
+import { Input } from '../../../shared/ui/Input/Input';
 
 const Profile = () => {
     const { user, refetch } = UserAuth();
@@ -79,10 +81,9 @@ const Profile = () => {
                         {t('Имя')}
                         :
                         {editStatus ? (
-                            <input
+                            <Input
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                className={s.profile__input}
                             />
                         ) : (
                             userInfo.displayName
@@ -100,7 +101,7 @@ const Profile = () => {
                         {userInfo.boardsIds?.length || 0}
                     </div>
                     {editStatus ? (
-                        <button
+                        <Button
                             onClick={() => {
                                 setEditStatus(false);
                                 handleSubmit();
@@ -108,14 +109,14 @@ const Profile = () => {
                             className={s.profile__save}
                         >
                             {t('Сохранить')}
-                        </button>
+                        </Button>
                     ) : (
-                        <button
+                        <Button
                             onClick={() => setEditStatus(true)}
                             className={s.profile__edit}
                         >
                             {t('Изменить')}
-                        </button>
+                        </Button>
                     )}
                 </div>
             </div>

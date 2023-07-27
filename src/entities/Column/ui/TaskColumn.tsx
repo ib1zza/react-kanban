@@ -10,6 +10,7 @@ import AddTaskForm from '../lib/AddTaskForm/AddTaskForm';
 import { deleteColumn } from '../../../features/columns/API/deleteColumn';
 import { IColumn } from '../../../app/types/IBoard';
 import { FormToEdit } from '../../../shared/ui/FormToEdit';
+import Button from '../../../shared/ui/Button/Button';
 
 interface ITaskColumnProps {
   column: IColumn;
@@ -46,29 +47,28 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                     <div className={s.titleBlock}>
                         <h6 className={s.title}>{column.title}</h6>
                         <div className={s.columnButtons}>
-                            <button
+                            <Button
                                 className={s.editButton}
                                 onClick={() => setIsEditColumn(true)}
-                            >
-                                <FontAwesomeIcon icon={faPenToSquare} />
-                            </button>
-                            <button
+                                icon={<FontAwesomeIcon icon={faPenToSquare} />}
+                            />
+                            <Button
                                 className={s.deleteButton}
                                 onClick={() => deleteColumn(boardId, column.uid).then(onEdit)}
-                            >
-                                <FontAwesomeIcon icon={faTrashCan} />
-                            </button>
+                                icon={<FontAwesomeIcon icon={faTrashCan} />}
+                            />
                         </div>
                     </div>
                     {!isAddingTask && (
                         <div>
-                            <button
+                            <Button
                                 className={s.addButton}
                                 onClick={() => setIsAddingTask(true)}
+                                icon={<FontAwesomeIcon icon={faPlus} height={20} />}
                             >
-                                <FontAwesomeIcon icon={faPlus} height={20} />
+
                                 <span>{t('Добавить')}</span>
-                            </button>
+                            </Button>
                         </div>
                     )}
                     {isAddingTask && (

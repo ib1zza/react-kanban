@@ -56,12 +56,12 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         <div className={s.container}>
             <div className={s.title}>
                 <h2>{task.title}</h2>
-                <button className={s.icon}>
+                <Button className={s.icon}>
                     <FontAwesomeIcon
                         icon={faCircleXmark}
                         onClick={() => dispatch(boardCollectionActions.removeSelectedTask())}
                     />
-                </button>
+                </Button>
             </div>
             <p className={s.description}>
                 {task.description || `${t('Нет описания')}`}
