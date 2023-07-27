@@ -6,28 +6,32 @@ import { classNames } from '../../lib/classNames/classNames';
 
 export enum InputTheme {
     CLEAR = 'clear',
-    OUTLINE = 'outline',
+    PRIMARY = 'primary',
+    AUTH = 'auth'
+
 }
 
-type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
-
-interface InputProps extends HTMLInputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     className?: string;
-    value?: string;
     theme?: InputTheme;
-    onChange?: (value: string) => void;
     autofocus?: boolean;
+    label?: string;
+    width?: string;
+    error?: string;
 }
 
 export const Input = memo((props: InputProps) => {
     const {
         className,
+        error,
         value,
         onChange,
-        theme = InputTheme.OUTLINE,
+        theme = InputTheme.PRIMARY,
         type = 'text',
         placeholder,
         autofocus,
+        width,
+        label,
         ...otherProps
     } = props;
 
@@ -36,24 +40,32 @@ export const Input = memo((props: InputProps) => {
 
     };
 
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        onChange?.(e.target.value);
-    };
-
     return (
-        <div className={classNames(s.InputWrapper, mods, [className as string])}>
-            {placeholder && (
-                <div className={s.placeholder}>
-                    {`${placeholder}>`}
-                </div>
+        <div
+            style={{ width: `${width}` }}
+            className={classNames(s.InputWrapper, mods, [className as string])}
+        >
+
+            {error ? (
+                <p className={s.error}>
+                    {error}
+                </p>
+            ) : (
+                label && (
+                    <label>
+                        {label}
+                    </label>
+                )
             )}
             <input
                 type={type}
                 value={value}
-                onChange={onChangeHandler}
+                onChange={onChange}
                 className={s.input}
+                placeholder={placeholder}
                 {...otherProps}
             />
+
         </div>
 
     );

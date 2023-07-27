@@ -1,6 +1,48 @@
-.clear {
-    
+.InputWrapper{
+    display: flex;
+    flex-direction: column;
+    label {
+        font: var(--font-m);
+        color: var(--InputText);
+        padding: calc(var(--InputPadding) - 4px);
+    }
+    input {
+        border: var(--InputBorder);
+        padding: var(--InputPadding);
+        background-color: var(--InputBg);
+        color: var(--InputText);
+        border-radius: var(--InputRadius);
+        font: var(--font-m);
+        
+    }
+    input::placeholder {
+        opacity: 0.8;
+    }
+  
+
 }
-.outline {
-    
+
+.clear {
+    input {
+        border: none;
+        outline: none;
+    }
+}
+.primary {
+    label {
+        color: var(--InputLabel)
+    }
+    input {
+        border: var(--InputBorder);
+        padding: var(--InputPadding);
+        background-color: var(--InputBg);
+        color: var(--InputText);
+        border-radius: var(--InputRadius);
+        font: var(--font-m); 
+    }
+}
+
+.error {
+    color: red;
+    padding: calc(var(--InputPadding) - 4px);    
 }

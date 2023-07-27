@@ -23,7 +23,10 @@ const Home = () => {
 
     const getBoards = getUserBoards;
     // getting boards (only info which we need)
-    const fetchBoards = () => getBoards(user).then((res) => setBoards(res));
+    const fetchBoards = () => getBoards(user).then((res) => {
+        setBoards(res);
+        console.log(boards);
+    });
 
     useEffect(() => {
         if (boards.length === 0) {
