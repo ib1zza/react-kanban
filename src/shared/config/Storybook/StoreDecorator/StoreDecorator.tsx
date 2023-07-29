@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-no-undef */
-import { Story } from '@storybook/react';
 
 import { Provider } from 'react-redux';
 
+import { Story } from '@storybook/react';
 import { store } from '../../../../app/providers/store/store';
 
-export const StoreDecorator = () => (StoryComponent: Story) => (
+export const StoreDecorator = () => (Story: Story) => (
 
     <Provider store={store}>
-        <StoryComponent />
+        <Story />
     </Provider>
 );

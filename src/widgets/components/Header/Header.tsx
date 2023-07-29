@@ -4,22 +4,22 @@ import { useTranslation } from 'react-i18next';
 import s from './Header.module.scss';
 import { useAuth } from '../../../app/providers/authRouter/ui/AuthContext';
 import { AppRoute } from '../../../app/providers/router/lib/AppRoute';
-import noAvatar from '../../assets/images/noAvatar.svg';
+import noAvatar from '../../../shared/assets/images/noAvatar.svg';
 import { useAppSelector } from '../../../app/providers/store/store';
-import ThemeSwitcher from '../ThemeSwitcher/ui/ThemeSwitcher';
-import { LangSwitcher } from '../LangSwitcher/ui/LangSwitcher';
-// eslint-disable-next-line max-len
-import OpenNotificationsButton from '../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
-import Button, { ButtonTheme } from '../Button/Button';
+import ThemeSwitcher from '../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
+import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
+import OpenNotificationsButton
+    from '../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
+import Button, { ButtonTheme } from '../../../shared/ui/Button/Button';
+import { getUserState } from '../../../entities/Users/model/selectors/getUserState';
 
 const Header = () => {
-    const { user } = useAppSelector((state) => state.userInfo);
+    // TODO : getSElector
+    const { user } = useAppSelector(getUserState);
     const [isOpen, setIsOpen] = useState(false);
     const { logOut } = useAuth();
     const navigate = useNavigate();
     const { t } = useTranslation();
-
-    if (!user) return null;
 
     return (
         <header className={s.header}>
@@ -37,7 +37,7 @@ const Header = () => {
                     <p className={s.nickname}>{user?.email}</p>
                     <div className={s.avatar}>
                         {
-                            user.photoURL ? <img src={user.photoURL} alt="your avatar" />
+                            user?.photoURL ? <img src={user?.photoURL} alt="your avatar" />
                                 // eslint-disable-next-line react/jsx-indent
                                 : <img src={noAvatar as unknown as string} alt="no avatar" />
                         }

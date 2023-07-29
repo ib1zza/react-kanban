@@ -14,6 +14,7 @@ export const store = configureStore({
         login: loginReducer,
         signup: signupReducer,
     },
+
 });
 
 type RootState = ReturnType<typeof store.getState>
