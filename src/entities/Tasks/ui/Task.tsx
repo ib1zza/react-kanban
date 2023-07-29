@@ -9,7 +9,6 @@ import { icon } from '@fortawesome/fontawesome-svg-core';
 import s from './Task.module.scss';
 import { ITask } from '../../../app/types/IBoard';
 import { useAppDispatch } from '../../../app/providers/store/store';
-
 import { toggleTaskComplete } from '../../../features/tasks/API/toggleTaskComplete';
 import { deleteTask } from '../../../features/tasks';
 import { boardCollectionActions } from '../../Board/model/slice/boardCollectionSlice';

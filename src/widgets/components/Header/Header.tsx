@@ -11,7 +11,7 @@ import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
 import OpenNotificationsButton
     from '../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
 import Button, { ButtonTheme } from '../../../shared/ui/Button/Button';
-import { getUserState } from '../../../entities/Users/model/selectors/getUserState';
+import { getUserState } from '../../../features/users/model/selectors/getUserState';
 
 const Header = () => {
     // TODO : getSElector

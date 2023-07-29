@@ -13,7 +13,7 @@ import { auth } from '../../../../firebase';
 import { signUpEmailPass } from '../../../../pages/SignUp/lib/signUp';
 import { loginByEmailPass } from '../../../../pages/Login/lib/logIn';
 import { getUserInfo } from '../../../../features/users/API/getUserInfo';
-import { userInfoActions } from '../../../../entities/Users/model/slice/userInfoSlice';
+import { userInfoActions } from '../../../../features/users/model/slice/userInfoSlice';
 
 // import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 type ISelect = 'practice' | 'work' | 'study' | 'other';
