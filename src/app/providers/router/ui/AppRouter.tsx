@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainRouter from './MainRouter';
 import ProtectedRoute from '../lib/ProtectedRoute';
-import Header from '../../../../shared/ui/Header/Header';
+import Header from '../../../../widgets/components/Header/Header';
 import s from '../../../styles/App.module.scss';
 import { Login } from '../../../../pages/Login';
 import { SignUp } from '../../../../pages/SignUp';
