@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { ThemeDecorator } from '../../../config/Storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '../../../../app/providers/theme/lib/ThemeContext';
-import { StoreDecorator } from '../../../config/Storybook/StoreDecorator/StoreDecorator';
 import ThemeSwitcher from './ThemeSwitcher';
 
 const meta: Meta<typeof ThemeSwitcher> = {
@@ -10,7 +8,7 @@ const meta: Meta<typeof ThemeSwitcher> = {
     component: ThemeSwitcher,
 
 };
-meta.decorators = [ThemeDecorator(Theme.LIGHT), StoreDecorator()];
+meta.decorators = [ThemeDecorator(Theme.LIGHT)];
 export default meta;
 type Story = StoryObj<typeof ThemeSwitcher>;
 

@@ -1,11 +1,12 @@
 import React from 'react';
-import s from './PopupNotifications.module.scss';
+
 import { useAppSelector } from '../../../app/providers/store/store';
 
 const PopupNotifications = () => {
     const { notifications } = useAppSelector((state) => state.notifications);
+    // TODO: FINISH
     return (
-        <div className={s.container}>
+        <div>
             {JSON.stringify(notifications)}
         </div>
     );

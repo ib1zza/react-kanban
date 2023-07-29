@@ -4,18 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import s from './PopupTaskInfo.module.scss';
-
 import {
     useAppDispatch,
     useAppSelector,
 } from '../../../app/providers/store/store';
 
 import { deleteTask, editTask } from '../../../features/tasks';
-
 import Button from '../../../shared/ui/Button/Button';
-
 import EditTaskForm from '../../../entities/Tasks/lib/EditTaskForm';
-
 import { boardCollectionActions } from '../../../entities/Board/model/slice/boardCollectionSlice';
 import { getBoardCollection } from '../../../entities/Board/model/selectors/getBoardCollection';
 
