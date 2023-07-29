@@ -1,5 +1,5 @@
 import { arrayUnion } from '@firebase/firestore';
-import { updateDocument } from '../../../features/users';
+import { updateDocument } from '../..';
 
 export async function addToBoardInvitedIds(userId: string, boardId: string) {
     try {

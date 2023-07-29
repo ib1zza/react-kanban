@@ -1,7 +1,7 @@
 import { BoardCollectionSchema } from '../../../../entities/Board';
 // eslint-disable-next-line max-len
 import { NotificationsSchema } from '../../../../entities/Notifications/model/types/NotificationsSchema';
-import { UserInfoSchema } from '../../../../entities/Users/model/types/UserInfoSchema';
+import { UserInfoSchema } from '../../../../features/users/model/types/UserInfoSchema';
 import { LoginSchema } from '../../../../features/auth/login';
 import { SignupSchema } from '../../../../features/auth/signup';
 

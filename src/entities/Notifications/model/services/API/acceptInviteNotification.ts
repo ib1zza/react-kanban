@@ -1,4 +1,4 @@
-import { addToBoardInvitedIds } from '../../../../Users/API/addToBoardInvitedIds';
+import { addToBoardInvitedIds } from '../../../../../features/users/API/addToBoardInvitedIds';
 import { updateDocument } from '../../../../../features/users';
 
 export async function acceptInviteNotification(
