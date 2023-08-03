@@ -67,6 +67,9 @@ const OpenNotificationsButton = () => {
 
     useEffect(() => {
         if (open) {
+            if (unreadCount) {
+                readAll();
+            }
             setTimeout(() => {
                 document.body.addEventListener('click', listener, { once: true });
             }, 50);

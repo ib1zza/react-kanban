@@ -12,8 +12,18 @@
     justify-content: space-between;
     align-items: flex-start;
 
-    span {
+    .title {
+        display: block;
+        flex-basis: 100%;
+        white-space: nowrap;
+        height: 40px;
         cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 5px;
+    }
+    .buttons {
+        flex-shrink: 0;
     }
 }
 

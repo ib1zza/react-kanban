@@ -54,9 +54,10 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                 />
             )}
             <h3 className={s.heading}>
-                <span onClick={onClick}>{board.title}</span>
+                {/* <span onClick={onClick}>{board.title.slice(0, 5)}</span> */}
+                <span className={s.title} onClick={onClick}>{board.title.slice(0)}</span>
                 {userId === board.ownerId && (
-                    <div>
+                    <div className={s.buttons}>
                         <Button
                             onClick={onOpenShare}
                             style={{ marginRight: '5px' }}
