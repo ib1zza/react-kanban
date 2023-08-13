@@ -49,7 +49,7 @@
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\" --custom-syntax postcss-less",
     "lint:scss:fix": "stylelint --fix \"**/*.scss\" --custom-syntax postcss-less",
-    "storybook": "storybook dev -p 6006 -c ./config/storybook",
+    "storybook": "storybook dev -p 6006 -c config1/storybook",
     "build-storybook": "storybook build",
     "unit": "jest"
   },
