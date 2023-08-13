@@ -94,6 +94,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.6.13",
+    "husky": "^8.0.3",
     "postcss-less": "^6.0.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.1.1",
