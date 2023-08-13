@@ -6,21 +6,24 @@ import { doc, setDoc } from 'firebase/firestore';
 import s from './OpenNotificationsButton.module.scss';
 import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import { getUserNotifications } from '../../model/services/API/getUserNotifications';
-import { useAppDispatch, useAppSelector } from '../../../../app/providers/store/store';
+import { useAppDispatch, useAppSelector } from '../../../../app/providers/StoreProvider';
 
 import Notification from '../Notification';
 import { readNotification } from '../../model/services/API/readNotification';
 import { db } from '../../../../firebase';
-import { getNotifications } from '../../model/selectors/getNotifications';
+import { getNotifications } from '../../model/selectors/getNotifications/getNotifications';
 import { notificationsActions } from '../../model/slice/notificationSlice';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
 import Button from '../../../../shared/ui/Button/Button';
 
+// eslint-disable-next-line max-len
+import { getUnreadNotificationsCount } from '../../model/selectors/getUnreadNotificationsCount/getUnreadNotificationsCount';
+
 const OpenNotificationsButton = () => {
     const { user } = useAuth();
     const dispatch = useAppDispatch();
-    const { notifications } = useAppSelector(getNotifications);
-    const [unreadCount, setUnreadCount] = useState(0);
+    const notifications = useAppSelector(getNotifications);
+    const unreadCount = useAppSelector(getUnreadNotificationsCount);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -42,10 +45,6 @@ const OpenNotificationsButton = () => {
         getNotifs();
     }, [user?.uid]);
 
-    useEffect(() => {
-        setUnreadCount(notifications.filter((notif: { read: any; }) => !notif.read).length);
-    }, [notifications]);
-
     const toggler = () => {
         setOpen((prev) => !prev);
     };
@@ -53,13 +52,11 @@ const OpenNotificationsButton = () => {
     const readAll = () => {
         if (!user?.uid || !notifications.length || !unreadCount) return;
         notifications.filter(
-            (notif: { read: any; }) => !notif.read,
+            (notif: { read: boolean; }) => !notif.read,
         ).forEach((notif: { uid: string; }) => {
             readNotification(user.uid, notif.uid);
         });
-        dispatch(notificationsActions.setNotifications(
-            notifications.map((notif: any) => ({ ...notif, read: true })),
-        ));
+        dispatch(notificationsActions.readAllNotifications());
     };
     function listener() {
         setOpen(false);

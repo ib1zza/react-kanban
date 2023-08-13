@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { updateDocument } from '../../../users/API/updateDocument';
+import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export const createColumn = async (
     title: string,

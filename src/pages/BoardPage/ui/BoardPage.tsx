@@ -12,14 +12,13 @@ import { PopupTaskInfo } from '../../../widgets';
 import {
     useAppDispatch,
     useAppSelector,
-} from '../../../app/providers/store/store';
+} from '../../../app/providers/StoreProvider';
 
 import { getTaskInfo } from '../../../features/tasks';
 import { editBoard, BoardPageHeader } from '../../../features/boards';
-import { getBoardFromId } from '../../../entities/Board';
+import { getBoardFromId, getBoardCollection } from '../../../entities/Board';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import { FormToLink } from '../../../shared/ui/FormToLink';
-import { getBoardCollection } from '../../../entities/Board/model/selectors/getBoardCollection';
 import { boardCollectionActions } from '../../../entities/Board/model/slice/boardCollectionSlice';
 import { TaskColumn } from '../../../entities/Column';
 

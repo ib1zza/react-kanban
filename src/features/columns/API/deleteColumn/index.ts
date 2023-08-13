@@ -1,5 +1,5 @@
 import { deleteField } from 'firebase/firestore';
-import { updateDocument } from '../../../users';
+import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export const deleteColumn = async (
     boardId: string,

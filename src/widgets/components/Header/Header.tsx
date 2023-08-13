@@ -5,13 +5,13 @@ import s from './Header.module.scss';
 import { useAuth } from '../../../app/providers/authRouter/ui/AuthContext';
 import { AppRoute } from '../../../app/providers/router/lib/AppRoute';
 import noAvatar from '../../../shared/assets/images/noAvatar.svg';
-import { useAppSelector } from '../../../app/providers/store/store';
+import { useAppSelector } from '../../../app/providers/StoreProvider/config/store';
 import ThemeSwitcher from '../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
 import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
 import OpenNotificationsButton
     from '../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
 import Button, { ButtonTheme } from '../../../shared/ui/Button/Button';
-import { getUserState } from '../../../features/users/model/selectors/getUserState';
+import { getUserState } from '../../../features/users/model/selectors/getUserState/getUserState';
 
 const Header = () => {
     // TODO : getSElector

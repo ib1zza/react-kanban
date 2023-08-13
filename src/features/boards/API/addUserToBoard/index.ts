@@ -1,6 +1,6 @@
 import { arrayUnion } from '@firebase/firestore';
-import { updateDocument } from '../../../users/API/updateDocument';
 import { LinkedUserType } from '../../../../app/types/IBoard';
+import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export const addUserToBoard = async (
     boardId: string,

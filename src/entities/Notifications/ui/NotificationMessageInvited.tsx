@@ -11,7 +11,7 @@ import { IBoard, LinkedUserType } from '../../../app/types/IBoard';
 import { acceptInviteNotification } from '../model/services/API/acceptInviteNotification';
 import { useAuth } from '../../../app/providers/authRouter/ui/AuthContext';
 import { declineInviteNotification } from '../model/services/API/declineInviteNotification';
-import { useAppDispatch } from '../../../app/providers/store';
+import { useAppDispatch } from '../../../app/providers/StoreProvider';
 import { NotificationPayloadBoardInvited } from '../model/types/NotificationsSchema';
 import { IUserInfo } from '../../../app/types/IUserInfo';
 import { notificationsActions } from '../model/slice/notificationSlice';

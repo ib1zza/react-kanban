@@ -1,5 +1,5 @@
-import { updateDocument } from '../../../users/API/updateDocument';
 import { ITask } from '../../../../app/types/IBoard';
+import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export async function editTask(
     boardId: string,

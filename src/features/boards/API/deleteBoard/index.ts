@@ -1,6 +1,6 @@
 import { arrayRemove, deleteDoc, doc } from 'firebase/firestore';
-import { updateDocument } from '../../../users/API/updateDocument';
 import { db } from '../../../../firebase';
+import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export const deleteBoard = async (boardId: string, userId: string) => {
     try {

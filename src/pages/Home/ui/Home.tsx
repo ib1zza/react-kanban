@@ -12,7 +12,7 @@ import { FormToCreate } from '../../../shared/ui/FormToCreate';
 import { FormToLink } from '../../../shared/ui/FormToLink';
 import { BoardPreview } from '../../../entities/Board';
 import { getUserBoards } from '../lib/getUserBoards';
-import { useAppSelector } from '../../../app/providers/store/store';
+import { useAppSelector } from '../../../app/providers/StoreProvider/config/store';
 
 const Home = () => {
     const navigate = useNavigate();

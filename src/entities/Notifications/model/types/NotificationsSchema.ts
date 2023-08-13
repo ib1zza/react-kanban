@@ -1,17 +1,15 @@
 import { LinkedUserType } from '../../../../app/types/IBoard';
 
-const enum NotificationType {
+export enum NotificationType {
     BOARD_INVITED = 'BOARD_INVITED',
     CHAT_MESSAGE = 'CHAT_MESSAGE',
 }
-
-export default NotificationType;
 
 export type NotificationPayloadBoardInvited = {
     boardId: string;
     userInvitedId: string;
     type: NotificationType.BOARD_INVITED;
-    invitedRole: LinkedUserType;
+    invitedRole: LinkedUserType | keyof typeof LinkedUserType;
     isAccepted: boolean;
 }
 

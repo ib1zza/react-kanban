@@ -3,7 +3,7 @@ import s from './Notification.module.scss';
 
 import NotificationMessageInvited from './NotificationMessageInvited';
 import { classNames } from '../../../shared/lib/classNames/classNames';
-import NotificationType, { NotificationItem } from '../model/types/NotificationsSchema';
+import { NotificationItem, NotificationType } from '../model/types/NotificationsSchema';
 
 interface Props {
     data: NotificationItem;

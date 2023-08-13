@@ -1,5 +1,5 @@
-import { updateDocument } from '../../../users/API/updateDocument';
 import { IBoard } from '../../../../app/types/IBoard';
+import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export async function editBoard(
     boardId: string,

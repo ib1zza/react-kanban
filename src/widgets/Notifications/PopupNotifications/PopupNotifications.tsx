@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAppSelector } from '../../../app/providers/store/store';
+import { useAppSelector } from '../../../app/providers/StoreProvider/config/store';
 
 const PopupNotifications = () => {
     const { notifications } = useAppSelector((state) => state.notifications);

@@ -1,4 +1,4 @@
-import { updateDocument } from '../../../users/API/updateDocument';
+import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export const toggleTaskComplete = async (
     taskId: string,

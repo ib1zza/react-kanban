@@ -1,6 +1,6 @@
 import { arrayRemove } from 'firebase/firestore';
-import { updateDocument } from '../../../../../features/users';
 import { deleteNotification } from './deleteNotification';
+import { updateDocument } from '../../../../../shared/API/updateDocument';
 
 export async function declineInviteNotification(
     notificationId: string,

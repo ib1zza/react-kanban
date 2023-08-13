@@ -1,6 +1,5 @@
 import { deleteField } from 'firebase/firestore';
-
-import { updateDocument } from '../../../../../features/users';
+import { updateDocument } from '../../../../../shared/API/updateDocument';
 
 export const deleteNotification = async (
     userId: string,

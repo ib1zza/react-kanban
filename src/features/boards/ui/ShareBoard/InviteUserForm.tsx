@@ -23,7 +23,7 @@ const InviteUserForm: FC<Props> = ({ board }) => {
     );
 
     const { user } = useAuth();
-    const { t } = useTranslation(); '';
+    const { t } = useTranslation();
     const handleShare = async (email: string) => {
         const userToInviteId = await getUserFromEmail(email).then((res) => res?.uid);
         if (!userToInviteId || !user?.uid) return false;

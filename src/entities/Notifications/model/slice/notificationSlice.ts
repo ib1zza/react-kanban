@@ -22,11 +22,13 @@ export const notificationSlice = createSlice({
                 (notification) => notification.uid === action.payload,
             );
             if (!notif) return;
-            state.notifications = (state.notifications.filter(
-                (notification) => notification.uid !== action.payload,
-            )as any[])
-                .concat({ ...notif, payload: { ...notif.payload, isAccepted: true } })
-                .sort((a, b) => b.timestamp - a.timestamp);
+            // @ts-ignore
+            notif.payload.isAccepted = true;
+        },
+        readAllNotifications: (state) => {
+            state.notifications = state.notifications.map(
+                (notification) => ({ ...notification, read: true }),
+            );
         },
     },
 });

@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 
 import { updateDocument } from '../../../../../shared/API/updateDocument';
 import { LinkedUserType } from '../../../../../app/types/IBoard';
-import NotificationType from '../../types/NotificationsSchema';
+import { NotificationType } from '../../types/NotificationsSchema';
 
 export const sendNotificationInvite = async (
     userToInviteId: string,
@@ -11,10 +11,10 @@ export const sendNotificationInvite = async (
     role: LinkedUserType,
 ) => {
     try {
-        const newColumnId = uuid();
+        const notificationUid = uuid();
         await updateDocument('notifications', userToInviteId, {
-            [newColumnId]: {
-                uid: newColumnId,
+            [notificationUid]: {
+                uid: notificationUid,
                 payload: {
                     boardId,
                     userInvitedId: userFromInviteId,

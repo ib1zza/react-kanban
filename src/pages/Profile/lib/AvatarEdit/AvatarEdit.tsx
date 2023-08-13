@@ -1,13 +1,8 @@
 import React, {
-    FC, FunctionComponent, SVGAttributes, useEffect,
+    FC, useEffect,
 } from 'react';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { updateProfile } from 'firebase/auth';
 import { ReactSVG } from 'react-svg';
 import s from './AvatarEdit.module.scss';
-
-import { storage } from '../../../../firebase';
-import { updateDocument } from '../../../../features/users/API/updateDocument';
 
 interface AvatarEditProps {
   avatar: string;

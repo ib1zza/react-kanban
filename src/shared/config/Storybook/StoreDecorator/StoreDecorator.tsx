@@ -3,7 +3,7 @@
 import { Provider } from 'react-redux';
 
 import { Story } from '@storybook/react';
-import { store } from '../../../../app/providers/store/store';
+import { store } from '../../../../app/providers/StoreProvider/config/store';
 
 export const StoreDecorator = () => (Story: Story) => (
 

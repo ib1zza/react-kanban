@@ -7,13 +7,13 @@ import s from './PopupTaskInfo.module.scss';
 import {
     useAppDispatch,
     useAppSelector,
-} from '../../../app/providers/store/store';
+} from '../../../app/providers/StoreProvider';
 
 import { deleteTask, editTask } from '../../../features/tasks';
 import Button from '../../../shared/ui/Button/Button';
 import EditTaskForm from '../../../entities/Tasks/lib/EditTaskForm';
 import { boardCollectionActions } from '../../../entities/Board/model/slice/boardCollectionSlice';
-import { getBoardCollection } from '../../../entities/Board/model/selectors/getBoardCollection';
+import { getBoardCollection } from '../../../entities/Board';
 
 interface Props {
   onEdit: () => void;

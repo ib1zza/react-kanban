@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Theme } from '../../../app/providers/theme/lib/ThemeContext';
 import { ThemeDecorator } from '../../../shared/config/Storybook/ThemeDecorator/ThemeDecorator';
 import Notification from './Notification';
-import NotificationType from '../model/types/NotificationsSchema';
+import { NotificationType } from '../model/types/NotificationsSchema';
 import { LinkedUserType } from '../../../app/types/IBoard';
 
 const meta: Meta<typeof Notification> = {
