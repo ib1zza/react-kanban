@@ -11,7 +11,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: JSX.Element;
   loading?: boolean;
   iconStyles?: React.CSSProperties;
-  theme?: ButtonTheme
+  theme?: ButtonTheme,
+    children?: React.ReactNode
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -20,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
     className,
     loading,
     theme = ButtonTheme.FULL,
+    children,
     ...props
 }) => {
     const mods: Record<string, boolean> = {
@@ -39,10 +41,10 @@ const Button: React.FC<ButtonProps> = ({
                         {Icon}
                     </div>
                 )}
-                {(Icon && props.children) && (
+                {(Icon && children) && (
                     <div className={s.iconContainer} />
                 )}
-                { props.children }
+                { children }
 
             </div>
             {loading && (
