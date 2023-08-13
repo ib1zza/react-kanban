@@ -55,6 +55,7 @@ module.exports = {
         'react/destructuring-assignment': 'off',
         'react-hooks/rules-of-hooks': 'warn',
         'react-hooks/exhaustive-deps': 'warn',
+        'linebreak-style': 'off',
     },
     globals: {
         __IS_DEV__: true,
