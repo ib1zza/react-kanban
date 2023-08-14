@@ -30,4 +30,6 @@ export interface NotificationItem {
 }
 export interface NotificationsSchema {
     notifications: NotificationItem[];
+    isLoading: boolean;
+    error: string;
 }
