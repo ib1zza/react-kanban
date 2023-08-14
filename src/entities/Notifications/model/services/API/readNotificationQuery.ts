@@ -1,6 +1,6 @@
 import { updateDocument } from '../../../../../shared/API/updateDocument';
 
-export const readNotification = async (
+export const readNotificationQuery = async (
     userId: string,
     notificationId: string,
 ) => {
@@ -10,7 +10,5 @@ export const readNotification = async (
         });
     } catch (e) {
         console.log(e);
-        return false;
     }
-    return true;
 };

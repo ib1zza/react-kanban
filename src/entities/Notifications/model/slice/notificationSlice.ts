@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { NotificationItem, NotificationsSchema } from '../types/NotificationsSchema';
+import { getNotifications } from '../services/getNotifications/getNotifications';
+import { readAllNotifications } from '../services/readAllNotifications/readAllNotifications';
 
 const initialState: NotificationsSchema = {
     notifications: [],
+    isLoading: false,
+    error: '',
 };
 
 export const notificationSlice = createSlice({
@@ -25,12 +29,38 @@ export const notificationSlice = createSlice({
             // @ts-ignore
             notif.payload.isAccepted = true;
         },
-        readAllNotifications: (state) => {
-            state.notifications = state.notifications.map(
-                (notification) => ({ ...notification, read: true }),
-            );
-        },
+        // readAllNotifications: (state) => {
+        //     state.notifications = state.notifications.map(
+        //         (notification) => ({ ...notification, read: true }),
+        //     );
+        // },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getNotifications.pending, (state) => {
+                state.error = '';
+                state.isLoading = true;
+            })
+            .addCase(getNotifications.fulfilled, (state, action) => {
+                state.isLoading = false;
+            })
+            .addCase(getNotifications.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = 'error while getting notifications';
+            })
+            .addCase(readAllNotifications.pending, (state) => {
+                state.notifications = state.notifications.map(
+                    (notification) => ({ ...notification, read: true }),
+                );
+            })
+            .addCase(readAllNotifications.fulfilled, (state, action) => {
+
+            })
+            .addCase(readAllNotifications.rejected, (state, action) => {
+                state.error = 'error while getting notifications';
+            });
+    },
+
 });
 
 export const { actions: notificationsActions } = notificationSlice;
