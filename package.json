@@ -83,15 +83,15 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "jest --config ./config1/jest/jest.config.ts",
+    "test": "jest --config ./config/jest/jest.config.ts",
     "component": "generate-react-cli component",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\" --custom-syntax postcss-less",
     "lint:scss:fix": "stylelint --fix \"**/*.scss\" --custom-syntax postcss-less",
-    "storybook": "storybook dev -p 6006 -c config1/storybook",
+    "storybook": "storybook dev -p 6006 -c config/storybook",
     "build-storybook": "storybook build",
-    "unit": "jest --config ./config1/jest/jest.config.ts"
+    "unit": "jest --config ./config/jest/jest.config.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -150,11 +150,5 @@
     "ts-node": "^10.9.1",
     "uuid": "^9.0.0",
     "webpack": "^5.88.2"
-  },
-
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
   }
 }

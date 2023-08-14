@@ -10,17 +10,18 @@ const config: StorybookConfig = {
         '@storybook/addon-onboarding',
         '@storybook/addon-interactions',
         '@storybook/addon-essentials',
-        {
-            name: '@storybook/addon-styling',
-            options: {
-                postCss: {
-                    // eslint-disable-next-line global-require
-                    implementation: require('postcss'),
-                },
-            },
-        },
-
     ],
+  
+  
+    core: {
+        builder: {
+          name: '@storybook/builder-webpack5',
+          options: {
+            fsCache: true,
+            lazyCompilation: true,
+          },
+        },
+      },
     framework: {
         name: '@storybook/react-webpack5',
         options: {},
