@@ -83,7 +83,7 @@
   "scripts": {
     "start": "webpack serve --env port=3000",
     "start1": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "webpack  --env mode=production",
     "test": "jest --config ./config/jest/jest.config.ts",
     "component": "generate-react-cli component",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
