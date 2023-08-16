@@ -15,7 +15,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-    img {
+    svg {
         position: absolute;
         width: 100px;
         left: 16px;
@@ -65,7 +65,7 @@
 .btn_wrapper{
     display: flex;
     justify-content: center;
-
+    border: none;
 }
 .btn {
     background-color: var(--LRbtnbgColor);
