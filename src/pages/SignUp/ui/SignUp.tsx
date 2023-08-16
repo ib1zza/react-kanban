@@ -1,7 +1,7 @@
+import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
+import { LangSwitcher } from 'shared/ui/LangSwitcher/ui/LangSwitcher';
+import { SignupForm } from 'features/auth/signup';
 import s from './SignUp.module.scss';
-import ThemeSwitcher from '../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
-import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
-import { SignupForm } from '../../../features/auth/signup';
 
 const SignUp = () => (
     <div className={s.wrapper}>

@@ -1,14 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import s from './ShareBoard.module.scss';
-import { IBoard, LinkedUserType } from '../../../../app/types/IBoard';
-import { getUserInfo } from '../../../users/API/getUserInfo';
-import { deleteUserFromBoard } from '../../API/deleteUserFromBoard';
+import { IBoard, LinkedUserType } from 'app/types/IBoard';
+import { getUserInfo } from 'features/users';
+import { deleteUserFromBoard } from 'features/boards';
 
-import { IUserInfo } from '../../../../app/types/IUserInfo';
+import { IUserInfo } from 'app/types/IUserInfo';
+import s from './ShareBoard.module.scss';
 
 interface Props {
   board: IBoard;

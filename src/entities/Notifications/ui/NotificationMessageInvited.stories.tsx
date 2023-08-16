@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Theme } from '../../../app/providers/theme/lib/ThemeContext';
-import { ThemeDecorator } from '../../../shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from 'app/providers/theme/lib/ThemeContext';
+import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { LinkedUserType } from 'app/types/IBoard';
 import { NotificationType } from '../model/types/NotificationsSchema';
-import { LinkedUserType } from '../../../app/types/IBoard';
 import NotificationMessageInvited from './NotificationMessageInvited';
 
 const meta: Meta<typeof NotificationMessageInvited> = {

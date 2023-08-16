@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
-import { updateDocument } from '../../../../../shared/API/updateDocument';
-import { LinkedUserType } from '../../../../../app/types/IBoard';
+import { updateDocument } from 'shared/API/updateDocument';
+import { LinkedUserType } from 'app/types/IBoard';
 import { NotificationType } from '../../types/NotificationsSchema';
 
 export const sendNotificationInvite = async (

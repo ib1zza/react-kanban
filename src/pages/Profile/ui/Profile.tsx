@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
-import s from './Profile.module.scss';
-import { UserAuth } from '../../../app/providers/authRouter/ui/AuthContext';
-import { getUserInfo, editDisplayName } from '../../../features/users';
+import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
+import { getUserInfo, editDisplayName } from 'features/users';
+import { storage } from 'firebase';
+import { IUserInfo } from 'app/types/IUserInfo';
+import Button from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
+import { updateDocument } from 'shared/API/updateDocument';
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
-import { storage } from '../../../firebase';
-import { IUserInfo } from '../../../app/types/IUserInfo';
-import Button from '../../../shared/ui/Button/Button';
-import { Input } from '../../../shared/ui/Input/Input';
-import { updateDocument } from '../../../shared/API/updateDocument';
+import s from './Profile.module.scss';
 
 const Profile = () => {
     const { user, refetch } = UserAuth();

@@ -1,5 +1,5 @@
 import { DeepPartial } from '@reduxjs/toolkit';
-import { StateSchema } from '../../../../../app/providers/StoreProvider';
+import { StateSchema } from 'app/providers/StoreProvider';
 import { getUserState } from './getUserState';
 
 describe('getUserState', () => {

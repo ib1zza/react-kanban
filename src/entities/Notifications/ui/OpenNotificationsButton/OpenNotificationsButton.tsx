@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell as faSolidBell } from '@fortawesome/free-solid-svg-icons';
 import { faBell as faRegularBell } from '@fortawesome/free-regular-svg-icons';
+import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import s from './OpenNotificationsButton.module.scss';
-import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
-import { useAppDispatch, useAppSelector } from '../../../../app/providers/StoreProvider';
 
 import Notification from '../Notification';
-import { readNotificationQuery } from '../../model/services/API/readNotificationQuery';
-import { notificationsActions } from '../../model/slice/notificationSlice';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
 import Button from '../../../../shared/ui/Button/Button';
 

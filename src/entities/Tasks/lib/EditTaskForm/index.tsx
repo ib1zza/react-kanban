@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ITask } from 'app/types/IBoard';
 import s from './EditTaskForm.module.scss';
-import { ITask } from '../../../../app/types/IBoard';
 import ConfirmButtons from '../../../../shared/ui/ConfirmButtons/ConfirmButtons';
 
 interface Props {

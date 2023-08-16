@@ -1,7 +1,5 @@
-import {
-    arrayRemove, deleteDoc, deleteField, doc,
-} from 'firebase/firestore';
-import { updateDocument } from '../../../../shared/API/updateDocument';
+import { deleteField } from 'firebase/firestore';
+import { updateDocument } from 'shared/API/updateDocument';
 
 export const deleteTask = async (
     boardId: string,
@@ -10,18 +8,10 @@ export const deleteTask = async (
 ) => {
     try {
         console.log(boardId);
-        // TODO: check why this does not work
-        // await deleteDoc(
-        //   doc(db, "boards", boardId, "columns", columnId, "tasks", taskId)
-        // );
 
         await updateDocument('boards', boardId, {
             [`columns.${columnId}.tasks.${taskId}`]: deleteField(),
         });
-
-    // await updateDocument("users", userId, {
-    //   boardsIds: arrayRemove(boardId),
-    // });
     } catch (e) {
         console.log(e);
         return false;

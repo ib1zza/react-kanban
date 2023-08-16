@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { updateDocument } from '../../../../shared/API/updateDocument';
+import { updateDocument } from 'shared/API/updateDocument';
 
 interface ITaskForCreate {
   title: string;

@@ -1,5 +1,5 @@
-import { addToBoardInvitedIds } from '../../../../../features/users';
-import { updateDocument } from '../../../../../shared/API/updateDocument';
+import { addToBoardInvitedIds } from 'features/users';
+import { updateDocument } from 'shared/API/updateDocument';
 
 export async function acceptInviteNotification(
     notificationId: string,

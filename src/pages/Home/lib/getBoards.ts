@@ -2,8 +2,8 @@ import {
     collection, getDocs, or, query, where,
 } from 'firebase/firestore';
 import { User } from 'firebase/auth';
-import { db } from '../../../firebase';
-import { IBoard } from '../../../app/types/IBoard';
+import { db } from 'firebase';
+import { IBoard } from 'app/types/IBoard';
 
 export const getBoards = async (user: User | null) => {
     if (!user) return [];
