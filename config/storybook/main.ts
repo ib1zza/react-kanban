@@ -1,6 +1,7 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import {buildLoaders} from "../build/buildLoaders";
 import {BuildOptions} from "../build/types/config";
+import { PluginItem } from '@babel/core';
 
 const config: StorybookConfig = {
     stories: [
@@ -40,7 +41,7 @@ const config: StorybookConfig = {
     babel: async (options) => ({
         ...options,
         presets: [
-            ...options.presets,
+            ...options.presets as PluginItem[],
             [
                 '@babel/preset-react', {
                 runtime: 'automatic',
