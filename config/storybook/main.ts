@@ -1,9 +1,10 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 import {buildLoaders} from "../build/buildLoaders";
-import {BuildOptions} from "../build/types/config";
+import {BuildOptions, BuildPaths} from "../build/types/config";
 import { PluginItem } from '@babel/core';
-import path from "path";
-import {TsconfigPathsPlugin} from "tsconfig-paths-webpack-plugin";
+
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+const path = require('path');
 
 const config: StorybookConfig = {
     stories: [
@@ -35,18 +36,21 @@ const config: StorybookConfig = {
     },
     staticDirs: ['../../public'],
     webpackFinal: async (config, { configType }) => {
-
+    
         config?.module?.rules?.push(...buildLoaders({isDev: true} as BuildOptions));
-        config?.resolve.modules.push(path.resolve(__dirname, "../../src"))
+        if (config.resolve) {
+            config.resolve.plugins = [
+              ...(config.resolve.plugins || []),
+              new TsconfigPathsPlugin({
+                extensions: config.resolve.extensions,
+              }),
+            ];
+          }
 
-        if (!config.resolve) {
-            config.resolve = {};
-        }
-
-        config.resolve.plugins = [
-            ...(config.resolve.plugins || []),
-            new TsconfigPathsPlugin(),
-        ];
+      
+  
+  
+  
         return config;
     },
     babel: async (options) => ({

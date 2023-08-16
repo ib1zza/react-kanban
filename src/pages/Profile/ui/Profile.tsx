@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
+
 import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { getUserInfo, editDisplayName } from 'features/users';
 import { storage } from 'firebase';
@@ -84,7 +85,7 @@ const Profile = () => {
                         {editStatus ? (
                             <Input
                                 value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                onChange={(e: { target: { value: any; }; }) => setName(e.target.value)}
                             />
                         ) : (
                             userInfo.displayName
