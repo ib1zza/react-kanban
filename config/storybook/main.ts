@@ -1,4 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
+import {buildLoaders} from "../build/buildLoaders";
+import {BuildOptions} from "../build/types/config";
 
 const config: StorybookConfig = {
     stories: [
@@ -11,8 +13,7 @@ const config: StorybookConfig = {
         '@storybook/addon-interactions',
         '@storybook/addon-essentials',
     ],
-  
-  
+
     core: {
         builder: {
           name: '@storybook/builder-webpack5',
@@ -30,5 +31,26 @@ const config: StorybookConfig = {
         autodocs: 'tag',
     },
     staticDirs: ['../../public'],
+    webpackFinal: async (config, { configType }) => {
+
+        config?.module?.rules?.push(...buildLoaders({isDev: true} as BuildOptions));
+
+        return config;
+    },
+    babel: async (options) => ({
+        ...options,
+        presets: [
+            ...options.presets,
+            [
+                '@babel/preset-react', {
+                runtime: 'automatic',
+            },
+                'preset-react-jsx-transform'
+            ],
+        ],
+    }),
 };
+
 export default config;
+
+
