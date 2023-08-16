@@ -1,4 +1,4 @@
-import { IBoard, ITask } from '../../../../app/types/IBoard';
+import { IBoard, ITask } from 'app/types/IBoard';
 
 export interface BoardCollectionSchema {
     selectedBoardId: string;

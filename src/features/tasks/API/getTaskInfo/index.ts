@@ -1,4 +1,4 @@
-import { getBoardFromId } from '../../../../entities/Board';
+import { getBoardFromId } from 'entities/Board';
 
 export async function getTaskInfo(
     boardId: string,

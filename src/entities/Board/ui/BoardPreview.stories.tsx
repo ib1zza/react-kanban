@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from 'app/providers/theme/lib/ThemeContext';
 import BoardPreview from './BoardPreview';
-import { ThemeDecorator } from '../../../shared/config/Storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from '../../../app/providers/theme/lib/ThemeContext';
 
 const meta: Meta<typeof BoardPreview> = {
     title: 'entities/BoardPreview',

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeDecorator } from '../../../../shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from 'app/providers/theme/lib/ThemeContext';
 import OpenNotificationsButton from './OpenNotificationsButton';
-import { Theme } from '../../../../app/providers/theme/lib/ThemeContext';
 
 const meta: Meta<typeof OpenNotificationsButton> = {
     title: 'entities/OpenNotificationsButton',

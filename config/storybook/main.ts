@@ -2,8 +2,10 @@ import type { StorybookConfig } from '@storybook/react-webpack5';
 import {buildLoaders} from "../build/buildLoaders";
 import {BuildOptions, BuildPaths} from "../build/types/config";
 import { PluginItem } from '@babel/core';
+
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 const path = require('path');
+
 const config: StorybookConfig = {
     stories: [
         '../../src/**/*.stories.@(js|jsx|ts|tsx)',
@@ -44,6 +46,11 @@ const config: StorybookConfig = {
               }),
             ];
           }
+
+      
+  
+  
+  
         return config;
     },
     babel: async (options) => ({

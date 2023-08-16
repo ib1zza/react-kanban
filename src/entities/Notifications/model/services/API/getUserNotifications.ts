@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
 
-import { db } from '../../../../../firebase';
+import { db } from 'firebase';
 import { NotificationItem } from '../../types/NotificationsSchema';
 
 export async function getUserNotifications(userId: string) {

@@ -3,24 +3,24 @@ import { useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import Button from '../../../shared/ui/Button/Button';
-import s from './BoardPage.module.scss';
-import { FormToCreate } from '../../../shared/ui/FormToCreate';
-import { createColumn } from '../../../features/columns';
-import { PopupTaskInfo } from '../../../widgets';
+import { createColumn } from 'features/columns';
+import { PopupTaskInfo } from 'widgets';
 
 import {
     useAppDispatch,
     useAppSelector,
-} from '../../../app/providers/StoreProvider';
+} from 'app/providers/StoreProvider';
 
-import { getTaskInfo } from '../../../features/tasks';
-import { editBoard, BoardPageHeader } from '../../../features/boards';
-import { getBoardFromId, getBoardCollection } from '../../../entities/Board';
+import { getTaskInfo } from 'features/tasks';
+import { editBoard, BoardPageHeader } from 'features/boards';
+import { getBoardFromId, getBoardCollection } from 'entities/Board';
+import { FormToLink } from 'shared/ui/FormToLink';
+import { boardCollectionActions } from 'entities/Board/model/slice/boardCollectionSlice';
+import { TaskColumn } from 'entities/Column';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
-import { FormToLink } from '../../../shared/ui/FormToLink';
-import { boardCollectionActions } from '../../../entities/Board/model/slice/boardCollectionSlice';
-import { TaskColumn } from '../../../entities/Column';
+import { FormToCreate } from '../../../shared/ui/FormToCreate';
+import s from './BoardPage.module.scss';
+import Button from '../../../shared/ui/Button/Button';
 
 const BoardPage: React.FC = memo(() => {
     const { boardId } = useParams();

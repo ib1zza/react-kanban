@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IBoard, ITask } from '../../../../app/types/IBoard';
-import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
+import { IBoard, ITask } from 'app/types/IBoard';
+import { BoardCollectionSchema } from 'entities/Board';
 
 const initialState: BoardCollectionSchema = {
     selectedBoardId: '',

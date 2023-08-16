@@ -83,7 +83,6 @@
   },
   "scripts": {
     "start": "webpack serve --env port=3000",
-    "start1": "node scripts/start.js",
     "build": "webpack  --env mode=production",
     "test": "jest --config ./config/jest/jest.config.ts",
     "component": "generate-react-cli component",
@@ -155,6 +154,7 @@
     "stylelint-config-standard-scss": "^10.0.0",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
     "uuid": "^9.0.0",
     "webpack": "^5.88.2",
     "webpack-bundle-analyzer": "^4.9.0",

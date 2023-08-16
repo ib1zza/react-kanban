@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Theme } from '../../../../app/providers/theme/lib/ThemeContext';
-import { ThemeDecorator } from '../../../../shared/config/Storybook/ThemeDecorator/ThemeDecorator';
-import { StoreDecorator } from '../../../../shared/config/Storybook/StoreDecorator/StoreDecorator';
-import ShareBoard from './ShareBoard';
+import { Theme } from 'app/providers/theme/lib/ThemeContext';
+import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { StoreDecorator } from 'shared/config/Storybook/StoreDecorator/StoreDecorator';
+import { ShareBoard } from './ShareBoard';
 
 const meta: Meta<typeof ShareBoard> = {
     title: 'features/ShareBoard',

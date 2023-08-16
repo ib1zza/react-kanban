@@ -4,15 +4,15 @@ import { Route, Routes } from 'react-router';
 import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../../shared/ui/Button/Button';
-import s from './Home.module.scss';
-import { addUserToBoard, createBoard } from '../../../features/boards';
-import { IBoard, LinkedUserType } from '../../../app/types/IBoard';
-import { FormToCreate } from '../../../shared/ui/FormToCreate';
-import { FormToLink } from '../../../shared/ui/FormToLink';
-import { BoardPreview } from '../../../entities/Board';
+import Button from 'shared/ui/Button/Button';
+import { addUserToBoard, createBoard } from 'features/boards';
+import { IBoard, LinkedUserType } from 'app/types/IBoard';
+import { FormToCreate } from 'shared/ui/FormToCreate';
+import { FormToLink } from 'shared/ui/FormToLink';
+import { BoardPreview } from 'entities/Board';
+import { useAppSelector } from 'app/providers/StoreProvider';
 import { getUserBoards } from '../lib/getUserBoards';
-import { useAppSelector } from '../../../app/providers/StoreProvider/config/store';
+import s from './Home.module.scss';
 
 const Home = () => {
     const navigate = useNavigate();

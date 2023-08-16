@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from 'app/providers/theme/lib/ThemeContext';
 import EditTaskForm from '.';
-import { ThemeDecorator } from '../../../../shared/config/Storybook/ThemeDecorator/ThemeDecorator';
-import { Theme } from '../../../../app/providers/theme/lib/ThemeContext';
 
 const meta: Meta<typeof EditTaskForm> = {
     title: 'entities/EditTaskForm',

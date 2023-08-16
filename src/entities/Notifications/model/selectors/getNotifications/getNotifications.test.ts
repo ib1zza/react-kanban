@@ -1,6 +1,6 @@
 import { DeepPartial } from '@reduxjs/toolkit';
+import { StateSchema } from 'app/providers/StoreProvider';
 import { getNotifications } from './getNotifications';
-import { StateSchema } from '../../../../../app/providers/StoreProvider';
 
 describe('getNotifications', () => {
     test('should return notifications', () => {
