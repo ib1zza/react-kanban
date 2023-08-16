@@ -51,7 +51,7 @@ const Header = () => {
                                             <div onClick={logOut}>{t('Выйти')}</div>
                                         </>
                                     )}
-                                    {!user && (
+                                    {/* {!user && (
                                         <>
                                             <div onClick={() => navigate(AppRoute.LOGIN)}>
                                                 {t('Войти')}
@@ -60,7 +60,7 @@ const Header = () => {
                                                 {t('Зарегистрироваться')}
                                             </div>
                                         </>
-                                    )}
+                                    )} */}
                                 </div>
                             )}
                     </div>

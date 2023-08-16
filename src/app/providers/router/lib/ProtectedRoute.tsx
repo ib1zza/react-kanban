@@ -5,7 +5,7 @@ import { UserAuth } from '../../authRouter/ui/AuthContext';
 const ProtectedRoute = ({ children }: any) => {
     const { user } = UserAuth();
     if (!user) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/auth" />;
     }
     return <div className="h-full">{children}</div>;
 };

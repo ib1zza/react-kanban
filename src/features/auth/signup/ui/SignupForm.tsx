@@ -15,7 +15,10 @@ import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getSignupState } from '../model/selectors/getSignupState';
 import { signupActions } from '../model/slice/SignupSlice';
 
-const SignupForm = memo(() => {
+interface props {
+    onSwitch: () => void
+}
+const SignupForm = memo(({ onSwitch }: props) => {
     const navigate = useNavigate();
     const { t } = useTranslation('auth');
     const { signUp } = useAuth();
@@ -76,12 +79,13 @@ const SignupForm = memo(() => {
     return (
         <form onSubmit={handleSubmit(handleContinue)} className={s.signup}>
             <div className={s.title_wrapper}>
-                <img src={Arrow as unknown as string} />
+
+                <Arrow />
                 <div>
                     <h1 className={s.signup__title}>{t('Регистрация')}</h1>
                     <p className={s.signup__linkArea}>
                         <span
-                            onClick={() => navigate(AppRoute.LOGIN)}
+                            onClick={onSwitch}
                         >
                             {t('У меня есть аккаунт')}
                         </span>
