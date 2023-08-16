@@ -1,5 +1,5 @@
-import { IColumn } from '../../../../app/types/IBoard';
-import { updateDocument } from '../../../../shared/API/updateDocument';
+import { IColumn } from 'app/types/IBoard';
+import { updateDocument } from 'shared/API/updateDocument';
 
 export async function editColumn(
     boardId: string,

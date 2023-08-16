@@ -5,10 +5,10 @@ import {
     faCircleXmark,
 } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
+import Button from 'shared/ui/Button/Button';
+import { createTask } from 'features/tasks';
+import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
 import s from './AddTaskForm.module.scss';
-import Button from '../../../../shared/ui/Button/Button';
-import { createTask } from '../../../../features/tasks/API/createTask';
-import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 
 interface Props {
   onAbort: () => void;

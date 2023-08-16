@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import s from './Header.module.scss';
-import { useAuth } from '../../../app/providers/authRouter/ui/AuthContext';
-import { AppRoute } from '../../../app/providers/router/lib/AppRoute';
+import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
+import { AppRoute } from 'app/providers/router/lib/AppRoute';
+import { useAppSelector } from 'app/providers/StoreProvider';
+import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
+import { LangSwitcher } from 'shared/ui/LangSwitcher/ui/LangSwitcher';
+import OpenNotificationsButton from 'entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
+import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import noAvatar from '../../../shared/assets/images/noAvatar.svg';
-import { useAppSelector } from '../../../app/providers/StoreProvider/config/store';
-import ThemeSwitcher from '../../../shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
-import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
-import OpenNotificationsButton
-    from '../../../entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
-import Button, { ButtonTheme } from '../../../shared/ui/Button/Button';
-import { getUserState } from '../../../features/users/model/selectors/getUserState/getUserState';
+import s from './Header.module.scss';
 
 const Header = () => {
     // TODO : getSElector

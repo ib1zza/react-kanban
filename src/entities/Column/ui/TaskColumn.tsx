@@ -3,14 +3,13 @@ import { faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { editColumn, deleteColumn } from 'features/columns';
+import { IColumn } from 'app/types/IBoard';
+import { FormToEdit } from 'shared/ui/FormToEdit';
+import Button from 'shared/ui/Button/Button';
 import s from './TaskColumn.module.scss';
 import TaskList from '../lib/TaskList/TaskList';
-import { editColumn } from '../../../features/columns/API/editColumn';
 import AddTaskForm from '../lib/AddTaskForm/AddTaskForm';
-import { deleteColumn } from '../../../features/columns/API/deleteColumn';
-import { IColumn } from '../../../app/types/IBoard';
-import { FormToEdit } from '../../../shared/ui/FormToEdit';
-import Button from '../../../shared/ui/Button/Button';
 
 interface ITaskColumnProps {
   column: IColumn;

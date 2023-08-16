@@ -1,3 +1,5 @@
+export { ShareBoard } from './ui/ShareBoard/ShareBoard';
+
 export * from './API/addUserToBoard';
 export * from './API/createBoard';
 export * from './API/deleteBoard';

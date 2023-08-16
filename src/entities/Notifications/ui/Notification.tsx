@@ -1,8 +1,8 @@
 import React from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
 import s from './Notification.module.scss';
 
 import NotificationMessageInvited from './NotificationMessageInvited';
-import { classNames } from '../../../shared/lib/classNames/classNames';
 import { NotificationItem, NotificationType } from '../model/types/NotificationsSchema';
 
 interface Props {

@@ -3,17 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getUserInfo } from 'features/users';
+import { IBoard, LinkedUserType } from 'app/types/IBoard';
+import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
+import { useAppDispatch } from 'app/providers/StoreProvider';
+import { IUserInfo } from 'app/types/IUserInfo';
 import s from './Notification.module.scss';
 
-import { getUserInfo } from '../../../features/users';
 import { getBoardFromId } from '../../Board';
-import { IBoard, LinkedUserType } from '../../../app/types/IBoard';
 import { acceptInviteNotification } from '../model/services/API/acceptInviteNotification';
-import { useAuth } from '../../../app/providers/authRouter/ui/AuthContext';
 import { declineInviteNotification } from '../model/services/API/declineInviteNotification';
-import { useAppDispatch } from '../../../app/providers/StoreProvider';
 import { NotificationPayloadBoardInvited } from '../model/types/NotificationsSchema';
-import { IUserInfo } from '../../../app/types/IUserInfo';
 import { notificationsActions } from '../model/slice/notificationSlice';
 
 interface Props {
