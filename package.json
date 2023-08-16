@@ -81,17 +81,18 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "jest --config ./config1/jest/jest.config.ts",
+    "start": "webpack serve --env port=3000",
+    "start1": "node scripts/start.js",
+    "build": "webpack  --env mode=production",
+    "test": "jest --config ./config/jest/jest.config.ts",
     "component": "generate-react-cli component",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\" --custom-syntax postcss-less",
     "lint:scss:fix": "stylelint --fix \"**/*.scss\" --custom-syntax postcss-less",
-    "storybook": "storybook dev -p 6006 -c config1/storybook",
+    "storybook": "storybook dev -p 6006 -c config/storybook",
     "build-storybook": "storybook build",
-    "unit": "jest --config ./config1/jest/jest.config.ts"
+    "unit": "jest --config ./config/jest/jest.config.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -122,11 +123,15 @@
     "@storybook/react": "^7.1.1",
     "@storybook/react-webpack5": "^7.2.3",
     "@storybook/testing-library": "^0.2.0",
+    "@types/dotenv-webpack": "^7.0.4",
     "@types/react-color": "^3.0.6",
     "@types/uuid": "^9.0.2",
+    "@types/webpack-bundle-analyzer": "^4.6.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "babel-jest": "^29.6.2",
+    "babel-plugin-i18next-extract": "^0.9.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.47.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-airbnb-base": "15.0.0",
@@ -147,14 +152,11 @@
     "stylelint": "^15.10.2",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^10.0.0",
+    "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
     "uuid": "^9.0.0",
-    "webpack": "^5.88.2"
-  },
-
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.9.0",
+    "webpack-cli": "^5.1.4"
   }
 }
