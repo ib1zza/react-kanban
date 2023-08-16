@@ -10,10 +10,11 @@ import { signOut, User, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { AsyncThunk } from '@reduxjs/toolkit';
 import { auth } from '../../../../firebase';
-import { signUpEmailPass } from '../../../../pages/SignUp/lib/signUp';
-import { loginByEmailPass } from '../../../../pages/Login/lib/logIn';
+
 import { getUserInfo } from '../../../../features/users/API/getUserInfo';
 import { userInfoActions } from '../../../../features/users/model/slice/userInfoSlice';
+import { signUpEmailPass } from '../lib/signUp';
+import { loginByEmailPass } from '../lib/logIn';
 
 // import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 type ISelect = 'practice' | 'work' | 'study' | 'other';

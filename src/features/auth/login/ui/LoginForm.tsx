@@ -1,15 +1,18 @@
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { memo } from 'react';
-
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import s from './LoginForm.module.scss';
 import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getLoginState, loginActions } from '..';
 
-const LoginForm = memo(() => {
+interface props {
+    onSwitch: () => void
+}
+const LoginForm = memo(({ onSwitch }: props) => {
     const { logIn } = useAuth();
     const { t } = useTranslation('auth');
     const navigate = useNavigate();
@@ -48,10 +51,10 @@ const LoginForm = memo(() => {
                     <h1 className={s.title}>{t('Вход')}</h1>
                     <p className={s.linkArea}>
                         <span className={s.linkArea_descr}>{t('Новенький')}</span>
-                        <Link to="/signup" className={s.login__linkArea_link}>
+                        <Button theme={ButtonTheme.CLEAR} onClick={onSwitch} className={s.login__linkArea_link}>
                             {t('Зарегистрироваться')}
                             ?
-                        </Link>
+                        </Button>
                     </p>
                 </div>
             </div>
@@ -103,7 +106,6 @@ const LoginForm = memo(() => {
                     {t('Войти')}
                 </button>
             </div>
-
         </form>
     );
 });

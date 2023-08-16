@@ -10,6 +10,8 @@
     padding-left: 30vw;;
     width: 50%;
     height: 100%;
+    
+
 }
 
 .center {
@@ -63,7 +65,6 @@
     color: #fff;
 }
 
-
 .langSwitcher{
     display: flex;
     border-radius: 6px;
@@ -74,10 +75,11 @@
     line-height: normal;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    width: 44px;
+    width:44px;
     height: 44px;
     flex-shrink: 0;
-    background-color: var(--LRLangColor)
+    
+  
 }
 
 .themeSwitcherWrapper{
@@ -85,6 +87,7 @@
     left: 0;
     margin-top: 20px;
     margin-left: 20px;
+   
 }
 
 .langSwitcherWrapper{
@@ -98,7 +101,6 @@
         height: 30px;
     }
 }
-
 @media screen and (width >= 800px) and (width <= 1100px) {
     .center h1 span {
         font-size: 3rem;
@@ -117,17 +119,15 @@
     .wrapper {
         display: flex;
         flex-direction: column;
+        
     }
 
     .center h1 span {
         font-size: 1.5rem;
+    
+      
     }
-
-    .title_wrapper {
-        img {
-            display: none;
-        }
-    }
+    
     .logo {
         display: flex;
         width: 75%;
@@ -143,6 +143,5 @@
         left: -18px;
     }
 
- 
 }
 
