@@ -48,10 +48,10 @@ const LoginForm = memo(({ onSwitch }: props) => {
                 <Arrow />
 
                 <div>
-                    <h1 className={s.title}>{t('Вход')}</h1>
+                    <div className={s.title}>{t('Вход')}</div>
                     <p className={s.linkArea}>
                         <span className={s.linkArea_descr}>{t('Новенький')}</span>
-                        <Button theme={ButtonTheme.CLEAR} onClick={onSwitch} className={s.login__linkArea_link}>
+                        <Button theme={ButtonTheme.CLEAR} onClick={onSwitch} className={s.linkArea_link}>
                             {t('Зарегистрироваться')}
                             ?
                         </Button>
@@ -59,8 +59,7 @@ const LoginForm = memo(({ onSwitch }: props) => {
                 </div>
             </div>
             {error ? (
-                <p className="">
-
+                <p className={s.error}>
                     {error}
                 </p>
             ) : null}

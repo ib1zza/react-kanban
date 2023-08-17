@@ -82,8 +82,8 @@ const SignupForm = memo(({ onSwitch }: props) => {
 
                 <Arrow />
                 <div>
-                    <h1 className={s.signup__title}>{t('Регистрация')}</h1>
-                    <p className={s.signup__linkArea}>
+                    <h1 className={s.title}>{t('Регистрация')}</h1>
+                    <p className={s.linkArea}>
                         <span
                             onClick={onSwitch}
                         >
@@ -93,8 +93,8 @@ const SignupForm = memo(({ onSwitch }: props) => {
 
                 </div>
             </div>
-            <div className={s.signup__body}>
-                <div className={s.signup__progress}>
+            <div className={s.body}>
+                <div className={s.progress}>
                     <div className="">
                         {t('Шаг')}
                         {' '}
@@ -105,24 +105,24 @@ const SignupForm = memo(({ onSwitch }: props) => {
                     <ProgressBar
                         completed={progress}
                         isLabelVisible={false}
-                        bgColor="#DE1D6E"
+                        bgColor="#710080"
                     />
                 </div>
                 {step === 1 && (
                     <>
 
-                        <div className={s.signup__label}>
+                        <div className={s.label}>
                             {t('Введите вашу почту')}
                         </div>
 
                         {errors.email && (
-                            <p className={s.signup__label_error}>
+                            <p className={s.label_error}>
                                 {t('Запишите в формате почты')}
                             </p>
                         )}
 
                         <input
-                            className={s.signup__input}
+                            className={s.input}
                             type="email"
                             placeholder={t('Почта')}
                             // eslint-disable-next-line react/jsx-props-no-spreading
@@ -135,17 +135,17 @@ const SignupForm = memo(({ onSwitch }: props) => {
                         />
                         <div className="">{error}</div>
 
-                        <div className={s.signup__label}>
+                        <div className={s.label}>
                             {t('Придумайте имя пользователя')}
                         </div>
 
                         {errors.displayName && (
-                            <p className={s.signup__label_error}>
+                            <p className={s.label_error}>
                                 {t('Допускается только латиница в нижнем регистре и нижнee подчеркивание. Минимальное количество символов 3, максимальное - 20.')}
                             </p>
                         )}
                         <input
-                            className={s.signup__input}
+                            className={s.input}
                             type="text"
                             placeholder={t('Имя пользователя')}
                             {...register('displayName', {
@@ -159,15 +159,15 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 )}
                 {step === 2 && (
                     <>
-                        <div className={s.signup__label}>{t('Придумайте пароль')}</div>
+                        <div className={s.label}>{t('Придумайте пароль')}</div>
                         {errors.password && (
-                            <p className={s.signup__label_error}>
+                            <p className={s.label_error}>
                                 {t('Пароль должен включать в себя латинские буквы, включая заглавные и состоять из 6-15 символов')}
                             </p>
                         )}
                         <div className="">{t(error)}</div>
                         <input
-                            className={s.signup__input}
+                            className={s.input}
                             type="password"
                             placeholder={t('Пароль')}
                             {...register('password', {
@@ -177,10 +177,10 @@ const SignupForm = memo(({ onSwitch }: props) => {
                             })}
                         />
                         {errors.secondPassword && (
-                            <p className={s.signup__label_error}>{t('Пароль не совпадает')}</p>
+                            <p className={s.label_error}>{t('Пароль не совпадает')}</p>
                         )}
                         <input
-                            className={s.signup__input}
+                            className={s.input}
                             type="password"
                             placeholder={t('Повторный пароль')}
                             {...register('secondPassword', {
@@ -191,7 +191,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 )}
                 {step === 3 && (
                     <>
-                        <div className={s.singup__avatar__block}>
+                        <div className={s.avatar__block}>
                             <input
                                 {...register('file')}
                                 type="file"
@@ -204,12 +204,12 @@ const SignupForm = memo(({ onSwitch }: props) => {
                                 <span>{t('Загрузить аватар')}</span>
                             </label>
                         </div>
-                        <div className={s.signup__label}>
+                        <div className={s.label}>
                             {t('Для чего вам нужен сервис')}
                             ?
                         </div>
                         <select
-                            className={s.signup__input}
+                            className={s.input}
                             defaultValue="practice"
                             {...register('select')}
                         >
@@ -220,8 +220,8 @@ const SignupForm = memo(({ onSwitch }: props) => {
                         </select>
                     </>
                 )}
-                <div className={s.signup__btn_wrapper}>
-                    <button className={s.signup__btn}>{t('Продолжить')}</button>
+                <div className={s.btn_wrapper}>
+                    <button className={s.btn}>{t('Продолжить')}</button>
                 </div>
             </div>
         </form>

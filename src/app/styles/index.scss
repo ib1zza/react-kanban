@@ -37,6 +37,7 @@ $transitionDuration: 0.3s;
 
 
 .app {
+    width: 100%;
     height: 100vh;
     font-family: Poppins, sans-serif;
     background-color: var(--body-bg);
@@ -60,4 +61,6 @@ html,
 body,
 #root {
     height: 100vh;
+    width: 100%;
 }
+
