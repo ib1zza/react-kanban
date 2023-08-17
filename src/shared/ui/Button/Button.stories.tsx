@@ -3,7 +3,7 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ThemeDecorator } from '../../config/Storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from '../../../app/providers/theme/lib/ThemeContext';
-import Button, { ButtonTheme } from './Button';
+import Button, { ButtonSize, ButtonTheme } from './Button';
 
 const meta: Meta<typeof Button> = {
     title: 'shared/Button',
@@ -14,9 +14,22 @@ meta.decorators = [ThemeDecorator(Theme.LIGHT)];
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
+export const PrimaryS: Story = {
     args: {
         children: 'Button',
+        size: ButtonSize.S,
+    },
+};
+export const PrimaryM: Story = {
+    args: {
+        children: 'Button',
+        size: ButtonSize.M,
+    },
+};
+export const PrimaryL: Story = {
+    args: {
+        children: 'Button',
+        size: ButtonSize.L,
     },
 };
 export const PrimaryDark: Story = {
@@ -58,7 +71,6 @@ LoadingDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const Clear: Story = {
     args: {
-
         children: 'Button',
         theme: ButtonTheme.CLEAR,
     },

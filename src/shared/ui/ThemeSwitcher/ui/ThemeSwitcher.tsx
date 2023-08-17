@@ -14,6 +14,7 @@ const ThemeSwitcher = ({ className } : ThemeSwitcherProps) => {
     const { toggleTheme, theme } = useTheme();
     return (
         <Button
+            square
             className={classNames(
                 '',
                 {},
