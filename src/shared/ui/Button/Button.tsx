@@ -7,27 +7,37 @@ export enum ButtonTheme {
     CLEAR= 'clear',
     FULL = 'full'
 }
+export enum ButtonSize {
+    S = 's',
+    M = 'm',
+    L = 'l'
+}
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: JSX.Element;
   loading?: boolean;
   iconStyles?: React.CSSProperties;
-  theme?: ButtonTheme,
-    children?: React.ReactNode
+  theme?: ButtonTheme;
+  children?: React.ReactNode;
+  size?: ButtonSize;
+  square?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
     icon: Icon,
     iconStyles,
     className,
+    square,
     loading,
+    size = ButtonSize.S,
     theme = ButtonTheme.FULL,
     children,
     ...props
 }) => {
     const mods: Record<string, boolean> = {
         [s[theme]]: true,
+        [s.square]: square,
         [s.loading]: loading as boolean,
-
+        [s[size]]: true,
     };
     return (
         <button
@@ -45,7 +55,6 @@ const Button: React.FC<ButtonProps> = ({
                     <div className={s.iconContainer} />
                 )}
                 { children }
-
             </div>
             {loading && (
                 <div className={s.loading}>

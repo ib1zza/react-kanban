@@ -1,18 +1,14 @@
-$background: #fff;
-$hover: var(--iconColorHover);
-$hoverBorder: var(--iconColorHover);
+
 
 .full {
-
     background-color: var(#{--ButtonBg});
     position: relative;
     font: var(--font-m);
     cursor: pointer;
-    border: 1px solid transparent;
-    padding: 6px;
+    border: none;
+    padding: 8px;
     border-radius: 10px;
-
-   
+    border: 2px solid transparent;
     .icon {
         display: flex;
         justify-content: center;
@@ -24,7 +20,7 @@ $hoverBorder: var(--iconColorHover);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(#{--ButtonText});
+        color: var(--ButtonText);
 
        
         &.invisible {
@@ -40,9 +36,29 @@ $hoverBorder: var(--iconColorHover);
     }
 
    
-
+    .square {
+        padding: 0;
+    }
+    
+    .square.s {
+        width: var(--font-line-s);
+        height: var(--font-line-s);
+    }
+    
+    .square.m {
+        width: var(--font-line-m);
+        height: var(--font-line-m);
+    }
+    
+    .square.l {
+        width: var(--font-line-l);
+        height: var(--font-line-l);
+    }
+    
     &:hover {
-        border: 1px solid $hoverBorder;
+        background-color: var(--ButtonBorderHover);
+        color: var(--ButtonColorHover);
+
     }
     &:disabled {
         cursor: default;
@@ -56,6 +72,18 @@ $hoverBorder: var(--iconColorHover);
     
     }
 
+}
+
+.s{
+    padding: 6px;
+}
+
+.m{
+    padding: 9px;
+}
+
+.l{
+    padding: 10px;
 }
 
 .clear{
