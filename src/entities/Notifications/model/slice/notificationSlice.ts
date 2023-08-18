@@ -49,15 +49,17 @@ export const notificationSlice = createSlice({
                 state.error = 'error while getting notifications';
             })
             .addCase(readAllNotifications.pending, (state) => {
+                // state.notifications = state.notifications.map(
+                //     (notification) => ({ ...notification, read: true }),
+                // );
+            })
+            .addCase(readAllNotifications.fulfilled, (state, action) => {
                 state.notifications = state.notifications.map(
                     (notification) => ({ ...notification, read: true }),
                 );
             })
-            .addCase(readAllNotifications.fulfilled, (state, action) => {
-
-            })
             .addCase(readAllNotifications.rejected, (state, action) => {
-                state.error = 'error while getting notifications';
+                state.error = 'error while reading notifications';
             });
     },
 
