@@ -1,7 +1,7 @@
 import React from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import s from './Button.module.scss';
-import { classNames } from '../../lib/classNames/classNames';
+import { classNames, Mods } from '../../lib/classNames/classNames';
 
 export enum ButtonTheme {
     CLEAR= 'clear',
@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
     children,
     ...props
 }) => {
-    const mods: Record<string, boolean> = {
+    const mods: Mods = {
         [s[theme]]: true,
         [s.square]: square,
         [s.loading]: loading as boolean,

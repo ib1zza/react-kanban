@@ -9,7 +9,7 @@ import React, {
 import { signOut, User, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { AsyncThunk } from '@reduxjs/toolkit';
-import { auth } from '../../../../firebase';
+import { auth } from '../../../../shared/config/firebase/firebase';
 
 import { getUserInfo } from '../../../../features/users/API/getUserInfo';
 import { userInfoActions } from '../../../../features/users/model/slice/userInfoSlice';
@@ -68,8 +68,8 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
         }
     }
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser: User) => {
-            setUser(currentUser);
+        const unsubscribe = onAuthStateChanged(auth, (currentUser: User | null) => {
+            setUser(currentUser as User);
             if (user?.uid) {
                 getUserInfo(user.uid).then((res) => {
                     if (res) {

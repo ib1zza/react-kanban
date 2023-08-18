@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import React, { useState } from 'react';
+import { useAppSelector } from 'app/providers/StoreProvider';
+import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import s from '../../../../entities/Column/ui/TaskColumn.module.scss';
 import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
@@ -25,7 +27,8 @@ const FormToLink: React.FC<Props> = ({
 }) => {
     const { t } = useTranslation('buttons');
     const [title, setTitle] = useState('');
-    const { user } = UserAuth();
+    // const { user } = UserAuth();
+    const { user } = useAppSelector(getUserState);
     const [color, setColor] = useState('#f44336');
 
     const addBoard = () => {

@@ -1,6 +1,6 @@
 import { DeepPartial } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers/StoreProvider';
-import { getBoardCollection } from 'entities/Board';
+import { getBoardCollection } from './getBoardCollection';
 
 describe('getBoardCollection', () => {
     test('should return board collection', () => {

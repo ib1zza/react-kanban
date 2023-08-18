@@ -5,16 +5,19 @@ import { useTranslation } from 'react-i18next';
 
 import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { getUserInfo, editDisplayName } from 'features/users';
-import { storage } from 'firebase';
+import { storage } from 'shared/config/firebase/firebase';
 import { IUserInfo } from 'app/types/IUserInfo';
 import Button from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { updateDocument } from 'shared/API/updateDocument';
+import { useAppSelector } from 'app/providers/StoreProvider';
+import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import s from './Profile.module.scss';
 
 const Profile = () => {
-    const { user, refetch } = UserAuth();
+    const { user } = useAppSelector(getUserState);
+    const { refetch } = UserAuth();
     const [editStatus, setEditStatus] = useState(false);
     const [name, setName] = useState<any>('');
     const { t } = useTranslation('profile');
@@ -42,7 +45,7 @@ const Profile = () => {
         const storageRef = ref(storage, user.displayName);
         const uploadImage = uploadBytesResumable(storageRef, file);
 
-        await uploadImage.on(
+        uploadImage.on(
             'state_changed',
             (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -62,9 +65,9 @@ const Profile = () => {
             () => {
                 getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
                     await updateDocument('users', user.uid, { photoURL: downloadURL });
-                    await updateProfile(user, {
-                        photoURL: downloadURL,
-                    });
+                    // await updateProfile(user, {
+                    //     photoURL: downloadURL,
+                    // });
                     refetch();
                     fetchUserInfo();
                 });

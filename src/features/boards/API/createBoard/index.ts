@@ -1,6 +1,6 @@
 import { arrayUnion, doc, setDoc } from '@firebase/firestore';
 import { v4 as uuid } from 'uuid';
-import { db } from '../../../../firebase';
+import { db } from '../../../../shared/config/firebase/firebase';
 
 import { GuestPermission } from '../../../../app/types/IBoard';
 import { updateDocument } from '../../../../shared/API/updateDocument';

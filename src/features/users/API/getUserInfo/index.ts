@@ -1,5 +1,5 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from 'firebase';
+import { db } from 'shared/config/firebase/firebase';
 import { IUserInfo } from 'app/types/IUserInfo';
 
 export async function getUserInfo(id: string) {

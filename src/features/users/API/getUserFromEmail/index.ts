@@ -1,7 +1,7 @@
 import {
     collection, getDocs, query, where,
 } from 'firebase/firestore';
-import { db } from 'firebase';
+import { db } from 'shared/config/firebase/firebase';
 import { IUserInfo } from 'app/types/IUserInfo';
 
 export async function getUserFromEmail(

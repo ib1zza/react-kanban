@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, db, storage } from 'firebase';
+import { auth, db, storage } from 'shared/config/firebase/firebase';
 
 export const signUpEmailPass = async (
     email: string,
