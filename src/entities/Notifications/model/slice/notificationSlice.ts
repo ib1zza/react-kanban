@@ -43,6 +43,7 @@ export const notificationSlice = createSlice({
             })
             .addCase(getNotifications.fulfilled, (state, action) => {
                 state.isLoading = false;
+                state.notifications = action.payload.sort((a, b) => b.timestamp - a.timestamp);
             })
             .addCase(getNotifications.rejected, (state, action) => {
                 state.isLoading = false;
