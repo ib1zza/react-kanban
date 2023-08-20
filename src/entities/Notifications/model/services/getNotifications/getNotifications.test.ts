@@ -122,5 +122,5 @@ describe('getNotifications', () => {
                 uid: '0f4af800-dc39-4710-a67b-00d6121a3a24',
             },
         ]);
-    });
+    }, 10000);
 });

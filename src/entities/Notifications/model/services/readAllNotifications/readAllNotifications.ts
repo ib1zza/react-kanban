@@ -10,7 +10,7 @@ export const readAllNotifications = createAsyncThunk<any, string, { rejectValue:
     async (userId, { getState, rejectWithValue }) => {
         try {
             const { notifications } = (getState() as getStateInterface).notifications;
-            console.log(getState());
+
             return await Promise.allSettled(notifications.filter(
                 (notification) => !notification.read,
             )
