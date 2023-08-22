@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import s from './Footer.module.scss';
 
 interface FooterProps {
@@ -24,4 +24,4 @@ const Footer = ({ active, finished }: FooterProps) => (
     </footer>
 );
 
-export default Footer;
+export default memo(Footer);

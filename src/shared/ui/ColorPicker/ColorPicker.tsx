@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CirclePicker } from 'react-color';
 import s from './ColorPicker.module.scss';
 
@@ -17,4 +17,4 @@ const ColorPicker: React.FC<IProps> = ({ onChange, color }) => (
     </div>
 );
 
-export default ColorPicker;
+export default memo(ColorPicker);

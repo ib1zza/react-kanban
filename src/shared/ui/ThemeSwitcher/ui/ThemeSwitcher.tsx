@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { useTheme } from '../../../../app/providers/theme/lib/useTheme';
@@ -31,4 +31,4 @@ const ThemeSwitcher = ({ className } : ThemeSwitcherProps) => {
     );
 };
 
-export default ThemeSwitcher;
+export default memo(ThemeSwitcher);
