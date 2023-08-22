@@ -1,5 +1,5 @@
 import React, {
-    FC, useEffect,
+    FC, useCallback, useEffect,
 } from 'react';
 import { ReactSVG } from 'react-svg';
 import s from './AvatarEdit.module.scss';
@@ -12,20 +12,23 @@ interface AvatarEditProps {
 const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit }) => {
     const [file, setFile] = React.useState<File | null>(null);
     const [loading, setLoading] = React.useState(false);
-    console.log(avatar);
-    const handleUpdateAvatar = async () => {
-        if (file && !loading) {
-            setLoading(true);
-            await onEdit(file);
-            setFile(null);
-        }
-    };
+    // console.log(avatar);
+    const handleUpdateAvatar = useCallback(
+        async () => {
+            if (file && !loading) {
+                setLoading(true);
+                await onEdit(file);
+                setFile(null);
+            }
+        },
+        [file, loading, onEdit],
+    );
 
     useEffect(() => {
         handleUpdateAvatar().finally(() => setLoading(false));
 
-        console.log('work');
-    }, [file]);
+        // console.log('work');
+    }, [file, handleUpdateAvatar]);
     return (
         <div className={s.profile__avatar}>
             {avatar ? (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import s from './Button.module.scss';
 import { classNames, Mods } from '../../lib/classNames/classNames';
@@ -71,4 +71,4 @@ const Button: React.FC<ButtonProps> = ({
     );
 };
 
-export default Button;
+export default memo(Button);

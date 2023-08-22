@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 
 import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
@@ -23,23 +22,23 @@ const Profile = () => {
     const { t } = useTranslation('profile');
     const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
 
-    const fetchUserInfo = async () => {
+    const fetchUserInfo = useCallback(async () => {
         if (!user?.uid) return;
         return getUserInfo(user.uid).then((res) => {
             setUserInfo(res);
         });
-    };
+    }, [user?.uid]);
     useEffect(() => {
         fetchUserInfo();
     }, [user]);
 
-    const handleSubmit = async () => {
+    const handleSubmit = useCallback(async () => {
         if (!user || !/^[a-z0-9_]+$/.test(name)) return;
         await editDisplayName(user.uid, name);
         fetchUserInfo();
-    };
+    }, [fetchUserInfo, name, user]);
 
-    const onAvatarUpdate = async (file: File) => {
+    const onAvatarUpdate = useCallback(async (file: File) => {
         if (!user?.displayName) return;
 
         const storageRef = ref(storage, user.displayName);
@@ -74,7 +73,7 @@ const Profile = () => {
                 return true;
             },
         );
-    };
+    }, [fetchUserInfo, refetch, user?.displayName, user?.uid]);
 
     if (!user || !userInfo) return null;
     return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck,
@@ -38,4 +38,4 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort }) => {
     );
 };
 
-export default ConfirmButtons;
+export default memo(ConfirmButtons);

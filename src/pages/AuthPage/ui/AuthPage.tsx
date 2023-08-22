@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { LoginForm } from 'features/auth/login';
 import { SignupForm } from 'features/auth/signup';
 import s from './AuthPage.module.scss';
@@ -7,9 +7,9 @@ import { LangSwitcher } from '../../../shared/ui/LangSwitcher/ui/LangSwitcher';
 
 const AuthPage = () => {
     const [isLogin, setisLogin] = useState(true);
-    const onSwitch = () => {
+    const onSwitch = useCallback(() => {
         setisLogin(!isLogin);
-    };
+    }, [isLogin]);
     return (
 
         <div className={s.wrapper}>
