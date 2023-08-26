@@ -47,7 +47,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
             );
             navigate('/');
         } catch (error) {
-            dispatch(signupActions.setError(error as any));
+            dispatch(signupActions.setError(error as string));
         }
     };
 

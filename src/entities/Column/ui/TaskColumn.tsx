@@ -5,8 +5,8 @@ import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { editColumn, deleteColumn } from 'features/columns';
 import { IColumn } from 'app/types/IBoard';
-import { FormToEdit } from 'shared/ui/FormToEdit';
 import Button from 'shared/ui/Button/Button';
+import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import s from './TaskColumn.module.scss';
 import TaskList from '../lib/TaskList/TaskList';
 import AddTaskForm from '../lib/AddTaskForm/AddTaskForm';
@@ -86,7 +86,8 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                 </>
             )}
             {isEditColumn && (
-                <FormToEdit
+                <ActionForm
+                    status={ActionFormStatus.EDIT}
                     title={column.title}
                     color={column.color}
                     onEdit={editHandler}

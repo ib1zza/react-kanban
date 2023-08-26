@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'shared/ui/Button/Button';
 import { addUserToBoard, createBoard } from 'features/boards';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
-import { FormToCreate } from 'shared/ui/FormToCreate';
-import { FormToLink } from 'shared/ui/FormToLink';
+
 import { BoardPreview } from 'entities/Board';
 import { useAppSelector } from 'app/providers/StoreProvider';
+import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { getUserBoards } from '../lib/getUserBoards';
 import s from './Home.module.scss';
 
@@ -53,15 +53,15 @@ const Home = () => {
                     <div className={s.boardPageContainer}>
                         <div className={s.blocks__container}>
                             {addBoardStatus && (
-                                <FormToCreate
-                                    forBoard
+                                <ActionForm
+                                    status={ActionFormStatus.BOARD}
                                     onCreateBoard={handleCreateBoard}
                                     onAbort={() => setAddBoardStatus(false)}
                                 />
                             )}
                             {linkBoardStatus && (
-                                <FormToLink
-                                    forBoard
+                                <ActionForm
+                                    status={ActionFormStatus.BOARD}
                                     onCreateBoard={handleLinkBoard}
                                     onAbort={() => setLinkBoardStatus(false)}
                                 />
