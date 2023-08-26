@@ -14,11 +14,10 @@ import {
 import { getTaskInfo } from 'features/tasks';
 import { editBoard, BoardPageHeader } from 'features/boards';
 import { getBoardFromId, getBoardCollection } from 'entities/Board';
-import { FormToLink } from 'shared/ui/FormToLink';
 import { boardCollectionActions } from 'entities/Board/model/slice/boardCollectionSlice';
 import { TaskColumn } from 'entities/Column';
+import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
-import { FormToCreate } from '../../../shared/ui/FormToCreate';
 import s from './BoardPage.module.scss';
 import Button from '../../../shared/ui/Button/Button';
 
@@ -27,7 +26,7 @@ const BoardPage: React.FC = memo(() => {
     const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
         getBoardCollection,
     );
-    const [isCreating, setIsCreating] = useState(false);
+    const [isCreating, setIsCreating] = useState(true);
     const [isLinking, setIsLinking] = useState(false);
     const dispatch = useAppDispatch();
 
@@ -68,7 +67,6 @@ const BoardPage: React.FC = memo(() => {
 
     if (!selectedBoard) return <></>;
 
-    console.log(selectedBoard.title);
     return (
         <div className={s.wrapperContainer}>
             <BoardPageHeader onEdit={handleEditTitle} title={selectedBoard.title} />
@@ -84,16 +82,18 @@ const BoardPage: React.FC = memo(() => {
                         />
                     ))}
                     {isCreating && (
-                        <FormToCreate
-                            forColumn
+                        <ActionForm
+                            status={ActionFormStatus.COLUMN}
                             onCreateColumn={createColumnAction}
                             onAbort={() => setIsCreating(false)}
                         />
                     )}
                     {isLinking && (
-                        <FormToLink
-                            forColumn
-                            onCreateColumn={() => 1}
+                        <ActionForm
+                            status={ActionFormStatus.COLUMN}
+                            onCreateColumn={() => {
+                                // TODO: LINKCOLUMN
+                            }}
                             onAbort={() => setIsLinking(false)}
                         />
                     )}
@@ -105,6 +105,13 @@ const BoardPage: React.FC = memo(() => {
                         </Button>
                     </div>
                 )}
+                {/* {!isLinking && (
+                    <div className={s.buttons}>
+                        <Button onClick={() => setIsCreating(true)}>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </Button>
+                    </div>
+                )} */}
                 {selectedTask && (
                     <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />
                 )}
