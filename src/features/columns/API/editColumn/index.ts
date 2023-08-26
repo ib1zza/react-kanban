@@ -7,8 +7,8 @@ export async function editColumn(
     newData: { [key in keyof IColumn]?: IColumn[key] },
 ) {
     const updatedData = Object.keys(newData).reduce(
-        (acc: { [key: string]: any }, key: keyof IColumn) => {
-            acc[`columns.${columnId}.${key}`] = newData[key];
+        (acc: { [key: string]: any }, key) => {
+            acc[`columns.${columnId}.${key}`] = newData[key as keyof IColumn];
             return acc;
         },
         {},

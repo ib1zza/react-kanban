@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { memo } from 'react';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import Button, { ButtonTheme } from 'shared/ui/Button/Button';
+import { useCallback } from 'react';
 import s from './LoginForm.module.scss';
 import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getLoginState, loginActions } from '..';
@@ -12,7 +12,7 @@ import { getLoginState, loginActions } from '..';
 interface props {
     onSwitch: () => void
 }
-const LoginForm = memo(({ onSwitch }: props) => {
+const LoginForm = ({ onSwitch }: props) => {
     const { logIn } = useAuth();
     const { t } = useTranslation('auth');
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const LoginForm = memo(({ onSwitch }: props) => {
     const {
         error, isLoading, rememberMe,
     } = useSelector(getLoginState);
-    const onSubmit:any = async (data: any, e?: Event) => {
+    const onSubmit = useCallback(async (data: any, e?: Event) => {
         e?.preventDefault();
         if (data.email !== '' && data.password !== '') {
             await logIn(data.email, data.password, rememberMe);
@@ -34,13 +34,13 @@ const LoginForm = memo(({ onSwitch }: props) => {
         } else {
             dispatch(loginActions.setError('Какое-то поле незаполнено'));
         }
-    };
-    const handleChange = () => {
+    }, [dispatch, logIn, navigate, rememberMe]);
+    const handleChange = useCallback(() => {
         dispatch(loginActions.setRememberMe(!rememberMe));
-    };
+    }, [dispatch, rememberMe]);
     return (
         <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmit as SubmitHandler<FieldValues>)}
             className={s.form}
         >
             <div className={s.title_wrapper}>
@@ -107,6 +107,6 @@ const LoginForm = memo(({ onSwitch }: props) => {
             </div>
         </form>
     );
-});
+};
 
 export default LoginForm;

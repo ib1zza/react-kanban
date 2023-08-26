@@ -43,21 +43,24 @@ export const notificationSlice = createSlice({
             })
             .addCase(getNotifications.fulfilled, (state, action) => {
                 state.isLoading = false;
+                state.notifications = action.payload.sort((a, b) => b.timestamp - a.timestamp);
             })
             .addCase(getNotifications.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = 'error while getting notifications';
             })
             .addCase(readAllNotifications.pending, (state) => {
+                // state.notifications = state.notifications.map(
+                //     (notification) => ({ ...notification, read: true }),
+                // );
+            })
+            .addCase(readAllNotifications.fulfilled, (state, action) => {
                 state.notifications = state.notifications.map(
                     (notification) => ({ ...notification, read: true }),
                 );
             })
-            .addCase(readAllNotifications.fulfilled, (state, action) => {
-
-            })
             .addCase(readAllNotifications.rejected, (state, action) => {
-                state.error = 'error while getting notifications';
+                state.error = 'error while reading notifications';
             });
     },
 

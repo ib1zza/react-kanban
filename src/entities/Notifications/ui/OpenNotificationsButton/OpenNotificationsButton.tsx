@@ -27,17 +27,6 @@ const OpenNotificationsButton = () => {
         async function getNotifs() {
             if (!user?.uid) return;
             dispatch(getNotifications(user.uid));
-            // await getUserNotifications(user.uid).then((res) => {
-            //     console.log(res);
-            //     if (!res) {
-            //         setDoc(doc(db, 'notifications', user.uid), {});
-            //         dispatch(notificationsActions.setNotifications([]));
-            //         return;
-            //     }
-            //     dispatch(notificationsActions.setNotifications(
-            //         Object.values(res).sort((a, b) => b.timestamp - a.timestamp),
-            //     ));
-            // });
         }
 
         getNotifs();
@@ -74,6 +63,8 @@ const OpenNotificationsButton = () => {
             {open && (
                 <div className={s.notificationsContainer}>
                     {notifications.length ? '' : 'Нет уведомлений'}
+                    {notifications.length
+                    && <div className={s.deleteAll}>Удалить все</div>}
                     {notifications.map((notif: NotificationItem) => (
                         <Notification data={notif} key={notif.uid} />
                     ))}

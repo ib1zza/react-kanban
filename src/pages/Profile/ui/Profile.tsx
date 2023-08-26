@@ -1,48 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { updateProfile } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
 
 import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { getUserInfo, editDisplayName } from 'features/users';
-import { storage } from 'firebase';
+import { storage } from 'shared/config/firebase/firebase';
 import { IUserInfo } from 'app/types/IUserInfo';
 import Button from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { updateDocument } from 'shared/API/updateDocument';
+import { useAppSelector } from 'app/providers/StoreProvider';
+import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import s from './Profile.module.scss';
 
 const Profile = () => {
-    const { user, refetch } = UserAuth();
+    const { user } = useAppSelector(getUserState);
+    const { refetch } = UserAuth();
     const [editStatus, setEditStatus] = useState(false);
     const [name, setName] = useState<any>('');
     const { t } = useTranslation('profile');
     const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
 
-    const fetchUserInfo = async () => {
+    const fetchUserInfo = useCallback(async () => {
         if (!user?.uid) return;
         return getUserInfo(user.uid).then((res) => {
             setUserInfo(res);
         });
-    };
+    }, [user?.uid]);
     useEffect(() => {
         fetchUserInfo();
     }, [user]);
 
-    const handleSubmit = async () => {
+    const handleSubmit = useCallback(async () => {
         if (!user || !/^[a-z0-9_]+$/.test(name)) return;
         await editDisplayName(user.uid, name);
         fetchUserInfo();
-    };
+    }, [fetchUserInfo, name, user]);
 
-    const onAvatarUpdate = async (file: File) => {
+    const onAvatarUpdate = useCallback(async (file: File) => {
         if (!user?.displayName) return;
 
         const storageRef = ref(storage, user.displayName);
         const uploadImage = uploadBytesResumable(storageRef, file);
 
-        await uploadImage.on(
+        uploadImage.on(
             'state_changed',
             (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -62,16 +64,16 @@ const Profile = () => {
             () => {
                 getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
                     await updateDocument('users', user.uid, { photoURL: downloadURL });
-                    await updateProfile(user, {
-                        photoURL: downloadURL,
-                    });
+                    // await updateProfile(user, {
+                    //     photoURL: downloadURL,
+                    // });
                     refetch();
                     fetchUserInfo();
                 });
                 return true;
             },
         );
-    };
+    }, [fetchUserInfo, refetch, user?.displayName, user?.uid]);
 
     if (!user || !userInfo) return null;
     return (

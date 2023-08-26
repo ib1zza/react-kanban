@@ -1,9 +1,8 @@
-import { BoardCollectionSchema } from '../../../../entities/Board';
-// eslint-disable-next-line max-len
-import { NotificationsSchema } from '../../../../entities/Notifications/model/types/NotificationsSchema';
-import { UserInfoSchema } from '../../../../features/users/model/types/UserInfoSchema';
-import { LoginSchema } from '../../../../features/auth/login';
-import { SignupSchema } from '../../../../features/auth/signup';
+import { BoardCollectionSchema } from 'entities/Board';
+import { NotificationsSchema } from 'entities/Notifications';
+import { UserInfoSchema } from 'features/users/model/types/UserInfoSchema';
+import { LoginSchema } from 'features/auth/login';
+import { SignupSchema } from 'features/auth/signup';
 
 export interface StateSchema {
     boardCollection: BoardCollectionSchema,

@@ -36,7 +36,7 @@ const Header = () => {
                     <p className={s.nickname}>{user?.email}</p>
                     <div className={s.avatar}>
                         {
-                            user?.photoURL ? <img src={user?.photoURL} alt="your avatar" />
+                            user ? <img src={user?.photoURL as string} alt="your avatar" />
                                 // eslint-disable-next-line react/jsx-indent
                                 : <img src={noAvatar as unknown as string} alt="no avatar" />
                         }

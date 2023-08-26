@@ -8,38 +8,42 @@ import React, {
 } from 'react';
 import { signOut, User, onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
-import { AsyncThunk } from '@reduxjs/toolkit';
-import { auth } from '../../../../firebase';
+import { auth } from 'shared/config/firebase/firebase';
 
-import { getUserInfo } from '../../../../features/users/API/getUserInfo';
-import { userInfoActions } from '../../../../features/users/model/slice/userInfoSlice';
+import { getUserInfo } from 'features/users';
+import { userInfoActions } from 'features/users/model/slice/userInfoSlice';
 import { signUpEmailPass } from '../lib/signUp';
 import { loginByEmailPass } from '../lib/logIn';
 
-// import { setDoc, doc, getDocs, collection } from "firebase/firestore";
 type ISelect = 'practice' | 'work' | 'study' | 'other';
 
 interface IAuthContext {
-  signUp: (
-    email: string,
-    password: string,
-    displayName: string,
-    select: ISelect,
-    photoFile?: any
-  ) => void;
+    signUp: (
+        email: string,
+        password: string,
+        displayName: string,
+        select: ISelect,
+        photoFile?: any
+    ) => void;
 
-  logIn: (email: string,
-    password: string, rememberMe: boolean) => void
-  logOut: () => void;
-  refetch: () => void;
-  user: User | null;
+    logIn: (
+        email: string,
+        password: string, rememberMe: boolean
+    ) => void
+    logOut: () => void;
+    refetch: () => void;
+    user: User | null;
 }
 
 const AuthContext = createContext<IAuthContext>({
-    logIn: () => {},
-    signUp: () => {},
-    logOut: () => {},
-    refetch: () => {},
+    logIn: () => {
+    },
+    signUp: () => {
+    },
+    logOut: () => {
+    },
+    refetch: () => {
+    },
     user: null,
 });
 
@@ -52,11 +56,13 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     const signUp = signUpEmailPass;
     const logIn = loginByEmailPass;
     const dispatch = useDispatch();
+
     function logOut() {
         signOut(auth);
     }
+
     async function refetch() {
-        console.log('refetch');
+        console.log('refetch user');
         if (user?.uid) {
             await user.reload();
             getUserInfo(user.uid).then((res) => {
@@ -67,9 +73,10 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
             });
         }
     }
+
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser: User) => {
-            setUser(currentUser);
+        const unsubscribe = onAuthStateChanged(auth, (currentUser: User | null) => {
+            setUser(currentUser as User);
             if (user?.uid) {
                 getUserInfo(user.uid).then((res) => {
                     if (res) {

@@ -34,9 +34,9 @@ const ActionForm = memo((props: Props) => {
         onCreateColumn,
         onCreateBoard,
     } = props;
-    const [title, setTitle] = useState(initTitle);
+    const [title, setTitle] = useState<string>(initTitle as string);
     const { user } = UserAuth();
-    const [color, setColor] = useState(initColor);
+    const [color, setColor] = useState<string>(initColor as string);
     const { t } = useTranslation('buttons');
 
     const addBoard = useCallback(() => {
