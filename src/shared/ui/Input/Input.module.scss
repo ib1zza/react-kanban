@@ -7,7 +7,7 @@
         padding: calc(var(--InputPadding) - 4px);
     }
     input {
-        border: var(--InputBorder);
+        border: none;
         padding: var(--InputPadding);
         background-color: var(--InputBg);
         color: var(--InputText);
@@ -33,7 +33,7 @@
         color: var(--InputLabel)
     }
     input {
-        border: var(--InputBorder);
+        border: none;
         padding: var(--InputPadding);
         background-color: var(--InputBg);
         color: var(--InputText);

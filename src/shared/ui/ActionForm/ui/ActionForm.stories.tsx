@@ -2,16 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/theme/lib/ThemeContext';
-import FormToCreate, { ActionFormStatus } from './ActionForm';
+import ActionForm, { ActionFormStatus } from './ActionForm';
 
-const meta: Meta<typeof FormToCreate> = {
-    title: 'shared/FormToCreate',
-    component: FormToCreate,
+const meta: Meta<typeof ActionForm> = {
+    title: 'shared/ActionForm',
+    component: ActionForm,
 
 };
 meta.decorators = [ThemeDecorator(Theme.LIGHT)];
 export default meta;
-type Story = StoryObj<typeof FormToCreate>;
+type Story = StoryObj<typeof ActionForm>;
 
 export const Board: Story = {
     args: {
