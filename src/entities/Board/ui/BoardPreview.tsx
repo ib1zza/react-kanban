@@ -73,6 +73,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
             <p>
                 by
                 {' '}
+
                 {username || `${t('Загрузка')}`}
             </p>
         </div>

@@ -13,6 +13,7 @@ import { useAppSelector } from 'app/providers/StoreProvider';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import s from './Profile.module.scss';
+import ProfileSkeleton from './ProfileSkeleton';
 
 const Profile = () => {
     const { user } = useAppSelector(getUserState);
@@ -75,7 +76,7 @@ const Profile = () => {
         );
     }, [fetchUserInfo, refetch, user?.displayName, user?.uid]);
 
-    if (!user || !userInfo) return null;
+    if (!user || !userInfo) return <ProfileSkeleton />;
     return (
         <div>
             <div className={s.profile}>

@@ -7,11 +7,12 @@ import Header from '../../../../widgets/components/Header/Header';
 import s from '../../../styles/App.module.scss';
 
 const AppRouter = () => (
-    <Suspense fallback={<div>Loading..</div>}>
+    <Suspense>
         <Routes>
             <Route
                 path="/*"
                 element={(
+
                     <ProtectedRoute>
                         <div className={s.home}>
                             <Header />
@@ -20,6 +21,7 @@ const AppRouter = () => (
                             </div>
                         </div>
                     </ProtectedRoute>
+
                 )}
             />
 

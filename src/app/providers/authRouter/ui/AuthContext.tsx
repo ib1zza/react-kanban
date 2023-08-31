@@ -62,13 +62,11 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     }
 
     async function refetch() {
-        console.log('refetch user');
         if (user?.uid) {
             await user.reload();
             getUserInfo(user.uid).then((res) => {
                 if (res) {
                     dispatch(userInfoActions.setUserInfo(res));
-                    console.log(res.photoURL);
                 }
             });
         }

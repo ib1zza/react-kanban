@@ -16,12 +16,10 @@ export const boardCollectionSlice = createSlice({
         setCurrentBoard: (state, action: PayloadAction<IBoard>) => {
             state.selectedBoard = action.payload;
             state.selectedBoardId = action.payload.uid;
-            console.log('board selected:', action.payload);
         },
         removeSelectedBoard: (state) => {
             state.selectedBoard = null;
             state.selectedBoardId = '';
-            console.log('board unselected:');
         },
         setCurrentTask: (state, action: PayloadAction<ITask>) => {
             state.selectedTask = action.payload;
@@ -29,12 +27,10 @@ export const boardCollectionSlice = createSlice({
             state.selectedColumnId = Object.values(state.selectedBoard.columns).find(
                 (col) => Object.keys(col.tasks).includes(action.payload.uid),
             )?.uid || '';
-            console.log('task selected:', action.payload);
         },
         removeSelectedTask: (state) => {
             state.selectedTask = null;
             state.selectedColumnId = '';
-            console.log('task unselected:');
         },
     },
 });

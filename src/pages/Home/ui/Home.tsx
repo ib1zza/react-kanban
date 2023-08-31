@@ -13,6 +13,7 @@ import { useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { getUserBoards } from '../lib/getUserBoards';
 import s from './Home.module.scss';
+import HomeSkeleton from './HomeSkeleton';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -25,7 +26,6 @@ const Home = () => {
     // getting boards (only info which we need)
     const fetchBoards = () => getBoards(user).then((res) => {
         setBoards(res);
-        console.log(boards);
     });
 
     useEffect(() => {
@@ -44,53 +44,48 @@ const Home = () => {
         await fetchBoards();
         setLinkBoardStatus(false);
     };
-    if (!user?.uid) return null;
+    if (!user?.uid) return <HomeSkeleton />;
     return (
-        <Routes>
-            <Route
-                path="/*"
-                element={(
-                    <div className={s.boardPageContainer}>
-                        <div className={s.blocks__container}>
-                            {addBoardStatus && (
-                                <ActionForm
-                                    status={ActionFormStatus.BOARD}
-                                    onCreateBoard={handleCreateBoard}
-                                    onAbort={() => setAddBoardStatus(false)}
-                                />
-                            )}
-                            {linkBoardStatus && (
-                                <ActionForm
-                                    status={ActionFormStatus.BOARD}
-                                    onCreateBoard={handleLinkBoard}
-                                    onAbort={() => setLinkBoardStatus(false)}
-                                />
-                            )}
-                            {boards.map((item, index) => (
-                                <BoardPreview
-                                    onDelete={() => getBoards}
-                                    onClick={() => {
-                                        navigate(`/board/${item.uid}`);
-                                    }}
-                                    key={index}
-                                    board={item}
-                                    userId={user.uid}
-                                />
-                            ))}
-                        </div>
 
-                        <div className={s.buttons}>
-                            <Button onClick={() => setAddBoardStatus(true)}>
-                                <FontAwesomeIcon size="lg" icon={faPlus} />
-                            </Button>
-                            <Button onClick={() => setLinkBoardStatus(true)}>
-                                <FontAwesomeIcon size="lg" icon={faLink} />
-                            </Button>
-                        </div>
-                    </div>
+        <div className={s.boardPageContainer}>
+            <div className={s.blocks__container}>
+                {addBoardStatus && (
+                    <ActionForm
+                        status={ActionFormStatus.BOARD}
+                        onCreateBoard={handleCreateBoard}
+                        onAbort={() => setAddBoardStatus(false)}
+                    />
                 )}
-            />
-        </Routes>
+                {linkBoardStatus && (
+                    <ActionForm
+                        status={ActionFormStatus.BOARD}
+                        onCreateBoard={handleLinkBoard}
+                        onAbort={() => setLinkBoardStatus(false)}
+                    />
+                )}
+                {boards.map((item, index) => (
+                    <BoardPreview
+                        onDelete={() => getBoards}
+                        onClick={() => {
+                            navigate(`/board/${item.uid}`);
+                        }}
+                        key={index}
+                        board={item}
+                        userId={user.uid}
+                    />
+                ))}
+            </div>
+
+            <div className={s.buttons}>
+                <Button onClick={() => setAddBoardStatus(true)}>
+                    <FontAwesomeIcon size="lg" icon={faPlus} />
+                </Button>
+                <Button onClick={() => setLinkBoardStatus(true)}>
+                    <FontAwesomeIcon size="lg" icon={faLink} />
+                </Button>
+            </div>
+        </div>
+
     );
 };
 

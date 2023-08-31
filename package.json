@@ -58,6 +58,7 @@
     "react-hook-form": "^7.45.4",
     "react-i18next": "^13.1.2",
     "react-loader-spinner": "^5.3.4",
+    "react-loading-skeleton": "^3.3.1",
     "react-redux": "^8.1.2",
     "react-refresh": "^0.11.0",
     "react-router-dom": "^6.15.0",

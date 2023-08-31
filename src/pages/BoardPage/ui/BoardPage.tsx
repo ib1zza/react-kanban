@@ -20,13 +20,14 @@ import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 import Button from '../../../shared/ui/Button/Button';
+import BoardPageSkeleton from './BoardPageSkeleton';
 
 const BoardPage: React.FC = memo(() => {
     const { boardId } = useParams();
     const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
         getBoardCollection,
     );
-    const [isCreating, setIsCreating] = useState(true);
+    const [isCreating, setIsCreating] = useState(false);
     const [isLinking, setIsLinking] = useState(false);
     const dispatch = useAppDispatch();
 
@@ -38,7 +39,6 @@ const BoardPage: React.FC = memo(() => {
     };
 
     useEffect(() => {
-        console.log(boardId);
         refetchBoard();
     }, [boardId]);
 
@@ -65,7 +65,7 @@ const BoardPage: React.FC = memo(() => {
         editBoard(boardId, { title: newTitle }).then(refetchBoard);
     };
 
-    if (!selectedBoard) return <></>;
+    if (!selectedBoard) return <BoardPageSkeleton />;
 
     return (
         <div className={s.wrapperContainer}>
