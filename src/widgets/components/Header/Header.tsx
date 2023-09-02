@@ -10,6 +10,7 @@ import OpenNotificationsButton from 'entities/Notifications/ui/OpenNotifications
 import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import Skeleton from 'react-loading-skeleton';
+import { Avatar } from 'shared/ui/Avatar';
 import s from './Header.module.scss';
 import OpenIcon from './OpenIcon';
 import { CloseIcon } from './CloseIcon';
@@ -37,8 +38,7 @@ const Header = () => {
                         <p className={s.nickname}>{user ? user?.email : <Skeleton width={200} duration={1} />}</p>
                         <div className={s.avatar}>
                             {
-                                user ? <img src={user?.photoURL} alt="your avatar" />
-                                // eslint-disable-next-line react/jsx-indent
+                                user ? <Avatar src={user?.photoURL} alt={user?.displayName} />
                                     : <Skeleton circle width={38} height={38} duration={1} />
                             }
 

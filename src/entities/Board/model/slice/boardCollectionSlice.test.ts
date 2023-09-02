@@ -9,6 +9,7 @@ describe('boardCollectionSlice', () => {
             selectedColumnId: '',
             selectedBoard: null,
             selectedTask: null,
+            linkedUsersInfo: [],
         };
         expect(boardCollectionReducer(
 state as BoardCollectionSchema,
@@ -31,6 +32,8 @@ boardCollectionActions.setCurrentBoard({
             {
                 selectedBoardId: '6009f37b-1800-41bd-a383-7904a5d2b7d4',
                 selectedColumnId: '',
+                linkedUsersInfo: [],
+
                 selectedBoard: {
                     usersAllowed: [],
                     guestsAllowed: [
@@ -55,6 +58,7 @@ boardCollectionActions.setCurrentBoard({
         const state: BoardCollectionSchema = {
             selectedBoardId: '6009f37b-1800-41bd-a383-7904a5d2b7d4',
             selectedColumnId: '',
+            linkedUsersInfo: [],
             selectedBoard: {
                 usersAllowed: [],
                 guestsAllowed: [
@@ -81,6 +85,8 @@ boardCollectionActions.removeSelectedBoard(),
                 selectedColumnId: '',
                 selectedBoard: null,
                 selectedTask: null,
+                linkedUsersInfo: [],
+
             },
         );
     });
@@ -89,6 +95,8 @@ boardCollectionActions.removeSelectedBoard(),
         const state: BoardCollectionSchema = {
             selectedColumnId: '',
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
+            linkedUsersInfo: [],
+
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {
@@ -173,6 +181,7 @@ boardCollectionActions.setCurrentTask(
         )).toEqual({
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
             selectedColumnId: '2d7579a2-1d17-4fdb-9560-d894c8d83b0f',
+            linkedUsersInfo: [],
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {
@@ -254,6 +263,7 @@ boardCollectionActions.setCurrentTask(
         const state: BoardCollectionSchema = {
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
             selectedColumnId: '2d7579a2-1d17-4fdb-9560-d894c8d83b0f',
+            linkedUsersInfo: [],
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {
@@ -336,6 +346,7 @@ boardCollectionActions.removeSelectedTask(),
         )).toEqual({
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
             selectedColumnId: '',
+            linkedUsersInfo: [],
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {

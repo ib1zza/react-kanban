@@ -19,6 +19,7 @@ export interface ITask {
   chatId?: string;
   creatorId: string;
   subtasks: { [id: string]: any };
+  attachedUser?: string;
 }
 export interface IColumn {
   uid: string;

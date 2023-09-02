@@ -8,7 +8,7 @@
 
     .button {
         margin-left: 15px;
-    
+
         &:hover {
             color: var(#{--iconColorHover});
         }
@@ -18,4 +18,10 @@
 .input {
     width: 100%;
     max-width: 500px;
+}
+
+.linkedUsers {
+    margin-left: 15px;
+    gap: 8px;
+    display: flex;
 }

@@ -1,0 +1,42 @@
+.Avatar{
+  border-radius: 50%;
+  overflow: hidden;
+
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .initials {
+    height: 100%;
+    width: 100%;
+    line-height: inherit;
+    font-size: inherit;
+    text-align: center;
+    background: var(--ButtonBg);
+    color: var(--textColor);
+  }
+
+  &.s {
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    line-height: 25px;
+  }
+
+  &.m {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 40px;
+  }
+
+  &.l {
+    width: 90px;
+    height: 90px;
+    font-size: 30px;
+    line-height: 90px;
+  }
+}

@@ -2,19 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
+import { Input } from 'shared/ui/Input/Input';
+import Button from 'shared/ui/Button/Button';
+import { getLinkedUsers } from 'entities/Board/model/selectors/getLinkedUsers/getLinkedUsers';
+import { useAppSelector } from 'app/providers/StoreProvider';
+import { Avatar } from 'shared/ui/Avatar';
 import s from './BoardPageHeader.module.scss';
-import Button from '../../../../shared/ui/Button/Button';
-import { Input } from '../../../../shared/ui/Input/Input';
 
 interface Props {
     title: string;
-    onEdit: (newTitle: string) => void;
+    onEdit: (newTitle: string) => void
 }
 
 const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
-
+    const linkedUsers = useAppSelector(getLinkedUsers);
     const onEditHandler = () => {
         const len = editingTitle.trim().length;
         if (len > 3 && len < 30) {
@@ -26,6 +29,10 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
     useEffect(() => {
         setEditingTitle(title);
     }, [title]);
+
+    useEffect(() => {
+
+    }, []);
 
     return (
         <h1 className={s.title}>
@@ -57,6 +64,15 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
                     </Button>
                 </>
             )}
+            {
+                linkedUsers.length > 0 && (
+                    <div className={s.linkedUsers}>
+                        {linkedUsers.map((user) => (
+                            <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
+                        ))}
+                    </div>
+                )
+            }
         </h1>
     );
 };

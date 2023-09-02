@@ -17,6 +17,8 @@ import { getBoardFromId, getBoardCollection } from 'entities/Board';
 import { boardCollectionActions } from 'entities/Board/model/slice/boardCollectionSlice';
 import { TaskColumn } from 'entities/Column';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
+import { getUserInfo } from 'features/users';
+import { IUserInfo } from 'app/types/IUserInfo';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 import Button from '../../../shared/ui/Button/Button';
@@ -35,6 +37,18 @@ const BoardPage: React.FC = memo(() => {
         const board = await getBoardFromId(boardId as string);
         if (board) {
             dispatch(boardCollectionActions.setCurrentBoard(board));
+
+            const usersIds = board.usersAllowed.concat(board.guestsAllowed);
+            const usersInfo = await Promise.allSettled(
+                usersIds.map((userId) => getUserInfo(userId)),
+            );
+
+            dispatch(boardCollectionActions.setLinkedUsers(usersInfo.reduce((acc, el) => {
+                if (el.status === 'fulfilled') {
+                    acc.push(el.value);
+                }
+                return acc;
+            }, [] as IUserInfo[])));
         }
     };
 
@@ -69,7 +83,10 @@ const BoardPage: React.FC = memo(() => {
 
     return (
         <div className={s.wrapperContainer}>
-            <BoardPageHeader onEdit={handleEditTitle} title={selectedBoard.title} />
+            <BoardPageHeader
+                onEdit={handleEditTitle}
+                title={selectedBoard.title}
+            />
 
             <div className={s.wrapper}>
                 <div className={s.columnsWrapper}>
@@ -112,6 +129,7 @@ const BoardPage: React.FC = memo(() => {
                         </Button>
                     </div>
                 )} */}
+
                 {selectedTask && (
                     <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />
                 )}

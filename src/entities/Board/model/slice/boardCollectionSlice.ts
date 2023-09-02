@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IBoard, ITask } from 'app/types/IBoard';
 import { BoardCollectionSchema } from 'entities/Board';
+import { IUserInfo } from 'app/types/IUserInfo';
 
 const initialState: BoardCollectionSchema = {
     selectedBoardId: '',
     selectedColumnId: '',
     selectedBoard: null,
     selectedTask: null,
+    linkedUsersInfo: [],
 };
 
 export const boardCollectionSlice = createSlice({
@@ -20,6 +22,7 @@ export const boardCollectionSlice = createSlice({
         removeSelectedBoard: (state) => {
             state.selectedBoard = null;
             state.selectedBoardId = '';
+            state.linkedUsersInfo = [];
         },
         setCurrentTask: (state, action: PayloadAction<ITask>) => {
             state.selectedTask = action.payload;
@@ -31,6 +34,9 @@ export const boardCollectionSlice = createSlice({
         removeSelectedTask: (state) => {
             state.selectedTask = null;
             state.selectedColumnId = '';
+        },
+        setLinkedUsers: (state, action: PayloadAction<IUserInfo[]>) => {
+            state.linkedUsersInfo = action.payload;
         },
     },
 });
