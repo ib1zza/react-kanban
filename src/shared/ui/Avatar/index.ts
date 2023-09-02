@@ -1,3 +1,3 @@
-import { Avatar } from './ui/Avatar';
+import { Avatar, AvatarSize } from './ui/Avatar';
 
-export { Avatar };
+export { Avatar, AvatarSize };

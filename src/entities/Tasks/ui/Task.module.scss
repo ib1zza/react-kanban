@@ -29,3 +29,9 @@
         color: var(#{--iconColorHover});
     }
 }
+
+.infoBlock {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

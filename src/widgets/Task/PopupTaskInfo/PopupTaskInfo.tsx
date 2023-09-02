@@ -3,21 +3,25 @@ import { faCircleXmark, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import s from './PopupTaskInfo.module.scss';
-import {
-    useAppDispatch,
-    useAppSelector,
-} from '../../../app/providers/StoreProvider';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 
-import { deleteTask, editTask } from '../../../features/tasks';
-import Button from '../../../shared/ui/Button/Button';
-import EditTaskForm from '../../../entities/Tasks/lib/EditTaskForm';
-import { boardCollectionActions } from '../../../entities/Board/model/slice/boardCollectionSlice';
-import { getBoardCollection } from '../../../entities/Board';
+import { deleteTask, editTask } from 'features/tasks';
+import Button from 'shared/ui/Button/Button';
+import EditTaskForm from 'entities/Tasks/lib/EditTaskForm';
+import { boardCollectionActions, getBoardCollection } from 'entities/Board';
+
+import { Avatar, AvatarSize } from 'shared/ui/Avatar';
+import s from './PopupTaskInfo.module.scss';
 
 interface Props {
   onEdit: () => void;
   onDelete: () => void;
+}
+
+export interface EditedData {
+    title?: string;
+    description?:string;
+    attachedUser?:string;
 }
 
 const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
@@ -25,10 +29,12 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         selectedTask: task,
         selectedBoardId,
         selectedColumnId,
+        linkedUsersInfo,
     } = useAppSelector(getBoardCollection);
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
+
     const { t } = useTranslation('buttons');
     if (!task) return null;
     const onDeleteTask = async () => {
@@ -37,16 +43,17 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         onDelete();
     };
 
-    const handleEditTask = async (title: string, description: string) => {
+    const handleEditTask = async (data : EditedData) => {
         setLoading('edit');
-        await editTask(selectedBoardId, selectedColumnId, task.uid, {
-            title,
-            description,
-        });
+        console.log('edited');
+        await editTask(selectedBoardId, selectedColumnId, task.uid, data);
+
         setLoading('');
         setEditing(false);
         onEdit();
     };
+
+    const linkedUser = linkedUsersInfo.find((user) => user.uid === task.attachedUser);
 
     return (
         <div className={s.container}>
@@ -61,6 +68,19 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
             </div>
             <p className={s.description}>
                 {task.description || `${t('Нет описания')}`}
+            </p>
+            <p className={s.linkedUserInfo}>
+                {
+                    linkedUser
+                        ? (
+                            <>
+                                <span>{t('Исполнитель:')}</span>
+                                <Avatar alt={linkedUser.displayName} src={linkedUser.photoURL} size={AvatarSize.S} />
+                                {linkedUser.displayName }
+                            </>
+                        )
+                        : `${t('Пользователь не прикреплен')}`
+                }
             </p>
             {!isEditing && (
                 <div className={s.buttons}>

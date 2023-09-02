@@ -9,13 +9,13 @@ export enum AvatarSize {
 
 interface AvatarProps {
     src?: string;
-    alt: string;
+    alt?: string;
     className?: string;
     size?: AvatarSize;
 }
 const Avatar = (props: AvatarProps) => {
     const {
-        className, src, alt, size = AvatarSize.M,
+        className, src, alt = '...', size = AvatarSize.M,
     } = props;
     return (
         <div className={classNames(s.Avatar, {}, [className, s[size]])}>

@@ -1,10 +1,11 @@
 import { getBoardFromId } from './API/getBoardFromId';
 import type { BoardCollectionSchema } from './model/types/BoardCollectionSchema';
 import BoardPreview from './ui/BoardPreview';
-import { boardCollectionReducer } from './model/slice/boardCollectionSlice';
+import { boardCollectionActions, boardCollectionReducer } from './model/slice/boardCollectionSlice';
+
 import { getBoardCollection } from './model/selectors/getBoardCollection/getBoardCollection';
 
 export {
-    BoardPreview, getBoardFromId, BoardCollectionSchema, boardCollectionReducer,
+    BoardPreview, getBoardFromId, BoardCollectionSchema, boardCollectionReducer, boardCollectionActions,
     getBoardCollection,
 };

@@ -16,7 +16,7 @@ const TaskList: React.FC<ITaskListProps> = ({
     columnId,
 }) => {
     // eslint-disable-next-line max-len
-    const getTasksFromColumn = (tasks: { [key: string]: ITask }) => Object.values(tasks).sort((a, b) => +a.timeCreated - +b.timeCreated);
+    const getTasksFromColumn = (tasks: { [key: string]: ITask }): ITask[] => Object.values(tasks).sort((a, b) => +a.timeCreated - +b.timeCreated);
     return (
         <div className={s.tasks}>
             {tasks

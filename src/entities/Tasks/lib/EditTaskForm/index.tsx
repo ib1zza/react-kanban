@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ITask } from 'app/types/IBoard';
-import s from './EditTaskForm.module.scss';
+import { IUserInfo } from 'app/types/IUserInfo';
+import { useAppSelector } from 'app/providers/StoreProvider';
+import { getLinkedUsers } from 'entities/Board/model/selectors/getLinkedUsers/getLinkedUsers';
+import { EditedData } from 'widgets/Task/PopupTaskInfo/PopupTaskInfo';
 import ConfirmButtons from '../../../../shared/ui/ConfirmButtons/ConfirmButtons';
+import s from './EditTaskForm.module.scss';
 
 interface Props {
-  onEdit: (title: string, description: string) => void;
+  onEdit: (data: EditedData) => void;
   onAbort: () => void;
   prevTask: ITask;
   loading: boolean;
@@ -19,17 +23,43 @@ const EditTaskForm: React.FC<Props> = ({
 }) => {
     const [title, setTitle] = useState(prevTask.title);
     const [description, setDescription] = useState(prevTask.description);
+    const linkedUsers = useAppSelector(getLinkedUsers);
+
+    const [linkedUserId, setLinkedUserId] = useState<string | undefined>(
+        () => linkedUsers.find((user) => user.uid === prevTask.attachedUser)?.uid,
+    );
     const { t } = useTranslation();
     const editHandler = () => {
+        console.log('edit');
         if (title === '' || description === '') return onAbort();
-        if (title === prevTask.title && description === prevTask.description) return onAbort();
-        onEdit(title, description);
+
+        const editedData : EditedData = {};
+
+        if (title !== prevTask.title) {
+            editedData.title = title;
+        }
+
+        if (description !== prevTask.description) {
+            editedData.description = description;
+        }
+
+        if (linkedUserId !== prevTask.attachedUser) {
+            editedData.attachedUser = linkedUserId;
+        }
+
+        console.log(editedData);
+
+        if (Object.keys(editedData).length === 0) return onAbort();
+        onEdit(editedData);
     };
 
     const onConfirmButtons = () => {
+        editHandler();
     };
     const onAbortButtons = () => {
+        onAbort();
     };
+
     return (
         <div>
             <h2>{t('Редактирование')}</h2>
@@ -52,6 +82,31 @@ const EditTaskForm: React.FC<Props> = ({
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder={t('Описание')}
                     />
+                </div>
+                <div>
+                    <select onChange={(e) => setLinkedUserId(e.target.value)}>
+                        <option
+                            selected
+                            disabled
+                            hidden
+                            value={linkedUserId}
+                        >
+                            {linkedUsers.find((el) => el.uid === linkedUserId)?.displayName
+                            || t('Пользователь не прикреплен')}
+                        </option>
+                        <option value="" key={0}>
+                            {t('Никто')}
+                        </option>
+                        ))
+                        {
+                            linkedUsers.map((user) => (
+                                <option value={user.uid} key={user.uid}>
+                                    {user.displayName}
+                                </option>
+                            ))
+                        }
+                    </select>
+
                 </div>
             </div>
             {/* //TODO: func  */}

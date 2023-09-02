@@ -1,17 +1,16 @@
 import React from 'react';
 import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
-import {
-    faEllipsisVertical, faTrash,
-    faCircleCheck as iconCheckSolid,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck as iconCheckSolid, faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { icon } from '@fortawesome/fontawesome-svg-core';
+import { ITask } from 'app/types/IBoard';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
+import { deleteTask, toggleTaskComplete } from 'features/tasks';
+
+import { boardCollectionActions } from 'entities/Board';
+import { Avatar } from 'shared/ui/Avatar';
+import { getLinkedUsers } from 'entities/Board/model/selectors/getLinkedUsers/getLinkedUsers';
+import { AvatarSize } from 'shared/ui/Avatar/ui/Avatar';
 import s from './Task.module.scss';
-import { ITask } from '../../../app/types/IBoard';
-import { useAppDispatch } from '../../../app/providers/StoreProvider/config/store';
-import { toggleTaskComplete } from '../../../features/tasks/API/toggleTaskComplete';
-import { deleteTask } from '../../../features/tasks';
-import { boardCollectionActions } from '../../Board/model/slice/boardCollectionSlice';
 import Button from '../../../shared/ui/Button/Button';
 
 interface ITaskProps {
@@ -24,7 +23,7 @@ const Task = ({
     task, boardId, columnId, rerender,
 }: ITaskProps) => {
     const dispatch = useAppDispatch();
-
+    const linkedUsers = useAppSelector(getLinkedUsers);
     const openTaskHandler = () => {
         dispatch(boardCollectionActions.setCurrentTask(task));
     };
@@ -39,6 +38,8 @@ const Task = ({
             rerender,
         );
     };
+
+    const linkedUser = linkedUsers.find((user) => user.uid === task.attachedUser);
 
     return (
         <div className={s.container}>
@@ -55,7 +56,14 @@ const Task = ({
 
                 <span>{task.title}</span>
             </div>
-            <div>
+            <div className={s.infoBlock}>
+                {task.attachedUser && (
+                    <Avatar
+                        src={linkedUser?.photoURL}
+                        alt={linkedUser?.displayName}
+                        size={AvatarSize.S}
+                    />
+                ) }
                 <Button
                     onClick={openTaskHandler}
                     icon={<FontAwesomeIcon icon={faEllipsisVertical} />}
