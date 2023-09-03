@@ -13,12 +13,13 @@
         color: var(--InputText);
         border-radius: var(--InputRadius);
         font: var(--font-m);
-        
+
+
     }
     input::placeholder {
         opacity: 0.8;
     }
-  
+
 
 }
 
@@ -38,11 +39,11 @@
         background-color: var(--InputBg);
         color: var(--InputText);
         border-radius: var(--InputRadius);
-        font: var(--font-m); 
+        font: var(--font-m);
     }
 }
 
 .error {
     color: red;
-    padding: calc(var(--InputPadding) - 4px);    
+    padding: calc(var(--InputPadding) - 4px);
 }

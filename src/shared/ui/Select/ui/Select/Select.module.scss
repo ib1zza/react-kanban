@@ -1,0 +1,42 @@
+.selectWrapper {
+
+  label {
+    font: var(--font-m);
+    color: var(--InputText);
+    padding: calc(var(--InputPadding) - 4px);
+  }
+
+  .selectButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--InputPadding);
+    background-color: var(--InputBg);
+    color: var(--InputText);
+    border-radius: var(--InputRadius);
+    font: var(--font-m);
+    .placeholder {
+
+    }
+
+    &.open {
+      border-radius: var(--InputRadius) var(--InputRadius)  0 0  ;
+    }
+  }
+
+  position: relative;
+  .selectArea {
+    //position: absolute;
+    //overflow: hidden;
+    border-radius:  0 0 var(--InputRadius) var(--InputRadius) ;
+    background-color: var(--InputBg);
+    max-height: 80px;
+    padding-bottom: 5px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+}
