@@ -6,10 +6,11 @@ import { ITask } from 'app/types/IBoard';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { deleteTask, toggleTaskComplete } from 'features/tasks';
 
-import { boardCollectionActions } from 'entities/Board';
 import { Avatar } from 'shared/ui/Avatar';
-import { getLinkedUsers } from 'entities/Board/model/selectors/getLinkedUsers/getLinkedUsers';
+
 import { AvatarSize } from 'shared/ui/Avatar/ui/Avatar';
+import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
+import { IUserInfo } from 'app/types/IUserInfo';
 import s from './Task.module.scss';
 import Button from '../../../shared/ui/Button/Button';
 
@@ -39,7 +40,7 @@ const Task = ({
         );
     };
 
-    const linkedUser = linkedUsers.find((user) => user.uid === task.attachedUser);
+    const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
 
     return (
         <div className={s.container}>

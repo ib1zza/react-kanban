@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IBoard, ITask } from 'app/types/IBoard';
-import { BoardCollectionSchema } from 'entities/Board';
+
 import { IUserInfo } from 'app/types/IUserInfo';
+import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
 
 const initialState: BoardCollectionSchema = {
     selectedBoardId: '',
@@ -28,7 +29,7 @@ export const boardCollectionSlice = createSlice({
             state.selectedTask = action.payload;
             if (!state.selectedBoard) return;
             state.selectedColumnId = Object.values(state.selectedBoard.columns).find(
-                (col) => Object.keys(col.tasks).includes(action.payload.uid),
+                (col: any) => Object.keys(col.tasks).includes(action.payload.uid),
             )?.uid || '';
         },
         removeSelectedTask: (state) => {

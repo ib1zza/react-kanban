@@ -13,18 +13,18 @@ import {
 
 import { getTaskInfo } from 'features/tasks';
 import { editBoard, BoardPageHeader } from 'features/boards';
-import { getBoardFromId, getBoardCollection } from 'entities/Board';
-import { boardCollectionActions } from 'entities/Board/model/slice/boardCollectionSlice';
 import { TaskColumn } from 'entities/Column';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { getUserInfo } from 'features/users';
 import { IUserInfo } from 'app/types/IUserInfo';
+import { getBoardFromId } from 'entities/Board';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 import Button from '../../../shared/ui/Button/Button';
 import BoardPageSkeleton from './BoardPageSkeleton';
+import { boardCollectionActions, getBoardCollection } from '..';
 
-const BoardPage: React.FC = memo(() => {
+const BoardPage = memo(() => {
     const { boardId } = useParams();
     const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
         getBoardCollection,

@@ -8,9 +8,10 @@ import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { deleteTask, editTask } from 'features/tasks';
 import Button from 'shared/ui/Button/Button';
 import EditTaskForm from 'entities/Tasks/lib/EditTaskForm';
-import { boardCollectionActions, getBoardCollection } from 'entities/Board';
 
 import { Avatar, AvatarSize } from 'shared/ui/Avatar';
+import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
+import { IUserInfo } from 'app/types/IUserInfo';
 import s from './PopupTaskInfo.module.scss';
 
 interface Props {
@@ -53,7 +54,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         onEdit();
     };
 
-    const linkedUser = linkedUsersInfo.find((user) => user.uid === task.attachedUser);
+    const linkedUser = linkedUsersInfo.find((user: IUserInfo) => user.uid === task.attachedUser);
 
     return (
         <div className={s.container}>

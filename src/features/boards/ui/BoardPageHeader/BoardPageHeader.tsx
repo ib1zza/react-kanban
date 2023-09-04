@@ -4,9 +4,10 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { Input } from 'shared/ui/Input/Input';
 import Button from 'shared/ui/Button/Button';
-import { getLinkedUsers } from 'entities/Board/model/selectors/getLinkedUsers/getLinkedUsers';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { Avatar } from 'shared/ui/Avatar';
+import { getLinkedUsers } from 'pages/BoardPage';
+import { IUserInfo } from 'app/types/IUserInfo';
 import s from './BoardPageHeader.module.scss';
 
 interface Props {
@@ -67,7 +68,7 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
             {
                 linkedUsers.length > 0 && (
                     <div className={s.linkedUsers}>
-                        {linkedUsers.map((user) => (
+                        {linkedUsers.map((user: IUserInfo) => (
                             <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
                         ))}
                     </div>

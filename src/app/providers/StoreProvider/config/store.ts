@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { boardCollectionReducer } from 'pages/BoardPage';
 import { notificationReducer } from '../../../../entities/Notifications';
-import { boardCollectionReducer } from '../../../../entities/Board';
 import { userInfoReducer } from '../../../../features/users/model/slice/userInfoSlice';
 import { loginReducer } from '../../../../features/auth/login';
 import { signupReducer } from '../../../../features/auth/signup';

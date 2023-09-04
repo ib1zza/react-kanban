@@ -1,6 +1,6 @@
-import { BoardCollectionSchema } from 'entities/Board';
 import { GuestPermission } from 'app/types/IBoard';
 import { boardCollectionActions, boardCollectionReducer } from './boardCollectionSlice';
+import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
 
 describe('boardCollectionSlice', () => {
     test('setCurrentBoard action', () => {

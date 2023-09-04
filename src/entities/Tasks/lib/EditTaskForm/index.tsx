@@ -2,10 +2,11 @@ import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ITask } from 'app/types/IBoard';
 import { useAppSelector } from 'app/providers/StoreProvider';
-import { getLinkedUsers } from 'entities/Board/model/selectors/getLinkedUsers/getLinkedUsers';
 import { EditedData } from 'widgets/Task/PopupTaskInfo/PopupTaskInfo';
 import { OptionType, Select } from 'shared/ui/Select';
 import ConfirmButtons from 'shared/ui/ConfirmButtons/ConfirmButtons';
+import { getLinkedUsers } from 'pages/BoardPage';
+import { IUserInfo } from 'app/types/IUserInfo';
 import s from './EditTaskForm.module.scss';
 
 interface Props {
@@ -26,11 +27,11 @@ const EditTaskForm: React.FC<Props> = ({
     const linkedUsers = useAppSelector(getLinkedUsers);
 
     const [linkedUserId, setLinkedUserId] = useState<string | undefined>(
-        () => linkedUsers.find((user) => user.uid === prevTask.attachedUser)?.uid,
+        () => linkedUsers.find((user: IUserInfo) => user.uid === prevTask.attachedUser)?.uid,
     );
     const { t } = useTranslation();
 
-    const options = useMemo<OptionType[]>(() => linkedUsers.map((user) => ({
+    const options = useMemo<OptionType[]>(() => linkedUsers.map((user: IUserInfo) => ({
         value: user.uid,
         heading: user.displayName,
         text: user.email,
