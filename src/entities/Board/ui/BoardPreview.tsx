@@ -49,9 +49,9 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
             {shareStatus && (
                 <Modal
                     onClose={onCloseShare}
-                    // eslint-disable-next-line react/no-children-prop
-                    children={<ShareBoard board={board} />}
-                />
+                >
+                    <ShareBoard board={board} />
+                </Modal>
             )}
             <h3 className={s.heading}>
                 {/* <span onClick={onClick}>{board.title.slice(0, 5)}</span> */}

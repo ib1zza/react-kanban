@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useTranslation } from 'react-i18next';
-
 import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { getUserInfo, editDisplayName } from 'features/users';
 import { storage } from 'shared/config/firebase/firebase';
@@ -29,6 +28,7 @@ const Profile = () => {
             setUserInfo(res);
         });
     }, [user?.uid]);
+
     useEffect(() => {
         fetchUserInfo();
     }, [user]);
