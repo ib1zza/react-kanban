@@ -16,6 +16,11 @@
 
 
     }
+    input:hover {
+        outline: solid #808080;
+    }
+ 
+
     input::placeholder {
         opacity: 0.8;
     }
@@ -47,3 +52,12 @@
     color: red;
     padding: calc(var(--InputPadding) - 4px);
 }
+
+
+// .error {
+//     input {
+//         border: none;
+//         outline: none;
+//         color: red;
+//     }
+// }

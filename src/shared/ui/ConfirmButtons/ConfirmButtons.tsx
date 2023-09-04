@@ -9,16 +9,18 @@ import Button from '../Button/Button';
 import s from './ConfirmButtons.module.scss';
 
 interface Props {
-  onConfirm: () => any;
+  onConfirm: (e: any) => any;
   onAbort: () => any;
+  disabled?: boolean;
 }
 
-const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort }) => {
+const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort, disabled }) => {
     const { t } = useTranslation('Buttons');
     return (
         <div className={s.buttons}>
             <Button
                 onClick={onConfirm}
+                disabled={disabled}
                 icon={
                     <FontAwesomeIcon icon={faCircleCheck} style={{ color: '#5CD43E' }} />
                 }
