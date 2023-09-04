@@ -64,7 +64,7 @@ const BoardPage = memo(() => {
 
     const createColumnAction = async (title: string, color: string) => {
         if (!boardId) return;
-        await createColumn(title, color, boardId);
+        await createColumn(title, color = '#808080', boardId);
         setIsCreating(false);
         refetchBoard();
     };

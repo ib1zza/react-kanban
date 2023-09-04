@@ -7,8 +7,7 @@ import { classNames } from '../../lib/classNames/classNames';
 export enum InputTheme {
     CLEAR = 'clear',
     PRIMARY = 'primary',
-    AUTH = 'auth'
-
+    AUTH = 'auth',
 }
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
@@ -18,13 +17,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     label?: string;
     width?: string;
     error?: string;
+    value?: string;
 }
 
 export const Input = memo((props: InputProps) => {
     const {
         className,
         error,
-        value,
+        value = '',
         onChange,
         theme = InputTheme.PRIMARY,
         type = 'text',
@@ -39,7 +39,6 @@ export const Input = memo((props: InputProps) => {
         [s[theme]]: true,
 
     };
-
     return (
         <div
             style={{ width: `${width}` }}
