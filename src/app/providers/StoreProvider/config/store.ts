@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { boardCollectionReducer } from 'pages/BoardPage';
+import { homeReducer } from 'pages/Home/model/slice/HomeSlice';
 import { notificationReducer } from '../../../../entities/Notifications';
 import { userInfoReducer } from '../../../../features/users/model/slice/userInfoSlice';
 import { loginReducer } from '../../../../features/auth/login';
@@ -15,6 +16,7 @@ export function createReduxStore(initialState?: StateSchema) {
             notifications: notificationReducer,
             login: loginReducer,
             signup: signupReducer,
+            home: homeReducer,
         },
         preloadedState: initialState,
     });
@@ -26,6 +28,7 @@ export const store = configureStore({
         notifications: notificationReducer,
         login: loginReducer,
         signup: signupReducer,
+        home: homeReducer,
     },
 
 });

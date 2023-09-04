@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router';
+import React, { useCallback, useEffect, useState } from 'react';
 import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
@@ -9,30 +8,32 @@ import { addUserToBoard, createBoard } from 'features/boards';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
 
 import { BoardPreview } from 'entities/Board';
-import { useAppSelector } from 'app/providers/StoreProvider';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
-import { getUserBoards } from '../lib/getUserBoards';
+import { getUserBoards as getBoards } from '../model/services/getUserBoards';
 import s from './Home.module.scss';
 import HomeSkeleton from './HomeSkeleton';
+import { homeActions } from '../model/slice/HomeSlice';
+import { getHomeBoards } from '../model/selectors/getHomeBoards';
 
 const Home = () => {
     const navigate = useNavigate();
     const { user } = useAppSelector((state) => state.userInfo);
-    const [boards, setBoards] = React.useState<IBoard[]>([]);
     const [addBoardStatus, setAddBoardStatus] = useState(false);
     const [linkBoardStatus, setLinkBoardStatus] = useState(false);
-
-    const getBoards = getUserBoards;
+    const boards = useAppSelector(getHomeBoards);
+    const dispatch = useAppDispatch();
     // getting boards (only info which we need)
-    const fetchBoards = () => getBoards(user).then((res) => {
-        setBoards(res);
-    });
-
+    const fetchBoards = useCallback(() => getBoards(user).then((res: IBoard[]) => {
+        if (res) {
+            dispatch(homeActions.addBoards(Object.values(res)));
+        }
+    }), [dispatch, user]);
     useEffect(() => {
         if (boards.length === 0) {
             fetchBoards();
         }
-    }, [boards.length, user]);
+    }, [boards.length, fetchBoards, user]);
 
     const handleCreateBoard = async (title: string) => {
         await createBoard(title, user?.uid as string);
@@ -46,7 +47,6 @@ const Home = () => {
     };
     if (!user?.uid) return <HomeSkeleton />;
     return (
-
         <div className={s.boardPageContainer}>
             <div className={s.blocks__container}>
                 {addBoardStatus && (
@@ -63,11 +63,11 @@ const Home = () => {
                         onAbort={() => setLinkBoardStatus(false)}
                     />
                 )}
-                {boards.map((item, index) => (
+                {boards.length && boards.map((item: IBoard, index) => (
                     <BoardPreview
                         onDelete={() => getBoards}
                         onClick={() => {
-                            navigate(`/board/${item.uid}`);
+                            navigate(`/board/${item?.uid}`);
                         }}
                         key={index}
                         board={item}
