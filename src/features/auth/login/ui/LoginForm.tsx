@@ -25,12 +25,12 @@ const LoginForm = ({ onSwitch }: props) => {
     const {
         error, isLoading, rememberMe,
     } = useSelector(getLoginState);
-    const onSubmit = useCallback(async (data: any, e?: Event) => {
+    const onSubmit = useCallback((data: any, e?: Event) => {
         e?.preventDefault();
         if (data.email !== '' && data.password !== '') {
-            await logIn(data.email, data.password, rememberMe);
-
-            navigate('/');
+            logIn(data.email, data.password, rememberMe).then((res) => {
+                navigate('/');
+            });
         } else {
             dispatch(loginActions.setError('Какое-то поле незаполнено'));
         }

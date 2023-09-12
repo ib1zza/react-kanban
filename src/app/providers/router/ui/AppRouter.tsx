@@ -12,7 +12,6 @@ const AppRouter = () => (
             <Route
                 path="/*"
                 element={(
-
                     <ProtectedRoute>
                         <div className={s.home}>
                             <Header />
@@ -21,7 +20,6 @@ const AppRouter = () => (
                             </div>
                         </div>
                     </ProtectedRoute>
-
                 )}
             />
 

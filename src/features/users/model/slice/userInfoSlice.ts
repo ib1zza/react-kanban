@@ -12,6 +12,9 @@ export const userInfoSlice = createSlice({
         setUserInfo: (state, action) => {
             state.user = action.payload;
         },
+        clearUserInfo: (state) => {
+            state.user = null;
+        },
     },
 });
 

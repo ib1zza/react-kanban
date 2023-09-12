@@ -6,7 +6,9 @@ import React, {
     useMemo,
     useState,
 } from 'react';
-import { signOut, User, onAuthStateChanged } from 'firebase/auth';
+import {
+    signOut, User, onAuthStateChanged,
+} from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { auth } from 'shared/config/firebase/firebase';
 
@@ -29,10 +31,10 @@ interface IAuthContext {
     logIn: (
         email: string,
         password: string, rememberMe: boolean
-    ) => void
+    ) => Promise<User>;
     logOut: () => void;
     refetch: () => void;
-    user: User | null;
+    user?: User | null;
 }
 
 const AuthContext = createContext<IAuthContext>({
@@ -45,7 +47,7 @@ const AuthContext = createContext<IAuthContext>({
     refetch: () => {
     },
     user: null,
-});
+} as unknown as IAuthContext);
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -58,10 +60,11 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     const dispatch = useDispatch();
 
     function logOut() {
-        signOut(auth);
+        return signOut(auth).then((res) => dispatch(userInfoActions.clearUserInfo()));
     }
 
     async function refetch() {
+        console.log('refetch');
         if (user?.uid) {
             await user.reload();
             getUserInfo(user.uid).then((res) => {
@@ -75,9 +78,11 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser: User | null) => {
             setUser(currentUser as User);
+            console.log(currentUser);
             if (user?.uid) {
                 getUserInfo(user.uid).then((res) => {
                     if (res) {
+                        console.log('getUserUseEffect', res);
                         dispatch(userInfoActions.setUserInfo(res));
                     }
                 });
