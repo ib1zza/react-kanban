@@ -5,11 +5,19 @@ import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 import {BuildOptions} from './types/config';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 export function buildPlugins({paths, isDev}: BuildOptions): webpack.WebpackPluginInstance[] {
     const plugins = [
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: 'public/locales', to: 'locales' },
+            ]
+        }),
         new HtmlWebpackPlugin({
             template: paths.html,
+            filename: 'index.html',
+            inject: "body",
         }),
         new webpack.ProgressPlugin(),
         new MiniCssExtractPlugin({
@@ -26,6 +34,7 @@ export function buildPlugins({paths, isDev}: BuildOptions): webpack.WebpackPlugi
             // 'process.env.REACT_APP_FIREBASE_MESSAGE_SENDER': JSON.stringify(process.env.REACT_APP_FIREBASE_MESSAGE_SENDER),
             // 'process.env.REACT_APP_APP_ID': JSON.stringify(process.env.REACT_APP_APP_ID),
         }),
+
     ];
 
     if (isDev) {
