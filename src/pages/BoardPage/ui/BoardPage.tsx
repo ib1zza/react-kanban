@@ -59,12 +59,12 @@ const BoardPage = memo(() => {
     const refetchTask = async () => {
         if (!boardId || !selectedColumnId || !selectedTask) return;
         const res = await getTaskInfo(boardId, selectedColumnId, selectedTask.uid);
-        dispatch(boardCollectionActions.setCurrentTask(res));
+        dispatch(boardCollectionActions.updateSelectedTask(res));
     };
 
     const createColumnAction = async (title: string, color: string) => {
         if (!boardId) return;
-        await createColumn(title, color = '#808080', boardId);
+        await createColumn(title, color || '#808080', boardId);
         setIsCreating(false);
         refetchBoard();
     };

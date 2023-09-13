@@ -12,9 +12,9 @@ import TaskList from '../lib/TaskList/TaskList';
 import AddTaskForm from '../lib/AddTaskForm/AddTaskForm';
 
 interface ITaskColumnProps {
-  column: IColumn;
-  onEdit: () => void;
-  boardId: string;
+    column: IColumn;
+    onEdit: () => void;
+    boardId: string;
 }
 
 const TaskColumn: React.FC<ITaskColumnProps> = ({
@@ -35,65 +35,62 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
         setIsEditColumn(false);
     };
 
-    return (
+    return isEditColumn ? (
+        <ActionForm
+            status={ActionFormStatus.EDIT}
+            title={column.title}
+            color={column.color}
+            onEdit={editHandler}
+            onAbort={() => setIsEditColumn(false)}
+        />
+    ) : (
         <div className={`${s.container} ${s.withColor}`}>
             <div
                 className={s.headerColor}
                 style={{ backgroundColor: column.color }}
             />
-            {!isEditColumn && (
-                <>
-                    <div className={s.titleBlock}>
-                        <h6 className={s.title}>{column.title}</h6>
-                        <div className={s.columnButtons}>
-                            <Button
-                                className={s.editButton}
-                                onClick={() => setIsEditColumn(true)}
-                                icon={<FontAwesomeIcon icon={faPenToSquare} />}
-                            />
-                            <Button
-                                className={s.deleteButton}
-                                onClick={() => deleteColumn(boardId, column.uid).then(onEdit)}
-                                icon={<FontAwesomeIcon icon={faTrashCan} />}
-                            />
-                        </div>
-                    </div>
-                    {!isAddingTask && (
-                        <div>
-                            <Button
-                                className={s.addButton}
-                                onClick={() => setIsAddingTask(true)}
-                                icon={<FontAwesomeIcon icon={faPlus} height={20} />}
-                            >
 
-                                <span>{t('Добавить')}</span>
-                            </Button>
-                        </div>
-                    )}
-                    {isAddingTask && (
-                        <AddTaskForm
-                            onAbort={() => {
-                                setIsAddingTask(false);
-                            }}
-                            onSubmit={() => {
-                                setIsAddingTask(false);
-                                onEdit();
-                            }}
-                            boardId={boardId}
-                            columnId={column.uid}
-                        />
-                    )}
-                </>
+            <div className={s.titleBlock}>
+                <h6 className={s.title}>{column.title}</h6>
+                <div className={s.columnButtons}>
+                    <Button
+                        className={s.editButton}
+                        onClick={() => setIsEditColumn(true)}
+                        icon={<FontAwesomeIcon icon={faPenToSquare} />}
+                    />
+                    <Button
+                        className={s.deleteButton}
+                        onClick={() => deleteColumn(boardId, column.uid).then(onEdit)}
+                        icon={<FontAwesomeIcon icon={faTrashCan} />}
+                    />
+                </div>
+            </div>
+            {!isAddingTask && (
+                <div>
+                    <Button
+                        className={s.addButton}
+                        onClick={() => setIsAddingTask(true)}
+                        icon={<FontAwesomeIcon icon={faPlus} height={20} />}
+                    >
+
+                        <span>{t('Добавить')}</span>
+                    </Button>
+                </div>
             )}
-            {isEditColumn && (
-                <ActionForm
-                    status={ActionFormStatus.EDIT}
-                    title={column.title}
-                    color={column.color}
-                    onEdit={editHandler}
-                    onAbort={() => setIsEditColumn(false)}
+            {isAddingTask && (
+                <AddTaskForm
+                    onAbort={() => {
+                        setIsAddingTask(false);
+                    }}
+                    onSubmit={() => {
+                        setIsAddingTask(false);
+                        onEdit();
+                    }}
+                    boardId={boardId}
+                    columnId={column.uid}
                 />
             )}
+
             <TaskList
                 boardId={boardId}
                 columnId={column.uid}
