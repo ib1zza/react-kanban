@@ -8,6 +8,7 @@ export enum InputTheme {
     CLEAR = 'clear',
     PRIMARY = 'primary',
     AUTH = 'auth',
+    BORDERED = 'bordered',
 }
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{

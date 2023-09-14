@@ -6,7 +6,7 @@ import { getUserInfo, editDisplayName } from 'features/users';
 import { storage } from 'shared/config/firebase/firebase';
 import { IUserInfo } from 'app/types/IUserInfo';
 import Button from 'shared/ui/Button/Button';
-import { Input } from 'shared/ui/Input/Input';
+import { Input, InputTheme } from 'shared/ui/Input/Input';
 import { updateDocument } from 'shared/API/updateDocument';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
@@ -88,6 +88,7 @@ const Profile = () => {
                         {editStatus ? (
                             <Input
                                 value={name}
+                                theme={InputTheme.BORDERED}
                                 onChange={(e: { target: { value: any; }; }) => setName(e.target.value)}
                             />
                         ) : (

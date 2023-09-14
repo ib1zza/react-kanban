@@ -34,6 +34,16 @@
         outline: none;
     }
 }
+
+.bordered {
+    input {
+        border: 1px solid black;
+        outline: none;
+    }
+    input:hover {
+        outline: solid #808080;
+    }
+}
 .primary {
     label {
         color: var(--InputLabel)
