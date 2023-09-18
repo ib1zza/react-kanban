@@ -77,7 +77,6 @@ const EditTaskForm: React.FC<Props> = ({
 
     return (
         <div>
-            <h2>{t('Редактирование')}</h2>
             <div className={s.form}>
                 <div>
                     <label htmlFor="titleInput">{t('Заголовок')}</label>
@@ -98,17 +97,19 @@ const EditTaskForm: React.FC<Props> = ({
                         placeholder={t('Описание')}
                     />
                 </div>
-                <div className={s.selectWrapper}>
-                    <Select
-                        options={options}
-                        onChange={handleSelectChange}
-                        placeholder={linkedUsers.find((el) => el.uid === linkedUserId)?.displayName
-                            || t('Пользователь не прикреплен')}
-                        label={t('Исполнитель')}
-                    />
-                </div>
+                {linkedUsers.length > 1
+                    && (
+                        <div className={s.selectWrapper}>
+                            <Select
+                                options={options}
+                                onChange={handleSelectChange}
+                                placeholder={linkedUsers.find((el) => el.uid === linkedUserId)?.displayName
+                                || t('Пользователь не прикреплен')}
+                                label={t('Исполнитель')}
+                            />
+                        </div>
+                    )}
             </div>
-            {/* //TODO: func  */}
             <ConfirmButtons
                 onConfirm={onConfirmButtons}
                 onAbort={onAbortButtons}

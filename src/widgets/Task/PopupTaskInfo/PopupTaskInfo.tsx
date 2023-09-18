@@ -59,7 +59,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
     return (
         <div className={s.container}>
             <div className={s.title}>
-                <h2>{task.title}</h2>
+                <h2>{isEditing ? t('Редактирование') : task.title}</h2>
                 <Button className={s.icon}>
                     <FontAwesomeIcon
                         icon={faCircleXmark}
@@ -67,39 +67,49 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                     />
                 </Button>
             </div>
-            <p className={s.description}>
-                {task.description || `${t('Нет описания')}`}
-            </p>
-            <p className={s.linkedUserInfo}>
-                {
-                    linkedUser
-                        ? (
-                            <>
-                                <span>{t('Исполнитель:')}</span>
-                                <Avatar alt={linkedUser.displayName} src={linkedUser.photoURL} size={AvatarSize.S} />
-                                {linkedUser.displayName }
-                            </>
-                        )
-                        : `${t('Пользователь не прикреплен')}`
-                }
-            </p>
             {!isEditing && (
-                <div className={s.buttons}>
-                    <Button
-                        icon={<FontAwesomeIcon icon={faPenToSquare} />}
-                        onClick={() => setEditing(true)}
-                        loading={loading === 'edit'}
-                    >
-                        {t('Изменить')}
-                    </Button>
-                    <Button
-                        icon={<FontAwesomeIcon icon={faTrashCan} />}
-                        onClick={onDeleteTask}
-                        loading={loading === 'delete'}
-                    >
-                        {t('Удалить')}
-                    </Button>
-                </div>
+                <>
+                    <p className={s.description}>
+                        {task.description || `${t('Нет описания')}`}
+                    </p>
+                    <p className={s.linkedUserInfo}>
+                        {
+                            linkedUser
+                                ? (
+                                    <>
+                                        <span>
+                                            {t('Исполнитель')}
+                                            :
+                                        </span>
+                                        <Avatar
+                                            alt={linkedUser.displayName}
+                                            src={linkedUser.photoURL}
+                                            size={AvatarSize.S}
+                                        />
+                                        {linkedUser.displayName}
+                                    </>
+                                )
+                                : `${t('Пользователь не прикреплен')}`
+                        }
+                    </p>
+
+                    <div className={s.buttons}>
+                        <Button
+                            icon={<FontAwesomeIcon icon={faPenToSquare} />}
+                            onClick={() => setEditing(true)}
+                            loading={loading === 'edit'}
+                        >
+                            {t('Изменить')}
+                        </Button>
+                        <Button
+                            icon={<FontAwesomeIcon icon={faTrashCan} />}
+                            onClick={onDeleteTask}
+                            loading={loading === 'delete'}
+                        >
+                            {t('Удалить')}
+                        </Button>
+                    </div>
+                </>
             )}
             {isEditing && (
                 <EditTaskForm
