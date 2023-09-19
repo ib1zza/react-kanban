@@ -1,14 +1,8 @@
 .input {
     margin-top: 8px;
-    padding: 16px;
-    width: 100%;
-    border: 1px solid white;
-    background-color: white;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 4.8px;
+   
+    
+    margin-bottom: 12px;
 }
 
 .title_wrapper{
@@ -22,7 +16,6 @@
         left: 16px;
         top: 16px;
     }
-   
 }
 .form {
     background-color: var(--LRbodyBg);
@@ -31,7 +24,7 @@
     padding: 36px;
     margin: auto;
     width: 500px;
-    height: 520px;
+
 
 }
 
@@ -102,6 +95,7 @@
     line-height: normal;
     letter-spacing: 4.8px;
     text-transform: uppercase;
+    margin-bottom: 12px;
 }
 
 
@@ -127,7 +121,10 @@
 }
 .error {
     color: rgba(255, 68, 0, 0.643);
-
+    
+}
+.errorSpace{
+    height: 20px;
 }
 
 @media screen and (width <= 800px) {
