@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
-import React, { memo, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '@ramonak/react-progress-bar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFormik } from 'formik';
+import { Input } from 'shared/ui/Input/Input';
 import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import { getUserFromEmail } from '../../../users';
 import s from './SignupForm.module.scss';
-import { AppRoute } from '../../../../app/providers/router/lib/AppRoute';
 import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getSignupState } from '../model/selectors/getSignupState';
 import { signupActions } from '../model/slice/SignupSlice';
@@ -22,15 +22,11 @@ const SignupForm = memo(({ onSwitch }: props) => {
     const navigate = useNavigate();
     const { t } = useTranslation('auth');
     const { signUp } = useAuth();
+    const [step, setStep] = useState(1);
     const dispatch = useDispatch();
     const {
-        error, isLoading, progress, step,
+        error, isLoading, progress,
     } = useSelector(getSignupState);
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
 
     useEffect(() => {
         dispatch(signupActions.setProgress((step / 3) * 100));
@@ -59,27 +55,81 @@ const SignupForm = memo(({ onSwitch }: props) => {
         }
         case 2: {
             if (data.password === data.secondPassword) {
-                dispatch(signupActions.setStep(step + 1));
-            } else {
-                dispatch(signupActions.setError(t('Пароли должны совпадать')));
+                setStep(3);
             }
             break;
         }
         case 1: {
-            const res = await getUserFromEmail(data.email);
-            if (res) {
-                dispatch(signupActions.setError(t('Пользователь с такой почтой уже существует')));
-            } else {
-                dispatch(signupActions.setStep(step + 1));
+            if (data.email && data.displayName) {
+                setStep(2);
             }
             break;
         }
         }
     };
-    return (
-        <form onSubmit={handleSubmit(handleContinue)} className={s.signup}>
-            <div className={s.title_wrapper}>
+    const formik = useFormik({
+        initialValues: {
+            email: '', password: '', secondPassword: '', displayName: '', select: '', file: '',
+        },
+        validate: async (values) => {
+            const errors: any = {};
+            switch (step) {
+            case 3: {
+                break;
+            }
+            case 2: {
+                // if (!values.password) {
+                //     errors.password = 'Required';
+                // } else if (
+                //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/.test(values.password)
+                // ) {
+                //     errors.password = 'Invalid password address';
+                // }
+                // if (!values.secondPassword) {
+                //     errors.secondPassword = 'Required';
+                // } else if (
+                //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/.test(values.secondPassword)
+                // ) {
+                //     errors.secondPassword = 'Invalid secondPassword address';
+                // }
+                if (values.password !== values.secondPassword) {
+                    errors.password = t('Пароли должны совпадать');
+                }
+                break;
+            }
+            case 1: {
+                if (!values.email) {
+                    errors.email = 'Required';
+                } else if (
+                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                ) {
+                    errors.email = 'Invalid email address';
+                }
+                if (!values.displayName) {
+                    errors.displayName = 'Required';
+                } else if (
+                    /^[a-z0-9_]+$/.test(values.displayName)
+                ) {
+                    errors.displayName = 'Invalid secondPassword address';
+                }
+                const res = await getUserFromEmail(values.email);
+                if (res) {
+                    errors.email = t('Пользователь с такой почтой уже существует');
+                }
 
+                break;
+            }
+            }
+            return errors;
+        },
+        onSubmit: (values) => {
+            console.log(values);
+            handleContinue(values);
+        },
+    });
+    return (
+        <form onSubmit={formik.handleSubmit} className={s.signup}>
+            <div className={s.title_wrapper}>
                 <Arrow />
                 <div>
                     <h1 className={s.title}>{t('Регистрация')}</h1>
@@ -90,7 +140,6 @@ const SignupForm = memo(({ onSwitch }: props) => {
                             {t('У меня есть аккаунт')}
                         </span>
                     </p>
-
                 </div>
             </div>
             <div className={s.body}>
@@ -111,27 +160,24 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 {step === 1 && (
                     <>
 
-                        <div className={s.label}>
+                        <label className={s.label}>
                             {t('Введите вашу почту')}
-                        </div>
+                        </label>
 
-                        {errors.email && (
+                        {formik.errors.email && (
                             <p className={s.label_error}>
                                 {t('Запишите в формате почты')}
                             </p>
                         )}
 
-                        <input
+                        <Input
                             className={s.input}
                             type="email"
                             placeholder={t('Почта')}
-                            // eslint-disable-next-line react/jsx-props-no-spreading
-                            {...register('email', {
-                                required: true,
-                                pattern:
-                            // eslint-disable-next-line max-len, no-useless-escape
-                            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            })}
+                            id="email"
+                            name="email"
+                            onChange={formik.handleChange}
+                            value={formik.values.email}
                         />
                         <div className="">{error}</div>
 
@@ -139,64 +185,64 @@ const SignupForm = memo(({ onSwitch }: props) => {
                             {t('Придумайте имя пользователя')}
                         </div>
 
-                        {errors.displayName && (
+                        {formik.errors.displayName && (
                             <p className={s.label_error}>
                                 {t('Допускается только латиница в нижнем регистре и нижнee подчеркивание. Минимальное количество символов 3, максимальное - 20.')}
                             </p>
                         )}
-                        <input
+                        <Input
                             className={s.input}
                             type="text"
                             placeholder={t('Имя пользователя')}
-                            {...register('displayName', {
-                                required: true,
-                                minLength: 3,
-                                maxLength: 20,
-                                pattern: /^[a-z0-9_]+$/,
-                            })}
+                            id="displayName"
+                            name="displayName"
+                            onChange={formik.handleChange}
+                            value={formik.values.displayName}
                         />
                     </>
                 )}
                 {step === 2 && (
                     <>
                         <div className={s.label}>{t('Придумайте пароль')}</div>
-                        {errors.password && (
+                        {formik.errors.password && (
                             <p className={s.label_error}>
                                 {t('Пароль должен включать в себя латинские буквы, включая заглавные и состоять из 6-15 символов')}
                             </p>
                         )}
                         <div className="">{t(error)}</div>
-                        <input
+                        <Input
                             className={s.input}
                             type="password"
                             placeholder={t('Пароль')}
-                            {...register('password', {
-                                required: true,
-                                // TODO enable password validation pattern
-                                // pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                            })}
+                            id="password"
+                            name="password"
+                            onChange={formik.handleChange}
+                            value={formik.values.password}
                         />
-                        {errors.secondPassword && (
+                        {formik.errors.secondPassword && (
                             <p className={s.label_error}>{t('Пароль не совпадает')}</p>
                         )}
-                        <input
+                        <Input
                             className={s.input}
                             type="password"
                             placeholder={t('Повторный пароль')}
-                            {...register('secondPassword', {
-                                required: true,
-                            })}
+                            id="secondPassword"
+                            name="secondPassword"
+                            onChange={formik.handleChange}
+                            value={formik.values.secondPassword}
                         />
                     </>
                 )}
                 {step === 3 && (
                     <>
                         <div className={s.avatar__block}>
-                            <input
-                                {...register('file')}
+                            <Input
                                 type="file"
                                 className={s.avatar__fileInput}
                                 id="file"
+                                name="file"
+                                onChange={formik.handleChange}
+                                value={formik.values.file}
                             />
                             <label htmlFor="file">
                                 <FontAwesomeIcon icon={faImage} />
@@ -211,7 +257,10 @@ const SignupForm = memo(({ onSwitch }: props) => {
                         <select
                             className={s.input}
                             defaultValue="practice"
-                            {...register('select')}
+                            id="select"
+                            name="select"
+                            onChange={formik.handleChange}
+                            value={formik.values.select}
                         >
                             <option value="practice">{t('Для практики')}</option>
                             <option value="work">{t('Для работы')}</option>
@@ -221,7 +270,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                     </>
                 )}
                 <div className={s.btn_wrapper}>
-                    <button className={s.btn}>{t('Продолжить')}</button>
+                    <button type="submit" className={s.btn}>{t('Продолжить')}</button>
                 </div>
             </div>
         </form>
