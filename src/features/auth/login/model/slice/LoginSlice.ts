@@ -11,7 +11,6 @@ export const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
-
         setRememberMe: (state, action: PayloadAction<boolean>) => {
             state.rememberMe = action.payload;
         },
