@@ -34,10 +34,10 @@ interface IAuthContext {
     ) => Promise<User>;
     logOut: () => void;
     refetch: () => void;
-    user?: User | null;
+    user?: any ;
 }
 
-const AuthContext = createContext<IAuthContext>({
+const AuthContext = createContext<any>({
     logIn: () => {
     },
     signUp: () => {
@@ -64,7 +64,6 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     }
 
     async function refetch() {
-        console.log('refetch');
         if (user?.uid) {
             await user.reload();
             getUserInfo(user.uid).then((res) => {
@@ -78,11 +77,9 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser: User | null) => {
             setUser(currentUser as User);
-            console.log(currentUser);
             if (user?.uid) {
                 getUserInfo(user.uid).then((res) => {
                     if (res) {
-                        console.log('getUserUseEffect', res);
                         dispatch(userInfoActions.setUserInfo(res));
                     }
                 });
@@ -96,7 +93,9 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
         signUp, logIn, logOut, refetch, user,
     }), [user]);
     return (
-        <AuthContext.Provider value={value}>
+        <AuthContext.Provider
+            value={value}
+        >
             {children}
         </AuthContext.Provider>
     );

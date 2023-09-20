@@ -23,7 +23,7 @@ const LoginForm = ({ onSwitch }: props) => {
     } = useSelector(getLoginState);
     const handleSubmit = useCallback((data: any) => {
         if (data.email !== '' && data.password !== '') {
-            logIn(data.email, data.password, rememberMe).then((res) => {
+            logIn(data.email, data.password, rememberMe).then(() => {
                 navigate('/');
             });
         } else {

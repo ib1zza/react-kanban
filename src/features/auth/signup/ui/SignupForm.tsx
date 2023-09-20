@@ -78,20 +78,12 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 break;
             }
             case 2: {
-                // if (!values.password) {
-                //     errors.password = 'Required';
-                // } else if (
-                //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/.test(values.password)
-                // ) {
-                //     errors.password = 'Invalid password address';
-                // }
-                // if (!values.secondPassword) {
-                //     errors.secondPassword = 'Required';
-                // } else if (
-                //     /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/.test(values.secondPassword)
-                // ) {
-                //     errors.secondPassword = 'Invalid secondPassword address';
-                // }
+                if (!values.password) {
+                    errors.password = 'Required';
+                }
+                if (!values.secondPassword) {
+                    errors.secondPassword = 'Required';
+                }
                 if (values.password !== values.secondPassword) {
                     errors.password = t('Пароли должны совпадать');
                 }
@@ -123,7 +115,6 @@ const SignupForm = memo(({ onSwitch }: props) => {
             return errors;
         },
         onSubmit: (values) => {
-            console.log(values);
             handleContinue(values);
         },
     });
