@@ -9,6 +9,7 @@ import { Input } from 'shared/ui/Input/Input';
 import s from './LoginForm.module.scss';
 import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getLoginState, loginActions } from '..';
+import { loginThunk } from '../model/services/loginThunk/loginThunk';
 
 interface props {
     onSwitch: () => void
@@ -23,9 +24,14 @@ const LoginForm = ({ onSwitch }: props) => {
     } = useSelector(getLoginState);
     const handleSubmit = useCallback((data: any) => {
         if (data.email !== '' && data.password !== '') {
-            logIn(data.email, data.password, rememberMe).then(() => {
+            logIn(data.email, data.password, rememberMe).then((res: any) => {
+                if (res) {
+                    // dispatch(loginActions.setError(res.error));
+                    console.log(res);
+                }
                 navigate('/');
             });
+            dispatch(loginThunk({ email: data.email, password: data.password, remember: rememberMe }) as any);
         } else {
             dispatch(loginActions.setError('Какое-то поле незаполнено'));
         }

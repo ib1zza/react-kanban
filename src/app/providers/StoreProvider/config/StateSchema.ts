@@ -5,6 +5,7 @@ import { LoginSchema } from 'features/auth/login';
 import { SignupSchema } from 'features/auth/signup';
 import { BoardCollectionSchema } from 'pages/BoardPage';
 import { HomeSchema } from 'pages/Home';
+import { UserSchema } from 'features/auth/user';
 
 export interface StateSchema {
     boardCollection: BoardCollectionSchema,
@@ -13,4 +14,5 @@ export interface StateSchema {
     login: LoginSchema,
     signup: SignupSchema,
     home: HomeSchema,
+    user: UserSchema,
 }
