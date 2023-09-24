@@ -9,7 +9,7 @@ import { Input } from 'shared/ui/Input/Input';
 import s from './LoginForm.module.scss';
 import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getLoginState, loginActions } from '..';
-import { loginThunk } from '../model/services/loginThunk/loginThunk';
+import { fetchByIdStatus } from '../model/services/loginThunk/fetchByIdStatus';
 
 interface props {
     onSwitch: () => void
@@ -17,30 +17,29 @@ interface props {
 const LoginForm = ({ onSwitch }: props) => {
     const { logIn } = useAuth();
     const { t } = useTranslation('auth');
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {
-        error, isLoading, rememberMe,
+        error, isLoading,
     } = useSelector(getLoginState);
     const handleSubmit = useCallback((data: any) => {
         if (data.email !== '' && data.password !== '') {
-            logIn(data.email, data.password, rememberMe).then((res: any) => {
+            logIn(data.email, data.password, data.rememberMe).then((res: any) => {
                 if (res) {
                     // dispatch(loginActions.setError(res.error));
                     console.log(res);
                 }
                 navigate('/');
             });
-            dispatch(loginThunk({ email: data.email, password: data.password, remember: rememberMe }) as any);
+            dispatch(fetchByIdStatus({ email: data.email, password: data.password, remember: data.rememberMe }) as any);
         } else {
             dispatch(loginActions.setError('Какое-то поле незаполнено'));
         }
-    }, [dispatch, logIn, navigate, rememberMe]);
-    const handleChange = useCallback(() => {
-        dispatch(loginActions.setRememberMe(!rememberMe));
-    }, [dispatch, rememberMe]);
+    }, [dispatch, logIn, navigate]);
+
     const formik = useFormik({
-        initialValues: { email: '', password: '' },
+        initialValues: { email: '', password: '', rememberMe: false },
         validate: (values) => {
             const errors: any = {};
             if (!values.email) {
@@ -56,6 +55,7 @@ const LoginForm = ({ onSwitch }: props) => {
             handleSubmit(values);
         },
     });
+    console.log(error);
     return (
         <form
             onSubmit={formik.handleSubmit}
@@ -75,11 +75,9 @@ const LoginForm = ({ onSwitch }: props) => {
                 </div>
             </div>
 
-            {error ? (
-                <p className={s.error}>
-                    {error}
-                </p>
-            ) : null}
+            <p className={s.error}>
+                {error}
+            </p>
 
             {/* {error && <div>{error}</div>} */}
             <label
@@ -124,10 +122,12 @@ const LoginForm = ({ onSwitch }: props) => {
 
             <div className={s.remember}>
                 <p>
-                    <input
-                        checked={rememberMe}
-                        onChange={handleChange}
+                    <Input
+                        checked={formik.values.rememberMe}
+                        onChange={formik.handleChange}
                         type="checkbox"
+                        id="rememberMe"
+                        name="rememberMe"
                     />
                     {t('Запомнить меня')}
                 </p>
