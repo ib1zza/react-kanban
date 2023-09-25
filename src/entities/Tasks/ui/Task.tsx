@@ -44,7 +44,7 @@ const Task = ({
 
     return (
         <div className={s.container}>
-            <div>
+            <div className={s.butle}>
                 <Button
                     className={s.icon}
                     onClick={handleComplete}

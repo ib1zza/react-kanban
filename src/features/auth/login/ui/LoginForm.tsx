@@ -62,7 +62,7 @@ const LoginForm = ({ onSwitch }: props) => {
             className={s.form}
         >
             <div className={s.title_wrapper}>
-                <Arrow />
+                {/* <Arrow /> */}
                 <div>
                     <div className={s.title}>{t('Вход')}</div>
                     <p className={s.linkArea}>
