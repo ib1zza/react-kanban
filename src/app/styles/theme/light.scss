@@ -1,8 +1,11 @@
 .app {
-    --body-bg: #c2b8ff;
+    --body-bg: #b895da;
     --darker-bg: #666186;
     --columnBg: #ebecf0;
     --taskBg: #fff;
+    --BoardBg: #EBEBEB;
+    --wbText: #fff; 
+    --altWbText: #000;
     --taskTextColor: #000;
     --buttonTextColor: #5e6c84;
     --popupBg: #fff;
@@ -15,8 +18,11 @@
     --ButtonText: #5e6c84;
     --ButtonBg: #fff;
     --ButtonBorderHover: rgb(234, 234, 234);
-    --ButtonColorHover: rgb(220, 220, 220)
+    --ButtonColorHover: rgb(220, 220, 220);
 
+    /* Header */
+    --HeaderBg: #e4d8ef;
+    
     /* Login / Registration */
     --LRbgColor: #19032E;
     --LRbodyBg: #B895DA;

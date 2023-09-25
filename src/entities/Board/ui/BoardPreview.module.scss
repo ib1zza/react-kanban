@@ -1,23 +1,28 @@
 .container {
-    background-color: var(#{--columnBg});
+    background-color: var(--BoardBg);
     color: var(#{--taskTextColor});
     border-radius: 10px;
     padding: 12px;
     min-width: 250px;
     height: 80px;
+    border: 2px solid var(--altWbText);
 }
 
 .heading {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-
+    .info {
+        font: var(--font-m);
+        font-weight: 300;
+    }
     .title {
         display: block;
         flex-basis: 100%;
         white-space: nowrap;
-        height: 40px;
+        height: 30px;
         cursor: pointer;
+        font-weight: 600;
         overflow: hidden;
         text-overflow: ellipsis;
         padding-right: 5px;

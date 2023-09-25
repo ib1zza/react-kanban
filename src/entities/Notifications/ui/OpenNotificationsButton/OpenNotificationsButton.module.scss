@@ -1,6 +1,6 @@
 .button {
-    position: relative;
-
+    position:   relative;
+    
     svg {
         width: 30px;
         height: 30px;
@@ -30,7 +30,7 @@
     padding: 15px 0;
     border-radius: 15px;
     right: 0;
-    background-color: var(--taskBg);
+
     color: var(--taskTextColor);
     font-size: 14px;
 }

@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
     square,
     loading,
     size = ButtonSize.S,
-    theme = ButtonTheme.FULL,
+    theme = ButtonTheme.CLEAR,
     children,
     ...props
 }) => {

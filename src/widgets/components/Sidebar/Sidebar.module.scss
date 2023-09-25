@@ -1,0 +1,77 @@
+
+.logo {
+    margin-top: 21px;
+    width: 30px;
+    cursor: pointer;
+    // font-size: 20px;
+    font: var(--font-l  );
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.sidebar
+ {
+    height: 100vh;
+
+    padding: 0 26px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--HeaderBg);
+    color: var(--altWbText);
+    border-right: 1px solid var(--altWbText);
+}
+.nav_buttons{
+   
+}
+.nav_button {
+    font: var(--font-m);
+    display: flex;
+    align-items: center;
+    letter-spacing: 2px;;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.nav_button:first-child{
+        margin-bottom: 21px;
+}
+.svg {
+    margin-right: 10px;
+  
+    fill: #ffff;
+}
+
+hr{
+    margin: 20px 0;
+	padding: 0;
+	height: 0;
+	border: none;
+	border-top: 1px solid #333;
+}
+
+.space span{
+    font: var(--font-m);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.space_team{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font: var(--font-m);
+}
+.bottom{
+    margin-bottom: auto;
+    height: 100%;
+
+    position: relative;
+}
+.app_buttons{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;;
+}

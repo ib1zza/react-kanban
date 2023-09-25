@@ -9,12 +9,15 @@ import Button, { ButtonTheme } from '../../Button/Button';
 
 interface ThemeSwitcherProps{
     className?: string
+    auth?: boolean
 }
-const ThemeSwitcher = ({ className } : ThemeSwitcherProps) => {
+const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
     const { toggleTheme, theme } = useTheme();
+
     return (
         <Button
             square
+            theme={auth ? ButtonTheme.FULL : ButtonTheme.CLEAR}
             className={classNames(
                 '',
                 {},
