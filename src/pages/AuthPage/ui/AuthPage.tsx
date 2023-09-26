@@ -25,6 +25,7 @@ const AuthPage = () => {
             navigate('/');
         }
     }, [user]);
+
     return (
         <Suspense fallback={<>....</>}>
             <div className={s.wrapper}>
@@ -38,10 +39,10 @@ const AuthPage = () => {
                     </div>
                 </div>
                 <div className={s.themeSwitcherWrapper}>
-                    <ThemeSwitcher className={s.themeSwitcher} />
+                    <ThemeSwitcher auth className={s.themeSwitcher} />
                 </div>
                 <div className={s.langSwitcherWrapper}>
-                    <LangSwitcher className={s.langSwitcher} />
+                    <LangSwitcher auth className={s.langSwitcher} />
                 </div>
                 {isLogin ? <LoginForm onSwitch={onSwitch} /> : <SignupForm onSwitch={onSwitch} />}
             </div>

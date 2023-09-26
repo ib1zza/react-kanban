@@ -55,7 +55,15 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
             )}
             <h3 className={s.heading}>
                 {/* <span onClick={onClick}>{board.title.slice(0, 5)}</span> */}
-                <span className={s.title} onClick={onClick}>{board.title.slice(0)}</span>
+                <div className={s.info}>
+                    <span className={s.title} onClick={onClick}>{board.title.slice(0)}</span>
+                    <p>
+                        by
+                        {' '}
+                        {username || `${t('Загрузка')}`}
+                    </p>
+                </div>
+
                 {userId === board.ownerId && (
                     <div className={s.buttons}>
                         <Button
@@ -70,12 +78,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                     </div>
                 )}
             </h3>
-            <p>
-                by
-                {' '}
 
-                {username || `${t('Загрузка')}`}
-            </p>
         </div>
     );
 };

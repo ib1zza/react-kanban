@@ -49,10 +49,21 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                 className={s.headerColor}
                 style={{ backgroundColor: column.color }}
             />
+            <hr />
 
             <div className={s.titleBlock}>
+
                 <h6 className={s.title}>{column.title}</h6>
                 <div className={s.columnButtons}>
+                    {!isAddingTask && (
+
+                        <Button
+                            className={s.addButton}
+                            onClick={() => setIsAddingTask(true)}
+                            icon={<FontAwesomeIcon icon={faPlus} />}
+                        />
+
+                    )}
                     <Button
                         className={s.editButton}
                         onClick={() => setIsEditColumn(true)}
@@ -65,18 +76,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                     />
                 </div>
             </div>
-            {!isAddingTask && (
-                <div>
-                    <Button
-                        className={s.addButton}
-                        onClick={() => setIsAddingTask(true)}
-                        icon={<FontAwesomeIcon icon={faPlus} height={20} />}
-                    >
 
-                        <span>{t('Добавить')}</span>
-                    </Button>
-                </div>
-            )}
             {isAddingTask && (
                 <AddTaskForm
                     onAbort={() => {
@@ -97,6 +97,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                 tasks={column.tasks}
                 rerender={onEdit}
             />
+            <div className={s.fill} />
         </div>
     );
 };

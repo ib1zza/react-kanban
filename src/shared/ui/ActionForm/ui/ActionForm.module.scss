@@ -1,14 +1,23 @@
 .container {
-    background-color: var(--columnBg);
-    border-radius: 10px;
+    background-color: var(--BoardBg);
+    position: relative;
+    border-radius: 20px;
+    border: 2px solid var(--altWbText);
     padding: 12px;
     position: relative;
     max-width: 400px;
-
+    height: 100%;
     &.withColor {
-        padding-top: 32px;
+        padding-top: 29px;
+    }
+    hr{
+        margin: 0px;
+        border-color: var(--altWbText);
+        margin-bottom: 22px;
+        padding: 0;
     }
 }
+
 
 .headerColor {
     position: absolute;
@@ -16,15 +25,16 @@
     right: 0;
     left: 0;
     opacity: 0.7;
-    height: 20px;
-    border-radius: 10px;
+    height: 30px;
+    border-radius: 18px 18px 0px 0px;
     background-color: #9d9d9d;
 }
 
 .title {
+    margin-top: 12px;;
     display: block;
     font-weight: 500;
     font-size: 18px;
     color: var(#{--taskTextColor});
-    margin-bottom: 15px;
+    margin-bottom: 7px;
 }

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Input } from 'shared/ui/Input/Input';
+import { Input, InputTheme } from 'shared/ui/Input/Input';
 import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import { getUserFromEmail } from '../../../users';
 import s from './SignupForm.module.scss';
@@ -121,7 +121,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
     return (
         <form onSubmit={formik.handleSubmit} className={s.signup}>
             <div className={s.title_wrapper}>
-                <Arrow />
+                {/* <Arrow /> */}
                 <div>
                     <h1 className={s.title}>{t('Регистрация')}</h1>
                     <p className={s.linkArea}>

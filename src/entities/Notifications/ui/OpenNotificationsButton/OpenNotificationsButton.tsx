@@ -5,11 +5,9 @@ import { faBell as faRegularBell } from '@fortawesome/free-regular-svg-icons';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import s from './OpenNotificationsButton.module.scss';
-
 import Notification from '../Notification';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
 import Button from '../../../../shared/ui/Button/Button';
-
 // eslint-disable-next-line max-len
 import { getUnreadNotificationsCount } from '../../model/selectors/getUnreadNotificationsCount/getUnreadNotificationsCount';
 import { getNotifications as getNotificationsSelector } from '../../model/selectors/getNotifications/getNotifications';

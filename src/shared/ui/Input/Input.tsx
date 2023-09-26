@@ -61,7 +61,7 @@ export const Input = memo((props: InputProps) => {
                 type={type}
                 value={value}
                 onChange={onChange}
-                className={s.input}
+                className={classNames(s.input, {}, [])}
                 placeholder={placeholder}
                 {...otherProps}
             />

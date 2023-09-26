@@ -6,15 +6,12 @@
     cursor: pointer;
 }
 
-.header,
-.footer {
-    height: 55px;
-    padding: 0 20px;
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(#{--darker-bg});
     color: white;
+    margin-bottom: 20px;
 }
 
 .nickname {
@@ -28,12 +25,20 @@
     border: none;
     display: flex;
     align-items: center;
+    div {
+         color: white
+    }
+    p {
+        margin-left: 20px;
+    }
 }
 
 .header__cabinet > .avatar {
     margin-right: 6px;
     position: relative;
     display: flex;
+
+
     align-items: center;
     justify-content: center;
     img {
@@ -44,6 +49,7 @@
         border-radius: 50%;
     }
     span{
+
            display: flex; 
     align-items: center;
     }
@@ -55,14 +61,20 @@
 }
 
 .menu {
-    width: 140px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 8px 7px;
-    background-color: #fff;
+    background-color: transparent;
+    border: 1px solid white;
     border-radius: 5px;
     position: absolute;
-    bottom: -60px;
-    left: -80px;
+    bottom: -70px;
+    // left: -80px;
     z-index: 10;
+
+  
 }
 
 .menu > div {
@@ -71,7 +83,7 @@
     font-size: 14px;
     line-height: 16px;
     cursor: pointer;
-    color: #000;
+   
 }
 
 .menu > div:hover {
