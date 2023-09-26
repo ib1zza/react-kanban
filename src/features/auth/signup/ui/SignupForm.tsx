@@ -8,12 +8,11 @@ import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Input, InputTheme } from 'shared/ui/Input/Input';
-import { useAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
+import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
+import { signupActions } from 'features/auth/signup';
 import { getUserFromEmail } from '../../../users';
 import s from './SignupForm.module.scss';
-import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getSignupState } from '../model/selectors/getSignupState';
-import { signupActions } from '../model/slice/SignupSlice';
 
 interface props {
     onSwitch: () => void

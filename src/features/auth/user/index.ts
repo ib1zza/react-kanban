@@ -1,3 +1,3 @@
-import { UserSchema } from './model/types/UserSchema';
+import type { UserSchema } from './model/types/UserSchema';
 
 export { UserSchema };
