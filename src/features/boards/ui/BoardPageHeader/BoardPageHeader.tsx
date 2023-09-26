@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+    faAdd,
+    faCalendarTimes,
+    faFilter,
+    faPenToSquare, faShare, faShareAlt, faWalkieTalkie,
+} from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { Input } from 'shared/ui/Input/Input';
 import Button from 'shared/ui/Button/Button';
@@ -31,50 +36,72 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
         setEditingTitle(title);
     }, [title]);
 
-    useEffect(() => {
-
-    }, []);
-
     return (
-        <h1 className={s.title}>
-            {!isEditing && (
-                <>
-                    <span>{editingTitle}</span>
-                    <Button
-                        className={s.button}
-                        onClick={() => setEditing(true)}
-                    >
-                        <FontAwesomeIcon icon={faPenToSquare} />
-                    </Button>
-                </>
-            )}
-            {isEditing && (
-                <>
-                    <Input
-                        className={s.input}
-                        maxLength={40}
-                        type="text"
-                        value={editingTitle}
-                        onChange={(e) => setEditingTitle(e.target.value)}
-                    />
-                    <Button
-                        className={s.button}
-                        onClick={onEditHandler}
-                    >
-                        <FontAwesomeIcon icon={faCircleCheck} />
-                    </Button>
-                </>
-            )}
-            {
-                linkedUsers.length > 0 && (
-                    <div className={s.linkedUsers}>
-                        {linkedUsers.map((user: IUserInfo) => (
-                            <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
-                        ))}
-                    </div>
-                )
-            }
-        </h1>
+        <div className={s.BoardPageHeader}>
+            <h1 className={s.title}>
+                {!isEditing && (
+                    <>
+                        <span>{editingTitle}</span>
+                        <Button
+                            className={s.button}
+                            onClick={() => setEditing(true)}
+                        >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </Button>
+                    </>
+                )}
+                {isEditing && (
+                    <>
+                        <Input
+                            className={s.input}
+                            maxLength={40}
+                            type="text"
+                            value={editingTitle}
+                            onChange={(e) => setEditingTitle(e.target.value)}
+                        />
+                        <Button
+                            className={s.button}
+                            onClick={onEditHandler}
+                        >
+                            <FontAwesomeIcon icon={faCircleCheck} />
+                        </Button>
+                    </>
+                )}
+                {
+                    linkedUsers.length > 0 && (
+                        <div className={s.linkedUsers}>
+                            {linkedUsers.map((user: IUserInfo) => (
+                                <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
+                            ))}
+                        </div>
+                    )
+                }
+            </h1>
+            <div className={s.second}>
+                <div className={s.share}>
+                    <FontAwesomeIcon icon={faShareAlt} />
+                    <p>share</p>
+                </div>
+                <div className={s.members}>
+                    <FontAwesomeIcon icon={faWalkieTalkie} />
+                    <p>members</p>
+                </div>
+            </div>
+            <div className={s.third}>
+                <div className={s.filter}>
+                    <FontAwesomeIcon icon={faFilter} />
+                    <p>filter</p>
+                </div>
+                <div className={s.date}>
+                    <FontAwesomeIcon icon={faCalendarTimes} />
+                    <p>this week</p>
+                </div>
+                <div className={s.add}>
+                    <FontAwesomeIcon icon={faAdd} />
+                    <p>add</p>
+                </div>
+            </div>
+        </div>
     );
 };
 

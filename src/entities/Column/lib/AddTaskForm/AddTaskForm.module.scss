@@ -1,7 +1,7 @@
 .wrapper {
     background-color: var(#{--taskBg});
     color: var(#{--taskTextColor});
-    box-shadow: 0 0 3px 0 var(#{--taskTextColor});
+    border: 2px solid var(--altWbText);
     padding: 6px 10px;
     border-radius: 10px;
     font-size: 16px;
@@ -19,7 +19,7 @@
 
         textarea {
             width: 100%;
-            min-height: 100px;
+            min-height: 50px;
             resize: none;
             border: none;
             font-size: 16px;
@@ -41,8 +41,12 @@
         }
     }
 }
-
+.hr{
+    border-top: 2px solid black;
+  
+}
 .createColumnButtons {
+    margin-top: -16px;
     display: flex;
     justify-content: space-between;
 }

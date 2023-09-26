@@ -62,6 +62,7 @@ const AddTaskForm: React.FC<Props> = ({
                     />
                 </div>
             </form>
+            <hr className={s.hr} />
             <div className={s.createColumnButtons}>
                 <Button
                     onClick={handler}
