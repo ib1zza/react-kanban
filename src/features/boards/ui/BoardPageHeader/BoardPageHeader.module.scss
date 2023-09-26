@@ -1,14 +1,19 @@
+.BoardPageHeader{
+    position: relative;
+}
 .title {
+    top: -60px;
+    position: absolute;
     height: 47px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(#{--taskTextColor});
+    color: white;
     margin-bottom: 20px;
 
     .button {
         margin-left: 15px;
-
+        color: white;
         &:hover {
             color: var(#{--iconColorHover});
         }
@@ -24,4 +29,63 @@
     margin-left: 15px;
     gap: 8px;
     display: flex;
+}
+.second {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+}
+.share{
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    border: 1px solid white;
+    padding: 4px 6px;
+    color: white;
+    border-radius: 15px;
+}
+.members{
+    padding: 4px 6px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    border: 1px solid white;
+    color: white;
+    border-radius: 15px;
+}
+.third {
+    margin-top: 20px;;
+    width: 100%;
+    display: flex;
+    gap:60px;
+    margin-bottom: 20px;
+}
+.filter{
+    padding: 4px 6px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    border: 1px solid white;
+    color: white;
+    border-radius: 15px;
+}
+.date {
+    padding: 4px 6px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    border: 1px solid white;
+    color: white;
+    border-radius: 15px;
+}
+.add {
+    margin-left: auto;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 4px 6px;
+    border: 1px solid white;
+    color: white;
+    border-radius: 15px;
 }
