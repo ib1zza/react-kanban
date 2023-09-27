@@ -3,7 +3,6 @@
     margin-top: 21px;
     width: 30px;
     cursor: pointer;
-    // font-size: 20px;
     font: var(--font-l  );
     font-weight: 700;
     letter-spacing: 4px;
@@ -18,7 +17,7 @@
     flex-direction: column;
     background-color: var(--HeaderBg);
     color: var(--altWbText);
-    border-right: 1px solid var(--altWbText);
+    border-right: 2px solid var(--altWbText);
 }
 .nav_buttons{
    
@@ -29,7 +28,7 @@
     align-items: center;
     letter-spacing: 2px;;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 600;
 }
 .nav_button:first-child{
         margin-bottom: 21px;
@@ -45,7 +44,7 @@ hr{
 	padding: 0;
 	height: 0;
 	border: none;
-	border-top: 1px solid #333;
+	border-top: 2px solid var(--altWbText);
 }
 
 .space span{
@@ -74,4 +73,7 @@ hr{
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;;
+    button {
+        color: var(--altWbText);
+    }
 }

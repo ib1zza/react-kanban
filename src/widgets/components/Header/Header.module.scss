@@ -61,16 +61,20 @@
 }
 
 .menu {
-    width: 100px;
+    width: 140px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 30px;
     align-items: center;
+    justify-content:  space-around;
     padding: 8px 7px;
     background-color: transparent;
+    align-items: center;
     border: 1px solid white;
-    border-radius: 5px;
+    border-radius: 15px;
     position: absolute;
-    bottom: -70px;
+    right: -34px;
+    bottom: -40px;
     // left: -80px;
     z-index: 10;
 
@@ -90,9 +94,7 @@
     color: #676767;
 }
 
-.menu > div:first-child {
-    margin-bottom: 7px;
-}
+
 
 .leftmenu {
     display: flex;
