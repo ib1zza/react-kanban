@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
 import { faCircleCheck as iconCheckSolid, faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,7 +41,7 @@ const Task = ({
     };
 
     const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
-
+    const [isOpen, setIsOpen] = useState(false);
     return (
         <div className={s.container}>
             <div className={s.butle}>
@@ -54,9 +54,9 @@ const Task = ({
                         <FontAwesomeIcon icon={iconCheckSolid} />
                     )}
                 />
-
                 <span>{task.title}</span>
             </div>
+
             <div className={s.infoBlock}>
                 {task.attachedUser && (
                     <Avatar
@@ -66,7 +66,9 @@ const Task = ({
                     />
                 ) }
                 <Button
-                    onClick={openTaskHandler}
+                    onClick={
+                        openTaskHandler
+                    }
                     icon={<FontAwesomeIcon icon={faEllipsisVertical} />}
                 />
                 <Button
