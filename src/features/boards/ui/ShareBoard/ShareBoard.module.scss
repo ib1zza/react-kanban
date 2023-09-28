@@ -1,4 +1,5 @@
 .form {
+    // border: 1px solid var(--altWbText);
     padding: 4px;
     display: flex;
     width: 100%;
@@ -6,18 +7,39 @@
 }
 
 .form__title {
-    font-weight: bold;
-    font-size: 16px;
+    font: var(--font-m);
+    font-weight: 600;
+    color: var(--altWbText);
+    margin-bottom: 12px;
+}
+.form__checkboxes {
+    display: flex;
+     gap: 10px;
+    p {
+        font: var(--font-s);
+        font-weight: 400;
+        color: var(--altWbText);
+    }
+    label {
+        display: flex; 
+        flex-direction: row;
+        align-items: center;
+        gap: 6px;
+        color: var(--altWbText);
+    }
+    margin-bottom:  12px;
 }
 
 .form__categoris {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+  
 }
 
 .form__input {
     width: 100%;
-    border-bottom: 1px solid black;
-    padding: 4px;
+    border-bottom: 2px solid black;
+    input {font: var(--font-s)}
+    margin-bottom: 12px;;
 }
 
 .form__error {
@@ -36,46 +58,26 @@
     margin-top: 8px;
     margin-bottom: 8px;
     width: 100%;
+  
 }
 
-.form__category_l {
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 4px;
+.form__category {
+    border: none;
     width: 50%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    font: var(--font-s);
+    background: transparent;
+    color: var(--altWbText);
 }
 
-.form__category_l__active {
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 4px;
+.form__category__active {
+    border: none;
     width: 50%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    background-color: black;
-    color: white;
-}
-
-.form__category_r {
-    border: 1px solid black;
-    padding: 4px;
-    width: 50%;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.form__category_r__active {
-    border: 1px solid black;
-    padding: 4px;
-    width: 50%;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: black;
-    color: white;
+    font: var(--font-s);
+    background: transparent;
+    color: var(--altWbText);
+    font-weight: 600;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--altWbText);
 }
 
 .form__users {

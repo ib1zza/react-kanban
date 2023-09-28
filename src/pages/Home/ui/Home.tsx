@@ -1,5 +1,7 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+    useCallback, useEffect, useState,
+} from 'react';
 import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +12,7 @@ import { IBoard, LinkedUserType } from 'app/types/IBoard';
 import { BoardPreview } from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
+
 import { getUserBoards as getBoards } from '../model/services/getUserBoards';
 import s from './Home.module.scss';
 import HomeSkeleton from './HomeSkeleton';
@@ -48,6 +51,19 @@ const Home = () => {
     if (!user?.uid) return <HomeSkeleton />;
     return (
         <div className={s.boardPageContainer}>
+            <div>
+                <div className={s.buttons}>
+                    <Button onClick={() => setAddBoardStatus(true)} className={s.add_button}>
+                        <FontAwesomeIcon size="lg" icon={faPlus} />
+
+                    </Button>
+                    <Button onClick={() => setLinkBoardStatus(true)} className={s.share_button}>
+                        <FontAwesomeIcon size="lg" icon={faLink} />
+
+                    </Button>
+                </div>
+            </div>
+
             <div className={s.blocks__container}>
                 {addBoardStatus && (
                     <ActionForm
@@ -76,14 +92,6 @@ const Home = () => {
                 ))}
             </div>
 
-            <div className={s.buttons}>
-                <Button onClick={() => setAddBoardStatus(true)}>
-                    <FontAwesomeIcon size="lg" icon={faPlus} />
-                </Button>
-                <Button onClick={() => setLinkBoardStatus(true)}>
-                    <FontAwesomeIcon size="lg" icon={faLink} />
-                </Button>
-            </div>
         </div>
 
     );

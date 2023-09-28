@@ -68,12 +68,21 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                     <div className={s.buttons}>
                         <Button
                             onClick={onOpenShare}
-                            style={{ marginRight: '5px' }}
-                            icon={<FontAwesomeIcon icon={faLink} />}
+                            className={s.share_button}
+                            icon={(
+                                <FontAwesomeIcon
+                                    icon={faLink}
+                                />
+                            )}
                         />
                         <Button
                             onClick={handleDelete}
-                            icon={<FontAwesomeIcon icon={faTrash} style={{ color: '#e32400' }} />}
+                            className={s.delete_button}
+                            icon={(
+                                <FontAwesomeIcon
+                                    icon={faTrash}
+                                />
+                            )}
                         />
                     </div>
                 )}

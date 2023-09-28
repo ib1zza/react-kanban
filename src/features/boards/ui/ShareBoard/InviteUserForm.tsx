@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
-import { Input } from 'shared/ui/Input/Input';
+import { Input, InputTheme } from 'shared/ui/Input/Input';
 import { getUserFromEmail } from 'features/users';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
 import { sendNotificationInvite } from 'entities/Notifications';
@@ -42,7 +42,6 @@ const InviteUserForm: FC<Props> = ({ board }) => {
                     setError('Не найден');
                 }
             });
-            // console.log(valueStatus, email);
         } else {
             setError('Нет данных');
             setTimeout(() => {
@@ -76,7 +75,6 @@ const InviteUserForm: FC<Props> = ({ board }) => {
                         value={LinkedUserType.GUEST}
                         name="status"
                         checked={valueStatus === LinkedUserType.GUEST}
-                        style={{ marginRight: '4px' }}
                         onChange={(e) => setValueStatus(e.target.value as LinkedUserType)}
                     />
                     {t('Гость')}
@@ -87,7 +85,6 @@ const InviteUserForm: FC<Props> = ({ board }) => {
                         value={LinkedUserType.USER}
                         name="status"
                         checked={valueStatus === LinkedUserType.USER}
-                        style={{ marginRight: '4px' }}
                         onChange={(e) => setValueStatus(e.target.value as LinkedUserType)}
                     />
                     {t('Редактор')}
@@ -97,6 +94,8 @@ const InviteUserForm: FC<Props> = ({ board }) => {
             <Input
                 placeholder={t('Введите почту')}
                 value={email}
+                theme={InputTheme.CLEAR}
+                className={s.form__input}
                 onChange={(e) => setEmail(e.target.value)}
             />
             <Button
