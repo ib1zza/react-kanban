@@ -3,39 +3,50 @@
     padding: 16px;
     background-color: white;
     border-radius: 12px;
-    width: 535px;
+    width: 100%
 }
 
 .profile__name {
     font-weight: bold;
     font-size: 22px;
+    text-align: left;
 }
 
 .profile__email {
     letter-spacing: 2px;
     font-size: 18px;
     margin-bottom: 4px;
+    text-align: left;
 }
 
 .profile__company {
     font-size: 18px;
     margin-bottom: 4px;
+    text-align: left;
 }
 
 .profile__descr {
     font-size: 16px;
+    text-align: left;
 }
 
 .profile__edit {
-    margin-top: 12px;
-    border: 1px solid black;
-    padding: 4px;
+   
+  
+    border: 2px solid black;
+    padding: 4px 6px;
+    font-weight: 500;
+    border-radius: 12px;
+
+
 }
 
 .profile__save {
-    margin-top: 12px;
-    border: 1px solid black;
-    padding: 4px;
+ 
+    border: 2px solid black;
+    padding: 4px 6px;
+    font-weight: 500;
+    border-radius: 12px;
 
 }
 
@@ -43,3 +54,19 @@
 //     border: 1px solid black;
 //     width: 100%;
 // }
+
+.logout {
+
+    border: 2px solid red;
+    color: red;
+    padding: 4px 6px;
+    font-weight: 500;
+    border-radius: 12px;
+}
+.buttons {
+    margin-top: 12px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: right;
+}

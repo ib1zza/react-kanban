@@ -87,7 +87,6 @@ const BoardPage = memo(() => {
                 title={selectedBoard.title}
                 setIsCreating={setIsCreating}
             />
-
             <div className={s.wrapper}>
                 <div className={s.columnsWrapper}>
                     {getColumnsFromBoard(selectedBoard).map((column) => (
@@ -105,9 +104,7 @@ const BoardPage = memo(() => {
                             onAbort={() => setIsCreating(false)}
                         />
                     )}
-
                 </div>
-
                 {selectedTask && (
                     <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />
                 )}
