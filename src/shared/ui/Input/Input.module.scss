@@ -13,7 +13,7 @@
         color: var(--InputText);
         border-radius: var(--InputRadius);
         font: var(--font-m);
-
+     
 
     }
     input:hover {
@@ -22,7 +22,7 @@
  
 
     input::placeholder {
-        opacity: 0.8;
+        color: var(--InputPlaceholder);
     }
 
 
@@ -32,6 +32,11 @@
     input {
         border: none;
         outline: none;
+        background: transparent;
+
+    }
+    input:hover {
+        outline: solid transparent;
     }
 }
 

@@ -73,7 +73,7 @@ const GuestsList: FC<Props> = ({ board }) => {
                         setIsEditorsOpened(false);
                     }}
                     className={
-                        isEditorsOpened ? s.form__category_l : s.form__category_l__active
+                        isEditorsOpened ? s.form__category : s.form__category__active
                     }
                 >
                     {t('Гость')}
@@ -83,7 +83,7 @@ const GuestsList: FC<Props> = ({ board }) => {
                         setIsEditorsOpened(true);
                     }}
                     className={
-                        !isEditorsOpened ? s.form__category_r : s.form__category_r__active
+                        !isEditorsOpened ? s.form__category : s.form__category__active
                     }
                 >
                     {t('Редактор')}

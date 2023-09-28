@@ -41,19 +41,23 @@
     display: flex;
     gap: 6px;
     align-items: center;
-    border: 1px solid white;
+    border: 2px solid white;
+    font-weight: 500;
     padding: 4px 6px;
     color: white;
     border-radius: 15px;
+    cursor: pointer;
 }
 .members{
     padding: 4px 6px;
     display: flex;
     gap: 6px;
     align-items: center;
-    border: 1px solid white;
+    border: 2px solid white;
+    font-weight: 500;
     color: white;
     border-radius: 15px;
+    cursor: pointer;
 }
 .third {
     margin-top: 20px;;
@@ -67,26 +71,32 @@
     display: flex;
     gap: 6px;
     align-items: center;
-    border: 1px solid white;
+    font-weight: 500;
+    border: 2px solid white;
     color: white;
     border-radius: 15px;
+    cursor: pointer;
 }
 .date {
     padding: 4px 6px;
     display: flex;
     gap: 6px;
     align-items: center;
-    border: 1px solid white;
+    font-weight: 500;
+    border: 2px solid white;
     color: white;
     border-radius: 15px;
+    cursor: pointer;
 }
 .add {
     margin-left: auto;
     display: flex;
     gap: 6px;
     align-items: center;
+    font-weight: 500;
     padding: 4px 6px;
-    border: 1px solid white;
+    border: 2px solid white;
     color: white;
     border-radius: 15px;
+    cursor: pointer;
 }

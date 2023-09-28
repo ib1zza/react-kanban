@@ -4,7 +4,7 @@ import {
     faAdd,
     faCalendarTimes,
     faFilter,
-    faPenToSquare, faShare, faShareAlt, faWalkieTalkie,
+    faPenToSquare, faShareAlt, faWalkieTalkie,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { Input } from 'shared/ui/Input/Input';
@@ -13,17 +13,20 @@ import { useAppSelector } from 'app/providers/StoreProvider';
 import { Avatar } from 'shared/ui/Avatar';
 import { getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
+import { useTranslation } from 'react-i18next';
 import s from './BoardPageHeader.module.scss';
 
 interface Props {
     title: string;
-    onEdit: (newTitle: string) => void
+    onEdit: (newTitle: string) => void;
+    setIsCreating: (value: boolean) => void;
 }
 
-const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
+const BoardPageHeader: React.FC<Props> = ({ onEdit, title, setIsCreating }) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
     const linkedUsers = useAppSelector(getLinkedUsers);
+    const { t } = useTranslation();
     const onEditHandler = () => {
         const len = editingTitle.trim().length;
         if (len > 3 && len < 30) {
@@ -80,25 +83,25 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title }) => {
             <div className={s.second}>
                 <div className={s.share}>
                     <FontAwesomeIcon icon={faShareAlt} />
-                    <p>share</p>
+                    <p>{t('share')}</p>
                 </div>
                 <div className={s.members}>
                     <FontAwesomeIcon icon={faWalkieTalkie} />
-                    <p>members</p>
+                    <p>{t('members')}</p>
                 </div>
             </div>
             <div className={s.third}>
                 <div className={s.filter}>
                     <FontAwesomeIcon icon={faFilter} />
-                    <p>filter</p>
+                    <p>{t('filter')}</p>
                 </div>
                 <div className={s.date}>
                     <FontAwesomeIcon icon={faCalendarTimes} />
-                    <p>this week</p>
+                    <p>{t('this week')}</p>
                 </div>
-                <div className={s.add}>
+                <div className={s.add} onClick={() => setIsCreating(true)}>
                     <FontAwesomeIcon icon={faAdd} />
-                    <p>add</p>
+                    <p>{t('add')}</p>
                 </div>
             </div>
         </div>

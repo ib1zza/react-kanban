@@ -10,12 +10,14 @@ const initialState: BoardCollectionSchema = {
     selectedBoard: null,
     selectedTask: null,
     linkedUsersInfo: [],
+
 };
 
 export const boardCollectionSlice = createSlice({
     name: 'boardCollection',
     initialState,
     reducers: {
+
         setCurrentBoard: (state, action: PayloadAction<IBoard>) => {
             state.selectedBoard = action.payload;
             state.selectedBoardId = action.payload.uid;

@@ -30,9 +30,8 @@ const BoardPage = memo(() => {
         getBoardCollection,
     );
     const [isCreating, setIsCreating] = useState(false);
-    const [isLinking, setIsLinking] = useState(false);
-    const dispatch = useAppDispatch();
 
+    const dispatch = useAppDispatch();
     const refetchBoard = async () => {
         const board = await getBoardFromId(boardId as string);
         if (board) {
@@ -86,6 +85,7 @@ const BoardPage = memo(() => {
             <BoardPageHeader
                 onEdit={handleEditTitle}
                 title={selectedBoard.title}
+                setIsCreating={setIsCreating}
             />
 
             <div className={s.wrapper}>
@@ -105,30 +105,8 @@ const BoardPage = memo(() => {
                             onAbort={() => setIsCreating(false)}
                         />
                     )}
-                    {isLinking && (
-                        <ActionForm
-                            status={ActionFormStatus.COLUMN}
-                            onCreateColumn={() => {
-                                // TODO: LINKCOLUMN
-                            }}
-                            onAbort={() => setIsLinking(false)}
-                        />
-                    )}
+
                 </div>
-                {!isCreating && (
-                    <div className={s.buttons}>
-                        <Button onClick={() => setIsCreating(true)}>
-                            <FontAwesomeIcon icon={faPlus} />
-                        </Button>
-                    </div>
-                )}
-                {/* {!isLinking && (
-                    <div className={s.buttons}>
-                        <Button onClick={() => setIsCreating(true)}>
-                            <FontAwesomeIcon icon={faPlus} />
-                        </Button>
-                    </div>
-                )} */}
 
                 {selectedTask && (
                     <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />

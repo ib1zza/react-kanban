@@ -17,11 +17,12 @@
 }
 
 .modal {
-    background: var(--ModalColor);
+    background: var(--HeaderBg);
     color: var(--InputText);
     z-index: 10;
     border-radius: 16px;
-    box-shadow: 0 5px 20px 0 rgb(0 0 0 / 4%);
+    border: 2px solid var(--altWbText);
+
 }
 
 .modalHeader {
