@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useTranslation } from 'react-i18next';
-import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
+import { UserAuth, useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { getUserInfo, editDisplayName } from 'features/users';
 import { storage } from 'shared/config/firebase/firebase';
 import { IUserInfo } from 'app/types/IUserInfo';
@@ -21,7 +21,7 @@ const Profile = () => {
     const [name, setName] = useState<any>('');
     const { t } = useTranslation('profile');
     const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
-
+    const { logOut } = useAuth();
     const fetchUserInfo = useCallback(async () => {
         if (!user?.uid) return;
         return getUserInfo(user.uid).then((res) => {
@@ -101,29 +101,35 @@ const Profile = () => {
                         :
                         {user.email}
                     </div>
-                    <div>
+                    <div className={s.profile__descr}>
                         {t('Количество досок')}
                         :
                         {userInfo.boardsIds?.length || 0}
                     </div>
-                    {editStatus ? (
-                        <Button
-                            onClick={() => {
-                                setEditStatus(false);
-                                handleSubmit();
-                            }}
-                            className={s.profile__save}
-                        >
-                            {t('Сохранить')}
+                    <div className={s.buttons}>
+                        {editStatus ? (
+                            <Button
+                                onClick={() => {
+                                    setEditStatus(false);
+                                    handleSubmit();
+                                }}
+                                className={s.profile__save}
+                            >
+                                {t('Сохранить')}
+                            </Button>
+                        ) : (
+                            <Button
+                                onClick={() => setEditStatus(true)}
+                                className={s.profile__edit}
+                            >
+                                {t('Изменить')}
+                            </Button>
+                        )}
+                        <Button onClick={logOut} className={s.logout}>
+                            {t('Выйти')}
                         </Button>
-                    ) : (
-                        <Button
-                            onClick={() => setEditStatus(true)}
-                            className={s.profile__edit}
-                        >
-                            {t('Изменить')}
-                        </Button>
-                    )}
+                    </div>
+
                 </div>
             </div>
         </div>
