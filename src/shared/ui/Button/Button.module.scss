@@ -21,7 +21,7 @@
         justify-content: center;
         color: var(--ButtonText);
 
-       
+
         &.invisible {
             visibility: hidden;
         }
@@ -34,26 +34,26 @@
         top: calc(50% - 10px);
     }
 
-   
+
     .square {
         padding: 0;
     }
-    
+
     .square.s {
         width: var(--font-line-s);
         height: var(--font-line-s);
     }
-    
+
     .square.m {
         width: var(--font-line-m);
         height: var(--font-line-m);
     }
-    
+
     .square.l {
         width: var(--font-line-l);
         height: var(--font-line-l);
     }
-    
+
     &:hover {
         background-color: var(--ButtonBorderHover);
         color: var(--ButtonColorHover);
@@ -64,12 +64,12 @@
         cursor: default;
         background: var(--ButtonBg);
 
-       
+
     }
     .iconContainer {
         margin-right: 5px;
-        
-    
+
+
     }
 
 }
@@ -91,5 +91,15 @@
     background-color: transparent;
     font: var(--font-m);
     cursor: pointer;
-    
+
+}
+
+.accent {
+    cursor: pointer;
+    background-color: var(--HeaderBg);
+    color: var(#{--taskTextColor});
+    // padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: 2px solid var(--HeaderBg);;
 }

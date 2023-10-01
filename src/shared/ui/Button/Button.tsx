@@ -5,7 +5,8 @@ import { classNames, Mods } from '../../lib/classNames/classNames';
 
 export enum ButtonTheme {
     CLEAR= 'clear',
-    FULL = 'full'
+    FULL = 'full',
+    ACCENT = 'accent',
 }
 export enum ButtonSize {
     S = 's',

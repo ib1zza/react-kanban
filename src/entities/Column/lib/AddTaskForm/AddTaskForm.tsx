@@ -41,7 +41,7 @@ const AddTaskForm: React.FC<Props> = ({
         <div className={s.wrapper}>
             <form>
                 <div className={s.inputBlock}>
-                    <label htmlFor={t('Заголовок')}>Title:</label>
+                    <label htmlFor={t('Заголовок')}>{t('Заголовок')}</label>
                     <textarea
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -52,7 +52,11 @@ const AddTaskForm: React.FC<Props> = ({
                     />
                 </div>
                 <div className={s.inputBlock}>
-                    <label htmlFor={t('Описание')}>Description (optional):</label>
+                    <label htmlFor={t('Описание')}>
+                        {t('Описание')}
+                        {' '}
+                        (optional):
+                    </label>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}

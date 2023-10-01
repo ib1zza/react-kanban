@@ -11,6 +11,7 @@ import { Avatar } from 'shared/ui/Avatar';
 import { AvatarSize } from 'shared/ui/Avatar/ui/Avatar';
 import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
+import { classNames } from 'shared/lib/classNames/classNames';
 import s from './Task.module.scss';
 import Button from '../../../shared/ui/Button/Button';
 
@@ -29,11 +30,11 @@ const Task = ({
         dispatch(boardCollectionActions.setCurrentTask(task));
     };
 
-    const deleteTaskHandler = () => {
-        deleteTask(boardId, columnId, task.uid);
-        dispatch(boardCollectionActions.removeSelectedTask());
-        rerender();
-    };
+    // const deleteTaskHandler = () => {
+    //     deleteTask(boardId, columnId, task.uid);
+    //     dispatch(boardCollectionActions.removeSelectedTask());
+    //     rerender();
+    // };
     const handleComplete = () => {
         toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted).then(
             rerender,
@@ -41,9 +42,8 @@ const Task = ({
     };
 
     const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
-    const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className={s.container}>
+        <div className={classNames(s.container, { [s.completed]: task.isCompleted })}>
             <div className={s.butle}>
                 <Button
                     className={s.icon}
@@ -71,10 +71,10 @@ const Task = ({
                     }
                     icon={<FontAwesomeIcon icon={faEllipsisVertical} />}
                 />
-                <Button
-                    onClick={() => deleteTaskHandler()}
-                    icon={<FontAwesomeIcon icon={faTrash} />}
-                />
+                {/* <Button */}
+                {/*    onClick={() => deleteTaskHandler()} */}
+                {/*    icon={<FontAwesomeIcon icon={faTrash} />} */}
+                {/* /> */}
 
             </div>
         </div>
