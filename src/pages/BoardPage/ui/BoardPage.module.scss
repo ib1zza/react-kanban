@@ -13,10 +13,27 @@
     height: 100%;
     gap: 15px;
     flex-basis: 100%;
+    padding-bottom: 10px;
 
     flex-wrap: nowrap;
     overflow-y: auto;
     width: 100%;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: var(--ScrollBg);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--ScrollThumb);
+    }
+
+    //&::-webkit-scrollbar-track {
+    //    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    //    border-radius: 10px;
+    //    background-color: #f9f9fd;
+    //}
 
 
 

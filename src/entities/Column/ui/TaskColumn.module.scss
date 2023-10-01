@@ -10,7 +10,7 @@
     &.withColor {
         padding-top: 29px;
     }
-    hr{
+    & > hr{
         margin: 0px;
         border-color: var(--altWbText);
         margin-bottom: 22px;
@@ -75,14 +75,16 @@
 }
 
 .addButton {
-    background-color: var(#{--taskBg});
-    color: var(#{--taskTextColor});
-    // padding: 6px 10px;
+    //background-color: var(#{--taskBg});
+    //color: var(#{--taskTextColor});
+   // padding: 6px 10px;
     border-radius: 10px;
     font-size: 16px;
+    width: 100%;
+    //border: 2px solid var(#{--taskBg});
 
     &:hover {
-        box-shadow: 0 0 1px 0 var(#{--taskTextColor});
+        border: 2px solid var(--altWbText);
     }
 
     span {

@@ -1,6 +1,6 @@
 .wrapper {
-    background-color: var(#{--taskBg});
-    color: var(#{--taskTextColor});
+    background-color: var(--white);
+    color: var(--black);
     border: 2px solid var(--altWbText);
     padding: 6px 10px;
     border-radius: 10px;
@@ -10,7 +10,14 @@
         margin-bottom: 10px;
 
         label {
+            color: var(--black);
+            font-family: Inter, serif;
             font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+
+            letter-spacing: 3.6px;
         }
 
         input {
@@ -24,7 +31,7 @@
             border: none;
             font-size: 16px;
             background-color: transparent;
-            color: var(#{--taskTextColor});
+            color: var(--black);
 
             &.min {
                 min-height: 70px;
@@ -35,7 +42,7 @@
             }
 
             &::placeholder {
-                color: var(#{--taskTextColor});
+                color: var(--placeholder);
                 opacity: 0.5;
             }
         }
@@ -43,7 +50,8 @@
 }
 .hr{
     border-top: 2px solid black;
-  
+    border-color: var(--black);
+
 }
 .createColumnButtons {
     margin-top: -16px;

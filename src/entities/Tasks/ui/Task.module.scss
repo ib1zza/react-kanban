@@ -5,6 +5,11 @@
     padding: 7px 8px;
     display: flex;
     justify-content: space-between;
+
+    &.completed {
+        background-color: var(--completed);
+        border: 2px solid var(--completed);
+    }
 }
 
 .title {

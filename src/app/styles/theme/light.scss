@@ -4,7 +4,7 @@
     --columnBg: #ebecf0;
     --taskBg: #fff;
     --BoardBg: #EBEBEB;
-    --wbText: #fff; 
+    --wbText: #fff;
     --altWbText: #000;
     --taskTextColor: #000;
     --buttonTextColor: #5e6c84;
@@ -21,8 +21,9 @@
     --ButtonColorHover: rgb(220, 220, 220);
 
     /* Header */
-    --HeaderBg: #e4d8ef;
-    
+    //--HeaderBg: #e4d8ef;
+    --HeaderBg: #e8d0ff;
+
     /* Login / Registration */
     --LRbgColor: #19032E;
     --LRbodyBg: white;
@@ -39,8 +40,12 @@
     --InputText: black;
     --InputLabel: black;
     --InputPlaceholder: gray;
-    
+
     /* Modal */
     --ModalColor:  #b895da;
+
+    /* Scrollbar */
+    --ScrollBg: #b895da;
+    --ScrollThumb: #e4d8ef;
 }
 

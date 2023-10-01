@@ -72,7 +72,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                     <p className={s.description}>
                         {task.description || `${t('Нет описания')}`}
                     </p>
-                    <p className={s.linkedUserInfo}>
+                    <div className={s.linkedUserInfo}>
                         {
                             linkedUser
                                 ? (
@@ -91,7 +91,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                                 )
                                 : `${t('Пользователь не прикреплен')}`
                         }
-                    </p>
+                    </div>
 
                     <div className={s.buttons}>
                         <Button

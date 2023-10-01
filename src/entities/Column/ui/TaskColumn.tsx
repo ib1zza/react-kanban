@@ -3,9 +3,9 @@ import { faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { editColumn, deleteColumn } from 'features/columns';
+import { deleteColumn, editColumn } from 'features/columns';
 import { IColumn } from 'app/types/IBoard';
-import Button from 'shared/ui/Button/Button';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import s from './TaskColumn.module.scss';
 import TaskList from '../lib/TaskList/TaskList';
@@ -55,15 +55,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
 
                 <h6 className={s.title}>{column.title}</h6>
                 <div className={s.columnButtons}>
-                    {!isAddingTask && (
 
-                        <Button
-                            className={s.addButton}
-                            onClick={() => setIsAddingTask(true)}
-                            icon={<FontAwesomeIcon icon={faPlus} />}
-                        />
-
-                    )}
                     <Button
                         className={s.editButton}
                         onClick={() => setIsEditColumn(true)}
@@ -76,6 +68,15 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
                     />
                 </div>
             </div>
+
+            {!isAddingTask && (
+                <Button
+                    theme={ButtonTheme.ACCENT}
+                    className={s.addButton}
+                    onClick={() => setIsAddingTask(true)}
+                    icon={<FontAwesomeIcon icon={faPlus} />}
+                />
+            )}
 
             {isAddingTask && (
                 <AddTaskForm
