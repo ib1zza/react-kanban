@@ -14,14 +14,14 @@ interface IBoardPreviewProps {
   userId: string;
   board: IBoard;
   onClick: () => void;
-  onDelete: () => void;
+  // onDelete: () => void;
 }
 
 const BoardPreview: React.FC<IBoardPreviewProps> = ({
     userId,
     onClick,
     board,
-    onDelete,
+    // onDelete,
 }) => {
     const [username, setUsername] = React.useState<string>('');
     const [shareStatus, setShareStatus] = React.useState(false);
@@ -33,11 +33,11 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
         });
     }, [userId]);
 
-    const handleDelete = async (e: React.MouseEvent) => {
-        e.stopPropagation();
-        await deleteBoard(board.uid, board.ownerId);
-        onDelete();
-    };
+    // const handleDelete = async (e: React.MouseEvent) => {
+    //     e.stopPropagation();
+    //     await deleteBoard(board.uid, board.ownerId);
+    //     onDelete();
+    // };
     const onCloseShare = () => {
         setShareStatus(false);
     };
@@ -75,15 +75,15 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                                 />
                             )}
                         />
-                        <Button
-                            onClick={handleDelete}
-                            className={s.delete_button}
-                            icon={(
-                                <FontAwesomeIcon
-                                    icon={faTrash}
-                                />
-                            )}
-                        />
+                        {/* <Button */}
+                        {/*    onClick={handleDelete} */}
+                        {/*    className={s.delete_button} */}
+                        {/*    icon={( */}
+                        {/*        <FontAwesomeIcon */}
+                        {/*            icon={faTrash} */}
+                        {/*        /> */}
+                        {/*    )} */}
+                        {/* /> */}
                     </div>
                 )}
             </h3>

@@ -1,4 +1,24 @@
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
 
+}
+
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //color: var(--ButtonText);
+    gap: 8px;
+    //color: var(--white);
+    &.invisible {
+        visibility: hidden;
+    }
+}
 
 .full {
     background-color: var(#{--ButtonBg});
@@ -8,51 +28,7 @@
     padding: 8px;
     border-radius: 10px;
     border: 1px solid transparent;
-    .icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 18px;
-        height: 18px;
-    }
-    .content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--ButtonText);
 
-
-        &.invisible {
-            visibility: hidden;
-        }
-    }
-
-    .loading {
-        display: flex;
-        position: absolute;
-        left: calc(50% - 10px);
-        top: calc(50% - 10px);
-    }
-
-
-    .square {
-        padding: 0;
-    }
-
-    .square.s {
-        width: var(--font-line-s);
-        height: var(--font-line-s);
-    }
-
-    .square.m {
-        width: var(--font-line-m);
-        height: var(--font-line-m);
-    }
-
-    .square.l {
-        width: var(--font-line-l);
-        height: var(--font-line-l);
-    }
 
     &:hover {
         background-color: var(--ButtonBorderHover);
@@ -66,24 +42,68 @@
 
 
     }
-    .iconContainer {
-        margin-right: 5px;
+
+}
+
+.loading {
+    display: flex;
+    position: absolute;
+    left: calc(50% - 10px);
+    top: calc(50% - 10px);
+}
 
 
-    }
+.square {
+    padding: 0;
+}
+
+.square.s {
+    width: var(--font-line-s);
+    height: var(--font-line-s);
+}
+
+.square.m {
+    width: var(--font-line-m);
+    height: var(--font-line-m);
+}
+
+.square.l {
+    width: var(--font-line-l);
+    height: var(--font-line-l);
+}
+
+
+.iconContainer {
+    margin-right: 5px;
+
 
 }
 
 .s{
     padding: 6px;
+    font: var(--font-s);
+    border-radius: 12px;
 }
 
 .m{
-    padding: 9px;
+    padding: 4px 10px;
+    font: var(--font-m);
+    border-radius: 12px;
+
 }
 
 .l{
     padding: 10px;
+    font: var(--font-l);
+    border-radius: 14px;
+}
+
+.button {
+    cursor: pointer;
+    //border: 2px solid;
+    &:hover {
+        background-color: rgb(68 68 68 / 14%);
+    }
 }
 
 .clear{
@@ -102,4 +122,46 @@
     border-radius: 10px;
     font-size: 16px;
     border: 2px solid var(--HeaderBg);;
+
+    &:hover {
+       background-color: rgb(213 180 245 / 79%);
+    }
+}
+
+.white {
+    color: var(--white);
+    border-color: var(--white);
+    background: transparent;
+
+}
+
+.black {
+    color: var(--black);
+    border-color: var(--black);
+    background: transparent;
+}
+
+.red {
+    color: var(--red);
+    border-color: var(--red);
+    background: transparent;
+
+}
+
+.green {
+    color: var(--green);
+    border-color: var(--green);
+    background: transparent;
+}
+
+
+
+
+.sharp {
+    border-radius: 0;
+}
+
+
+.noBorder {
+    border: none;
 }

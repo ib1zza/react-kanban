@@ -13,6 +13,7 @@ import { BoardPreview } from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 
+import { useTranslation } from 'react-i18next';
 import { getUserBoards as getBoards } from '../model/services/getUserBoards';
 import s from './Home.module.scss';
 import HomeSkeleton from './HomeSkeleton';
@@ -48,20 +49,25 @@ const Home = () => {
         await fetchBoards();
         setLinkBoardStatus(false);
     };
+    const { t } = useTranslation('buttons');
     if (!user?.uid) return <HomeSkeleton />;
     return (
         <div className={s.boardPageContainer}>
-            <div>
-                <div className={s.buttons}>
-                    <Button onClick={() => setAddBoardStatus(true)} className={s.add_button}>
-                        <FontAwesomeIcon size="lg" icon={faPlus} />
 
-                    </Button>
-                    <Button onClick={() => setLinkBoardStatus(true)} className={s.share_button}>
-                        <FontAwesomeIcon size="lg" icon={faLink} />
+            <div className={s.buttons}>
+                <Button
+                    onClick={() => setAddBoardStatus(true)}
+                    // className={s.add_button}
+                    icon={<FontAwesomeIcon size="lg" icon={faPlus} />}
+                >
+                    {/* <FontAwesomeIcon size="lg" icon={faPlus} /> */}
+                    {t('Добавить доску')}
+                </Button>
+                <Button onClick={() => setLinkBoardStatus(true)} className={s.share_button}>
+                    <FontAwesomeIcon size="lg" icon={faLink} />
 
-                    </Button>
-                </div>
+                </Button>
+
             </div>
 
             <div className={s.blocks__container}>
@@ -81,7 +87,6 @@ const Home = () => {
                 )}
                 {boards.length && boards.map((item: IBoard, index) => (
                     <BoardPreview
-                        onDelete={() => getBoards}
                         onClick={() => {
                             navigate(`/board/${item?.uid}`);
                         }}

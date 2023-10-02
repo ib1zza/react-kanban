@@ -4,6 +4,10 @@ import s from './Button.module.scss';
 import { classNames, Mods } from '../../lib/classNames/classNames';
 
 export enum ButtonTheme {
+    WHITE = 'white',
+    BLACK = 'black',
+    RED = 'red',
+    GREEN = 'green',
     CLEAR= 'clear',
     FULL = 'full',
     ACCENT = 'accent',
@@ -21,6 +25,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   size?: ButtonSize;
   square?: boolean;
+  sharp?: boolean;
+  noBorder?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -32,6 +38,8 @@ const Button: React.FC<ButtonProps> = ({
     size = ButtonSize.S,
     theme = ButtonTheme.CLEAR,
     children,
+    sharp,
+    noBorder,
     ...props
 }) => {
     const mods: Mods = {
@@ -39,6 +47,8 @@ const Button: React.FC<ButtonProps> = ({
         [s.square]: square,
         [s.loading]: loading as boolean,
         [s[size]]: true,
+        [s.sharp]: sharp,
+        [s.noBorder]: noBorder,
     };
     return (
         <button
@@ -51,9 +61,6 @@ const Button: React.FC<ButtonProps> = ({
                     <div className={s.icon} style={iconStyles}>
                         {Icon}
                     </div>
-                )}
-                {(Icon && children) && (
-                    <div className={s.iconContainer} />
                 )}
                 { children }
             </div>

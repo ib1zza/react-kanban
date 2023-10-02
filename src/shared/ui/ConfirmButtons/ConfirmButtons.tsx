@@ -1,11 +1,8 @@
 import React, { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircleCheck,
-    faCircleXmark,
-} from '@fortawesome/free-regular-svg-icons';
+import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
-import Button from '../Button/Button';
+import Button, { ButtonTheme } from '../Button/Button';
 import s from './ConfirmButtons.module.scss';
 
 interface Props {
@@ -19,6 +16,7 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort, disabled }) => {
     return (
         <div className={s.buttons}>
             <Button
+                theme={ButtonTheme.GREEN}
                 onClick={onConfirm}
                 disabled={disabled}
                 icon={
@@ -29,6 +27,7 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort, disabled }) => {
             </Button>
 
             <Button
+                theme={ButtonTheme.RED}
                 onClick={onAbort}
                 icon={
                     <FontAwesomeIcon icon={faCircleXmark} style={{ color: '#DE2525' }} />

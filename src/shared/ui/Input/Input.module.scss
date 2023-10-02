@@ -3,7 +3,7 @@
     flex-direction: column;
     label {
         font: var(--font-m);
-        color: var(--InputText);
+        color: var(--altWbText);
         padding: calc(var(--InputPadding) - 4px);
     }
     input {
@@ -13,13 +13,14 @@
         color: var(--InputText);
         border-radius: var(--InputRadius);
         font: var(--font-m);
-     
+
 
     }
-    input:hover {
-        outline: solid #808080;
-    }
- 
+
+    //input:hover {
+    //    outline: solid #808080;
+    //}
+
 
     input::placeholder {
         color: var(--InputPlaceholder);
@@ -66,6 +67,20 @@
 .error {
     color: red;
     padding: calc(var(--InputPadding) - 4px);
+}
+
+.white {
+    label {
+        color: var(--altWbText)
+    }
+    input {
+        border: 2px solid var(--black);
+        padding: var(--InputPadding);
+        background-color: var(--white);
+        color: var(--black);
+        border-radius: var(--InputRadius);
+        font: var(--font-m);
+    }
 }
 
 

@@ -6,7 +6,7 @@ import s from './ActionForm.module.scss';
 import { UserAuth } from '../../../../app/providers/authRouter/ui/AuthContext';
 import ColorPicker from '../../ColorPicker/ColorPicker';
 import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
-import { Input } from '../../Input/Input';
+import { Input, InputTheme } from '../../Input/Input';
 
 export enum ActionFormStatus {
     COLUMN = 'COLUMN',
@@ -88,11 +88,16 @@ const ActionForm = memo((props: Props) => {
     return (
         <form className={`${s.container} ${status !== ActionFormStatus.BOARD && s.withColor}`}>
             {status !== ActionFormStatus.BOARD && (
-                <div className={s.headerColor} style={{ backgroundColor: color }} />
+                <>
+                    <div className={s.headerColor} style={{ backgroundColor: color }} />
+                    <hr />
+                </>
             )}
             <div className={s.title}>
                 <Input
-                    placeholder={t('Название')}
+                    theme={InputTheme.WHITE}
+                    // placeholder={t('Название')}
+                    label={t('Название')}
                     // className={s.createColumnTitle}
                     error={error}
                     value={title}

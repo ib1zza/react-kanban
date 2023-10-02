@@ -60,7 +60,7 @@
     font-size: 18px;
     color: #2c3e50;
     background: white;
-    transition: all 0.25s ease;
+    //transition: all 0.25s ease;
     box-shadow: 0 5px 20px 0 rgb(0 0 0 / 6%);
     position: absolute;
     right: 0;
@@ -68,9 +68,17 @@
     align-self: flex-end;
     margin-top: -7px;
     margin-right: -7px;
+
+
 }
 
-.closeBtn:hover {
+.closeBtn > svg {
+    transform: rotateZ(0deg);
+    transition: all 0.25s ease;
+}
+
+.closeBtn:hover > svg {
     box-shadow: 0 5px 20px 0 rgb(0 0 0 / 4%);
-    transform: translate(-4px, 4px);
+    transform: rotateZ(90deg);
+    transition: all 0.25s ease;
 }

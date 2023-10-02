@@ -16,7 +16,7 @@ const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
 
     return (
         <Button
-            square
+            // square
             theme={auth ? ButtonTheme.FULL : ButtonTheme.CLEAR}
             className={classNames(
                 '',

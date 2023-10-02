@@ -5,6 +5,7 @@ import s from './Input.module.scss';
 import { classNames } from '../../lib/classNames/classNames';
 
 export enum InputTheme {
+    WHITE = 'white',
     CLEAR = 'clear',
     PRIMARY = 'primary',
     AUTH = 'auth',
