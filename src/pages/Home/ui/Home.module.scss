@@ -9,18 +9,19 @@
 }
 
 .buttons {
-    margin-top: 24px;
+    margin: 24px 0;
+    //margin-bottom: 10px;
     display: flex;
     flex-direction: row;
-    float: right;
+    justify-content: flex-end;
     align-items: center;
     gap: 12px;
     button {
         color: white;
         border: 2px solid white;
         border-radius: 15px;
-        width: 42px;
-        height: 42px;
+        //width: 42px;
+        //height: 42px;
     }
 }
 

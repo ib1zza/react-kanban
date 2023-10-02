@@ -12,22 +12,29 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
     .info {
+        width: calc(100% - 30px);
+        //flex-basis: calc(100% - 30px);
+        flex-shrink: 1;
+        flex-grow: 0;
         font: var(--font-m);
         font-weight: 300;
+
+        .title {
+            display: block;
+            white-space: nowrap;
+            height: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 5px;
+        }
     }
-    .title {
-        display: block;
-        flex-basis: 100%;
-        white-space: nowrap;
-        height: 30px;
-        cursor: pointer;
-        font-weight: 600;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding-right: 5px;
-    }
+
     .buttons {
+        flex-basis: 20px;
         flex-shrink: 0;
     }
 }
@@ -46,8 +53,9 @@
 }
 
 .share_button {
-    margin-right: 5px;
+    //margin-right: 5px;
     color: var(--altWbText);
+    padding: 0;
 }
 .delete_button {
     color: #e32400;

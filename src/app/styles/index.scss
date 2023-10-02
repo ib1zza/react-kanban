@@ -36,6 +36,19 @@ $transitionDuration: 0.3s;
 //     outline: none;
 // }
 
+input, button {
+    outline: none;
+}
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    /* отображаем курсор в виде руки при наведении; некоторые
+    считают, что необходимо оставлять стрелочный вид для кнопок */
+    cursor: pointer;
+}
 
 .app {
     width: 100%;

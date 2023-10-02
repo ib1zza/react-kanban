@@ -44,7 +44,7 @@ const Task = ({
     const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
     return (
         <div className={classNames(s.container, { [s.completed]: task.isCompleted })}>
-            <div className={s.butle}>
+            <div className={s.title}>
                 <Button
                     className={s.icon}
                     onClick={handleComplete}

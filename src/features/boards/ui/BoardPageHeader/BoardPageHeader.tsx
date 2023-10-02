@@ -4,11 +4,13 @@ import {
     faAdd,
     faCalendarTimes,
     faFilter,
-    faPenToSquare, faShareAlt, faWalkieTalkie,
+    faPenToSquare,
+    faShareAlt,
+    faWalkieTalkie,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { Input } from 'shared/ui/Input/Input';
-import Button from 'shared/ui/Button/Button';
+import Button, { ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { Avatar } from 'shared/ui/Avatar';
 import { getLinkedUsers } from 'pages/BoardPage';
@@ -46,6 +48,9 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title, setIsCreating }) => {
                     <>
                         <span>{editingTitle}</span>
                         <Button
+                            size={ButtonSize.M}
+                            theme={ButtonTheme.WHITE}
+                            noBorder
                             className={s.button}
                             onClick={() => setEditing(true)}
                         >
@@ -63,6 +68,9 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title, setIsCreating }) => {
                             onChange={(e) => setEditingTitle(e.target.value)}
                         />
                         <Button
+                            size={ButtonSize.M}
+                            theme={ButtonTheme.WHITE}
+                            noBorder
                             className={s.button}
                             onClick={onEditHandler}
                         >

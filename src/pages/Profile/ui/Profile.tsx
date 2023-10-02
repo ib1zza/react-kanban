@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useTranslation } from 'react-i18next';
-import { UserAuth, useAuth } from 'app/providers/authRouter/ui/AuthContext';
-import { getUserInfo, editDisplayName } from 'features/users';
+import { useAuth, UserAuth } from 'app/providers/authRouter/ui/AuthContext';
+import { editDisplayName, getUserInfo } from 'features/users';
 import { storage } from 'shared/config/firebase/firebase';
 import { IUserInfo } from 'app/types/IUserInfo';
-import Button from 'shared/ui/Button/Button';
+import Button, { ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { Input, InputTheme } from 'shared/ui/Input/Input';
 import { updateDocument } from 'shared/API/updateDocument';
 import { useAppSelector } from 'app/providers/StoreProvider';
@@ -109,6 +109,8 @@ const Profile = () => {
                     <div className={s.buttons}>
                         {editStatus ? (
                             <Button
+                                theme={ButtonTheme.BLACK}
+                                size={ButtonSize.M}
                                 onClick={() => {
                                     setEditStatus(false);
                                     handleSubmit();
@@ -119,13 +121,20 @@ const Profile = () => {
                             </Button>
                         ) : (
                             <Button
+                                theme={ButtonTheme.BLACK}
+                                size={ButtonSize.M}
                                 onClick={() => setEditStatus(true)}
                                 className={s.profile__edit}
                             >
                                 {t('Изменить')}
                             </Button>
                         )}
-                        <Button onClick={logOut} className={s.logout}>
+                        <Button
+                            onClick={logOut}
+                            theme={ButtonTheme.RED}
+                            size={ButtonSize.M}
+                            className={s.logout}
+                        >
                             {t('Выйти')}
                         </Button>
                     </div>

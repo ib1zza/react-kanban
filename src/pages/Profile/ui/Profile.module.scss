@@ -30,43 +30,48 @@
     text-align: left;
 }
 
-.profile__edit {
-   
-  
-    border: 2px solid black;
-    padding: 4px 6px;
-    font-weight: 500;
-    border-radius: 12px;
+//.profile__edit {
+//
+//
+//    border: 2px solid black;
+//    padding: 4px 6px;
+//    font-weight: 500;
+//    border-radius: 12px;
+//
+//
+//}
 
-
-}
-
-.profile__save {
- 
-    border: 2px solid black;
-    padding: 4px 6px;
-    font-weight: 500;
-    border-radius: 12px;
-
-}
+//.profile__save {
+//
+//    border: 2px solid black;
+//    padding: 4px 6px;
+//    font-weight: 500;
+//    border-radius: 12px;
+//
+//}
 
 // .profile__input {
 //     border: 1px solid black;
 //     width: 100%;
 // }
 
-.logout {
+//.logout {
+//
+//    border: 2px solid red;
+//    color: red;
+//    padding: 4px 6px;
+//    font-weight: 500;
+//    border-radius: 12px;
+//}
 
-    border: 2px solid red;
-    color: red;
-    padding: 4px 6px;
-    font-weight: 500;
-    border-radius: 12px;
-}
 .buttons {
     margin-top: 12px;
     display: flex;
     gap: 20px;
     align-items: center;
     justify-content: right;
+
+    //button {
+    //    color: var(--black);
+    //}
 }

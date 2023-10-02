@@ -8,21 +8,23 @@
 
     &.completed {
         background-color: var(--completed);
-        border: 2px solid var(--completed);
+        border: 2px solid var(--black);
     }
 }
 
 .title {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: var(#{--taskTextColor});
-
+    display: flex;
+    align-items: center;
+    //font-weight: 400;
+    font-size: 18px;
+    //line-height: 24px;
+    //color: var(#{--taskTextColor});
+    display: flex;
     .icon {
-        font-size: 20px;
-        display: inline-block;
-        margin-right: 10px;
-        color: #00c900;
+        //font-size: 20px;
+        //display: inline-block;
+        //margin-right: 10px;
+        //color: #00c900;
     }
 }
 
