@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+import { getDatabase } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,11 +13,15 @@ const firebaseConfig = {
     storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_SENDER,
     appId: process.env.REACT_APP_APP_ID,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+// Initialize Realtime Database and get a reference to the service
 
 export const auth = getAuth(app);
 export const storage = getStorage();
 export const db = getFirestore();
+export const rtdb = getDatabase(app);

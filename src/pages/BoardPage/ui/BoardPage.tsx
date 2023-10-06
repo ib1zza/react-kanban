@@ -1,9 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { createColumn } from 'features/columns';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PopupTaskInfo } from 'widgets';
 
 import {
@@ -12,12 +8,16 @@ import {
 } from 'app/providers/StoreProvider';
 
 import { getTaskInfo } from 'features/tasks';
-import { editBoard, BoardPageHeader } from 'features/boards';
+import { editBoard, BoardPageHeader, deleteBoard } from 'features/boards';
 import { TaskColumn } from 'entities/Column';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { getUserInfo } from 'features/users';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { getBoardFromId } from 'entities/Board';
+import { subscribeToBoardById } from 'entities/Board/API/getBoardFromIdRt';
+import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt';
+import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
+
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 import Button from '../../../shared/ui/Button/Button';
@@ -29,8 +29,9 @@ const BoardPage = memo(() => {
     const { selectedBoard, selectedTask, selectedColumnId } = useAppSelector(
         getBoardCollection,
     );
+    const { user } = useAppSelector(getUserState);
     const [isCreating, setIsCreating] = useState(false);
-
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const refetchBoard = async () => {
         const board = await getBoardFromId(boardId as string);
@@ -63,7 +64,7 @@ const BoardPage = memo(() => {
 
     const createColumnAction = async (title: string, color: string) => {
         if (!boardId) return;
-        await createColumn(title, color || '#808080', boardId);
+        await createColumnRt(title, color || '#808080', boardId);
         setIsCreating(false);
         refetchBoard();
     };
@@ -78,6 +79,29 @@ const BoardPage = memo(() => {
         editBoard(boardId, { title: newTitle }).then(refetchBoard);
     };
 
+    useEffect(() => {
+        if (!boardId) return;
+
+        const unsub = subscribeToBoardById(boardId, (board) => {
+            dispatch(boardCollectionActions.setCurrentBoard(board));
+            console.log(board);
+        });
+
+        return () => {
+            unsub();
+        };
+    }, [boardId, dispatch]);
+
+    const handleDeleteBoard = async () => {
+        if (!boardId || !user?.uid) return;
+
+        deleteBoard(boardId, user.uid).then((res) => {
+            navigate('/');
+        });
+        // await dispatch(boardCollectionActions.removeBoard(boardId));
+        // window.location.href = '/';
+    };
+
     if (!selectedBoard) return <BoardPageSkeleton />;
 
     return (
@@ -86,6 +110,7 @@ const BoardPage = memo(() => {
                 onEdit={handleEditTitle}
                 title={selectedBoard.title}
                 setIsCreating={setIsCreating}
+                onDelete={handleDeleteBoard}
             />
             <div className={s.wrapper}>
                 <div className={s.columnsWrapper}>

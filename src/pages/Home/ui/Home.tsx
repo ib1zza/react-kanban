@@ -14,6 +14,8 @@ import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 
 import { useTranslation } from 'react-i18next';
+import { createBoardRt } from 'features/boards/API/createBoard/createBoardRealtime';
+import { getUserBoardsRt } from 'pages/Home/model/services/getUserBoardsRt';
 import { getUserBoards as getBoards } from '../model/services/getUserBoards';
 import s from './Home.module.scss';
 import HomeSkeleton from './HomeSkeleton';
@@ -28,11 +30,18 @@ const Home = () => {
     const boards = useAppSelector(getHomeBoards);
     const dispatch = useAppDispatch();
     // getting boards (only info which we need)
-    const fetchBoards = useCallback(() => getBoards(user).then((res: IBoard[]) => {
-        if (res) {
-            dispatch(homeActions.addBoards(Object.values(res)));
-        }
-    }), [dispatch, user]);
+    const fetchBoards = useCallback(() => {
+        getUserBoardsRt(user).then((res) => {
+            if (res) {
+                dispatch(homeActions.addBoards(Object.values(res)));
+            }
+        });
+        // () => getBoards(user).then((res: IBoard[]) => {
+        // if (res) {
+        //     dispatch(homeActions.addBoards(Object.values(res)));
+        // }
+        // }),
+    }, [dispatch, user]);
     useEffect(() => {
         if (boards.length === 0) {
             fetchBoards();
@@ -40,7 +49,7 @@ const Home = () => {
     }, [boards.length, fetchBoards, user]);
 
     const handleCreateBoard = async (title: string) => {
-        await createBoard(title, user?.uid as string);
+        await createBoardRt(title, user?.uid as string);
         await fetchBoards();
         setAddBoardStatus(false);
     };

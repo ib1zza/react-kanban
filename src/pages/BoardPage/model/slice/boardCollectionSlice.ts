@@ -38,7 +38,9 @@ export const boardCollectionSlice = createSlice({
         updateSelectedTask: (state, action: PayloadAction<ITask>) => {
             state.selectedTask = action.payload;
             if (!state.selectedBoard) return;
-            state.selectedBoard.columns[state.selectedColumnId].tasks[action.payload.uid] = action.payload;
+
+            state.selectedTask = state.selectedBoard.columns[state.selectedColumnId].tasks[action.payload.uid];
+            // state.selectedBoard.columns[state.selectedColumnId].tasks[action.payload.uid] = action.payload;
         },
         removeSelectedTask: (state) => {
             state.selectedTask = null;

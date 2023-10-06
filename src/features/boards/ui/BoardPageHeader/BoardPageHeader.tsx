@@ -5,7 +5,7 @@ import {
     faCalendarTimes,
     faFilter,
     faPenToSquare,
-    faShareAlt,
+    faShareAlt, faTrash,
     faWalkieTalkie,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
@@ -16,15 +16,19 @@ import { Avatar } from 'shared/ui/Avatar';
 import { getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { useTranslation } from 'react-i18next';
+import { deleteBoard } from 'features/boards';
 import s from './BoardPageHeader.module.scss';
 
 interface Props {
     title: string;
     onEdit: (newTitle: string) => void;
+    onDelete: () => void;
     setIsCreating: (value: boolean) => void;
 }
 
-const BoardPageHeader: React.FC<Props> = ({ onEdit, title, setIsCreating }) => {
+const BoardPageHeader: React.FC<Props> = ({
+    onEdit, onDelete, title, setIsCreating,
+}) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
     const linkedUsers = useAppSelector(getLinkedUsers);
@@ -41,6 +45,9 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title, setIsCreating }) => {
         setEditingTitle(title);
     }, [title]);
 
+    const handleDelete = () => {
+        onDelete();
+    };
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
@@ -55,6 +62,15 @@ const BoardPageHeader: React.FC<Props> = ({ onEdit, title, setIsCreating }) => {
                             onClick={() => setEditing(true)}
                         >
                             <FontAwesomeIcon icon={faPenToSquare} />
+                        </Button>
+                        <Button
+                            size={ButtonSize.M}
+                            theme={ButtonTheme.WHITE}
+                            noBorder
+                            className={s.button}
+                            onClick={handleDelete}
+                        >
+                            <FontAwesomeIcon icon={faTrash} />
                         </Button>
                     </>
                 )}
