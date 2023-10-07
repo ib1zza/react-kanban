@@ -10,10 +10,12 @@ export const deleteBoard = async (boardId: string, userId: string) => {
         //     [boardId]: null,
         // });
         await remove(ref(rtdb, `boards/${boardId}`));
-        await deleteDoc(doc(db, 'boards', boardId));
-        await updateDocument('users', userId, {
-            boardsIds: arrayRemove(boardId),
-        });
+        await remove(ref(rtdb, `usersBoards/${userId}/${boardId}`));
+
+        // await deleteDoc(doc(db, 'boards', boardId));
+        // await updateDocument('users', userId, {
+        //     boardsIds: arrayRemove(boardId),
+        // });
     } catch (e) {
         console.log(e);
         return false;

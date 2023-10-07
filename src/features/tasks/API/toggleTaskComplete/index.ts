@@ -1,10 +1,16 @@
 import { updateDocument } from 'shared/API/updateDocument';
+import { ref, update } from 'firebase/database';
+import { rtdb } from 'shared/config/firebase/firebase';
 
 export const toggleTaskComplete = async (
     taskId: string,
     columnId: string,
     boardId: string,
     newStatus: boolean,
-) => updateDocument('boards', boardId, {
-    [`columns.${columnId}.tasks.${taskId}.isCompleted`]: newStatus,
+) => update(ref(rtdb, `boards/${boardId}/columns/${columnId}/tasks/${taskId}`), {
+    isCompleted: newStatus,
 });
+
+// updateDocument('boards', boardId, {
+//     [`columns.${columnId}.tasks.${taskId}.isCompleted`]: newStatus,
+// });

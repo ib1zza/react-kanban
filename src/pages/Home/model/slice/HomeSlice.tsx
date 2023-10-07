@@ -11,7 +11,7 @@ export const HomeSlice = createSlice({
     initialState,
     reducers: {
         addBoards: (state, action: PayloadAction<IBoard[]>) => {
-            state.boards.push(...action.payload);
+            state.boards = action.payload;
         },
 
     },

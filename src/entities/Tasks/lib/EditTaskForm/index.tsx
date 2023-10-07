@@ -41,7 +41,8 @@ const EditTaskForm: React.FC<Props> = ({
 
     const editHandler = () => {
         console.log('edit');
-        if (title === '' || description === '') return onAbort();
+        console.log(title, description);
+        if (title === '') return onAbort();
 
         const editedData : EditedData = {};
 
@@ -60,6 +61,7 @@ const EditTaskForm: React.FC<Props> = ({
         console.log(editedData);
 
         if (Object.keys(editedData).length === 0) return onAbort();
+        console.log(editedData);
         onEdit(editedData);
     };
 
@@ -74,6 +76,8 @@ const EditTaskForm: React.FC<Props> = ({
         console.log(value);
         setLinkedUserId(String(value));
     };
+
+    console.log(linkedUsers);
 
     return (
         <div>

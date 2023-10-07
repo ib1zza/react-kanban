@@ -8,6 +8,8 @@ import { IBoard, LinkedUserType } from 'app/types/IBoard';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { IUserInfo } from 'app/types/IUserInfo';
+import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
+import { addUserToBoardRt } from 'features/boards/API/addUserToBoard/addUserToBoardRt';
 import s from './Notification.module.scss';
 
 import { getBoardFromId } from '../../Board';
@@ -32,18 +34,21 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
         getUserInfo(data.userInvitedId).then(
             (userFrom) => setUserFrom(userFrom),
         );
-        getBoardFromId(data.boardId).then(
-            (board) => setBoard(board),
+        getBoardsRt([data.boardId]).then(
+            (board) => setBoard(board[0]),
         );
     }, []);
 
     const acceptHandler = () => {
         if (!user || !board) return;
-        acceptInviteNotification(notificationId, user.uid, board.uid).then(
-            () => {
-                dispatch(notificationsActions.acceptNotification(notificationId));
-            },
-        );
+        addUserToBoardRt(user.uid, board.uid, data.invitedRole || LinkedUserType.USER);
+
+        dispatch(notificationsActions.acceptNotification(notificationId));
+        // acceptInviteNotification(notificationId, user.uid, board.uid).then(
+        //     () => {
+        //         dispatch(notificationsActions.acceptNotification(notificationId));
+        //     },
+        // );
     };
     const declineHandler = () => {
         if (!user || !board) return;

@@ -51,6 +51,8 @@ const AddTaskForm: React.FC<Props> = ({
                 <div className={s.inputBlock}>
                     <label htmlFor={t('Заголовок')}>{t('Заголовок')}</label>
                     <textarea
+                        // eslint-disable-next-line jsx-a11y/no-autofocus
+                        autoFocus
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         className={s.min}

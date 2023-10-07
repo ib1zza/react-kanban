@@ -7,15 +7,13 @@ interface Props {
     data: NotificationItem;
 }
 const Notification = ({ data }: Props) => (
-    <>
 
-        <div className={classNames(s.item, { [s.read]: data.read })}>
-            {data.payload.type === NotificationType.BOARD_INVITED ? (
-                <NotificationMessageInvited data={data.payload} notificationId={data.uid} />
-            ) : null}
-        </div>
+    <div className={classNames(s.item, { [s.read]: data.read })}>
+        {data.payload.type === NotificationType.BOARD_INVITED ? (
+            <NotificationMessageInvited data={data.payload} notificationId={data.uid} />
+        ) : null}
+    </div>
 
-    </>
 );
 
 export default Notification;

@@ -13,7 +13,7 @@ import { Input } from 'shared/ui/Input/Input';
 import Button, { ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { Avatar } from 'shared/ui/Avatar';
-import { getLinkedUsers } from 'pages/BoardPage';
+import { getBoardCollection, getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { useTranslation } from 'react-i18next';
 import { deleteBoard } from 'features/boards';
@@ -24,10 +24,11 @@ interface Props {
     onEdit: (newTitle: string) => void;
     onDelete: () => void;
     setIsCreating: (value: boolean) => void;
+    onShare: () => void;
 }
 
 const BoardPageHeader: React.FC<Props> = ({
-    onEdit, onDelete, title, setIsCreating,
+    onEdit, onDelete, title, setIsCreating, onShare,
 }) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
@@ -48,6 +49,10 @@ const BoardPageHeader: React.FC<Props> = ({
     const handleDelete = () => {
         onDelete();
     };
+
+    useEffect(() => {
+
+    }, []);
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
@@ -94,24 +99,33 @@ const BoardPageHeader: React.FC<Props> = ({
                         </Button>
                     </>
                 )}
-                {
-                    linkedUsers.length > 0 && (
-                        <div className={s.linkedUsers}>
-                            {linkedUsers.map((user: IUserInfo) => (
-                                <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
-                            ))}
-                        </div>
-                    )
-                }
+                {/* { */}
+                {/*    linkedUsers.length > 0 && ( */}
+                {/*        <div className={s.linkedUsers}> */}
+                {/*            {linkedUsers.map((user: IUserInfo) => ( */}
+                {/*                <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} /> */}
+                {/*            ))} */}
+                {/*        </div> */}
+                {/*    ) */}
+                {/* } */}
             </h1>
             <div className={s.second}>
-                <div className={s.share}>
+                <div className={s.share} onClick={onShare}>
                     <FontAwesomeIcon icon={faShareAlt} />
                     <p>{t('share')}</p>
                 </div>
                 <div className={s.members}>
                     <FontAwesomeIcon icon={faWalkieTalkie} />
                     <p>{t('members')}</p>
+                    {
+                        linkedUsers.length > 0 && (
+                            <div className={s.linkedUsers}>
+                                {linkedUsers.map((user: IUserInfo) => (
+                                    <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
+                                ))}
+                            </div>
+                        )
+                    }
                 </div>
             </div>
             <div className={s.third}>
