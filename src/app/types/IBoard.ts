@@ -41,4 +41,11 @@ export interface IBoard {
   usersAllowed: string[];
   timeCreated: string;
   timeUpdated: string;
+  users?: {
+    [userId: string]: {
+      role: LinkedUserType;
+      dateInvited: number;
+      joined: boolean;
+    };
+  }
 }

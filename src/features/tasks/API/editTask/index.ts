@@ -1,5 +1,7 @@
 import { ITask } from 'app/types/IBoard';
 import { updateDocument } from 'shared/API/updateDocument';
+import { ref, update } from 'firebase/database';
+import { rtdb } from 'shared/config/firebase/firebase';
 
 type NewData = {
     [key in keyof ITask]?: ITask[key]
@@ -12,11 +14,12 @@ export async function editTask(
 ) {
     const updatedData = (Object.keys(newData)).reduce(
         (acc, key) => {
-            acc[`columns.${columnId}.tasks.${taskId}.${key}`] = newData[key as keyof ITask];
+            acc[`columns/${columnId}/tasks/${taskId}/${key}`] = newData[key as keyof ITask];
             return acc;
         },
         {} as any,
     );
 
-    return updateDocument('boards', boardId, updatedData);
+    // return updateDocument('boards', boardId, updatedData);
+    update(ref(rtdb, `boards/${boardId}`), updatedData);
 }

@@ -1,7 +1,5 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import HomeSkeleton from 'pages/Home/ui/HomeSkeleton';
-import BoardPageSkeleton from 'pages/BoardPage/ui/BoardPageSkeleton';
 
 import BoardPage from '../../../../pages/BoardPage/ui/BoardPage';
 
@@ -12,7 +10,7 @@ const MainRouter = () => (
         <Route
             path="/board/:boardId"
             element={(
-                <Suspense fallback={<BoardPageSkeleton />}>
+                <Suspense fallback={<div />}>
                     <BoardPage />
                 </Suspense>
             )}
@@ -20,7 +18,7 @@ const MainRouter = () => (
         <Route
             index
             element={(
-                <Suspense fallback={<HomeSkeleton />}>
+                <Suspense fallback={<div />}>
                     <Home />
                 </Suspense>
             )}

@@ -5,7 +5,7 @@ import { Avatar } from 'shared/ui/Avatar';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import Modal from 'shared/ui/Modal/Modal';
-import { Profile } from 'pages/Profile';
+import { Profile } from 'features/Profile';
 import s from './Header.module.scss';
 
 const Header = () => {

@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import {
+    memo, useCallback, useEffect, useState,
+} from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { useTranslation } from 'react-i18next';
 import { useAuth, UserAuth } from 'app/providers/authRouter/ui/AuthContext';
@@ -14,7 +16,7 @@ import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import s from './Profile.module.scss';
 import ProfileSkeleton from './ProfileSkeleton';
 
-const Profile = () => {
+const Profile = memo(() => {
     const { user } = useAppSelector(getUserState);
     const { refetch } = UserAuth();
     const [editStatus, setEditStatus] = useState(false);
@@ -48,19 +50,19 @@ const Profile = () => {
         uploadImage.on(
             'state_changed',
             (snapshot) => {
-                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log(`Image upload is ${progress}% done`);
+                // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                // console.log(`Image upload is ${progress}% done`);
                 switch (snapshot.state) {
                 case 'paused':
-                    console.log('Upload is paused');
+                    // console.log('Upload is paused');
                     break;
                 case 'running':
-                    console.log('Upload is running');
+                    // console.log('Upload is running');
                     break;
                 }
             },
             (error) => {
-                console.log(error);
+                // console.log(error);
             },
             () => {
                 getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
@@ -143,6 +145,6 @@ const Profile = () => {
             </div>
         </div>
     );
-};
+});
 
 export default Profile;

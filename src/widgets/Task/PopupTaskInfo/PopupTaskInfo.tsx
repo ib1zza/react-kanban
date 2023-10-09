@@ -47,6 +47,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
     const handleEditTask = async (data : EditedData) => {
         setLoading('edit');
         console.log('edited');
+
         await editTask(selectedBoardId, selectedColumnId, task.uid, data);
 
         setLoading('');

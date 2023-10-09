@@ -10,6 +10,7 @@ export async function acceptInviteNotification(
         // если пользователь принимает приглашение, то
         // добавляем ему в boardInvitedIds доску и отмечаем
         // что он принял приглашение
+
         await addToBoardInvitedIds(userId, boardId);
         await updateDocument('notifications', userId, {
             [`${notificationId}.payload.isAccepted`]: true,

@@ -95,6 +95,7 @@ const ActionForm = memo((props: Props) => {
             )}
             <div className={s.title}>
                 <Input
+                    autoFocus
                     theme={InputTheme.WHITE}
                     // placeholder={t('Название')}
                     label={t('Название')}
