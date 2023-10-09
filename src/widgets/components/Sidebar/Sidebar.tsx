@@ -20,7 +20,7 @@ const Sidebar = () => {
             </div>
             <hr />
             <div className={s.nav_buttons}>
-                <div className={s.nav_button}>
+                <div className={s.nav_button} onClick={() => navigate(AppRoute.HOME)}>
                     <FontAwesomeIcon icon={faBarsProgress} className={s.svg} />
                     {t('Projects')}
                 </div>

@@ -7,7 +7,6 @@ import {
     useAppSelector,
 } from 'app/providers/StoreProvider';
 
-import { getTaskInfo } from 'features/tasks';
 import {
     editBoard, BoardPageHeader, deleteBoard, ShareBoard,
 } from 'features/boards';
@@ -21,10 +20,10 @@ import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 
 import Modal from 'shared/ui/Modal/Modal';
+import TaskColumnSkeleton from 'entities/Column/ui/TaskColumnSkeleton';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
-import Button from '../../../shared/ui/Button/Button';
-import BoardPageSkeleton from './BoardPageSkeleton';
+
 import { boardCollectionActions, getBoardCollection } from '..';
 
 const BoardPage = memo(() => {
@@ -103,7 +102,7 @@ const BoardPage = memo(() => {
             const usersIds = Object.keys(board.users || {});
             // console.log(usersIds, linkedUsersInfo);
 
-            console.log('usersUpdated', usersIds, linkedUsersInfo);
+            // console.log('usersUpdated', usersIds, linkedUsersInfo);
             if (!usersIds.length) return;
             if (isUsersEqual(linkedUsersInfo, usersIds)) return;
 
@@ -116,9 +115,9 @@ const BoardPage = memo(() => {
                 }
                 return acc;
             }, [] as IUserInfo[]);
-            console.log(result);
+            // console.log(result);
             dispatch(boardCollectionActions.setLinkedUsers(result));
-            console.log(board);
+            // console.log(board);
         });
 
         return () => {
@@ -136,11 +135,10 @@ const BoardPage = memo(() => {
         // window.location.href = '/';
     };
 
-    if (!selectedBoard) return <BoardPageSkeleton />;
-
     return (
         <>
-            {shareStatus && (
+
+            {selectedBoard && shareStatus && (
                 <Modal
                     onClose={() => setShareStatus(false)}
                 >
@@ -149,30 +147,40 @@ const BoardPage = memo(() => {
             )}
             <div className={s.wrapperContainer}>
                 <BoardPageHeader
+                    isEnabled={!selectedBoard && true}
                     onEdit={handleEditTitle}
-                    title={selectedBoard.title}
+                    title={selectedBoard?.title || 'loading...'}
                     setIsCreating={setIsCreating}
                     onDelete={handleDeleteBoard}
                     onShare={() => setShareStatus(true)}
                 />
                 <div className={s.wrapper}>
                     <div className={s.columnsWrapper}>
-                        {getColumnsFromBoard(selectedBoard).map((column) => (
-                            <TaskColumn
-                                key={column.uid}
-                                column={column}
-                                // onEdit={refetchBoard}
-                                onEdit={() => {}}
-                                boardId={selectedBoard.uid}
-                            />
-                        ))}
-                        {isCreating && (
-                            <ActionForm
-                                status={ActionFormStatus.COLUMN}
-                                onCreateColumn={createColumnAction}
-                                onAbort={() => setIsCreating(false)}
-                            />
-                        )}
+                        {!selectedBoard
+                            ? <><TaskColumnSkeleton /></>
+                            : (
+                                <>
+
+                                    {getColumnsFromBoard(selectedBoard).map((column) => (
+                                        <TaskColumn
+                                            key={column.uid}
+                                            column={column}
+                                            // onEdit={refetchBoard}
+                                            onEdit={() => {}}
+                                            boardId={selectedBoard.uid}
+                                        />
+                                    ))}
+                                    {isCreating && (
+                                        <ActionForm
+                                            status={ActionFormStatus.COLUMN}
+                                            onCreateColumn={createColumnAction}
+                                            onAbort={() => setIsCreating(false)}
+                                        />
+                                    )}
+
+                                </>
+                            )}
+
                     </div>
                     {selectedTask && (
                         <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />

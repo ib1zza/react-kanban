@@ -55,6 +55,7 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     children,
 }) => {
     const [user, setUser] = useState<User>({} as User);
+
     const signUp = signUpEmailPass;
     const logIn = loginByEmailPass;
     const dispatch = useDispatch();
@@ -85,10 +86,12 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
                 });
             }
         });
+
         return () => {
             unsubscribe();
         };
     }, [user]);
+
     const value = useMemo(() => ({
         signUp, logIn, logOut, refetch, user,
     }), [user]);

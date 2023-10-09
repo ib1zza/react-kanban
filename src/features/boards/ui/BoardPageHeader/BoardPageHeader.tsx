@@ -21,6 +21,7 @@ import s from './BoardPageHeader.module.scss';
 
 interface Props {
     title: string;
+    isEnabled: boolean;
     onEdit: (newTitle: string) => void;
     onDelete: () => void;
     setIsCreating: (value: boolean) => void;
@@ -28,7 +29,7 @@ interface Props {
 }
 
 const BoardPageHeader: React.FC<Props> = ({
-    onEdit, onDelete, title, setIsCreating, onShare,
+    onEdit, onDelete, title, setIsCreating, onShare, isEnabled,
 }) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
@@ -60,6 +61,7 @@ const BoardPageHeader: React.FC<Props> = ({
                     <>
                         <span>{editingTitle}</span>
                         <Button
+                            disabled={isEnabled}
                             size={ButtonSize.M}
                             theme={ButtonTheme.WHITE}
                             noBorder
@@ -69,6 +71,7 @@ const BoardPageHeader: React.FC<Props> = ({
                             <FontAwesomeIcon icon={faPenToSquare} />
                         </Button>
                         <Button
+                            disabled={isEnabled}
                             size={ButtonSize.M}
                             theme={ButtonTheme.WHITE}
                             noBorder
@@ -82,6 +85,7 @@ const BoardPageHeader: React.FC<Props> = ({
                 {isEditing && (
                     <>
                         <Input
+                            disabled={isEnabled}
                             className={s.input}
                             maxLength={40}
                             type="text"
@@ -89,6 +93,7 @@ const BoardPageHeader: React.FC<Props> = ({
                             onChange={(e) => setEditingTitle(e.target.value)}
                         />
                         <Button
+                            disabled={isEnabled}
                             size={ButtonSize.M}
                             theme={ButtonTheme.WHITE}
                             noBorder
@@ -110,11 +115,11 @@ const BoardPageHeader: React.FC<Props> = ({
                 {/* } */}
             </h1>
             <div className={s.second}>
-                <div className={s.share} onClick={onShare}>
+                <Button className={s.share} disabled={isEnabled} onClick={onShare}>
                     <FontAwesomeIcon icon={faShareAlt} />
                     <p>{t('share')}</p>
-                </div>
-                <div className={s.members}>
+                </Button>
+                <Button className={s.members} disabled={isEnabled}>
                     <FontAwesomeIcon icon={faWalkieTalkie} />
                     <p>{t('members')}</p>
                     {
@@ -126,21 +131,21 @@ const BoardPageHeader: React.FC<Props> = ({
                             </div>
                         )
                     }
-                </div>
+                </Button>
             </div>
             <div className={s.third}>
-                <div className={s.filter}>
+                <Button className={s.filter} disabled={isEnabled}>
                     <FontAwesomeIcon icon={faFilter} />
                     <p>{t('filter')}</p>
-                </div>
-                <div className={s.date}>
+                </Button>
+                <Button className={s.date} disabled={isEnabled}>
                     <FontAwesomeIcon icon={faCalendarTimes} />
                     <p>{t('this week')}</p>
-                </div>
-                <div className={s.add} onClick={() => setIsCreating(true)}>
+                </Button>
+                <Button className={s.add} disabled={isEnabled} onClick={() => setIsCreating(true)}>
                     <FontAwesomeIcon icon={faAdd} />
                     <p>{t('add')}</p>
-                </div>
+                </Button>
             </div>
         </div>
     );

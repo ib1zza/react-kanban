@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable react/no-array-index-key */
 import React, {
-    useCallback, useEffect, useState,
+    useEffect, useState,
 } from 'react';
 import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,9 +20,10 @@ import { getUserBoardsRt } from 'pages/Home/model/services/getUserBoardsRt';
 import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUserBoards';
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
 import { subscribeToUserNotifications } from 'entities/Notifications/model/services/API/subscribeToUserNotifications';
+import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
 import { getUserBoards as getBoards } from '../model/services/getUserBoards';
 import s from './Home.module.scss';
-import HomeSkeleton from './HomeSkeleton';
+
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
 
@@ -88,7 +90,6 @@ const Home = () => {
         // await fetchBoards();
     };
     const { t } = useTranslation('buttons');
-    if (!user?.uid) return <HomeSkeleton />;
     return (
         <div className={s.boardPageContainer}>
 
@@ -109,30 +110,36 @@ const Home = () => {
             </div>
 
             <div className={s.blocks__container}>
-                {addBoardStatus && (
-                    <ActionForm
-                        status={ActionFormStatus.BOARD}
-                        onCreateBoard={handleCreateBoard}
-                        onAbort={() => setAddBoardStatus(false)}
-                    />
+                {!user?.uid ? <BoardPreviewSkeleton /> : (
+                    <>
+                        {' '}
+                        {addBoardStatus && (
+                            <ActionForm
+                                status={ActionFormStatus.BOARD}
+                                onCreateBoard={handleCreateBoard}
+                                onAbort={() => setAddBoardStatus(false)}
+                            />
+                        )}
+                        {linkBoardStatus && (
+                            <ActionForm
+                                status={ActionFormStatus.BOARD}
+                                onCreateBoard={handleLinkBoard}
+                                onAbort={() => setLinkBoardStatus(false)}
+                            />
+                        )}
+                        {!!boards.length && boards.map((item: IBoard, index) => (
+                            <BoardPreview
+                                onClick={() => {
+                                    navigate(`/board/${item?.uid}`);
+                                }}
+                                key={item.uid}
+                                board={item}
+                                userId={user.uid}
+                            />
+                        ))}
+                    </>
                 )}
-                {linkBoardStatus && (
-                    <ActionForm
-                        status={ActionFormStatus.BOARD}
-                        onCreateBoard={handleLinkBoard}
-                        onAbort={() => setLinkBoardStatus(false)}
-                    />
-                )}
-                {!!boards.length && boards.map((item: IBoard, index) => (
-                    <BoardPreview
-                        onClick={() => {
-                            navigate(`/board/${item?.uid}`);
-                        }}
-                        key={item.uid}
-                        board={item}
-                        userId={user.uid}
-                    />
-                ))}
+
             </div>
 
         </div>
