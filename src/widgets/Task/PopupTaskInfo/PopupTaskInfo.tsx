@@ -59,8 +59,12 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
 
     return (
         <div className={s.container}>
+            <div
+                className={s.headerColor}
+                style={{ backgroundColor: '#weweww' }}
+            />
             <div className={s.title}>
-                <h2>{isEditing ? t('Редактирование') : task.title}</h2>
+                <p>{isEditing ? t('Редактирование') : task.title}</p>
                 <Button className={s.icon}>
                     <FontAwesomeIcon
                         icon={faCircleXmark}

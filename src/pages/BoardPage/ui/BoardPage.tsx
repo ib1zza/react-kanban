@@ -25,6 +25,7 @@ import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 
 import { boardCollectionActions, getBoardCollection } from '..';
+import { getBoardThunk } from '../model/services/getBoardThunk/getBoardThunk';
 
 const BoardPage = memo(() => {
     const { boardId } = useParams();
@@ -38,28 +39,28 @@ const BoardPage = memo(() => {
     const [isCreating, setIsCreating] = useState(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const refetchBoard = async () => {
-        const board = await getBoardFromId(boardId as string);
-        if (board) {
-            dispatch(boardCollectionActions.setCurrentBoard(board));
+    // const refetchBoard = async () => {
+    //     const board = await getBoardFromId(boardId as string);
+    //     if (board) {
+    //         dispatch(boardCollectionActions.setCurrentBoard(board));
 
-            const usersIds = board.usersAllowed.concat(board.guestsAllowed);
-            const usersInfo = await Promise.allSettled(
-                usersIds.map((userId) => getUserInfo(userId)),
-            );
+    //         const usersIds = board.usersAllowed.concat(board.guestsAllowed);
+    //         const usersInfo = await Promise.allSettled(
+    //             usersIds.map((userId) => getUserInfo(userId)),
+    //         );
 
-            dispatch(boardCollectionActions.setLinkedUsers(usersInfo.reduce((acc, el) => {
-                if (el.status === 'fulfilled') {
-                    acc.push(el.value);
-                }
-                return acc;
-            }, [] as IUserInfo[])));
-        }
-    };
+    //         dispatch(boardCollectionActions.setLinkedUsers(usersInfo.reduce((acc, el) => {
+    //             if (el.status === 'fulfilled') {
+    //                 acc.push(el.value);
+    //             }
+    //             return acc;
+    //         }, [] as IUserInfo[])));
+    //     }
+    // };
 
-    useEffect(() => {
-        // refetchBoard();
-    }, [boardId]);
+    //  useEffect(() => {
+    // refetchBoard();
+    // }, [boardId]);
 
     const refetchTask = async () => {
         if (!selectedTask) return;
@@ -88,40 +89,41 @@ const BoardPage = memo(() => {
     useEffect(() => {
         if (!boardId) return;
 
-        const unsub = subscribeToBoardById(boardId, async (board) => {
-            dispatch(boardCollectionActions.setCurrentBoard(board));
+        // const unsub = subscribeToBoardById(boardId, async (board) => {
+        //     dispatch(boardCollectionActions.setCurrentBoard(board));
 
-            const isUsersEqual = (
-                usersArr: IUserInfo[],
-                usersIds: string[],
-            ) => usersArr.length === usersIds.length && usersArr.map(
-                (user) => user.uid,
-            ).every(
-                (id) => usersIds.includes(id),
-            );
-            const usersIds = Object.keys(board.users || {});
-            // console.log(usersIds, linkedUsersInfo);
+        //     const isUsersEqual = (
+        //         usersArr: IUserInfo[],
+        //         usersIds: string[],
+        //     ) => usersArr.length === usersIds.length && usersArr.map(
+        //         (user) => user.uid,
+        //     ).every(
+        //         (id) => usersIds.includes(id),
+        //     );
+        //     const usersIds = Object.keys(board.users || {});
+        //     // console.log(usersIds, linkedUsersInfo);
 
-            // console.log('usersUpdated', usersIds, linkedUsersInfo);
-            if (!usersIds.length) return;
-            if (isUsersEqual(linkedUsersInfo, usersIds)) return;
+        //     // console.log('usersUpdated', usersIds, linkedUsersInfo);
+        //     if (!usersIds.length) return;
+        //     if (isUsersEqual(linkedUsersInfo, usersIds)) return;
 
-            const usersInfo = await Promise.allSettled(
-                usersIds.map((userId) => getUserInfo(userId)),
-            );
-            const result = usersInfo.reduce((acc, el) => {
-                if (el.status === 'fulfilled') {
-                    acc.push(el.value);
-                }
-                return acc;
-            }, [] as IUserInfo[]);
-            // console.log(result);
-            dispatch(boardCollectionActions.setLinkedUsers(result));
-            // console.log(board);
-        });
+        //     const usersInfo = await Promise.allSettled(
+        //         usersIds.map((userId) => getUserInfo(userId)),
+        //     );
+        //     const result = usersInfo.reduce((acc, el) => {
+        //         if (el.status === 'fulfilled') {
+        //             acc.push(el.value);
+        //         }
+        //         return acc;
+        //     }, [] as IUserInfo[]);
+        //     // console.log(result);
+        //     dispatch(boardCollectionActions.setLinkedUsers(result));
+        //     // console.log(board);
+        // });
 
         return () => {
-            unsub();
+            dispatch(getBoardThunk({ boardId, linkedUsersInfo }));
+            // unsub();
         };
     }, [boardId, dispatch]);
 

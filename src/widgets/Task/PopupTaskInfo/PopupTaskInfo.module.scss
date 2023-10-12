@@ -1,11 +1,15 @@
 .container {
     width: 30%;
     min-width: 300px;
+    position: relative;
     height: 100%;
     align-self: stretch;
     margin-left: 25px;
     margin-right: -24px;
-    border-radius: 10px 0 0 10px;
+    border-radius: 20px  0 0 20px;
+    border-bottom: 2px solid var(--altWbText);
+    border-left: 2px solid var(--altWbText);
+    border-top: 2px solid var(--altWbText);
     background-color: var(--columnBg);
     padding: 20px;
 }
@@ -19,15 +23,33 @@
     }
 }
 
+.headerColor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.7;
+    height: 30px;
+    border-radius: 18px 0px 0px 0px;
+    background-color: gray;
+
+    
+}
+
 .title,
 .description {
     color: var(--taskTextColor);
 }
 
 .title {
+    p {
+         font: var(--font-m);
+         font-weight: 600;
+    }
+    margin-top: 26px;
     display: flex;
     justify-content: space-between;
-
+   
     .icon {
         font-size: 25px;
         color: var(#{--iconColor});
@@ -38,6 +60,10 @@
     }
 }
 
+.description {
+    font: var(--font-s);
+
+}
 .linkedUserInfo {
     display: flex;
     gap: 5px;
