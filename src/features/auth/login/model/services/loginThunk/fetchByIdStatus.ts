@@ -14,9 +14,8 @@ export const fetchByIdStatus = createAsyncThunk(
             await getAuth().setPersistence(inMemoryPersistence);
         }
         return signInWithEmailAndPassword(auth, params.email, params.password).then(async (userCredential) => {
-            const { user } = userCredential;
-
-            return user;
+            // const { user } = userCredential;
+            // return user;
         }).catch((error: any) => rejectWithValue(error.code));
     },
 );

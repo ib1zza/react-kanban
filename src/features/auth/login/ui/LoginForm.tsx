@@ -65,13 +65,13 @@ const LoginForm = ({ onSwitch }: props) => {
                 {/* <Arrow /> */}
                 <div>
                     <div className={s.title}>{t('Вход')}</div>
-                    <p className={s.linkArea}>
+                    <div className={s.linkArea}>
                         <span className={s.linkArea_descr}>{t('Новенький')}</span>
                         <Button theme={ButtonTheme.CLEAR} onClick={onSwitch} className={s.linkArea_link}>
                             {t('Зарегистрироваться')}
                             ?
                         </Button>
-                    </p>
+                    </div>
                 </div>
             </div>
 
@@ -121,7 +121,7 @@ const LoginForm = ({ onSwitch }: props) => {
             />
 
             <div className={s.remember}>
-                <p>
+                <div>
                     <Input
                         checked={formik.values.rememberMe}
                         onChange={formik.handleChange}
@@ -130,7 +130,7 @@ const LoginForm = ({ onSwitch }: props) => {
                         name="rememberMe"
                     />
                     {t('Запомнить меня')}
-                </p>
+                </div>
             </div>
             <div className={s.btn_wrapper}>
                 <button type="submit" className={s.btn}>
