@@ -7,5 +7,4 @@ export interface BoardCollectionSchema {
     selectedBoard: IBoard | null;
     selectedTask: ITask | null;
     linkedUsersInfo: IUserInfo[]
-
   }

@@ -4,5 +4,5 @@ import { IUserInfo } from 'app/types/IUserInfo';
 
 export async function getUserInfo(id: string) {
     const ref = doc(db, 'users', id);
-    return getDoc(ref).then((doc) => doc.data() as IUserInfo);
+    return getDoc(ref).then(async (doc) => await doc.data() as IUserInfo);
 }
