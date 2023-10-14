@@ -83,6 +83,22 @@ const OpenNotificationsButton = () => {
 
             {open && (
                 <div className={s.notificationsContainer}>
+                    <svg
+                        className={s.trio}
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="35"
+                        height="19"
+                        viewBox="0 0 35 19"
+                        fill="none"
+                    >
+                        <path
+                            d="M17.5 2L32.6554 17H2.34456L17.5 2Z"
+                            fill="#F6F6F6"
+                            fillOpacity="0.6"
+                            shapeRendering="crispEdges"
+                        />
+
+                    </svg>
                     {notifications.length ? '' : 'Нет уведомлений'}
                     {!!notifications.length && <div className={s.deleteAll}>Удалить все</div>}
                     {notifications.map((notif: NotificationItem) => (

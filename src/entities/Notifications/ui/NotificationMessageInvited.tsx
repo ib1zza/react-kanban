@@ -10,10 +10,9 @@ import { useAppDispatch } from 'app/providers/StoreProvider';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
 import { addUserToBoardRt } from 'features/boards/API/addUserToBoard/addUserToBoardRt';
+import { Avatar, AvatarSize } from 'shared/ui/Avatar';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import s from './Notification.module.scss';
-
-import { getBoardFromId } from '../../Board';
-import { acceptInviteNotification } from '../model/services/API/acceptInviteNotification';
 import { declineInviteNotification } from '../model/services/API/declineInviteNotification';
 import { NotificationPayloadBoardInvited } from '../model/types/NotificationsSchema';
 import { notificationsActions } from '../model/slice/notificationSlice';
@@ -62,35 +61,58 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
     if (!userFrom || !board) return null;
     return (
         <div className={s.messageContainer}>
+            <div className={s.avatarContainer}>
+                <Avatar src={userFrom.photoURL} alt={userFrom.displayName} size={AvatarSize.M} />
+                {/* <img src={} alt={userFrom.displayName} /> */}
+            </div>
             <div className={s.messageInfo}>
-                <img src={userFrom.photoURL} alt="avatar" />
-                {`${userFrom.displayName
-                } ${
-                    t(data.invitedRole === LinkedUserType.USER
-                        ? 'приглашает вас стать гостем в доске'
-                        : 'приглашает вас стать редактором в доске')
-                } ${
-                    board.title}`}
+                <div className={s.text}>
+
+                    {`${userFrom.displayName
+                    } ${
+                        t(data.invitedRole === LinkedUserType.USER
+                            ? 'приглашает вас стать гостем в доске'
+                            : 'приглашает вас стать редактором в доске')
+                    } ${
+                        board.title}`}
+                </div>
+
+                {!data.isAccepted && (
+                    <div className={s.buttons}>
+                        <Button
+                            className={s.buttonAccept}
+                            theme={ButtonTheme.NOTIFICATION}
+                            onClick={acceptHandler}
+                            icon={(
+                                <FontAwesomeIcon
+                                    icon={faCircleCheck}
+                                />
+                            )}
+                        >
+                            {t('принять')}
+
+                        </Button>
+
+                        <Button
+                            className={s.buttonDecline}
+                            theme={ButtonTheme.NOTIFICATION}
+                            onClick={declineHandler}
+                            icon={(
+                                <FontAwesomeIcon
+                                    icon={faCircleXmark}
+                                    // style={{ color: '#DE2525' }}
+                                />
+                            )}
+                        >
+                            {t('отклонить')}
+
+                        </Button>
+                        {/* <button onClick={acceptHandler} /> */}
+
+                    </div>
+                )}
             </div>
 
-            {!data.isAccepted && (
-                <div className={s.buttons}>
-                    <button onClick={acceptHandler}>
-                        <FontAwesomeIcon
-                            icon={faCircleCheck}
-                            style={{ color: '#5CD43E' }}
-                        />
-                        {t('принять')}
-                    </button>
-                    <button onClick={declineHandler}>
-                        <FontAwesomeIcon
-                            icon={faCircleXmark}
-                            style={{ color: '#DE2525' }}
-                        />
-                        {t('отклонить')}
-                    </button>
-                </div>
-            )}
         </div>
     );
 };
