@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-
 import { deleteTask, editTask } from 'features/tasks';
 import Button from 'shared/ui/Button/Button';
 import EditTaskForm from 'entities/Tasks/lib/EditTaskForm';
-
 import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
+import { useSelector } from 'react-redux';
+import { getUserInfo } from 'features/users';
 import s from './PopupTaskInfo.module.scss';
 
 interface Props {
@@ -35,7 +35,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
-
+    // const userAvatar = useSelector(getUserAvatar);
     const { t } = useTranslation('buttons');
     if (!task) return null;
     const onDeleteTask = async () => {
@@ -54,7 +54,12 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         setEditing(false);
         onEdit();
     };
+    console.log(task);
+    // const user = getUserInfo(task.creatorId).then(
+    //     async (user) => user,
+    // );
 
+    // console.log(`info: ${user}`);
     const linkedUser = linkedUsersInfo.find((user: IUserInfo) => user.uid === task.attachedUser);
 
     return (
@@ -97,7 +102,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                                 : `${t('Пользователь не прикреплен')}`
                         }
                     </div>
-
+                    {/* <Avatar src={user.photoURL} /> */}
                     <div className={s.buttons}>
                         <Button
                             icon={<FontAwesomeIcon icon={faPenToSquare} />}
