@@ -1,9 +1,11 @@
 .profile__avatar {
     width: 90px;
     height: 90px;
-    margin-right: 16px;
+
     overflow: hidden;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
     position: relative;
 
     .profile__avatar__edit {
@@ -16,6 +18,12 @@
         opacity: 0;
         color: white;
         font-size: 18px;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
 
         &:hover {
             cursor: pointer;
@@ -31,5 +39,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+
     }
 }

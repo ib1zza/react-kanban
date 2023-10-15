@@ -15,6 +15,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const Primary: Story = {
     args: {
+        title: 'ColorPicker',
         children: <ColorPicker
             color=""
             onChange={() => null}
@@ -23,6 +24,7 @@ export const Primary: Story = {
 };
 export const PrimaryDark: Story = {
     args: {
+        title: 'ColorPicker',
         children: <ColorPicker
             color=""
             onChange={() => null}
