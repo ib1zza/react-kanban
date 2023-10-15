@@ -82,11 +82,15 @@ const Profile = memo(() => {
     return (
         <div>
             <div className={s.profile}>
-                <AvatarEdit onEdit={onAvatarUpdate} avatar={userInfo.photoURL} />
+                <div className={s.profile__avatar}>
+                    <AvatarEdit onEdit={onAvatarUpdate} avatar={userInfo.photoURL} />
+                </div>
                 <div>
                     <div className={s.profile__name}>
-                        {t('Имя')}
-                        :
+                        <p>
+                            {t('Имя')}
+                            :
+                        </p>
                         {editStatus ? (
                             <Input
                                 value={name}
@@ -94,21 +98,38 @@ const Profile = memo(() => {
                                 onChange={(e: { target: { value: any; }; }) => setName(e.target.value)}
                             />
                         ) : (
-                            userInfo.displayName
+                            <p>
+                                {userInfo.displayName}
+                            </p>
                         )}
                     </div>
-
                     <div className={s.profile__email}>
-                        {t('Почта')}
-                        :
-                        {user.email}
+                        <p>
+                            {t('Почта')}
+                            :
+                        </p>
+                        <p>
+                            {user.email}
+                        </p>
+
                     </div>
                     <div className={s.profile__descr}>
-                        {t('Количество досок')}
-                        :
-                        {userInfo.boardsIds?.length || 0}
+                        <p>
+                            {t('Statistics')}
+                            :
+                        </p>
+                        <p>
+                            {t('Количество досок')}
+                            :
+                            {` ${userInfo.boardsIds?.length}` || 0}
+                            <br />
+                            {t('Joined')}
+                            :
+                            DATA
+                        </p>
                     </div>
                     <div className={s.buttons}>
+
                         {editStatus ? (
                             <Button
                                 theme={ButtonTheme.BLACK}

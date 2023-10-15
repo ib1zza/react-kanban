@@ -6,16 +6,17 @@ import { useAppSelector } from 'app/providers/StoreProvider';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import Modal from 'shared/ui/Modal/Modal';
 import { Profile } from 'features/Profile';
+import { useTranslation } from 'react-i18next';
 import s from './Header.module.scss';
 
 const Header = () => {
     const { user } = useAppSelector(getUserState);
     const [isShowProfile, setIsShownProfile] = useState(false);
-
+    const { t } = useTranslation();
     return (
         <header className={s.header}>
             {isShowProfile && (
-                <Modal onClose={() => setIsShownProfile(false)}>
+                <Modal title={t('Profile')} onClose={() => setIsShownProfile(false)}>
                     <Profile />
                 </Modal>
             )}

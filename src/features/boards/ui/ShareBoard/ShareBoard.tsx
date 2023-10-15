@@ -11,6 +11,7 @@ interface IShareBoard {
 const ShareBoard: FC<IShareBoard> = ({ board }) => (
     <div className={s.form}>
         <InviteUserForm board={board} />
+        <div className={s.verticalLine} />
         <GuestsList board={board} />
     </div>
 );

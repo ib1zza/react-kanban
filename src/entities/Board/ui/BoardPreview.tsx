@@ -1,3 +1,4 @@
+import { title } from 'process';
 import React, { useEffect } from 'react';
 import { faLink, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -49,6 +50,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
             {shareStatus && (
                 <Modal
                     onClose={onCloseShare}
+                    title={t('Share board')}
                 >
                     <ShareBoard board={board} />
                 </Modal>
