@@ -24,9 +24,8 @@
     border: none;
     display: flex;
     align-items: center;
-    div {
+    &>div {
       color: var(--white);
-
     }
 
 }

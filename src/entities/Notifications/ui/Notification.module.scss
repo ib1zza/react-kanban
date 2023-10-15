@@ -1,57 +1,77 @@
 .item {
     padding: 5px 15px;
     display: flex;
-    background-color: var(--notificationBg);
+    background-color: transparent;
+    color: var(--black);
 
 
-    &.read {
-        opacity: 0.6;
-    }
+    //&.read {
+    //    opacity: 0.6;
+    //}
 
     &:hover {
-        background-color: var(--notificationBgRead);
+        background: rgba(3, 3, 3, 0.13);
+        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.31);
     }
 }
 
 .messageContainer{
-
+    display: flex;
+    .avatarContainer {
+        margin-right: 12px;
+        //img {
+        //    margin-right: 10px;
+        //    width: 30px;
+        //    height: 30px;
+        //    border-radius: 50%;
+        //    object-fit: cover;
+        //}
+    }
 
 
     .messageInfo {
-        display: flex;
-        align-items: center;
-        img {
-            margin-right: 15px;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-
+        //display: flex;
+        //align-items: center;
+        //flex-direction: column;
+        .text {
+            text-align: left;
+            font-size: 14px;
         }
     }
 
 
     .buttons {
         display: flex;
-        gap: 15px;
-
-        button {
-            padding: 4px 10px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-
-
-
-            svg {
-                transition: all 0.2s linear;
-                width: 18px;
-            }
-            &:hover svg {
-                text-decoration: underline;
-                width: 22px;
+        gap: 10px;
+        margin-top: 10px;
+        .buttonAccept {
+            border-color: #29C941;
+            & svg {
+                color: #29C941;
+                fill: #29C941;
             }
         }
+        .buttonDecline {
+            border-color: #FA5D55;
+            & svg {
+                color: #FA5D55;
+                fill: #FA5D55;
+            }
+        }
+        //button {
+        //    padding: 4px 10px;
+        //    font-size: 14px;
+        //    display: flex;
+        //    justify-content: center;
+        //    align-items: center;
+        //    gap: 7px;
+        //
+        //
+        //
+        //    svg {
+        //        transition: all 0.2s linear;
+        //        width: 17px;
+        //    }
+        //}
     }
 }
