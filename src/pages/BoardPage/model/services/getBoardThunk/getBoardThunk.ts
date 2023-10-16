@@ -6,6 +6,7 @@ import { getUserInfo } from 'features/users';
 import {
     browserLocalPersistence, getAuth, inMemoryPersistence, signInWithEmailAndPassword,
 } from 'firebase/auth';
+import { SetStateAction } from 'react';
 import { boardCollectionActions } from '../../slice/boardCollectionSlice';
 
 export const getBoardThunk = createAsyncThunk(
@@ -29,12 +30,21 @@ export const getBoardThunk = createAsyncThunk(
             const usersInfo = await Promise.allSettled(
                 usersIds.map((userId) => getUserInfo(userId)),
             );
-            const result = usersInfo.reduce((acc, el) => {
-                if (el.status === 'fulfilled') {
-                    acc.push(el.value);
-                }
-                return acc;
-            }, [] as IUserInfo[]);
+            console.log(usersInfo);
+            const result = usersInfo.map((user: any) => user && user.value);
+
+            // eslint-disable-next-line array-callback-return
+            // const result = usersInfo.reduce((acc: DocumentData) => {
+            //     console.log(acc, el);
+            // });
+
+            // if (el.status === 'fulfilled') {
+            //     [].push(acc);
+
+            //  }
+
+            //     return acc;
+            // }, [] as IUserInfo[]);
             // console.log(result);
             dispatch(boardCollectionActions.setLinkedUsers(result));
             // console.log(board);

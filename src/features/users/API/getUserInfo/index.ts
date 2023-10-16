@@ -4,5 +4,12 @@ import { IUserInfo } from 'app/types/IUserInfo';
 
 export async function getUserInfo(id: string) {
     const ref = doc(db, 'users', id);
-    return getDoc(ref).then(async (doc) => await doc.data() as IUserInfo);
+
+    const docSnap = await getDoc(ref);
+
+    // const x = await getDoc(ref).then(async (doc) => await doc.data() as IUserInfo);
+
+    return docSnap.data();
+
+    // eslint-disable-next-line no-alert
 }

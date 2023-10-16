@@ -29,7 +29,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
     const { t } = useTranslation();
 
     useEffect(() => {
-        getUserInfo(board.ownerId).then((res: { displayName: React.SetStateAction<string>; }) => {
+        getUserInfo(board.ownerId).then((res) => {
             setUsername(res?.displayName);
         });
     }, [userId]);
