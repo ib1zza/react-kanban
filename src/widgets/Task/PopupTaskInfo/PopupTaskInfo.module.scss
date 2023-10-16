@@ -13,7 +13,11 @@
     background-color: var(--columnBg);
     padding: 20px;
 }
-
+.descr {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .buttons {
     margin-top: 20px;
     display: flex;

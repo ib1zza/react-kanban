@@ -1,4 +1,5 @@
 import {
+    SetStateAction,
     memo, useCallback, useEffect, useState,
 } from 'react';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
@@ -12,6 +13,7 @@ import { Input, InputTheme } from 'shared/ui/Input/Input';
 import { updateDocument } from 'shared/API/updateDocument';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
+
 import AvatarEdit from '../lib/AvatarEdit/AvatarEdit';
 import s from './Profile.module.scss';
 import ProfileSkeleton from './ProfileSkeleton';
@@ -27,7 +29,7 @@ const Profile = memo(() => {
     const fetchUserInfo = useCallback(async () => {
         if (!user?.uid) return;
         return getUserInfo(user.uid).then((res) => {
-            setUserInfo(res);
+            setUserInfo(res as SetStateAction<IUserInfo | null>);
         });
     }, [user?.uid]);
 

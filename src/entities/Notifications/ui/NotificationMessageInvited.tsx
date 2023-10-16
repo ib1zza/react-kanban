@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
@@ -31,7 +31,7 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
 
     useEffect(() => {
         getUserInfo(data.userInvitedId).then(
-            (userFrom) => setUserFrom(userFrom),
+            (userFrom) => setUserFrom(userFrom as SetStateAction<IUserInfo | undefined>),
         );
         getBoardsRt([data.boardId]).then(
             (board) => setBoard(board[0]),

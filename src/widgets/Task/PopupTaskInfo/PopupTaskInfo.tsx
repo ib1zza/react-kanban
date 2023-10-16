@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { faCircleXmark, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +33,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         linkedUsersInfo,
     } = useAppSelector(getBoardCollection);
     const dispatch = useAppDispatch();
+    const [userInfo, setUserInfo] = useState();
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
     // const userAvatar = useSelector(getUserAvatar);
@@ -55,13 +56,12 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         onEdit();
     };
     console.log(task);
-    // const user = getUserInfo(task.creatorId).then(
-    //     async (user) => user,
-    // );
+    // eslint-disable-next-line no-console
 
-    // console.log(`info: ${user}`);
     const linkedUser = linkedUsersInfo.find((user: IUserInfo) => user.uid === task.attachedUser);
-
+    useEffect(() => {
+        getUserInfo(task.creatorId).then((user) => setUserInfo(user as any));
+    }, [task.creatorId]);
     return (
         <div className={s.container}>
             <div
@@ -102,7 +102,11 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                                 : `${t('Пользователь не прикреплен')}`
                         }
                     </div>
-                    {/* <Avatar src={user.photoURL} /> */}
+                    <div className={s.descr}>
+                        Attached:
+                        {/* {userInfo && <Avatar src={userInfo.photoURL} />} */}
+                    </div>
+
                     <div className={s.buttons}>
                         <Button
                             icon={<FontAwesomeIcon icon={faPenToSquare} />}
