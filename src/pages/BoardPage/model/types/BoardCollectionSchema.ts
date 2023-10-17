@@ -6,5 +6,5 @@ export interface BoardCollectionSchema {
     selectedColumnId: string;
     selectedBoard: IBoard | null;
     selectedTask: ITask | null;
-    linkedUsersInfo: IUserInfo[]
+    linkedUsersInfo: IUserInfo[],
   }

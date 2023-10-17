@@ -12,13 +12,8 @@ import {
 } from 'features/boards';
 import { TaskColumn } from 'entities/Column';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
-import { getUserInfo } from 'features/users';
-import { IUserInfo } from 'app/types/IUserInfo';
-import { getBoardFromId } from 'entities/Board';
-import { subscribeToBoardById } from 'entities/Board/API/getBoardFromIdRt';
 import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
-
 import Modal from 'shared/ui/Modal/Modal';
 import TaskColumnSkeleton from 'entities/Column/ui/TaskColumnSkeleton';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
@@ -30,7 +25,7 @@ import { getBoardThunk } from '../model/services/getBoardThunk/getBoardThunk';
 const BoardPage = memo(() => {
     const { boardId } = useParams();
     const {
-        selectedBoard, selectedTask, selectedColumnId, linkedUsersInfo,
+        selectedBoard, selectedTask, linkedUsersInfo,
     } = useAppSelector(
         getBoardCollection,
     );
@@ -88,44 +83,8 @@ const BoardPage = memo(() => {
 
     useEffect(() => {
         if (!boardId) return;
-
-        // const unsub = subscribeToBoardById(boardId, async (board) => {
-        //     dispatch(boardCollectionActions.setCurrentBoard(board));
-
-        //     const isUsersEqual = (
-        //         usersArr: IUserInfo[],
-        //         usersIds: string[],
-        //     ) => usersArr.length === usersIds.length && usersArr.map(
-        //         (user) => user.uid,
-        //     ).every(
-        //         (id) => usersIds.includes(id),
-        //     );
-        //     const usersIds = Object.keys(board.users || {});
-        //     // console.log(usersIds, linkedUsersInfo);
-
-        //     // console.log('usersUpdated', usersIds, linkedUsersInfo);
-        //     if (!usersIds.length) return;
-        //     if (isUsersEqual(linkedUsersInfo, usersIds)) return;
-
-        //     const usersInfo = await Promise.allSettled(
-        //         usersIds.map((userId) => getUserInfo(userId)),
-        //     );
-        //     const result = usersInfo.reduce((acc, el) => {
-        //         if (el.status === 'fulfilled') {
-        //             acc.push(el.value);
-        //         }
-        //         return acc;
-        //     }, [] as IUserInfo[]);
-        //     // console.log(result);
-        //     dispatch(boardCollectionActions.setLinkedUsers(result));
-        //     // console.log(board);
-        // });
-
-        return () => {
-            dispatch(getBoardThunk({ boardId, linkedUsersInfo }));
-            // unsub();
-        };
-    }, [boardId, dispatch]);
+        dispatch(getBoardThunk({ boardId, linkedUsersInfo }));
+    }, [boardId, dispatch, linkedUsersInfo]);
 
     const handleDeleteBoard = async () => {
         if (!boardId || !user?.uid) return;
