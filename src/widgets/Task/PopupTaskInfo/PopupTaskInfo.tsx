@@ -10,8 +10,8 @@ import EditTaskForm from 'entities/Tasks/lib/EditTaskForm';
 import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
-import { useSelector } from 'react-redux';
 import { getUserInfo } from 'features/users';
+import { DocumentData } from 'firebase/firestore';
 import s from './PopupTaskInfo.module.scss';
 
 interface Props {
@@ -33,7 +33,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         linkedUsersInfo,
     } = useAppSelector(getBoardCollection);
     const dispatch = useAppDispatch();
-    const [userInfo, setUserInfo] = useState();
+    const [userInfo, setUserInfo] = useState<any>();
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
     // const userAvatar = useSelector(getUserAvatar);
@@ -60,7 +60,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
 
     const linkedUser = linkedUsersInfo.find((user: IUserInfo) => user.uid === task.attachedUser);
     useEffect(() => {
-        getUserInfo(task.creatorId).then((user) => setUserInfo(user as any));
+        getUserInfo(task.creatorId).then((user: DocumentData | undefined) => user !== undefined && setUserInfo(user));
     }, [task.creatorId]);
     return (
         <div className={s.container}>
@@ -104,7 +104,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                     </div>
                     <div className={s.descr}>
                         Attached:
-                        {/* {userInfo && <Avatar src={userInfo.photoURL} />} */}
+                        {userInfo && <Avatar src={userInfo.photoURL} />}
                     </div>
 
                     <div className={s.buttons}>

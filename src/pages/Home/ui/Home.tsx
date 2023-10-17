@@ -7,25 +7,19 @@ import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import Button from 'shared/ui/Button/Button';
-import { addUserToBoard, createBoard } from 'features/boards';
+import { addUserToBoard } from 'features/boards';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
-
 import { BoardPreview } from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
-
 import { useTranslation } from 'react-i18next';
 import { createBoardRt } from 'features/boards/API/createBoard/createBoardRealtime';
-import { getUserBoardsRt } from 'pages/Home/model/services/getUserBoardsRt';
 import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUserBoards';
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
-import { subscribeToUserNotifications } from 'entities/Notifications/model/services/API/subscribeToUserNotifications';
 import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
-import { getUserBoards as getBoards } from '../model/services/getUserBoards';
-import s from './Home.module.scss';
-
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
+import s from './Home.module.scss';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -63,6 +57,7 @@ const Home = () => {
                 if (data) {
                     getBoardsRt(Object.keys(data)).then((res) => {
                         if (res) {
+                            console.log(res);
                             dispatch(homeActions.addBoards(Object.values(res)));
                         }
                     });
