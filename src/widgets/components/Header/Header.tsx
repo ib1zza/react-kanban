@@ -9,7 +9,7 @@ import { Profile } from 'features/Profile';
 import { useTranslation } from 'react-i18next';
 import s from './Header.module.scss';
 
-const Header = () => {
+const Header = memo(() => {
     const { user } = useAppSelector(getUserState);
     const [isShowProfile, setIsShownProfile] = useState(false);
     const { t } = useTranslation();
@@ -54,6 +54,6 @@ const Header = () => {
 
         </header>
     );
-};
+});
 
 export default memo(Header);

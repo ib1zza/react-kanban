@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-curly-newline */
 /* eslint-disable react/no-array-index-key */
 import React, {
+    memo,
+    useCallback,
     useEffect, useState,
 } from 'react';
 import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -21,48 +23,25 @@ import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
 
-const Home = () => {
+const Home = memo(() => {
     const navigate = useNavigate();
     const { user } = useAppSelector((state) => state.userInfo);
     const [addBoardStatus, setAddBoardStatus] = useState(false);
     const [linkBoardStatus, setLinkBoardStatus] = useState(false);
     const boards = useAppSelector(getHomeBoards);
     const dispatch = useAppDispatch();
-    // getting boards (only info which we need)
-    // const fetchBoards = useCallback(() => {
-    //     getUserBoardsRt(user).then((res) => {
-    //         if (res) {
-    //             dispatch(homeActions.addBoards(Object.values(res)));
-    //         }
-    //     });
-    //     // () => getBoards(user).then((res: IBoard[]) => {
-    //     // if (res) {
-    //     //     dispatch(homeActions.addBoards(Object.values(res)));
-    //     // }
-    //     // }),
-    // }, [dispatch, user]);
-    // useEffect(() => {
-    //     if (boards.length === 0) {
-    //         fetchBoards();
-    //     }
-    // }, [boards.length, fetchBoards, user]);
 
     useEffect(() => {
         if (!user?.uid) return;
-
         const unsub = subscribeToUserBoards(
             user.uid,
             (data) => {
-                console.log(data);
                 if (data) {
                     getBoardsRt(Object.keys(data)).then((res) => {
                         if (res) {
-                            console.log(res);
                             dispatch(homeActions.addBoards(Object.values(res)));
                         }
                     });
-
-                    // dispatch(homeActions.addBoards(Object.values(data)));
                 }
             },
         );
@@ -70,20 +49,24 @@ const Home = () => {
         return () => {
             unsub();
         };
-    }, [user?.uid]);
+    }, [dispatch, user?.uid]);
 
-    const handleCreateBoard = async (title: string) => {
-        setAddBoardStatus(false);
+    const handleCreateBoard = useCallback(
+        async (title: string) => {
+            setAddBoardStatus(false);
+            await createBoardRt(title, user?.uid as string);
+        },
+        [user?.uid],
+    );
 
-        await createBoardRt(title, user?.uid as string);
-        // await fetchBoards();
-    };
-    const handleLinkBoard = async (id: string) => {
-        setLinkBoardStatus(false);
+    const handleLinkBoard = useCallback(
+        async (id: string) => {
+            setLinkBoardStatus(false);
+            await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
+        },
+        [user?.uid],
+    );
 
-        await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
-        // await fetchBoards();
-    };
     const { t } = useTranslation('buttons');
     return (
         <div className={s.boardPageContainer}>
@@ -91,10 +74,9 @@ const Home = () => {
             <div className={s.buttons}>
                 <Button
                     onClick={() => setAddBoardStatus(true)}
-                    // className={s.add_button}
                     icon={<FontAwesomeIcon size="lg" icon={faPlus} />}
                 >
-                    {/* <FontAwesomeIcon size="lg" icon={faPlus} /> */}
+
                     {t('Добавить доску')}
                 </Button>
                 <Button onClick={() => setLinkBoardStatus(true)} className={s.share_button}>
@@ -140,6 +122,6 @@ const Home = () => {
         </div>
 
     );
-};
+});
 
 export default Home;
