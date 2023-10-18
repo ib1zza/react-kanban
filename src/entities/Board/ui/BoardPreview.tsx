@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import { title } from 'process';
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { faLink, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +19,7 @@ interface IBoardPreviewProps {
   // onDelete: () => void;
 }
 
-const BoardPreview: React.FC<IBoardPreviewProps> = ({
+const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
     userId,
     onClick,
     board,
@@ -92,6 +93,6 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
 
         </div>
     );
-};
+});
 
 export default BoardPreview;

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRemove } from '@fortawesome/free-solid-svg-icons';
 import s from './modal.module.scss';
@@ -9,7 +9,7 @@ interface IModal {
   title?: string ;
   children?: ReactNode;
 }
-const Modal = (props: IModal) => {
+const Modal = memo((props: IModal) => {
     const { onClose, children, title } = props;
     return (
         <>
@@ -29,6 +29,6 @@ const Modal = (props: IModal) => {
             </div>
         </>
     );
-};
+});
 
 export default Modal;

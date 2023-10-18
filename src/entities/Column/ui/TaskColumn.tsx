@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import React, { memo, useState } from 'react';
 import { faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
@@ -17,7 +18,7 @@ interface ITaskColumnProps {
     boardId: string;
 }
 
-const TaskColumn: React.FC<ITaskColumnProps> = ({
+const TaskColumn: React.FC<ITaskColumnProps> = memo(({
     column,
     onEdit,
     boardId,
@@ -101,6 +102,6 @@ const TaskColumn: React.FC<ITaskColumnProps> = ({
             <div className={s.fill} />
         </div>
     );
-};
+});
 
 export default TaskColumn;
