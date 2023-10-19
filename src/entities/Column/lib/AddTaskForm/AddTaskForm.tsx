@@ -85,14 +85,9 @@ const AddTaskForm: React.FC<Props> = ({
             <div className={s.createColumnButtons}>
                 <Button
                     onClick={handler}
+                    iconColor="#5CD43E"
                     icon={
                         faCircleCheck
-                    //     (
-                    //     <FontAwesomeIcon
-                    //         icon={faCircleCheck}
-                    //         style={{ color: '#5CD43E' }}
-                    //     />
-                    // )
                     }
                 >
                     Confirm
@@ -100,11 +95,8 @@ const AddTaskForm: React.FC<Props> = ({
 
                 <Button
                     onClick={onAbort}
+                    iconColor="#DE2525"
                     icon={(
-                        // <FontAwesomeIcon
-                        //     icon={faCircleXmark}
-                        //     style={{ color: '#DE2525' }}
-                        // />
                         faCircleXmark
                     )}
                 >

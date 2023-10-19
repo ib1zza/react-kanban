@@ -30,6 +30,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   square?: boolean;
   sharp?: boolean;
   noBorder?: boolean;
+    iconColor?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -43,6 +44,7 @@ const Button: React.FC<ButtonProps> = ({
     children,
     sharp,
     noBorder,
+    iconColor,
     ...props
 }) => {
     const mods: Mods = {
@@ -63,7 +65,7 @@ const Button: React.FC<ButtonProps> = ({
             <div className={s.content + (loading ? ` ${s.invisible}` : '')}>
                 {Icon && (
                     <div className={s.icon} style={iconStyles}>
-                        <FontAwesomeIcon icon={Icon as IconDefinition} />
+                        <FontAwesomeIcon icon={Icon as IconDefinition} style={iconColor ? { color: iconColor } : {}} />
                     </div>
                 )}
                 { children }
