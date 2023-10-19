@@ -11,7 +11,7 @@ const initialState: BoardCollectionSchema = {
     selectedBoard: null,
     selectedTask: null,
     linkedUsersInfo: [],
-
+    shareStatus: false,
 };
 
 export const boardCollectionSlice = createSlice({
@@ -52,6 +52,9 @@ export const boardCollectionSlice = createSlice({
         },
         setLinkedUsers: (state, action: PayloadAction<IUserInfo[]>) => {
             state.linkedUsersInfo = action.payload;
+        },
+        setShareStatus: (state, action: PayloadAction<boolean>) => {
+            state.shareStatus = action.payload;
         },
     },
 

@@ -10,6 +10,7 @@ describe('boardCollectionSlice', () => {
             selectedBoard: null,
             selectedTask: null,
             linkedUsersInfo: [],
+            shareStatus: false,
         };
         expect(boardCollectionReducer(
 state as BoardCollectionSchema,
@@ -33,7 +34,7 @@ boardCollectionActions.setCurrentBoard({
                 selectedBoardId: '6009f37b-1800-41bd-a383-7904a5d2b7d4',
                 selectedColumnId: '',
                 linkedUsersInfo: [],
-
+                shareStatus: false,
                 selectedBoard: {
                     usersAllowed: [],
                     guestsAllowed: [
@@ -59,6 +60,7 @@ boardCollectionActions.setCurrentBoard({
             selectedBoardId: '6009f37b-1800-41bd-a383-7904a5d2b7d4',
             selectedColumnId: '',
             linkedUsersInfo: [],
+            shareStatus: false,
             selectedBoard: {
                 usersAllowed: [],
                 guestsAllowed: [
@@ -86,7 +88,7 @@ boardCollectionActions.removeSelectedBoard(),
                 selectedBoard: null,
                 selectedTask: null,
                 linkedUsersInfo: [],
-
+                shareStatus: false,
             },
         );
     });
@@ -96,7 +98,7 @@ boardCollectionActions.removeSelectedBoard(),
             selectedColumnId: '',
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
             linkedUsersInfo: [],
-
+            shareStatus: false,
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {
@@ -182,6 +184,7 @@ boardCollectionActions.setCurrentTask(
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
             selectedColumnId: '2d7579a2-1d17-4fdb-9560-d894c8d83b0f',
             linkedUsersInfo: [],
+            shareStatus: false,
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {
@@ -338,6 +341,7 @@ boardCollectionActions.setCurrentTask(
                 description: '12e',
                 isCompleted: false,
             },
+            shareStatus: false,
         };
 
         expect(boardCollectionReducer(
@@ -412,6 +416,7 @@ boardCollectionActions.removeSelectedTask(),
                 ],
             },
             selectedTask: null,
+            shareStatus: false,
         });
     });
 });

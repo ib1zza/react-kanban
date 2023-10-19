@@ -24,12 +24,17 @@ const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
                 [className as string],
             )}
             onClick={toggleTheme}
-        >
-            {theme === Theme.LIGHT ? (
-                <FontAwesomeIcon icon={faSun} />
+            icon={theme === Theme.LIGHT ? (
+                faSun
             ) : (
-                <FontAwesomeIcon icon={faMoon} />
+                faMoon
             )}
+        >
+            {/* {theme === Theme.LIGHT ? ( */}
+            {/*    <FontAwesomeIcon icon={faSun} /> */}
+            {/* ) : ( */}
+            {/*    <FontAwesomeIcon icon={faMoon} /> */}
+            {/* )} */}
         </Button>
     );
 };

@@ -1,4 +1,6 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, {
+    memo, useCallback, useEffect, useState,
+} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PopupTaskInfo } from 'widgets';
 
@@ -25,11 +27,11 @@ import { getBoardThunk } from '../model/services/getBoardThunk/getBoardThunk';
 const BoardPage = memo(() => {
     const { boardId } = useParams();
     const {
-        selectedBoard, selectedTask, linkedUsersInfo,
+        selectedBoard, selectedTask, linkedUsersInfo, shareStatus,
     } = useAppSelector(
         getBoardCollection,
     );
-    const [shareStatus, setShareStatus] = useState(false);
+    // const [shareStatus, setShareStatus] = useState(false);
     const { user } = useAppSelector(getUserState);
     const [isCreating, setIsCreating] = useState(false);
     const navigate = useNavigate();
@@ -75,34 +77,28 @@ const BoardPage = memo(() => {
         // refetchBoard();
     };
 
-    const handleEditTitle = (newTitle: string) => {
+    const handleEditTitle = useCallback((newTitle: string) => {
         if (!boardId) return;
         editBoard(boardId, { title: newTitle });
-        // .then(refetchBoard);
-    };
+    }, [boardId]);
 
     useEffect(() => {
         if (!boardId) return;
         dispatch(getBoardThunk({ boardId, linkedUsersInfo }));
     }, [boardId, dispatch, linkedUsersInfo]);
 
-    const handleDeleteBoard = async () => {
+    const handleDeleteBoard = useCallback(async () => {
         if (!boardId || !user?.uid) return;
-
         deleteBoard(boardId, user.uid).then((res) => {
             navigate('/');
         });
-        // await dispatch(boardCollectionActions.removeBoard(boardId));
-        // window.location.href = '/';
-    };
+    }, [boardId, navigate, user?.uid]);
 
     return (
         <>
 
             {selectedBoard && shareStatus && (
-                <Modal
-                    onClose={() => setShareStatus(false)}
-                >
+                <Modal onClose={() => dispatch(boardCollectionActions.setShareStatus(false))}>
                     <ShareBoard board={selectedBoard} />
                 </Modal>
             )}
@@ -113,7 +109,7 @@ const BoardPage = memo(() => {
                     title={selectedBoard?.title || 'loading...'}
                     setIsCreating={setIsCreating}
                     onDelete={handleDeleteBoard}
-                    onShare={() => setShareStatus(true)}
+                    // onShare={() => setShareStatus(true)}
                 />
                 <div className={s.wrapper}>
                     <div className={s.columnsWrapper}>
@@ -127,7 +123,7 @@ const BoardPage = memo(() => {
                                             key={column.uid}
                                             column={column}
                                             // onEdit={refetchBoard}
-                                            onEdit={() => {}}
+                                            // onEdit={() => {}}
                                             boardId={selectedBoard.uid}
                                         />
                                     ))}

@@ -1,38 +1,33 @@
 /* eslint-disable react/prop-types */
 import React, { memo, useState } from 'react';
-import { faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { useTranslation } from 'react-i18next';
 import { deleteColumn, editColumn } from 'features/columns';
 import { IColumn } from 'app/types/IBoard';
-import Button, { ButtonTheme } from 'shared/ui/Button/Button';
+import Button from 'shared/ui/Button/Button';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
+import AddTaskBlock from 'entities/Column/lib/AddTaskForm/AddTaskBlock/AddTaskBlock';
 import s from './TaskColumn.module.scss';
 import TaskList from '../lib/TaskList/TaskList';
-import AddTaskForm from '../lib/AddTaskForm/AddTaskForm';
 
 interface ITaskColumnProps {
     column: IColumn;
-    onEdit: () => void;
     boardId: string;
 }
 
 const TaskColumn: React.FC<ITaskColumnProps> = memo(({
     column,
-    onEdit,
     boardId,
 }) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
-    const [isAddingTask, setIsAddingTask] = useState(false);
-    const { t } = useTranslation('buttons');
+    // const [isAddingTask, setIsAddingTask] = useState(false);
     const editHandler = async (title: string, color: string) => {
         const res = await editColumn(boardId, column.uid, {
             title,
             color,
         });
         console.log(res);
-        onEdit();
+        // onEdit();
         setIsEditColumn(false);
     };
 
@@ -60,44 +55,23 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                     <Button
                         className={s.editButton}
                         onClick={() => setIsEditColumn(true)}
-                        icon={<FontAwesomeIcon icon={faPenToSquare} />}
+                        icon={faPenToSquare}
                     />
                     <Button
                         className={s.deleteButton}
-                        onClick={() => deleteColumn(boardId, column.uid).then(onEdit)}
-                        icon={<FontAwesomeIcon icon={faTrashCan} />}
+                        onClick={() => deleteColumn(boardId, column.uid)}
+                        icon={faTrashCan}
                     />
                 </div>
             </div>
 
-            {!isAddingTask && (
-                <Button
-                    theme={ButtonTheme.ACCENT}
-                    className={s.addButton}
-                    onClick={() => setIsAddingTask(true)}
-                    icon={<FontAwesomeIcon icon={faPlus} />}
-                />
-            )}
-
-            {isAddingTask && (
-                <AddTaskForm
-                    onAbort={() => {
-                        setIsAddingTask(false);
-                    }}
-                    onSubmit={() => {
-                        setIsAddingTask(false);
-                        onEdit();
-                    }}
-                    boardId={boardId}
-                    columnId={column.uid}
-                />
-            )}
+            <AddTaskBlock boardId={boardId} columnId={column.uid} />
 
             <TaskList
                 boardId={boardId}
                 columnId={column.uid}
                 tasks={column.tasks}
-                rerender={onEdit}
+                // rerender={()}
             />
             <div className={s.fill} />
         </div>

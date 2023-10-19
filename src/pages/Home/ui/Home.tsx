@@ -74,9 +74,8 @@ const Home = memo(() => {
             <div className={s.buttons}>
                 <Button
                     onClick={() => setAddBoardStatus(true)}
-                    icon={<FontAwesomeIcon size="lg" icon={faPlus} />}
                 >
-
+                    <FontAwesomeIcon size="lg" icon={faPlus} />
                     {t('Добавить доску')}
                 </Button>
                 <Button onClick={() => setLinkBoardStatus(true)} className={s.share_button}>
@@ -89,7 +88,6 @@ const Home = memo(() => {
             <div className={s.blocks__container}>
                 {!user?.uid ? <BoardPreviewSkeleton /> : (
                     <>
-                        {' '}
                         {addBoardStatus && (
                             <ActionForm
                                 status={ActionFormStatus.BOARD}
@@ -104,11 +102,8 @@ const Home = memo(() => {
                                 onAbort={() => setLinkBoardStatus(false)}
                             />
                         )}
-                        {!!boards.length && boards.map((item: IBoard, index) => (
+                        {!!boards.length && boards.map((item: IBoard) => (
                             <BoardPreview
-                                onClick={() => {
-                                    navigate(`/board/${item?.uid}`);
-                                }}
                                 key={item.uid}
                                 board={item}
                                 userId={user.uid}

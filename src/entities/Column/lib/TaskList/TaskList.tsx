@@ -7,11 +7,11 @@ interface ITaskListProps {
   boardId: string;
   columnId: string;
   tasks: { [key: string]: ITask };
-  rerender: () => void;
+  // rerender: () => void;
 }
 const TaskList: React.FC<ITaskListProps> = ({
     tasks,
-    rerender,
+    // rerender,
     boardId,
     columnId,
 }) => {
@@ -26,7 +26,7 @@ const TaskList: React.FC<ITaskListProps> = ({
                 columnId={columnId}
                 task={el}
                 key={el.uid}
-                rerender={rerender}
+                // rerender={rerender}
             />
         ))}
         </div>
