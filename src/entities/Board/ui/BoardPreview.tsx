@@ -1,45 +1,40 @@
 /* eslint-disable react/prop-types */
-import { title } from 'process';
 import React, { memo, useEffect } from 'react';
-import { faLink, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { IBoard } from 'app/types/IBoard';
-import { deleteBoard, ShareBoard } from 'features/boards';
+import { ShareBoard } from 'features/boards';
 import { getUserInfo } from 'features/users';
 
 import Modal from 'shared/ui/Modal/Modal';
 import Button from 'shared/ui/Button/Button';
+import { useNavigate } from 'react-router-dom';
 import s from './BoardPreview.module.scss';
 
 interface IBoardPreviewProps {
   userId: string;
   board: IBoard;
-  onClick: () => void;
-  // onDelete: () => void;
 }
 
 const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
     userId,
-    onClick,
     board,
-    // onDelete,
 }) => {
+    const navigate = useNavigate();
     const [username, setUsername] = React.useState<string>('');
     const [shareStatus, setShareStatus] = React.useState(false);
     const { t } = useTranslation();
 
+    const onClick = () => {
+        navigate(`/board/${board.uid}`);
+    };
     useEffect(() => {
         getUserInfo(board.ownerId).then((res) => {
             setUsername(res?.displayName);
         });
     }, [userId]);
 
-    // const handleDelete = async (e: React.MouseEvent) => {
-    //     e.stopPropagation();
-    //     await deleteBoard(board.uid, board.ownerId);
-    //     onDelete();
-    // };
     const onCloseShare = () => {
         setShareStatus(false);
     };
@@ -72,11 +67,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
                         <Button
                             onClick={onOpenShare}
                             className={s.share_button}
-                            icon={(
-                                <FontAwesomeIcon
-                                    icon={faLink}
-                                />
-                            )}
+                            icon={faLink}
                         />
                         {/* <Button */}
                         {/*    onClick={handleDelete} */}

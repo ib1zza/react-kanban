@@ -14,13 +14,13 @@ import AddTaskForm from '../lib/AddTaskForm/AddTaskForm';
 
 interface ITaskColumnProps {
     column: IColumn;
-    onEdit: () => void;
+    // onEdit: () => void;
     boardId: string;
 }
 
 const TaskColumn: React.FC<ITaskColumnProps> = memo(({
     column,
-    onEdit,
+    // onEdit,
     boardId,
 }) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
@@ -32,7 +32,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
             color,
         });
         console.log(res);
-        onEdit();
+        // onEdit();
         setIsEditColumn(false);
     };
 
@@ -60,12 +60,12 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                     <Button
                         className={s.editButton}
                         onClick={() => setIsEditColumn(true)}
-                        icon={<FontAwesomeIcon icon={faPenToSquare} />}
+                        icon={faPenToSquare}
                     />
                     <Button
                         className={s.deleteButton}
-                        onClick={() => deleteColumn(boardId, column.uid).then(onEdit)}
-                        icon={<FontAwesomeIcon icon={faTrashCan} />}
+                        onClick={() => deleteColumn(boardId, column.uid)}
+                        icon={faTrashCan}
                     />
                 </div>
             </div>
@@ -75,7 +75,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                     theme={ButtonTheme.ACCENT}
                     className={s.addButton}
                     onClick={() => setIsAddingTask(true)}
-                    icon={<FontAwesomeIcon icon={faPlus} />}
+                    icon={faPlus}
                 />
             )}
 
@@ -86,7 +86,6 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                     }}
                     onSubmit={() => {
                         setIsAddingTask(false);
-                        onEdit();
                     }}
                     boardId={boardId}
                     columnId={column.uid}
@@ -97,7 +96,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                 boardId={boardId}
                 columnId={column.uid}
                 tasks={column.tasks}
-                rerender={onEdit}
+                // rerender={()}
             />
             <div className={s.fill} />
         </div>

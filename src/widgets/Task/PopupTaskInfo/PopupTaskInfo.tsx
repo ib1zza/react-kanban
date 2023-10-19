@@ -109,14 +109,14 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
 
                     <div className={s.buttons}>
                         <Button
-                            icon={<FontAwesomeIcon icon={faPenToSquare} />}
+                            icon={faPenToSquare}
                             onClick={() => setEditing(true)}
                             loading={loading === 'edit'}
                         >
                             {t('Изменить')}
                         </Button>
                         <Button
-                            icon={<FontAwesomeIcon icon={faTrashCan} />}
+                            icon={faTrashCan}
                             onClick={onDeleteTask}
                             loading={loading === 'delete'}
                         >

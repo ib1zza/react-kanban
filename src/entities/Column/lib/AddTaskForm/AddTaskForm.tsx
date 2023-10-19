@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck,
@@ -28,14 +28,18 @@ const AddTaskForm: React.FC<Props> = ({
     const [description, setDescription] = React.useState('');
     const { user } = UserAuth();
     const { t } = useTranslation();
-    const handler = () => {
-        createTaskRt(
+
+    const handler = useCallback(
+        () => createTaskRt(
             {
-                title, description, creatorId: user?.uid as string, tags: [],
+                title,
+                description,
+                creatorId: user?.uid as string,
+                tags: [],
             },
             boardId,
             columnId,
-        ).then(onSubmit);
+        ).then(onSubmit),
         // createTask(
         //     {
         //         title, description, creatorId: user?.uid as string, tags: [],
@@ -43,7 +47,8 @@ const AddTaskForm: React.FC<Props> = ({
         //     boardId,
         //     columnId,
         // ).then(onSubmit);
-    };
+        [title, description],
+    );
 
     return (
         <div className={s.wrapper}>
@@ -80,12 +85,15 @@ const AddTaskForm: React.FC<Props> = ({
             <div className={s.createColumnButtons}>
                 <Button
                     onClick={handler}
-                    icon={(
-                        <FontAwesomeIcon
-                            icon={faCircleCheck}
-                            style={{ color: '#5CD43E' }}
-                        />
-                    )}
+                    icon={
+                        faCircleCheck
+                    //     (
+                    //     <FontAwesomeIcon
+                    //         icon={faCircleCheck}
+                    //         style={{ color: '#5CD43E' }}
+                    //     />
+                    // )
+                    }
                 >
                     Confirm
                 </Button>
@@ -93,10 +101,11 @@ const AddTaskForm: React.FC<Props> = ({
                 <Button
                     onClick={onAbort}
                     icon={(
-                        <FontAwesomeIcon
-                            icon={faCircleXmark}
-                            style={{ color: '#DE2525' }}
-                        />
+                        // <FontAwesomeIcon
+                        //     icon={faCircleXmark}
+                        //     style={{ color: '#DE2525' }}
+                        // />
+                        faCircleXmark
                     )}
                 >
                     Cancel

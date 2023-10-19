@@ -83,11 +83,7 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
                             className={s.buttonAccept}
                             theme={ButtonTheme.NOTIFICATION}
                             onClick={acceptHandler}
-                            icon={(
-                                <FontAwesomeIcon
-                                    icon={faCircleCheck}
-                                />
-                            )}
+                            icon={faCircleCheck}
                         >
                             {t('принять')}
 
@@ -97,12 +93,7 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
                             className={s.buttonDecline}
                             theme={ButtonTheme.NOTIFICATION}
                             onClick={declineHandler}
-                            icon={(
-                                <FontAwesomeIcon
-                                    icon={faCircleXmark}
-                                    // style={{ color: '#DE2525' }}
-                                />
-                            )}
+                            icon={faCircleXmark}
                         >
                             {t('отклонить')}
 

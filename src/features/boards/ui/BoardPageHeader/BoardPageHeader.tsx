@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faAdd,
@@ -11,9 +11,9 @@ import {
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { Input } from 'shared/ui/Input/Input';
 import Button, { ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
-import { useAppSelector } from 'app/providers/StoreProvider';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { Avatar } from 'shared/ui/Avatar';
-import { getBoardCollection, getLinkedUsers } from 'pages/BoardPage';
+import { boardCollectionActions, getBoardCollection, getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { useTranslation } from 'react-i18next';
 import { deleteBoard } from 'features/boards';
@@ -25,16 +25,25 @@ interface Props {
     onEdit: (newTitle: string) => void;
     onDelete: () => void;
     setIsCreating: (value: boolean) => void;
-    onShare: () => void;
+    // onShare: () => void;
 }
 
-const BoardPageHeader: React.FC<Props> = ({
-    onEdit, onDelete, title, setIsCreating, onShare, isEnabled,
-}) => {
+const BoardPageHeader: React.FC<Props> = memo(({
+    onEdit,
+    onDelete,
+    title,
+    setIsCreating,
+    isEnabled,
+}: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
     const linkedUsers = useAppSelector(getLinkedUsers);
     const { t } = useTranslation();
+    const dispatch = useAppDispatch();
+
+    function onShare() {
+        dispatch(boardCollectionActions.setShareStatus(true));
+    }
     const onEditHandler = () => {
         const len = editingTitle.trim().length;
         if (len > 3 && len < 30) {
@@ -115,6 +124,7 @@ const BoardPageHeader: React.FC<Props> = ({
                 {/* } */}
             </h1>
             <div className={s.second}>
+                {/* eslint-disable-next-line react/jsx-no-bind */}
                 <Button className={s.share} disabled={isEnabled} onClick={onShare}>
                     <FontAwesomeIcon icon={faShareAlt} />
                     <p>{t('share')}</p>
@@ -149,6 +159,6 @@ const BoardPageHeader: React.FC<Props> = ({
             </div>
         </div>
     );
-};
+});
 
 export { BoardPageHeader };

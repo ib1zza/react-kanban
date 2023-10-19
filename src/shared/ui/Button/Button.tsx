@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './Button.module.scss';
 import { classNames, Mods } from '../../lib/classNames/classNames';
 
@@ -19,7 +21,7 @@ export enum ButtonSize {
     L = 'l'
 }
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  icon?: JSX.Element;
+  icon?: IconDefinition;
   loading?: boolean;
   iconStyles?: React.CSSProperties;
   theme?: ButtonTheme;
@@ -51,6 +53,7 @@ const Button: React.FC<ButtonProps> = ({
         [s.sharp]: sharp,
         [s.noBorder]: noBorder,
     };
+    console.log(Icon);
     return (
         <button
             className={classNames(s.button, mods, [className as string])}
@@ -60,7 +63,7 @@ const Button: React.FC<ButtonProps> = ({
             <div className={s.content + (loading ? ` ${s.invisible}` : '')}>
                 {Icon && (
                     <div className={s.icon} style={iconStyles}>
-                        {Icon}
+                        <FontAwesomeIcon icon={Icon as IconDefinition} />
                     </div>
                 )}
                 { children }

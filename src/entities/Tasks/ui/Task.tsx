@@ -19,10 +19,11 @@ interface ITaskProps {
   task: ITask;
   boardId: string;
   columnId: string;
-  rerender: () => void;
+  // rerender: () => void;
 }
 const Task = ({
-    task, boardId, columnId, rerender,
+    task, boardId, columnId,
+    // rerender,
 }: ITaskProps) => {
     const dispatch = useAppDispatch();
     const linkedUsers = useAppSelector(getLinkedUsers);
@@ -36,9 +37,10 @@ const Task = ({
     //     rerender();
     // };
     const handleComplete = () => {
-        toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted).then(
-            rerender,
-        );
+        toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted);
+        // .then(
+        // rerender,
+        // );
     };
 
     const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
@@ -49,9 +51,9 @@ const Task = ({
                     className={s.icon}
                     onClick={handleComplete}
                     icon={!task.isCompleted ? (
-                        <FontAwesomeIcon icon={iconCheckRegular} />
+                        iconCheckRegular
                     ) : (
-                        <FontAwesomeIcon icon={iconCheckSolid} />
+                        iconCheckSolid
                     )}
                 />
                 <span>{task.title}</span>
@@ -69,7 +71,7 @@ const Task = ({
                     onClick={
                         openTaskHandler
                     }
-                    icon={<FontAwesomeIcon icon={faEllipsisVertical} />}
+                    icon={faEllipsisVertical}
                 />
                 {/* <Button */}
                 {/*    onClick={() => deleteTaskHandler()} */}

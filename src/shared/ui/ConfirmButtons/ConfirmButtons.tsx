@@ -19,9 +19,8 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort, disabled }) => {
                 theme={ButtonTheme.GREEN}
                 onClick={onConfirm}
                 disabled={disabled}
-                icon={
-                    <FontAwesomeIcon icon={faCircleCheck} style={{ color: '#5CD43E' }} />
-                }
+                iconStyles={{ color: '#5CD43E' }}
+                icon={faCircleCheck}
             >
                 {t('Подтвердить')}
             </Button>
@@ -29,9 +28,8 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort, disabled }) => {
             <Button
                 theme={ButtonTheme.RED}
                 onClick={onAbort}
-                icon={
-                    <FontAwesomeIcon icon={faCircleXmark} style={{ color: '#DE2525' }} />
-                }
+                iconStyles={{ color: '#DE2525' }}
+                icon={faCircleXmark}
             >
                 {t('Отменить')}
             </Button>

@@ -41,17 +41,13 @@ PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];
 
 export const Icon: Story = {
     args: {
-        icon: <FontAwesomeIcon
-            icon={faCircleCheck}
-        />,
+        icon: faCircleCheck,
 
     },
 };
 export const IconWithText: Story = {
     args: {
-        icon: <FontAwesomeIcon
-            icon={faCircleCheck}
-        />,
+        icon: faCircleCheck,
         children: 'Button',
     },
 };
