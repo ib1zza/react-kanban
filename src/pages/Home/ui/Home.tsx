@@ -24,7 +24,6 @@ import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
 
 const Home = memo(() => {
-    const navigate = useNavigate();
     const { user } = useAppSelector((state) => state.userInfo);
     const [addBoardStatus, setAddBoardStatus] = useState(false);
     const [linkBoardStatus, setLinkBoardStatus] = useState(false);
@@ -66,7 +65,6 @@ const Home = memo(() => {
         },
         [user?.uid],
     );
-
     const { t } = useTranslation('buttons');
     return (
         <div className={s.boardPageContainer}>

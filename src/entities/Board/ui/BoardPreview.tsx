@@ -1,12 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { memo, useEffect } from 'react';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
 import { IBoard } from 'app/types/IBoard';
 import { ShareBoard } from 'features/boards';
 import { getUserInfo } from 'features/users';
-
 import Modal from 'shared/ui/Modal/Modal';
 import Button from 'shared/ui/Button/Button';
 import { useNavigate } from 'react-router-dom';
@@ -69,15 +67,6 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
                             className={s.share_button}
                             icon={faLink}
                         />
-                        {/* <Button */}
-                        {/*    onClick={handleDelete} */}
-                        {/*    className={s.delete_button} */}
-                        {/*    icon={( */}
-                        {/*        <FontAwesomeIcon */}
-                        {/*            icon={faTrash} */}
-                        {/*        /> */}
-                        {/*    )} */}
-                        {/* /> */}
                     </div>
                 )}
             </h3>
