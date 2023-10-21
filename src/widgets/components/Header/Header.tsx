@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import OpenNotificationsButton from 'entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
 import Skeleton from 'react-loading-skeleton';
 import { Avatar } from 'shared/ui/Avatar';
@@ -13,17 +13,20 @@ const Header = memo(() => {
     const { user } = useAppSelector(getUserState);
     const [isShowProfile, setIsShownProfile] = useState(false);
     const { t } = useTranslation();
+    const handleShowProfile = useCallback((status: boolean) => {
+        setIsShownProfile(status);
+    }, []);
     return (
         <header className={s.header}>
             {isShowProfile && (
-                <Modal title={t('Profile')} onClose={() => setIsShownProfile(false)}>
+                <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}>
                     <Profile />
                 </Modal>
             )}
             <div />
             <div className={s.header__cabinet}>
                 <OpenNotificationsButton />
-                <div onClick={() => setIsShownProfile(true)} className={s.profile}>
+                <div onClick={() => handleShowProfile(true)} className={s.profile}>
                     <span>
                         <p className={s.nickname}>{user ? user?.email : <Skeleton width={200} duration={1} />}</p>
                         <div className={s.avatar}>
@@ -31,21 +34,6 @@ const Header = memo(() => {
                                 user ? <Avatar src={user?.photoURL} alt={user?.displayName} />
                                     : <Skeleton circle width={38} height={38} duration={1} />
                             }
-                            {/* {isOpen
-                            && (
-                                <div className={s.menu}>
-                                    {user && (
-                                        <>
-                                            <div onClick={() => }>
-                                                {t('Профиль')}
-                                            </div>
-
-                                            <div onClick={logOut}>{t('Выйти')}</div>
-                                        </>
-                                    )}
-                                </div>
-                            )
-                        } */}
                         </div>
                     </span>
                 </div>

@@ -1,4 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, {
+    memo, useCallback, useMemo, useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { ITask } from 'app/types/IBoard';
 import { useAppSelector } from 'app/providers/StoreProvider';
@@ -16,12 +18,12 @@ interface Props {
   loading: boolean;
 }
 
-const EditTaskForm: React.FC<Props> = ({
+const EditTaskForm = memo(({
     onEdit,
     onAbort,
     prevTask,
     loading,
-}) => {
+}: Props) => {
     const [title, setTitle] = useState(prevTask.title);
     const [description, setDescription] = useState(prevTask.description);
     const linkedUsers = useAppSelector(getLinkedUsers);
@@ -40,28 +42,18 @@ const EditTaskForm: React.FC<Props> = ({
     })), [linkedUsers]);
 
     const editHandler = () => {
-        console.log('edit');
-        console.log(title, description);
         if (title === '') return onAbort();
-
         const editedData : EditedData = {};
-
         if (title !== prevTask.title) {
             editedData.title = title;
         }
-
         if (description !== prevTask.description) {
             editedData.description = description;
         }
-
         if (linkedUserId !== prevTask.attachedUser) {
             editedData.attachedUser = linkedUserId;
         }
-
-        console.log(editedData);
-
         if (Object.keys(editedData).length === 0) return onAbort();
-        console.log(editedData);
         onEdit(editedData);
     };
 
@@ -72,12 +64,9 @@ const EditTaskForm: React.FC<Props> = ({
         onAbort();
     };
 
-    const handleSelectChange = (value: string | number) => {
-        console.log(value);
+    const handleSelectChange = useCallback((value: string | number) => {
         setLinkedUserId(String(value));
-    };
-
-    console.log(linkedUsers);
+    }, []);
 
     return (
         <div>
@@ -120,6 +109,6 @@ const EditTaskForm: React.FC<Props> = ({
             />
         </div>
     );
-};
+});
 
 export default EditTaskForm;

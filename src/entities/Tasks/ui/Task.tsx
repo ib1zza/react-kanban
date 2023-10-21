@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
 import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
-import { faCircleCheck as iconCheckSolid, faEllipsisVertical, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck as iconCheckSolid, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { ITask } from 'app/types/IBoard';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import { deleteTask, toggleTaskComplete } from 'features/tasks';
-
+import { toggleTaskComplete } from 'features/tasks';
 import { Avatar } from 'shared/ui/Avatar';
-
 import { AvatarSize } from 'shared/ui/Avatar/ui/Avatar';
 import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { memo, useCallback } from 'react';
 import s from './Task.module.scss';
 import Button from '../../../shared/ui/Button/Button';
 
@@ -19,30 +16,18 @@ interface ITaskProps {
   task: ITask;
   boardId: string;
   columnId: string;
-  // rerender: () => void;
 }
-const Task = ({
+const Task = memo(({
     task, boardId, columnId,
-    // rerender,
 }: ITaskProps) => {
     const dispatch = useAppDispatch();
     const linkedUsers = useAppSelector(getLinkedUsers);
     const openTaskHandler = () => {
         dispatch(boardCollectionActions.setCurrentTask(task));
     };
-
-    // const deleteTaskHandler = () => {
-    //     deleteTask(boardId, columnId, task.uid);
-    //     dispatch(boardCollectionActions.removeSelectedTask());
-    //     rerender();
-    // };
-    const handleComplete = () => {
+    const handleComplete = useCallback(() => {
         toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted);
-        // .then(
-        // rerender,
-        // );
-    };
-
+    }, [boardId, columnId, task.isCompleted, task.uid]);
     const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
     return (
         <div className={classNames(s.container, { [s.completed]: task.isCompleted })}>
@@ -73,14 +58,10 @@ const Task = ({
                     }
                     icon={faEllipsisVertical}
                 />
-                {/* <Button */}
-                {/*    onClick={() => deleteTaskHandler()} */}
-                {/*    icon={<FontAwesomeIcon icon={faTrash} />} */}
-                {/* /> */}
 
             </div>
         </div>
     );
-};
+});
 
 export default Task;

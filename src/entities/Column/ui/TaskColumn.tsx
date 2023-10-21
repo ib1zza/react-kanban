@@ -20,14 +20,11 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
     boardId,
 }) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
-    // const [isAddingTask, setIsAddingTask] = useState(false);
     const editHandler = async (title: string, color: string) => {
         const res = await editColumn(boardId, column.uid, {
             title,
             color,
         });
-        console.log(res);
-        // onEdit();
         setIsEditColumn(false);
     };
 
@@ -46,12 +43,9 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                 style={{ backgroundColor: column.color }}
             />
             <hr />
-
             <div className={s.titleBlock}>
-
                 <h6 className={s.title}>{column.title}</h6>
                 <div className={s.columnButtons}>
-
                     <Button
                         className={s.editButton}
                         onClick={() => setIsEditColumn(true)}
@@ -64,9 +58,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                     />
                 </div>
             </div>
-
             <AddTaskBlock boardId={boardId} columnId={column.uid} />
-
             <TaskList
                 boardId={boardId}
                 columnId={column.uid}
