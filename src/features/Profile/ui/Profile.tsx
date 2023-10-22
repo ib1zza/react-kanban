@@ -22,7 +22,7 @@ const Profile = memo(() => {
     const { user } = useAppSelector(getUserState);
     const { refetch } = UserAuth();
     const [editStatus, setEditStatus] = useState(false);
-    const [name, setName] = useState<any>('');
+    const [name, setName] = useState<string>('');
     const { t } = useTranslation('profile');
     const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
     const { logOut } = useAuth();
@@ -30,6 +30,7 @@ const Profile = memo(() => {
         if (!user?.uid) return;
         return getUserInfo(user.uid).then((res) => {
             setUserInfo(res as SetStateAction<IUserInfo | null>);
+            setName(res?.displayName || '');
         });
     }, [user?.uid]);
 

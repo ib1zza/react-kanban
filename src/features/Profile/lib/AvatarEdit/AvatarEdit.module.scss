@@ -1,6 +1,6 @@
 .profile__avatar {
-    width: 90px;
-    height: 90px;
+    width: 150px;
+    height: 150px;
 
     overflow: hidden;
     border-radius: 50%;
@@ -17,17 +17,19 @@
         background-color: rgb(29 29 29 / 88%);
         opacity: 0;
         color: white;
-        font-size: 18px;
+        font-size: 20px;
         position: absolute;
         margin-left: auto;
         margin-right: auto;
         left: 0;
         right: 0;
         text-align: center;
+        transition: .2s ease-in-out;
 
         &:hover {
             cursor: pointer;
             opacity: 1;
+            transition: .2s ease-in-out;
         }
     }
 

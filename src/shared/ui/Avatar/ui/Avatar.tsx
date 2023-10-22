@@ -5,6 +5,7 @@ export enum AvatarSize {
     S = 's',
     M = 'm',
     L = 'l',
+    xl = 'xl',
 }
 
 interface AvatarProps {

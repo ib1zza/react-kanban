@@ -23,6 +23,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
 }
 
 export const Input = memo((props: InputProps) => {
+    console.log(props);
     const {
         className,
         error,
