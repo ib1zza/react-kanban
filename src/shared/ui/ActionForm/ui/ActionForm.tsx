@@ -79,11 +79,6 @@ const ActionForm = memo((props: Props) => {
             break;
         }
     };
-    useEffect(() => {
-        if (title !== '') {
-            setError('');
-        }
-    }, [title]);
 
     return (
         <form className={`${s.container} ${status !== ActionFormStatus.BOARD && s.withColor}`}>

@@ -1,6 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Theme } from 'app/providers/theme/lib/ThemeContext';
 import { ThemeDecorator } from '../../../config/Storybook/ThemeDecorator/ThemeDecorator';
 import { Avatar, AvatarSize } from './Avatar';

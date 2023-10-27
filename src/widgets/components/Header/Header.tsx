@@ -1,4 +1,6 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, {
+    Suspense, memo, useCallback, useState,
+} from 'react';
 import OpenNotificationsButton from 'entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
 import Skeleton from 'react-loading-skeleton';
 import { Avatar } from 'shared/ui/Avatar';
@@ -19,9 +21,11 @@ const Header = memo(() => {
     return (
         <header className={s.header}>
             {isShowProfile && (
-                <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}>
-                    <Profile />
-                </Modal>
+                <Suspense>
+                    <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}>
+                        <Profile />
+                    </Modal>
+                </Suspense>
             )}
             <div />
             <div className={s.header__cabinet}>

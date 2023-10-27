@@ -3,7 +3,7 @@ import React, {
     MouseEventHandler, useEffect, useRef, useState,
 } from 'react';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import { Option } from '../Option/Option';
 import s from './Select.module.scss';
 
@@ -83,7 +83,7 @@ const Select = (props : SelectProps) => {
                     {placeholder}
                 </div>
                 <div className={s.arrow}>
-                    <FontAwesomeIcon icon={faCaretDown} />
+                    <MemoizedFontAwesomeIcon icon={faCaretDown} />
                 </div>
             </div>
             {isOpen && (

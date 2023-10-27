@@ -3,13 +3,13 @@ import React, { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '@ramonak/react-progress-bar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { Input, InputTheme } from 'shared/ui/Input/Input';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { signupActions } from 'features/auth/signup';
+import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import { getUserFromEmail } from '../../../users';
 import s from './SignupForm.module.scss';
 import { getSignupState } from '../model/selectors/getSignupState';
@@ -235,7 +235,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                                 value={formik.values.file}
                             />
                             <label htmlFor="file">
-                                <FontAwesomeIcon icon={faImage} />
+                                <MemoizedFontAwesomeIcon icon={faImage} />
                                 {/* <img src={Add} alt="" /> */}
                                 <span>{t('Загрузить аватар')}</span>
                             </label>

@@ -31,7 +31,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
         getUserInfo(board.ownerId).then((res) => {
             setUsername(res?.displayName);
         });
-    }, [userId]);
+    }, []);
 
     const onCloseShare = () => {
         setShareStatus(false);
