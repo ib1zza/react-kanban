@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
 import Button, { ButtonTheme } from '../Button/Button';

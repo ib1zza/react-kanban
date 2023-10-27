@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { useTheme } from '../../../../app/providers/theme/lib/useTheme';
 import { Theme } from '../../../../app/providers/theme/lib/ThemeContext';
@@ -16,7 +16,6 @@ const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
 
     return (
         <Button
-            // square
             theme={auth ? ButtonTheme.FULL : ButtonTheme.CLEAR}
             className={classNames(
                 '',
@@ -29,13 +28,7 @@ const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
             ) : (
                 faMoon
             )}
-        >
-            {/* {theme === Theme.LIGHT ? ( */}
-            {/*    <FontAwesomeIcon icon={faSun} /> */}
-            {/* ) : ( */}
-            {/*    <FontAwesomeIcon icon={faMoon} /> */}
-            {/* )} */}
-        </Button>
+        />
     );
 };
 

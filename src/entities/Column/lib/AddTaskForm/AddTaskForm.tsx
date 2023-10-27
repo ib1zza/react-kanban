@@ -1,14 +1,15 @@
-import React, { useCallback, useMemo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useCallback } from 'react';
+
 import {
     faCircleCheck,
     faCircleXmark,
 } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
 import Button from 'shared/ui/Button/Button';
-import { createTask } from 'features/tasks';
+
 import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { createTaskRt } from 'features/tasks/API/createTask/createTaskRt';
+import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import s from './AddTaskForm.module.scss';
 
 interface Props {
@@ -40,13 +41,6 @@ const AddTaskForm: React.FC<Props> = ({
             boardId,
             columnId,
         ).then(onSubmit),
-        // createTask(
-        //     {
-        //         title, description, creatorId: user?.uid as string, tags: [],
-        //     },
-        //     boardId,
-        //     columnId,
-        // ).then(onSubmit);
         [title, description],
     );
 
@@ -85,21 +79,25 @@ const AddTaskForm: React.FC<Props> = ({
             <div className={s.createColumnButtons}>
                 <Button
                     onClick={handler}
-                    iconColor="#5CD43E"
-                    icon={
-                        faCircleCheck
-                    }
                 >
+                    <MemoizedFontAwesomeIcon
+                        iconColor="#5CD43E"
+                        icon={
+                            faCircleCheck
+                        }
+                    />
                     Confirm
                 </Button>
 
                 <Button
                     onClick={onAbort}
-                    iconColor="#DE2525"
-                    icon={(
-                        faCircleXmark
-                    )}
                 >
+                    <MemoizedFontAwesomeIcon
+                        iconColor="#DE2525"
+                        icon={(
+                            faCircleXmark
+                        )}
+                    />
                     Cancel
                 </Button>
             </div>

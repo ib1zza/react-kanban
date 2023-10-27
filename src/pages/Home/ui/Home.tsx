@@ -1,14 +1,9 @@
-/* eslint-disable react/jsx-curly-newline */
-/* eslint-disable react/no-array-index-key */
 import React, {
     memo,
     useCallback,
-    useEffect, useState,
+    useEffect,
 } from 'react';
-import { faLink, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
-import Button from 'shared/ui/Button/Button';
+
 import { addUserToBoard } from 'features/boards';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
 import { BoardPreview } from 'entities/Board';
@@ -22,14 +17,15 @@ import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
+import { getAddBoardStatus, getLinkBoardStatus } from '../model/selectors/getButtonStatus';
+import HomeHeader from './HomeHeader';
 
 const Home = memo(() => {
     const { user } = useAppSelector((state) => state.userInfo);
-    const [addBoardStatus, setAddBoardStatus] = useState(false);
-    const [linkBoardStatus, setLinkBoardStatus] = useState(false);
+    const addBoardStatus = useAppSelector(getAddBoardStatus);
+    const linkBoardStatus = useAppSelector(getLinkBoardStatus);
     const boards = useAppSelector(getHomeBoards);
     const dispatch = useAppDispatch();
-
     useEffect(() => {
         if (!user?.uid) return;
         const unsub = subscribeToUserBoards(
@@ -44,15 +40,15 @@ const Home = memo(() => {
                 }
             },
         );
-
         return () => {
             unsub();
         };
-    }, [dispatch, user?.uid]);
+    }, [user?.uid]);
 
+    const { t } = useTranslation('buttons');
     const handleCreateBoard = useCallback(
         async (title: string) => {
-            setAddBoardStatus(false);
+            dispatch(homeActions.setAddBoardStatus(false));
             await createBoardRt(title, user?.uid as string);
         },
         [user?.uid],
@@ -60,28 +56,14 @@ const Home = memo(() => {
 
     const handleLinkBoard = useCallback(
         async (id: string) => {
-            setLinkBoardStatus(false);
+            dispatch(homeActions.setAddBoardStatus(false));
             await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
         },
         [user?.uid],
     );
-    const { t } = useTranslation('buttons');
     return (
         <div className={s.boardPageContainer}>
-
-            <div className={s.buttons}>
-                <Button
-                    onClick={() => setAddBoardStatus(true)}
-                >
-                    <FontAwesomeIcon size="lg" icon={faPlus} />
-                    {t('Добавить доску')}
-                </Button>
-                <Button onClick={() => setLinkBoardStatus(true)} className={s.share_button}>
-                    <FontAwesomeIcon size="lg" icon={faLink} />
-
-                </Button>
-
-            </div>
+            <HomeHeader />
 
             <div className={s.blocks__container}>
                 {!user?.uid ? <BoardPreviewSkeleton /> : (
@@ -90,17 +72,17 @@ const Home = memo(() => {
                             <ActionForm
                                 status={ActionFormStatus.BOARD}
                                 onCreateBoard={handleCreateBoard}
-                                onAbort={() => setAddBoardStatus(false)}
+                                onAbort={() => dispatch(homeActions.setAddBoardStatus(false))}
                             />
                         )}
                         {linkBoardStatus && (
                             <ActionForm
                                 status={ActionFormStatus.BOARD}
                                 onCreateBoard={handleLinkBoard}
-                                onAbort={() => setLinkBoardStatus(false)}
+                                onAbort={() => dispatch(homeActions.setLinkBoardStatus(false))}
                             />
                         )}
-                        {!!boards.length && boards.map((item: IBoard) => (
+                        { boards.map((item: IBoard) => (
                             <BoardPreview
                                 key={item.uid}
                                 board={item}

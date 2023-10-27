@@ -1,8 +1,8 @@
 import React, { ReactNode, memo } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRemove } from '@fortawesome/free-solid-svg-icons';
 import s from './modal.module.scss';
 import Button from '../Button/Button';
+import MemoizedFontAwesomeIcon from '../MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 
 interface IModal {
   onClose: () => void;
@@ -19,12 +19,10 @@ const Modal = memo((props: IModal) => {
                     <div className={s.header}>
                         <p>{title}</p>
                         <Button className={s.closeBtn} onClick={() => onClose()}>
-                            <FontAwesomeIcon icon={faRemove} />
+                            <MemoizedFontAwesomeIcon icon={faRemove} />
                         </Button>
                     </div>
-
                     <div className={s.modalContent}>{children}</div>
-
                 </div>
             </div>
         </>

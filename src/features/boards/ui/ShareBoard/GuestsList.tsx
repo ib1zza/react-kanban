@@ -13,6 +13,7 @@ import { IUserInfo } from 'app/types/IUserInfo';
 import { use } from 'i18next';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
+import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import s from './ShareBoard.module.scss';
 
 interface Props {
@@ -128,7 +129,7 @@ const GuestsList: FC<Props> = ({ board }) => {
                 {visibleUsers.map((user) => (
                     <div key={user.uid} className={s.form__user}>
                         <div>
-                            <FontAwesomeIcon icon={
+                            <MemoizedFontAwesomeIcon icon={
                                 checkIsUserJoined(user.uid) ? faCheck : faClock
                             }
                             />
@@ -136,7 +137,7 @@ const GuestsList: FC<Props> = ({ board }) => {
                             {user.email}
                         </div>
                         <button onClick={() => handleRemoveUserFromBoard(user.uid)}>
-                            <FontAwesomeIcon icon={faXmark} />
+                            <MemoizedFontAwesomeIcon icon={faXmark} />
                         </button>
                     </div>
                 ))}

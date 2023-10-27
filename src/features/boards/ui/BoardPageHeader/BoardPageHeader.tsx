@@ -1,4 +1,6 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, {
+    memo, useCallback, useEffect, useState,
+} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faAdd,
@@ -17,6 +19,7 @@ import { boardCollectionActions, getBoardCollection, getLinkedUsers } from 'page
 import { IUserInfo } from 'app/types/IUserInfo';
 import { useTranslation } from 'react-i18next';
 import { deleteBoard } from 'features/boards';
+import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import s from './BoardPageHeader.module.scss';
 
 interface Props {
@@ -56,12 +59,11 @@ const BoardPageHeader: React.FC<Props> = memo(({
         setEditingTitle(title);
     }, [title]);
 
-    const handleDelete = () => {
+    const handleDelete = useCallback(() => {
         onDelete();
-    };
-
-    useEffect(() => {
-
+    }, [onDelete]);
+    const handleEdit = useCallback(() => {
+        setEditing(true);
     }, []);
     return (
         <div className={s.BoardPageHeader}>
@@ -75,9 +77,9 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             theme={ButtonTheme.WHITE}
                             noBorder
                             className={s.button}
-                            onClick={() => setEditing(true)}
+                            onClick={handleEdit}
                         >
-                            <FontAwesomeIcon icon={faPenToSquare} />
+                            <MemoizedFontAwesomeIcon icon={faPenToSquare} />
                         </Button>
                         <Button
                             disabled={isEnabled}
@@ -87,7 +89,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             className={s.button}
                             onClick={handleDelete}
                         >
-                            <FontAwesomeIcon icon={faTrash} />
+                            <MemoizedFontAwesomeIcon icon={faTrash} />
                         </Button>
                     </>
                 )}
@@ -109,28 +111,19 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             className={s.button}
                             onClick={onEditHandler}
                         >
-                            <FontAwesomeIcon icon={faCircleCheck} />
+                            <MemoizedFontAwesomeIcon icon={faCircleCheck} />
                         </Button>
                     </>
                 )}
-                {/* { */}
-                {/*    linkedUsers.length > 0 && ( */}
-                {/*        <div className={s.linkedUsers}> */}
-                {/*            {linkedUsers.map((user: IUserInfo) => ( */}
-                {/*                <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} /> */}
-                {/*            ))} */}
-                {/*        </div> */}
-                {/*    ) */}
-                {/* } */}
             </h1>
             <div className={s.second}>
                 {/* eslint-disable-next-line react/jsx-no-bind */}
                 <Button className={s.share} disabled={isEnabled} onClick={onShare}>
-                    <FontAwesomeIcon icon={faShareAlt} />
+                    <MemoizedFontAwesomeIcon icon={faShareAlt} />
                     <p>{t('share')}</p>
                 </Button>
                 <Button className={s.members} disabled={isEnabled}>
-                    <FontAwesomeIcon icon={faWalkieTalkie} />
+                    <MemoizedFontAwesomeIcon icon={faWalkieTalkie} />
                     <p>{t('members')}</p>
                     {
                         linkedUsers.length > 0 && (
@@ -145,15 +138,15 @@ const BoardPageHeader: React.FC<Props> = memo(({
             </div>
             <div className={s.third}>
                 <Button className={s.filter} disabled={isEnabled}>
-                    <FontAwesomeIcon icon={faFilter} />
+                    <MemoizedFontAwesomeIcon icon={faFilter} />
                     <p>{t('filter')}</p>
                 </Button>
                 <Button className={s.date} disabled={isEnabled}>
-                    <FontAwesomeIcon icon={faCalendarTimes} />
+                    <MemoizedFontAwesomeIcon icon={faCalendarTimes} />
                     <p>{t('this week')}</p>
                 </Button>
                 <Button className={s.add} disabled={isEnabled} onClick={() => setIsCreating(true)}>
-                    <FontAwesomeIcon icon={faAdd} />
+                    <MemoizedFontAwesomeIcon icon={faAdd} />
                     <p>{t('add')}</p>
                 </Button>
             </div>

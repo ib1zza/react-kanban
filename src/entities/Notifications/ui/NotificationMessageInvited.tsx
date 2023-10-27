@@ -2,7 +2,6 @@ import React, { SetStateAction, useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getUserInfo } from 'features/users';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
@@ -63,7 +62,6 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
         <div className={s.messageContainer}>
             <div className={s.avatarContainer}>
                 <Avatar src={userFrom.photoURL} alt={userFrom.displayName} size={AvatarSize.M} />
-                {/* <img src={} alt={userFrom.displayName} /> */}
             </div>
             <div className={s.messageInfo}>
                 <div className={s.text}>
@@ -76,7 +74,6 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
                     } ${
                         board.title}`}
                 </div>
-
                 {!data.isAccepted && (
                     <div className={s.buttons}>
                         <Button
@@ -85,6 +82,7 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
                             onClick={acceptHandler}
                             icon={faCircleCheck}
                         >
+
                             {t('принять')}
 
                         </Button>
@@ -99,7 +97,6 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
 
                         </Button>
                         {/* <button onClick={acceptHandler} /> */}
-
                     </div>
                 )}
             </div>

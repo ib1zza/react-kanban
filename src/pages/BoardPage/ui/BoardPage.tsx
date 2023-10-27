@@ -86,7 +86,6 @@ const BoardPage = memo(() => {
                     title={selectedBoard?.title || 'loading...'}
                     setIsCreating={setIsCreating}
                     onDelete={handleDeleteBoard}
-
                 />
                 <div className={s.wrapper}>
                     <div className={s.columnsWrapper}>
@@ -94,7 +93,6 @@ const BoardPage = memo(() => {
                             ? <><TaskColumnSkeleton /></>
                             : (
                                 <>
-
                                     {getColumnsFromBoard(selectedBoard).map((column) => (
                                         <TaskColumn
                                             key={column.uid}

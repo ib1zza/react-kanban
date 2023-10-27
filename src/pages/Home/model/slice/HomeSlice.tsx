@@ -4,6 +4,8 @@ import { HomeSchema } from '../types/homeSchema';
 
 const initialState: HomeSchema = {
     boards: [],
+    addBoardStatus: false,
+    linkBoardStatus: false,
 };
 
 export const HomeSlice = createSlice({
@@ -13,7 +15,12 @@ export const HomeSlice = createSlice({
         addBoards: (state, action: PayloadAction<IBoard[]>) => {
             state.boards = action.payload;
         },
-
+        setAddBoardStatus: (state, action: PayloadAction<boolean>) => {
+            state.addBoardStatus = action.payload;
+        },
+        setLinkBoardStatus: (state, action: PayloadAction<boolean>) => {
+            state.addBoardStatus = action.payload;
+        },
     },
 });
 
