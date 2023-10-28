@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { memo, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { IBoard } from 'app/types/IBoard';
@@ -24,21 +24,24 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
     const [shareStatus, setShareStatus] = React.useState(false);
     const { t } = useTranslation();
 
-    const onClick = () => {
+    const onClick = useCallback(() => {
         navigate(`/board/${board.uid}`);
-    };
+    }, [board.uid, navigate]);
+
     useEffect(() => {
         getUserInfo(board.ownerId).then((res) => {
             setUsername(res?.displayName);
         });
+    }, [board.ownerId]);
+
+    const onCloseShare = useCallback(() => {
+        setShareStatus(false);
     }, []);
 
-    const onCloseShare = () => {
-        setShareStatus(false);
-    };
-    const onOpenShare = () => {
+    const onOpenShare = useCallback(() => {
         setShareStatus(true);
-    };
+    }, []);
+
     return (
         <div className={s.container}>
             {shareStatus && (
@@ -59,15 +62,12 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
                         {username || `${t('Загрузка')}`}
                     </p>
                 </div>
-
                 {userId === board.ownerId && (
-                    <div className={s.buttons}>
-                        <Button
-                            onClick={onOpenShare}
-                            className={s.share_button}
-                            icon={faLink}
-                        />
-                    </div>
+                    <Button
+                        onClick={onOpenShare}
+                        className={s.share_button}
+                        icon={faLink}
+                    />
                 )}
             </h3>
 

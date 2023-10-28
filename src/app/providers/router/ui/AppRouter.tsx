@@ -1,4 +1,3 @@
-import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AuthPage } from 'pages/AuthPage';
 import Header from 'widgets/components/Header/Header';
@@ -12,15 +11,12 @@ const AppRouter = () => (
         <Route
             path="/*"
             element={(
-
                 <ProtectedRoute>
                     <div className={s.home}>
                         <Sidebar />
                         <div className={s.body}>
-
                             <Header />
                             <MainRouter />
-
                         </div>
                     </div>
                 </ProtectedRoute>

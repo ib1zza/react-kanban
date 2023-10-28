@@ -1,5 +1,4 @@
-import { HomeAsync } from './ui/Home.async';
-
 import { HomeSchema } from './model/types/homeSchema';
+import Home from './ui/Home';
 
-export { HomeAsync as Home, HomeSchema };
+export { Home, HomeSchema };
