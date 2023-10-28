@@ -112,6 +112,7 @@ describe('notificationSlice', () => {
                     },
                     read: true,
                     timestamp: 1688748450153,
+                    isAccepted: false,
                 },
                 {
                     read: true,
@@ -124,6 +125,7 @@ describe('notificationSlice', () => {
                         boardId: '6009f37b-1800-41bd-a383-7904a5d2b7d4',
                     },
                     uid: '9514cf5f-c326-4c01-a657-e6547fd7b8ca',
+                    isAccepted: false,
                 },
                 {
                     read: true,
@@ -136,6 +138,7 @@ describe('notificationSlice', () => {
                         boardId: 'f510e048-8818-431d-8318-027a45ba7855',
                         isAccepted: true,
                     },
+                    isAccepted: false,
                 },
 
             ],
@@ -154,6 +157,7 @@ describe('notificationSlice', () => {
                     notifications: [
                         {
                             uid: '845689c4-741f-46f3-888d-575013ec5b90',
+                            isAccepted: false,
                             payload: {
                                 isAccepted: true,
                                 invitedRole: 'GUEST',
@@ -167,6 +171,7 @@ describe('notificationSlice', () => {
                         {
                             read: true,
                             timestamp: 1689350619236,
+                            isAccepted: false,
                             payload: {
                                 invitedRole: 'GUEST',
                                 isAccepted: true,
@@ -180,6 +185,7 @@ describe('notificationSlice', () => {
                             read: true,
                             timestamp: 1689339787186,
                             uid: '0f4af800-dc39-4710-a67b-00d6121a3a24',
+                            isAccepted: false,
                             payload: {
                                 userInvitedId: 'Tf1GeGjK2rd3yhP7bgl3Qp2DZUW2',
                                 type: NotificationType.BOARD_INVITED,
@@ -309,6 +315,7 @@ describe('notificationSlice', () => {
                     },
                     read: true,
                     timestamp: 1688748450153,
+                    isAccepted: false,
                 },
                 {
                     read: true,
@@ -321,11 +328,13 @@ describe('notificationSlice', () => {
                         boardId: '6009f37b-1800-41bd-a383-7904a5d2b7d4',
                     },
                     uid: '9514cf5f-c326-4c01-a657-e6547fd7b8ca',
+                    isAccepted: false,
                 },
                 {
                     read: true,
                     timestamp: 1689339787186,
                     uid: '0f4af800-dc39-4710-a67b-00d6121a3a24',
+                    isAccepted: false,
                     payload: {
                         userInvitedId: 'Tf1GeGjK2rd3yhP7bgl3Qp2DZUW2',
                         type: NotificationType.BOARD_INVITED,
@@ -354,6 +363,7 @@ describe('notificationSlice', () => {
                         {
                             read: true,
                             timestamp: 1689350619236,
+                            isAccepted: false,
                             payload: {
                                 invitedRole: 'GUEST',
                                 isAccepted: true,
@@ -367,6 +377,7 @@ describe('notificationSlice', () => {
                         {
                             read: true,
                             timestamp: 1689339787186,
+                            isAccepted: false,
                             uid: '0f4af800-dc39-4710-a67b-00d6121a3a24',
                             payload: {
                                 userInvitedId: 'Tf1GeGjK2rd3yhP7bgl3Qp2DZUW2',
@@ -388,6 +399,7 @@ describe('notificationSlice', () => {
                     [
                         {
                             uid: '845689c4-741f-46f3-888d-575013ec5b90',
+                            isAccepted: false,
                             payload: {
                                 isAccepted: true,
                                 invitedRole: 'GUEST',
@@ -401,6 +413,7 @@ describe('notificationSlice', () => {
                         {
                             read: true,
                             timestamp: 1689350619236,
+                            isAccepted: false,
                             payload: {
                                 invitedRole: 'GUEST',
                                 isAccepted: true,
@@ -410,7 +423,9 @@ describe('notificationSlice', () => {
                             },
                             uid: '9514cf5f-c326-4c01-a657-e6547fd7b8ca',
                         },
+
                         {
+                            isAccepted: false,
                             read: true,
                             timestamp: 1689339787186,
                             uid: '0f4af800-dc39-4710-a67b-00d6121a3a24',
