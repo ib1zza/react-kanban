@@ -1,4 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, {
+    memo, useCallback, useEffect, useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { Input, InputTheme } from 'shared/ui/Input/Input';
@@ -13,17 +15,17 @@ interface Props {
   board: IBoard;
 }
 
-const InviteUserForm: FC<Props> = ({ board }) => {
+const InviteUserForm = memo(({ board }: Props) => {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [valueStatus, setValueStatus] = useState<LinkedUserType>(
         LinkedUserType.GUEST,
     );
-
     const { user } = useAuth();
     const { t } = useTranslation();
-    const handleShare = async (email: string) => {
+
+    const handleShare = useCallback(async (email: string) => {
         const userToInviteId = await getUserFromEmail(email).then((res) => res?.uid);
         if (!userToInviteId || !user?.uid) return false;
 
@@ -31,9 +33,9 @@ const InviteUserForm: FC<Props> = ({ board }) => {
         await addUserToBoard(board.uid, userToInviteId, valueStatus);
 
         return true;
-    };
+    }, [board.uid, user.uid, valueStatus]);
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback(() => {
         if (email.trim() !== '') {
             handleShare(email).then((res) => {
                 if (res) {
@@ -48,7 +50,7 @@ const InviteUserForm: FC<Props> = ({ board }) => {
                 setError('');
             }, 1000);
         }
-    };
+    }, [email, handleShare, t]);
 
     // Switching notifs
     useEffect(() => {
@@ -107,6 +109,6 @@ const InviteUserForm: FC<Props> = ({ board }) => {
             <div className={s.form__success}>{success}</div>
         </div>
     );
-};
+});
 
 export default InviteUserForm;

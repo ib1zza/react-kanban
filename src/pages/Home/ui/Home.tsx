@@ -1,15 +1,14 @@
 import React, {
+    Suspense,
     memo,
     useCallback,
     useEffect,
 } from 'react';
-
 import { addUserToBoard } from 'features/boards';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
 import { BoardPreview } from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
-import { useTranslation } from 'react-i18next';
 import { createBoardRt } from 'features/boards/API/createBoard/createBoardRealtime';
 import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUserBoards';
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
@@ -43,15 +42,14 @@ const Home = memo(() => {
         return () => {
             unsub();
         };
-    }, [user?.uid]);
+    }, [dispatch, user?.uid]);
 
-    const { t } = useTranslation('buttons');
     const handleCreateBoard = useCallback(
         async (title: string) => {
             dispatch(homeActions.setAddBoardStatus(false));
             await createBoardRt(title, user?.uid as string);
         },
-        [user?.uid],
+        [dispatch, user?.uid],
     );
 
     const handleLinkBoard = useCallback(
@@ -59,36 +57,41 @@ const Home = memo(() => {
             dispatch(homeActions.setAddBoardStatus(false));
             await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
         },
-        [user?.uid],
+        [dispatch, user?.uid],
     );
     return (
         <div className={s.boardPageContainer}>
             <HomeHeader />
-
             <div className={s.blocks__container}>
                 {!user?.uid ? <BoardPreviewSkeleton /> : (
                     <>
-                        {addBoardStatus && (
-                            <ActionForm
-                                status={ActionFormStatus.BOARD}
-                                onCreateBoard={handleCreateBoard}
-                                onAbort={() => dispatch(homeActions.setAddBoardStatus(false))}
-                            />
-                        )}
-                        {linkBoardStatus && (
-                            <ActionForm
-                                status={ActionFormStatus.BOARD}
-                                onCreateBoard={handleLinkBoard}
-                                onAbort={() => dispatch(homeActions.setLinkBoardStatus(false))}
-                            />
-                        )}
-                        { boards.map((item: IBoard) => (
-                            <BoardPreview
-                                key={item.uid}
-                                board={item}
-                                userId={user.uid}
-                            />
-                        ))}
+                        <Suspense>
+                            {addBoardStatus && (
+                                <ActionForm
+                                    status={ActionFormStatus.BOARD}
+                                    onCreateBoard={handleCreateBoard}
+                                    onAbort={() => dispatch(homeActions.setAddBoardStatus(false))}
+                                />
+                            )}
+                        </Suspense>
+                        <Suspense>
+                            {linkBoardStatus && (
+                                <ActionForm
+                                    status={ActionFormStatus.BOARD}
+                                    onCreateBoard={handleLinkBoard}
+                                    onAbort={() => dispatch(homeActions.setLinkBoardStatus(false))}
+                                />
+                            )}
+                        </Suspense>
+                        <Suspense>
+                            { boards.map((item: IBoard) => (
+                                <BoardPreview
+                                    key={item.uid}
+                                    board={item}
+                                    userId={user.uid}
+                                />
+                            ))}
+                        </Suspense>
                     </>
                 )}
 

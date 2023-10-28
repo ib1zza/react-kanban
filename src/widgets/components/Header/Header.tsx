@@ -21,11 +21,11 @@ const Header = memo(() => {
     return (
         <header className={s.header}>
             {isShowProfile && (
-                <Suspense>
-                    <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}>
+                <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}>
+                    <Suspense>
                         <Profile />
-                    </Modal>
-                </Suspense>
+                    </Suspense>
+                </Modal>
             )}
             <div />
             <div className={s.header__cabinet}>
@@ -41,9 +41,7 @@ const Header = memo(() => {
                         </div>
                     </span>
                 </div>
-
             </div>
-
         </header>
     );
 });

@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import BoardPage from '../../../../pages/BoardPage/ui/BoardPage';
-
 import { Home } from '../../../../pages/Home';
 
 const MainRouter = () => (
@@ -18,9 +16,9 @@ const MainRouter = () => (
         <Route
             index
             element={(
-                <Suspense fallback={<div />}>
-                    <Home />
-                </Suspense>
+
+                <Home />
+
             )}
         />
 
