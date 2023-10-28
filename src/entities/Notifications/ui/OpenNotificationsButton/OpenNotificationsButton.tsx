@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { faBell as faSolidBell } from '@fortawesome/free-solid-svg-icons';
 import { faBell as faRegularBell } from '@fortawesome/free-regular-svg-icons';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
@@ -22,14 +22,14 @@ const OpenNotificationsButton = () => {
     const unreadCount = useAppSelector(getUnreadNotificationsCount);
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-        // async function getNotifs() {
-        //     if (!user?.uid) return;
-        //     dispatch(getNotifications(user.uid));
-        // }
-        //
-        // getNotifs();
-    }, [user?.uid]);
+    // useEffect(() => {
+    // async function getNotifs() {
+    //     if (!user?.uid) return;
+    //     dispatch(getNotifications(user.uid));
+    // }
+    //
+    // getNotifs();
+    // }, [user?.uid]);
 
     useEffect(() => {
         const unsub = subscribeToUserNotifications(
@@ -48,7 +48,7 @@ const OpenNotificationsButton = () => {
     }, [user.uid]);
 
     const toggler = () => {
-        setOpen((prev) => !prev);
+        setOpen(true);
     };
 
     const readAll = () => {
