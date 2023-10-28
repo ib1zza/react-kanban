@@ -20,13 +20,13 @@ const Header = memo(() => {
     }, []);
     return (
         <header className={s.header}>
-            {isShowProfile && (
-                <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}>
-                    <Suspense>
-                        <Profile />
-                    </Suspense>
-                </Modal>
-            )}
+            {/* {isShowProfile && ( */}
+            {/*    <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}> */}
+            {/*        <Suspense> */}
+            {/*            <Profile /> */}
+            {/*        </Suspense> */}
+            {/*    </Modal> */}
+            {/* )} */}
             <div />
             <div className={s.header__cabinet}>
                 <OpenNotificationsButton />
@@ -46,4 +46,4 @@ const Header = memo(() => {
     );
 });
 
-export default memo(Header);
+export default Header;

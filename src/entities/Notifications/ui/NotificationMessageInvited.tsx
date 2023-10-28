@@ -19,9 +19,10 @@ import { notificationsActions } from '../model/slice/notificationSlice';
 interface Props {
     data: NotificationPayloadBoardInvited;
     notificationId: string;
+    isAccepted: boolean;
 }
 
-const NotificationMessageInvited = ({ data, notificationId }: Props) => {
+const NotificationMessageInvited = ({ data, notificationId, isAccepted }: Props) => {
     const [userFrom, setUserFrom] = useState<IUserInfo | undefined>();
     const [board, setBoard] = useState<IBoard | undefined>();
     const { t } = useTranslation('notifications');
@@ -57,7 +58,9 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
         );
     };
 
-    if (!userFrom || !board) return null;
+    if (!userFrom || !board) return <></>;
+
+    console.log(data, userFrom, board);
     return (
         <div className={s.messageContainer}>
             <div className={s.avatarContainer}>
@@ -67,14 +70,17 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
                 <div className={s.text}>
 
                     {`${userFrom.displayName
-                    } ${
-                        t(data.invitedRole === LinkedUserType.USER
-                            ? 'приглашает вас стать гостем в доске'
-                            : 'приглашает вас стать редактором в доске')
-                    } ${
-                        board.title}`}
+                    } 
+                                ${
+
+        t(data.invitedRole === LinkedUserType.USER
+            ? 'приглашает вас стать гостем в доске'
+            : 'приглашает вас стать редактором в доске')
+        } 
+                                ${
+        board.title}`}
                 </div>
-                {!data.isAccepted && (
+                {!isAccepted && (
                     <div className={s.buttons}>
                         <Button
                             className={s.buttonAccept}
@@ -96,7 +102,6 @@ const NotificationMessageInvited = ({ data, notificationId }: Props) => {
                             {t('отклонить')}
 
                         </Button>
-                        {/* <button onClick={acceptHandler} /> */}
                     </div>
                 )}
             </div>
