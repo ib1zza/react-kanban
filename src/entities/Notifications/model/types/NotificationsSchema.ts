@@ -24,6 +24,7 @@ export type NotificationPayload = NotificationPayloadBoardInvited | Notification
 
 export interface NotificationItem {
     uid: string;
+    isAccepted: boolean;
     timestamp: number;
     payload: NotificationPayload;
     read: boolean;

@@ -10,7 +10,11 @@ const Notification = ({ data }: Props) => (
 
     <div className={classNames(s.item, { [s.read]: data.read })}>
         {data.payload.type === NotificationType.BOARD_INVITED ? (
-            <NotificationMessageInvited data={data.payload} notificationId={data.uid} />
+            <NotificationMessageInvited
+                data={data.payload as any}
+                isAccepted={data.isAccepted}
+                notificationId={data.uid}
+            />
         ) : null}
     </div>
 

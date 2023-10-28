@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+    Suspense, useCallback, useEffect, useState,
+} from 'react';
 import { faBell as faSolidBell } from '@fortawesome/free-solid-svg-icons';
 import { faBell as faRegularBell } from '@fortawesome/free-regular-svg-icons';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
@@ -7,6 +9,7 @@ import { subscribeToUserNotifications } from 'entities/Notifications/model/servi
 import { notificationsActions } from 'entities/Notifications/model/slice/notificationSlice';
 import { readNotificationsRt } from 'entities/Notifications/model/services/API/readNotificationsRt';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './OpenNotificationsButton.module.scss';
 import Notification from '../Notification';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
@@ -56,7 +59,8 @@ const OpenNotificationsButton = () => {
         readNotificationsRt(user.uid, notifications.map((el) => el.uid));
         // dispatch(readAllNotifications(user.uid));
     };
-    function listener() {
+    function listener(e: MouseEvent) {
+        e.stopPropagation();
         setOpen(false);
     }
 
@@ -74,12 +78,12 @@ const OpenNotificationsButton = () => {
     console.log(notifications);
 
     return (
-        <Button className={s.button} onClick={(e) => e.stopPropagation()}>
+        <Button className={s.button}>
             <MemoizedFontAwesomeIcon onClick={toggler} icon={unreadCount ? faSolidBell : faRegularBell} />
             {!!unreadCount && <div className={s.count}>{unreadCount}</div>}
 
             {open && (
-                <div className={s.notificationsContainer}>
+                <div className={s.notificationsContainer} onClick={(e) => e.stopPropagation()}>
                     <svg
                         className={s.trio}
                         xmlns="http://www.w3.org/2000/svg"
@@ -98,9 +102,12 @@ const OpenNotificationsButton = () => {
                     </svg>
                     {notifications.length ? '' : 'Нет уведомлений'}
                     {!!notifications.length && <div className={s.deleteAll}>Удалить все</div>}
-                    {notifications.map((notif: NotificationItem) => (
-                        <Notification data={notif} key={notif.uid} />
-                    ))}
+                    <Suspense fallback={<></>}>
+                        {notifications.map((notif: NotificationItem) => (
+                            <Notification data={notif} key={notif.uid} />
+                        ))}
+                    </Suspense>
+
                 </div>
             )}
         </Button>
