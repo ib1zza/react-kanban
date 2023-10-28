@@ -16,6 +16,7 @@ type Story = StoryObj<typeof Notification>;
 export const Primary: Story = {
     args: {
         data: {
+            isAccepted: false,
             uid: 'cbb12e67-0712-4215-a58c-56508ea5cd7c',
             timestamp: Date.now(),
             payload: {
@@ -32,6 +33,7 @@ export const Primary: Story = {
 export const PrimaryDark: Story = {
     args: {
         data: {
+            isAccepted: false,
             uid: 'cbb12e67-0712-4215-a58c-56508ea5cd7c',
             timestamp: Date.now(),
             payload: {
