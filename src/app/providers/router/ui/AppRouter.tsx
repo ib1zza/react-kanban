@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AuthPage } from 'pages/AuthPage';
 import Header from 'widgets/components/Header/Header';
+import { Suspense } from 'react';
 import MainRouter from './MainRouter';
 import ProtectedRoute from '../lib/ProtectedRoute';
 import Sidebar from '../../../../widgets/components/Sidebar/Sidebar';
@@ -23,8 +24,14 @@ const AppRouter = () => (
 
             )}
         />
-
-        <Route path="auth" element={<AuthPage />} />
+        <Route
+            path="auth"
+            element={(
+                <Suspense>
+                    <AuthPage />
+                </Suspense>
+            )}
+        />
     </Routes>
 );
 

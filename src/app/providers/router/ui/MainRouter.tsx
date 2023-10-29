@@ -16,9 +16,7 @@ const MainRouter = () => (
         <Route
             index
             element={(
-
                 <Home />
-
             )}
         />
 
