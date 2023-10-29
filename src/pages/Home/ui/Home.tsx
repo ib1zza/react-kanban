@@ -94,7 +94,6 @@ const Home = memo(() => {
                         </Suspense>
                     </>
                 )}
-
             </div>
 
         </div>

@@ -88,7 +88,7 @@ const ActionForm = memo((props: Props) => {
                     <hr />
                 </>
             )}
-            <div className={s.title}>
+            {/* <div className={s.title}>
                 <Input
                     autoFocus
                     theme={InputTheme.WHITE}
@@ -99,7 +99,7 @@ const ActionForm = memo((props: Props) => {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                 />
-            </div>
+            </div> */}
             {status !== ActionFormStatus.BOARD && <ColorPicker color={color} onChange={setColor} />}
             <ConfirmButtons
                 disabled={error !== ''}
