@@ -20,7 +20,7 @@
     border-right: 2px solid var(--altWbText);
 }
 .nav_buttons{
-   
+
 }
 .nav_button {
     font: var(--font-m);
@@ -36,7 +36,7 @@
 }
 .svg {
     margin-right: 10px;
-  
+
     fill: #ffff;
 }
 
@@ -73,8 +73,40 @@ hr{
     width: 100%;
     display: flex;
     justify-content: space-around;
-    margin-bottom: 20px;;
+    margin-bottom: 20px;
     button {
         color: var(--altWbText);
     }
+}
+
+
+@media screen and (max-width: 1200px){
+  .logo {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+  }
+
+  .app_buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    button {
+      width: auto;
+    }
+  }
+
+  .nav_button {
+    justify-content: center;
+  }
+
+  .nav_button span, .space {
+    display: none;
+  }
+
+  .sidebar {
+    width: auto;
+    padding: 0 15px
+  }
+
 }

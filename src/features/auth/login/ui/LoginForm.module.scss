@@ -40,7 +40,7 @@
     letter-spacing: 0.1em;
     color: var(--LRtitleColor);
     text-transform: uppercase;
-    
+
 }
 
 .linkArea_link {
@@ -53,7 +53,7 @@
     text-transform: uppercase;
 }
 .linkArea{
-   
+
    display: flex;
    justify-content: center;
    align-items: center;
@@ -68,7 +68,7 @@
     text-transform: uppercase;
 }
 .btn_wrapper{
- 
+
     display: flex;
     justify-content: center;
     border: none;
@@ -106,29 +106,30 @@
 }
 
 
-.remember p {
-    margin-top: 16px;
+.remember div {
+    margin-top: 8px;
     display: flex;
     align-items: center;
+    justify-content: center;
     font-weight: 600;
     font-size: 12px;
-    line-height: normal;
+    line-height: 100%;
     letter-spacing: 2.8px;
     text-transform: uppercase;
     color: var(--LRtitleColor);
-    margin-bottom: 28px;
-  
+    margin-bottom: 8px;
 }
-.remember p input {
+
+.remember div input {
     width: 14px;
     height: 14px;
     margin-right: 16px;
     color: var(--taskTextColor);
-  
+
 }
 .error {
     color: rgba(255, 68, 0, 0.643);
-    
+
 }
 .errorSpace{
     height: 20px;
@@ -146,10 +147,10 @@
         font-size: 12px;
     }
     .btn {
-     
+
 
         margin-top: 4px;
-     
+
         width: 100%;
         font-size: 14px;
     }
@@ -162,7 +163,7 @@
     .linkArea_link {
         font-size: 12px;
     }
-  
+
     .form {
         margin-left: auto;
         margin-top: 1px;
