@@ -1,7 +1,6 @@
 import React, {
     memo, useCallback, useEffect, useState,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faAdd,
     faCalendarTimes,
@@ -15,10 +14,9 @@ import { Input } from 'shared/ui/Input/Input';
 import Button, { ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { Avatar } from 'shared/ui/Avatar';
-import { boardCollectionActions, getBoardCollection, getLinkedUsers } from 'pages/BoardPage';
+import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { useTranslation } from 'react-i18next';
-import { deleteBoard } from 'features/boards';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import s from './BoardPageHeader.module.scss';
 
@@ -44,27 +42,33 @@ const BoardPageHeader: React.FC<Props> = memo(({
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
 
-    function onShare() {
+    const onShare = useCallback(() => {
         dispatch(boardCollectionActions.setShareStatus(true));
-    }
-    const onEditHandler = () => {
+    }, [dispatch]);
+
+    const onEditHandler = useCallback(() => {
         const len = editingTitle.trim().length;
         if (len > 3 && len < 30) {
             onEdit(editingTitle);
         }
         setEditing(false);
-    };
+    }, [editingTitle, onEdit]);
 
     useEffect(() => {
         setEditingTitle(title);
     }, [title]);
-
+    const handleEditText = useCallback((value: React.SetStateAction<string>) => {
+        setEditingTitle(value);
+    }, []);
     const handleDelete = useCallback(() => {
         onDelete();
     }, [onDelete]);
     const handleEdit = useCallback(() => {
         setEditing(true);
     }, []);
+    const handleCreateStatus = useCallback((value: boolean) => {
+        setIsCreating(value);
+    }, [setIsCreating]);
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
@@ -101,7 +105,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             maxLength={40}
                             type="text"
                             value={editingTitle}
-                            onChange={(e) => setEditingTitle(e.target.value)}
+                            onChange={(e) => handleEditText(e.target.value)}
                         />
                         <Button
                             disabled={isEnabled}
@@ -117,7 +121,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
                 )}
             </h1>
             <div className={s.second}>
-                {/* eslint-disable-next-line react/jsx-no-bind */}
                 <Button className={s.share} disabled={isEnabled} onClick={onShare}>
                     <MemoizedFontAwesomeIcon icon={faShareAlt} />
                     <p>{t('share')}</p>
@@ -145,7 +148,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
                     <MemoizedFontAwesomeIcon icon={faCalendarTimes} />
                     <p>{t('this week')}</p>
                 </Button>
-                <Button className={s.add} disabled={isEnabled} onClick={() => setIsCreating(true)}>
+                <Button className={s.add} disabled={isEnabled} onClick={() => handleCreateStatus(true)}>
                     <MemoizedFontAwesomeIcon icon={faAdd} />
                     <p>{t('add')}</p>
                 </Button>

@@ -41,7 +41,7 @@ const EditTaskForm = memo(({
         withAvatar: true,
     })), [linkedUsers]);
 
-    const editHandler = () => {
+    const editHandler = useCallback(() => {
         if (title === '') return onAbort();
         const editedData : EditedData = {};
         if (title !== prevTask.title) {
@@ -55,11 +55,12 @@ const EditTaskForm = memo(({
         }
         if (Object.keys(editedData).length === 0) return onAbort();
         onEdit(editedData);
-    };
+    // eslint-disable-next-line max-len
+    }, [description, linkedUserId, onAbort, onEdit, prevTask.attachedUser, prevTask.description, prevTask.title, title]);
 
-    const onConfirmButtons = () => {
+    const onConfirmButtons = useCallback(() => {
         editHandler();
-    };
+    }, [editHandler]);
     const onAbortButtons = () => {
         onAbort();
     };

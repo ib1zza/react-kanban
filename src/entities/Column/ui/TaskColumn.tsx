@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { memo, useState } from 'react';
+import React, { Suspense, memo, useState } from 'react';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { deleteColumn, editColumn } from 'features/columns';
@@ -29,44 +29,48 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
     };
 
     return isEditColumn ? (
-        <ActionForm
-            status={ActionFormStatus.EDIT}
-            title={column.title}
-            color={column.color}
-            onEdit={editHandler}
-            onAbort={() => setIsEditColumn(false)}
-        />
+        <Suspense>
+            <ActionForm
+                status={ActionFormStatus.EDIT}
+                title={column.title}
+                color={column.color}
+                onEdit={editHandler}
+                onAbort={() => setIsEditColumn(false)}
+            />
+        </Suspense>
     ) : (
-        <div className={`${s.container} ${s.withColor}`}>
-            <div
-                className={s.headerColor}
-                style={{ backgroundColor: column.color }}
-            />
-            <hr />
-            <div className={s.titleBlock}>
-                <h6 className={s.title}>{column.title}</h6>
-                <div className={s.columnButtons}>
-                    <Button
-                        className={s.editButton}
-                        onClick={() => setIsEditColumn(true)}
-                        icon={faPenToSquare}
-                    />
-                    <Button
-                        className={s.deleteButton}
-                        onClick={() => deleteColumn(boardId, column.uid)}
-                        icon={faTrashCan}
-                    />
+        <Suspense>
+            <div className={`${s.container} ${s.withColor}`}>
+                <div
+                    className={s.headerColor}
+                    style={{ backgroundColor: column.color }}
+                />
+                <hr />
+                <div className={s.titleBlock}>
+                    <h6 className={s.title}>{column.title}</h6>
+                    <div className={s.columnButtons}>
+                        <Button
+                            className={s.editButton}
+                            onClick={() => setIsEditColumn(true)}
+                            icon={faPenToSquare}
+                        />
+                        <Button
+                            className={s.deleteButton}
+                            onClick={() => deleteColumn(boardId, column.uid)}
+                            icon={faTrashCan}
+                        />
+                    </div>
                 </div>
-            </div>
-            <AddTaskBlock boardId={boardId} columnId={column.uid} />
-            <TaskList
-                boardId={boardId}
-                columnId={column.uid}
-                tasks={column.tasks}
+                <AddTaskBlock boardId={boardId} columnId={column.uid} />
+                <TaskList
+                    boardId={boardId}
+                    columnId={column.uid}
+                    tasks={column.tasks}
                 // rerender={()}
-            />
-            <div className={s.fill} />
-        </div>
+                />
+                <div className={s.fill} />
+            </div>
+        </Suspense>
     );
 });
 

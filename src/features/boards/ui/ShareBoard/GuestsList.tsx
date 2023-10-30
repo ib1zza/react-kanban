@@ -1,16 +1,11 @@
 import React, {
-    FC, useEffect, useMemo, useState,
+    memo, useCallback, useMemo, useState,
 } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { IBoard, LinkedUserType } from 'app/types/IBoard';
-import { getUserInfo } from 'features/users';
 import { deleteUserFromBoard } from 'features/boards';
-
-import { IUserInfo } from 'app/types/IUserInfo';
-import { use } from 'i18next';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
@@ -20,20 +15,18 @@ interface Props {
   board: IBoard;
 }
 
-const GuestsList: FC<Props> = ({ board }) => {
+const GuestsList = memo(({ board }: Props) => {
     const [isEditorsOpened, setIsEditorsOpened] = useState(false);
-    // const [usersEmails, setUsersEmails] = useState<IUserInfo[]>([]);
     const linkedUsers = useAppSelector(getLinkedUsers);
-    const handleRemoveUserFromBoard = async (userId: string) => {
+    const handleRemoveUserFromBoard = useCallback(async (userId: string) => {
         await deleteUserFromBoard(
             board.uid,
             userId,
         );
-    };
+    }, [board.uid]);
 
     const visibleUsers = useMemo(() => {
         if (!board?.users) return [];
-        console.log(linkedUsers, board.users);
         return linkedUsers.filter(
             (user) => (board?.users?.[user.uid]?.role
             === (isEditorsOpened
@@ -92,10 +85,7 @@ const GuestsList: FC<Props> = ({ board }) => {
     //     });
     // }, [isEditorsOpened]);
 
-    const checkIsUserJoined = (userId: string) => {
-        console.log(board.users, userId);
-        return board.users?.[userId]?.joined;
-    };
+    const checkIsUserJoined = (userId: string) => board.users?.[userId]?.joined;
 
     return (
         <div className={s.form__users}>
@@ -144,6 +134,6 @@ const GuestsList: FC<Props> = ({ board }) => {
             </div>
         </div>
     );
-};
+});
 
 export default GuestsList;

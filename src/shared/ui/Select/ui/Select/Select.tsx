@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import React, {
-    MouseEventHandler, useEffect, useRef, useState,
+    MouseEventHandler, memo, useCallback, useEffect, useRef, useState,
 } from 'react';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
@@ -24,7 +24,7 @@ type SelectProps = {
     label?: string;
 };
 
-const Select = (props : SelectProps) => {
+const Select = memo((props : SelectProps) => {
     const {
         placeholder,
         selected,
@@ -53,21 +53,19 @@ const Select = (props : SelectProps) => {
         };
     }, [isOpen, onClose]);
 
-    const handleOptionClick = (value: string | number) => {
+    const handleOptionClick = useCallback((value: string | number) => {
         setIsOpen(false);
-
         onChange(value);
-    };
-    const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
+    }, [onChange]);
+
+    const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = useCallback(() => {
         setIsOpen((prev) => !prev);
-    };
+    }, []);
 
     return (
         <div
             className={classNames(s.selectWrapper, { [s.open]: isOpen })}
             ref={rootRef}
-            // data-is-active={isOpen}
-            // data-mode={mode}
         >
             {label && (
                 <label>
@@ -100,6 +98,6 @@ const Select = (props : SelectProps) => {
             )}
         </div>
     );
-};
+});
 
 export { Select };
