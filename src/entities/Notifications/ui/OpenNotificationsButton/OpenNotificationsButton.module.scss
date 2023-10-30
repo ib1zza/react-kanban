@@ -57,3 +57,16 @@
         font-weight: 700;
     }
 }
+
+@media screen and (max-width: 700px) {
+    .notificationsContainer {
+        //max-width: 100%;
+        left: -20px;
+        max-width: 327px;
+    }
+
+    .trio {
+        left: 22.5px;
+
+    }
+}

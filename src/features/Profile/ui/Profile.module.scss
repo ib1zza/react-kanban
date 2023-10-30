@@ -1,7 +1,8 @@
 .profile {
     display: flex;
     flex-direction: column;
-    width: 298px;
+    width: 320px;
+    max-width: 100%;
 }
 
 .profile__name {
@@ -13,11 +14,11 @@
         font-weight: 700;
         line-height: normal;
     }
-    p:second-child {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 16px;
-    }
+    //p:second-child {
+    //    font-size: 14px;
+    //    font-weight: 400;
+    //    line-height: 16px;
+    //}
 }
 
 .profile__email {
@@ -29,11 +30,11 @@
         font-weight: 700;
         line-height: normal;
     }
-    p:second-child {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 16px;
-    }
+    //p:second-child {
+    //    font-size: 14px;
+    //    font-weight: 400;
+    //    line-height: 16px;
+    //}
 }
 .profile__avatar {
     margin-top: 20px;
@@ -63,11 +64,11 @@
         font-weight: 700;
         line-height: normal;
     }
-    p:second-child {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 16px;
-    }
+    //p:second-child {
+    //    font-size: 14px;
+    //    font-weight: 400;
+    //    line-height: 16px;
+    //}
 }
 
 //.profile__edit {

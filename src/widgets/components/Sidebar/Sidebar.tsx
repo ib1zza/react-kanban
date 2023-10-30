@@ -22,12 +22,16 @@ const Sidebar = () => {
             <div className={s.nav_buttons}>
                 <div className={s.nav_button} onClick={() => navigate(AppRoute.HOME)}>
                     <MemoizedFontAwesomeIcon icon={faBarsProgress} className={s.svg} />
-                    {t('Projects')}
+                    <span>
+                        {t('Projects')}
+                    </span>
                 </div>
                 <div className={s.nav_button}>
                     <MemoizedFontAwesomeIcon icon={faGear} className={s.svg} />
+                    <span>
 
-                    {t('Settings')}
+                        {t('Settings')}
+                    </span>
                 </div>
             </div>
             <hr />
