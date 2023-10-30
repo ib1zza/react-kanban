@@ -1,4 +1,5 @@
 import React, {
+    Suspense,
     memo, useCallback, useEffect, useState,
 } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -100,21 +101,24 @@ const BoardPage = memo(() => {
                                             boardId={selectedBoard.uid}
                                         />
                                     ))}
-                                    {isCreating && (
-                                        <ActionForm
-                                            status={ActionFormStatus.COLUMN}
-                                            onCreateColumn={createColumnAction}
-                                            onAbort={() => setIsCreating(false)}
-                                        />
-                                    )}
-
+                                    <Suspense>
+                                        {isCreating && (
+                                            <ActionForm
+                                                status={ActionFormStatus.COLUMN}
+                                                onCreateColumn={createColumnAction}
+                                                onAbort={() => setIsCreating(false)}
+                                            />
+                                        )}
+                                    </Suspense>
                                 </>
                             )}
 
                     </div>
-                    {selectedTask && (
-                        <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />
-                    )}
+                    <Suspense>
+                        {selectedTask && (
+                            <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask} />
+                        )}
+                    </Suspense>
                 </div>
             </div>
         </>

@@ -1,13 +1,13 @@
-import { classNames } from 'shared/lib/classNames/classNames';
 import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import { OptionType } from 'shared/ui/Select';
+import { memo, useCallback } from 'react';
 import s from './Option.module.scss';
 
 interface OptionProps extends OptionType {
     onClick: (value: string | number) => void;
 }
 
-const Option = (props: OptionProps) => {
+const Option = memo((props: OptionProps) => {
     const {
         heading,
         value,
@@ -17,9 +17,9 @@ const Option = (props: OptionProps) => {
         withAvatar,
     } = props;
 
-    const handleClick = (clickedValue: string | number) => {
+    const handleClick = useCallback((clickedValue: string | number) => {
         onClick(clickedValue);
-    };
+    }, [onClick]);
 
     return (
         <div
@@ -34,6 +34,6 @@ const Option = (props: OptionProps) => {
             </div>
         </div>
     );
-};
+});
 
 export { Option };

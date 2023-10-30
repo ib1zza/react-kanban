@@ -10,7 +10,7 @@ interface Props {
   disabled?: boolean;
 }
 
-const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort, disabled }) => {
+const ConfirmButtons = memo(({ onConfirm, onAbort, disabled }: Props) => {
     const { t } = useTranslation('Buttons');
     return (
         <div className={s.buttons}>
@@ -34,6 +34,6 @@ const ConfirmButtons: React.FC<Props> = ({ onConfirm, onAbort, disabled }) => {
             </Button>
         </div>
     );
-};
+});
 
 export default memo(ConfirmButtons);

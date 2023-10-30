@@ -1,4 +1,5 @@
 import { classNames } from 'shared/lib/classNames/classNames';
+import { memo } from 'react';
 import s from './Avatar.module.scss';
 
 export enum AvatarSize {
@@ -14,7 +15,7 @@ interface AvatarProps {
     className?: string;
     size?: AvatarSize;
 }
-const Avatar = (props: AvatarProps) => {
+const Avatar = memo((props: AvatarProps) => {
     const {
         className, src, alt = '...', size = AvatarSize.M,
     } = props;
@@ -29,6 +30,6 @@ const Avatar = (props: AvatarProps) => {
                 )}
         </div>
     );
-};
+});
 
 export { Avatar };

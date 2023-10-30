@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { faCircleXmark, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -47,20 +47,22 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
 
     const handleEditTask = async (data : EditedData) => {
         setLoading('edit');
-        console.log('edited');
-
         await editTask(selectedBoardId, selectedColumnId, task.uid, data);
-
         setLoading('');
         setEditing(false);
         onEdit();
     };
-    console.log(task);
-    // eslint-disable-next-line no-console
 
+    // eslint-disable-next-line no-console
+    const fetchUserInfo = async () => {
+        const user = await getUserInfo(task.creatorId);
+        if (user !== undefined) {
+            setUserInfo(user);
+        }
+    };
     const linkedUser = linkedUsersInfo.find((user: IUserInfo) => user.uid === task.attachedUser);
     useEffect(() => {
-        getUserInfo(task.creatorId).then((user: DocumentData | undefined) => user !== undefined && setUserInfo(user));
+        fetchUserInfo();
     }, [task.creatorId]);
     return (
         <div className={s.container}>
