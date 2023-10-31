@@ -1,15 +1,15 @@
 .BoardPageHeader{
     position: relative;
 }
+
 .title {
-    top: -60px;
     position: absolute;
+    top: -60px;
     height: 47px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    //justify-content: center;
     color: white;
-    margin-bottom: 20px;
 
     .button {
         margin-left: 15px;
@@ -22,7 +22,7 @@
 
 .input {
     width: 100%;
-    max-width: 500px;
+    //max-width: 500px;
 }
 
 .linkedUsers {
@@ -30,66 +30,51 @@
     gap: 8px;
     display: flex;
 }
+
 .second {
-    margin-top: 30px;
-    width: 100%;
+    margin-top: 20px;
     display: flex;
-    gap: 30px;
-}
-.share{
-    margin-left: auto;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    border: 2px solid white;
-    font-weight: 500;
-    padding: 4px 6px;
-    color: white;
-    border-radius: 15px;
-    cursor: pointer;
-}
-.members{
-    padding: 4px 6px;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    border: 2px solid white;
-    font-weight: 500;
-    color: white;
-    border-radius: 15px;
-    cursor: pointer;
-}
-.third {
-    margin-top: 20px;;
-    width: 100%;
-    display: flex;
-    gap:60px;
+    justify-content: space-between;
     margin-bottom: 20px;
+    flex-wrap: wrap-reverse;
+    gap: 15px;
+
+    .shareButtons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+
+        .share{
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            border: 2px solid white;
+            font-weight: 500;
+            padding: 4px 6px;
+            color: white;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .members{
+            padding: 4px 6px;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            border: 2px solid white;
+            font-weight: 500;
+            color: white;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    }
+
+    button {
+        min-height: 52px;
+    }
 }
-.filter{
-    padding: 4px 6px;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    font-weight: 500;
-    border: 2px solid white;
-    color: white;
-    border-radius: 15px;
-    cursor: pointer;
-}
-.date {
-    padding: 4px 6px;
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    font-weight: 500;
-    border: 2px solid white;
-    color: white;
-    border-radius: 15px;
-    cursor: pointer;
-}
+
 .add {
-    margin-left: auto;
+    //margin-left: auto;
     display: flex;
     gap: 6px;
     align-items: center;
@@ -99,4 +84,30 @@
     color: white;
     border-radius: 15px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1350px) {
+    .title {
+        margin-top: 10px;
+        position: static;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+        .shareButtons{
+            flex-basis: 100%;
+            justify-content: flex-end;
+        }
+
+}
+
+@media screen and (max-width: 550px) {
+    .shareButtons{
+        justify-content: space-between;
+    }
+    .share, .members {
+        flex-basis: 100%;
+    }
 }

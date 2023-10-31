@@ -121,37 +121,30 @@ const BoardPageHeader: React.FC<Props> = memo(({
                 )}
             </h1>
             <div className={s.second}>
-                <Button className={s.share} disabled={isEnabled} onClick={onShare}>
-                    <MemoizedFontAwesomeIcon icon={faShareAlt} />
-                    <p>{t('share')}</p>
-                </Button>
-                <Button className={s.members} disabled={isEnabled}>
-                    <MemoizedFontAwesomeIcon icon={faWalkieTalkie} />
-                    <p>{t('members')}</p>
-                    {
-                        linkedUsers.length > 0 && (
-                            <div className={s.linkedUsers}>
-                                {linkedUsers.map((user: IUserInfo) => (
-                                    <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
-                                ))}
-                            </div>
-                        )
-                    }
-                </Button>
-            </div>
-            <div className={s.third}>
-                <Button className={s.filter} disabled={isEnabled}>
-                    <MemoizedFontAwesomeIcon icon={faFilter} />
-                    <p>{t('filter')}</p>
-                </Button>
-                <Button className={s.date} disabled={isEnabled}>
-                    <MemoizedFontAwesomeIcon icon={faCalendarTimes} />
-                    <p>{t('this week')}</p>
-                </Button>
                 <Button className={s.add} disabled={isEnabled} onClick={() => handleCreateStatus(true)}>
                     <MemoizedFontAwesomeIcon icon={faAdd} />
                     <p>{t('add')}</p>
                 </Button>
+                <div className={s.shareButtons}>
+
+                    <Button className={s.share} disabled={isEnabled} onClick={onShare}>
+                        <MemoizedFontAwesomeIcon icon={faShareAlt} />
+                        <p>{t('share')}</p>
+                    </Button>
+                    <Button className={s.members} disabled={isEnabled}>
+                        <MemoizedFontAwesomeIcon icon={faWalkieTalkie} />
+                        <p>{t('members')}</p>
+                        {
+                            linkedUsers.length > 0 && (
+                                <div className={s.linkedUsers}>
+                                    {linkedUsers.map((user: IUserInfo) => (
+                                        <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
+                                    ))}
+                                </div>
+                            )
+                        }
+                    </Button>
+                </div>
             </div>
         </div>
     );

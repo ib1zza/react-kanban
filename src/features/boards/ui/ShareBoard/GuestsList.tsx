@@ -36,54 +36,7 @@ const GuestsList = memo(({ board }: Props) => {
         );
     }, [linkedUsers, board?.users, isEditorsOpened]);
 
-    // const getBoardAllowedPeople = async (
-    //     isSearchForEditors: boolean,
-    // ): Promise<IUserInfo[]> => {
-    //     const handleServerResponse = <T, >({
-    //         status,
-    //         value,
-    //     }: {
-    //   status: string;
-    //   value?: T;
-    // }): T | null => (status === 'fulfilled' ? value || null : null);
-    //
-    //     const users: IUserInfo[] = [];
-    //
-    //     if (!board.users) return users;
-    //
-    //     const trans = Object.keys(board.users).map((el) => ({
-    //         uid: el,
-    //         // @ts-ignore
-    //         dateInvited: board.users[el].dateInvited,
-    //         // @ts-ignore
-    //         joined: board.users[el].joined,
-    //         // @ts-ignore
-    //         role: board.users[el].role,
-    //     }));
-    //
-    //     const usersInfoResponses = await Promise.allSettled(
-    //         trans.filter((el) => el.role === (
-    //             isSearchForEditors ? LinkedUserType.USER : LinkedUserType.GUEST
-    //         )).map(
-    //             (obj) => getUserInfo(obj.uid),
-    //         ),
-    //     );
-    //
-    //     usersInfoResponses.forEach((userInfoResponse) => {
-    //         const result = handleServerResponse(userInfoResponse);
-    //         if (result) {
-    //             users.push(result);
-    //         }
-    //     });
-    //
-    //     return users;
-    // };
     const { t } = useTranslation();
-    // useEffect(() => {
-    //     getBoardAllowedPeople(isEditorsOpened).then((res) => {
-    //         setUsersEmails(res);
-    //     });
-    // }, [isEditorsOpened]);
 
     const checkIsUserJoined = (userId: string) => board.users?.[userId]?.joined;
 
@@ -116,6 +69,13 @@ const GuestsList = memo(({ board }: Props) => {
                 </button>
             </div>
             <div>
+                {
+                    !visibleUsers.length && (
+                        <div>
+                            {t('Тут пока никого нет')}
+                        </div>
+                    )
+                }
                 {visibleUsers.map((user) => (
                     <div key={user.uid} className={s.form__user}>
                         <div>

@@ -18,7 +18,9 @@
     "Добавить":"Add",
     "Добавление в общий доступ": "Sharing",
     "Кто добавлен":"Who is added",
+    "Тут пока никого нет": "There is no users yet",
     "Исполнитель": "Attached",
     "Пользователь не прикреплен": "User not attached",
-    "Выберите цвет": "Choose color"
+    "Выберите цвет": "Choose color",
+    "add": "Add column"
 }

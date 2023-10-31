@@ -14,28 +14,6 @@ $transitionDuration: 0.3s;
     padding: 0;
     transition: background-color $transitionDuration;
 }
-
-// button {
-//     border: none;
-//     background-color: transparent;
-//     color: inherit;
-//     font: inherit;
-//     text-align:inherit;
-//     text-decoration: none;
-//     cursor: pointer;
-//     outline: none;
-//     transition: all 0.2s;
-// }
-
-// input {
-//     border: none;
-//     background-color: transparent;
-//     color: inherit;
-//     font: inherit;
-//     text-align: inherit;
-//     outline: none;
-// }
-
 input, button {
     outline: none;
 }
