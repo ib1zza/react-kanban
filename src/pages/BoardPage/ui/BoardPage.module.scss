@@ -3,7 +3,7 @@
     flex-direction: column;
     height: 100%;
     position: relative;
-
+    width: 100%;
 }
 
 
@@ -13,6 +13,7 @@
     height: 100%;
     gap: 15px;
     flex-basis: 100%;
+    flex-grow: 0;
     padding-bottom: 10px;
 
     flex-wrap: nowrap;
@@ -45,6 +46,7 @@
 
 
 .wrapper {
+    overflow: hidden;
     display: flex;
     width: 100%;
     height: 100%;
@@ -59,5 +61,11 @@
 
     .buttons>*:not(:last-child) {
         margin-bottom: 6px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .columnsWrapper > * {
+        flex-basis: 100%;
     }
 }

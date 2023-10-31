@@ -7,8 +7,9 @@
     grid-gap: 16px;
     justify-content: space-between;
 
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: calc(100vh - 200px);
+    padding-bottom: 10px;
 }
 
 .buttons {
