@@ -1,11 +1,11 @@
 .container {
     width: 30%;
     min-width: 300px;
-    position: relative;
-    height: 100%;
+    position: absolute;
+
     align-self: stretch;
     margin-left: 25px;
-    margin-right: -24px;
+    right: -24px;;
     border-radius: 20px  0 0 20px;
     border-bottom: 2px solid var(--altWbText);
     border-left: 2px solid var(--altWbText);

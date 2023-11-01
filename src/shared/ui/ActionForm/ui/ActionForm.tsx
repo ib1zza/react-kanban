@@ -79,7 +79,6 @@ const ActionForm = memo((props: Props) => {
             break;
         }
     };
-
     return (
         <form className={`${s.container} ${status !== ActionFormStatus.BOARD && s.withColor}`}>
             {status !== ActionFormStatus.BOARD && (

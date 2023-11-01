@@ -7,8 +7,9 @@ interface IProps {
     color: string;
     onChange: (color: string) => void;
 }
-const ColorPicker: React.FC<IProps> = ({ onChange, color }) => {
+const ColorPicker = memo(({ onChange, color }: IProps) => {
     const { t } = useTranslation();
+
     return (
         <div className={s.colorPicker}>
             <p>
@@ -25,6 +26,6 @@ const ColorPicker: React.FC<IProps> = ({ onChange, color }) => {
             />
         </div>
     );
-};
+});
 
-export default memo(ColorPicker);
+export default ColorPicker;

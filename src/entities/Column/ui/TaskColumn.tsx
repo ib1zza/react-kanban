@@ -27,9 +27,41 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
         });
         setIsEditColumn(false);
     };
+    const Column = (
+        <div className={`${s.container} ${s.withColor}`}>
+            <div
+                className={s.headerColor}
+                style={{ backgroundColor: column.color }}
+            />
+            <hr />
+            <div className={s.titleBlock}>
+                <h6 className={s.title}>{column.title}</h6>
+                <div className={s.columnButtons}>
+                    <Button
+                        className={s.editButton}
+                        onClick={() => setIsEditColumn(true)}
+                        icon={faPenToSquare}
+                    />
+                    <Button
+                        className={s.deleteButton}
+                        onClick={() => deleteColumn(boardId, column.uid)}
+                        icon={faTrashCan}
+                    />
+                </div>
+            </div>
+            <AddTaskBlock boardId={boardId} columnId={column.uid} />
+            <TaskList
+                boardId={boardId}
+                columnId={column.uid}
+                tasks={column.tasks}
+                // rerender={()}
+            />
+            <div className={s.fill} />
+        </div>
+    );
 
     return isEditColumn ? (
-        <Suspense>
+        <Suspense fallback={Column}>
             <ActionForm
                 status={ActionFormStatus.EDIT}
                 title={column.title}
@@ -40,36 +72,7 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
         </Suspense>
     ) : (
         <Suspense>
-            <div className={`${s.container} ${s.withColor}`}>
-                <div
-                    className={s.headerColor}
-                    style={{ backgroundColor: column.color }}
-                />
-                <hr />
-                <div className={s.titleBlock}>
-                    <h6 className={s.title}>{column.title}</h6>
-                    <div className={s.columnButtons}>
-                        <Button
-                            className={s.editButton}
-                            onClick={() => setIsEditColumn(true)}
-                            icon={faPenToSquare}
-                        />
-                        <Button
-                            className={s.deleteButton}
-                            onClick={() => deleteColumn(boardId, column.uid)}
-                            icon={faTrashCan}
-                        />
-                    </div>
-                </div>
-                <AddTaskBlock boardId={boardId} columnId={column.uid} />
-                <TaskList
-                    boardId={boardId}
-                    columnId={column.uid}
-                    tasks={column.tasks}
-                // rerender={()}
-                />
-                <div className={s.fill} />
-            </div>
+            {Column}
         </Suspense>
     );
 });
