@@ -1,5 +1,5 @@
 import React, {
-    InputHTMLAttributes, memo,
+    InputHTMLAttributes, memo, useCallback,
 } from 'react';
 import s from './Input.module.scss';
 import { classNames } from '../../lib/classNames/classNames';
@@ -23,7 +23,6 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
 }
 
 export const Input = memo((props: InputProps) => {
-    console.log(props);
     const {
         className,
         error,
