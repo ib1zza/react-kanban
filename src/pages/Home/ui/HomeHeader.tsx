@@ -13,11 +13,11 @@ const HomeHeader = memo(() => {
 
     const handleAddBoardStatus = useCallback(() => {
         dispatch(homeActions.setAddBoardStatus(true));
-    }, []);
+    }, [dispatch]);
 
     const handleLinkBoardStatus = useCallback(() => {
         dispatch(homeActions.setLinkBoardStatus(true));
-    }, []);
+    }, [dispatch]);
     return (
         <div className={s.buttons}>
             <Button

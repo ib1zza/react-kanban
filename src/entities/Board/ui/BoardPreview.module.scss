@@ -3,8 +3,7 @@
     color: var(#{--taskTextColor});
     border-radius: 10px;
     padding: 12px;
-    min-width: 250px;
-    height: 80px;
+    min-width: 150px;
     border: 2px solid var(--altWbText);
     box-shadow: 0px 4px 4px 0px rgb(0 0 0 / 20%);;
 }
@@ -62,8 +61,14 @@
     color: #e32400;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 460px) {
     .container {
         min-width: auto;
+        padding: 10px;
+    }
+    .heading{
+        .info {
+            font: var(--font-s);
+        }
     }
 }

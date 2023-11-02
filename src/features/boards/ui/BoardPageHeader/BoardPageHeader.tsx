@@ -3,8 +3,7 @@ import React, {
 } from 'react';
 import {
     faAdd,
-    faCalendarTimes,
-    faFilter,
+
     faPenToSquare,
     faShareAlt, faTrash,
     faWalkieTalkie,

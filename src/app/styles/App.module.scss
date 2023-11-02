@@ -12,3 +12,9 @@
     flex-direction: row;
     align-items: stretch;
 }
+@media screen and (max-width: 460px) {
+    .body {
+        padding: 6px;
+       
+    }
+}

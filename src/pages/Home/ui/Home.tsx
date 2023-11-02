@@ -12,7 +12,7 @@ import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm
 import { createBoardRt } from 'features/boards/API/createBoard/createBoardRealtime';
 import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUserBoards';
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
-import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
+import Loader from 'shared/ui/Loader/Loader';
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
@@ -63,7 +63,7 @@ const Home = memo(() => {
         <div className={s.boardPageContainer}>
             <HomeHeader />
             <div className={s.blocks__container}>
-                {!user?.uid ? <BoardPreviewSkeleton /> : (
+                {!user?.uid ? <Loader /> : (
                     <>
                         <Suspense>
                             {addBoardStatus && (

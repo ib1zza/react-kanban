@@ -183,3 +183,10 @@
 .noBorder {
     border: none;
 }
+
+@media screen and (max-width: 460px) {
+    .full {
+        padding: 4px;
+        font-size: 10px;
+    }
+}

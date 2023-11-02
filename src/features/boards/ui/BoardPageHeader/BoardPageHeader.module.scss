@@ -7,16 +7,13 @@
     top: -60px;
     height: 47px;
     display: flex;
+    margin-left: 10px;
+    font: 14px;
     align-items: center;
-    //justify-content: center;
     color: white;
 
     .button {
         margin-left: 15px;
-        //color: white;
-        //&:hover {
-        //    color: var(#{--iconColorHover});
-        //}
     }
 }
 
@@ -74,7 +71,6 @@
 }
 
 .add {
-    //margin-left: auto;
     display: flex;
     gap: 6px;
     align-items: center;
@@ -95,12 +91,10 @@
 }
 
 @media screen and (max-width: 750px) {
-
         .shareButtons{
             flex-basis: 100%;
             justify-content: flex-end;
         }
-
 }
 
 @media screen and (max-width: 550px) {
@@ -109,5 +103,28 @@
     }
     .share, .members {
         flex-basis: 100%;
+    }
+}
+
+
+@media screen and (max-width: 460px) {
+    .shareButtons{
+        flex-direction: column;
+        height: 52px;
+       
+    }
+    .second {
+        .shareButtons {
+            .share{
+                padding: 0px 2px 0px 10px;
+  
+            }
+            .members{
+                padding: 0px 2px 0px 10px;
+            }
+        }
+        button {
+            font-size: 16px;
+        }
     }
 }
