@@ -198,3 +198,11 @@
         align-items: center;
     }
 }
+@media screen and (max-width: 460px) {
+  .profile{
+    padding: 0.3em 0.5em;
+    font-size: 18px;
+    margin-left: 10px;
+  }
+
+}

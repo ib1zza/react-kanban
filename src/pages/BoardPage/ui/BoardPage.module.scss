@@ -28,14 +28,6 @@
         background-color: var(--ScrollThumb);
     }
 
-    //&::-webkit-scrollbar-track {
-    //    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
-    //    border-radius: 10px;
-    //    background-color: #f9f9fd;
-    //}
-
-
-
     & > * {
         flex-basis: 300px;
         flex-shrink: 0;

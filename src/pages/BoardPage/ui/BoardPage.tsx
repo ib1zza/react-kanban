@@ -16,7 +16,7 @@ import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm
 import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt';
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import Modal from 'shared/ui/Modal/Modal';
-import TaskColumnSkeleton from 'entities/Column/ui/TaskColumnSkeleton';
+import Loader from 'shared/ui/Loader/Loader';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 import { boardCollectionActions, getBoardCollection } from '..';
@@ -91,7 +91,7 @@ const BoardPage = memo(() => {
                 <div className={s.wrapper}>
                     <div className={s.columnsWrapper}>
                         {!selectedBoard
-                            ? <><TaskColumnSkeleton /></>
+                            ? <><Loader /></>
                             : (
                                 <>
                                     {getColumnsFromBoard(selectedBoard).map((column) => (

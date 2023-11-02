@@ -1,5 +1,5 @@
 import React, {
-    memo, useCallback, useEffect, useState,
+    memo, useCallback, useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import s from './ActionForm.module.scss';
