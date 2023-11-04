@@ -12,9 +12,17 @@
     flex-direction: row;
     align-items: stretch;
 }
+
+@media screen and (max-width: 1200px) {
+    .body {
+       width: calc(100vw - 30px);
+        overflow: hidden;
+    }
+}
+
+
 @media screen and (max-width: 460px) {
     .body {
         padding: 6px;
-       
     }
 }

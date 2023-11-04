@@ -70,3 +70,16 @@
 
     }
 }
+
+@media screen and (max-width: 460px) {
+    .notificationsContainer {
+        left: 0;
+        max-width: calc(100vw - 75px);
+        border-radius: 0 10px 10px 10px;
+    }
+
+    .trio {
+        left: 0;
+    }
+}
+

@@ -120,6 +120,7 @@ const BoardPage = memo(() => {
                         )}
                     </Suspense>
                 </div>
+
             </div>
         </>
     );
