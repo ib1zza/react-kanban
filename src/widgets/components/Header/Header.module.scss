@@ -1,16 +1,5 @@
-.header {
-    font-size: 28px;
-}
-
 .header__logo {
     cursor: pointer;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--white);
 }
 
 .nickname {
@@ -19,11 +8,15 @@
 }
 
 .header__cabinet {
+  color: var(--white);
+  font-size: 28px;
+
     cursor: pointer;
     background-color: transparent;
     border: none;
     display: flex;
     align-items: center;
+  justify-content: flex-end;
     &>div {
       color: var(--white);
     }
@@ -197,6 +190,13 @@
         flex-direction: row;
         align-items: center;
     }
+}
+
+@media screen and (max-width: 550px) {
+  .header__cabinet {
+    justify-content: space-between;
+  }
+
 }
 @media screen and (max-width: 460px) {
   .profile{

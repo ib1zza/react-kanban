@@ -27,7 +27,6 @@ const Header = memo(() => {
                     </Suspense>
                 </Modal>
             )}
-            <div />
             <div className={s.header__cabinet}>
                 <OpenNotificationsButton />
                 <div onClick={() => handleShowProfile(true)} className={s.profile}>

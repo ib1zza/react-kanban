@@ -75,3 +75,9 @@
         //}
     }
 }
+
+@media screen  and (max-width: 400px) {
+    .buttons {
+        flex-wrap: wrap;
+    }
+}

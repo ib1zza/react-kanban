@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { faCircleXmark, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,6 @@ import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { getUserInfo } from 'features/users';
-import { DocumentData } from 'firebase/firestore';
 import s from './PopupTaskInfo.module.scss';
 
 interface Props {
