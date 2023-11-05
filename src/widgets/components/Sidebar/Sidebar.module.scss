@@ -53,13 +53,16 @@ hr{
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
+   
 }
 
-.space_team{
+.space_team{  
+    margin-top: 6px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    font: var(--font-m);
+    font: var(--font-s);
+    gap: 10px;
 }
 .bottom{
     margin-bottom: auto;
@@ -100,10 +103,19 @@ hr{
     justify-content: center;
   }
 
-  .nav_button span, .space {
+  .nav_button span {
     display: none;
   }
-
+  .space {
+    span {
+      display: none;
+    }
+    .space_team{
+      p{
+        display: none;
+      }
+    }
+  }
   .sidebar {
     width: auto;
     padding: 0 15px
