@@ -1,15 +1,22 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppRoute } from 'app/providers/router/lib/AppRoute';
 import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
 import { faBarsProgress, faGear } from '@fortawesome/free-solid-svg-icons';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/ui/LangSwitcher';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import { useAppSelector } from 'app/providers/StoreProvider';
+import { getLinkedUsers } from 'pages/BoardPage';
+import { IUserInfo } from 'app/types/IUserInfo';
+import { Avatar } from 'shared/ui/Avatar';
 import s from './Sidebar.module.scss';
 
 const Sidebar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { t } = useTranslation();
+    const linkedUsers = useAppSelector(getLinkedUsers);
+
     return (
         <div className={s.sidebar}>
             <div
@@ -35,10 +42,27 @@ const Sidebar = () => {
                 </div>
             </div>
             <hr />
-            <div className={s.space}>
-                <span>{t('My space')}</span>
-                <div className={s.space_team} />
-            </div>
+            {location.pathname !== '/'
+                && (
+                    <div className={s.space}>
+                        <span>{t('My space')}</span>
+                        {
+                            linkedUsers.length > 0 && (
+                                <div className={s.linkedUsers}>
+                                    {linkedUsers.map((user: IUserInfo, key) => (
+                                        // eslint-disable-next-line react/no-array-index-key
+                                        <div key={key} className={s.space_team}>
+                                            <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
+
+                                            <p>{`${user.email.substring(0, 10)}...`}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )
+                        }
+                    </div>
+                )}
+
             <div className={s.bottom}>
                 <div className={s.app_buttons}>
                     <ThemeSwitcher />

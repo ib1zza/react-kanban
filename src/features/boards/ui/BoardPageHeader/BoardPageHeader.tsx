@@ -130,19 +130,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
                         <MemoizedFontAwesomeIcon icon={faShareAlt} />
                         <p>{t('share')}</p>
                     </Button>
-                    <Button className={s.members} disabled={isEnabled}>
-                        <MemoizedFontAwesomeIcon icon={faWalkieTalkie} />
-                        <p>{t('members')}</p>
-                        {
-                            linkedUsers.length > 0 && (
-                                <div className={s.linkedUsers}>
-                                    {linkedUsers.map((user: IUserInfo) => (
-                                        <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
-                                    ))}
-                                </div>
-                            )
-                        }
-                    </Button>
+
                 </div>
             </div>
         </div>
