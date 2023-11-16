@@ -5,7 +5,6 @@ export const readNotificationQuery = async (
     notificationId: string,
 ) => {
     try {
-        console.log('reading notification', notificationId);
         await updateDocument('notifications', userId, {
             [`${notificationId}.` + 'read']: true,
         });

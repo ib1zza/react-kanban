@@ -26,10 +26,6 @@ const LoginForm = ({ onSwitch }: props) => {
     const handleSubmit = useCallback((data: any) => {
         if (data.email !== '' && data.password !== '') {
             logIn(data.email, data.password, data.rememberMe).then((res: any) => {
-                if (res) {
-                    // dispatch(loginActions.setError(res.error));
-                    console.log(res);
-                }
                 navigate('/');
             });
             dispatch(fetchByIdStatus({ email: data.email, password: data.password, remember: data.rememberMe }) as any);
@@ -62,7 +58,6 @@ const LoginForm = ({ onSwitch }: props) => {
             className={s.form}
         >
             <div className={s.title_wrapper}>
-                {/* <Arrow /> */}
                 <div>
                     <div className={s.title}>{t('Вход')}</div>
                     <div className={s.linkArea}>
@@ -79,7 +74,6 @@ const LoginForm = ({ onSwitch }: props) => {
                 {error}
             </p>
 
-            {/* {error && <div>{error}</div>} */}
             <label
                 htmlFor="email"
                 className={s.label}

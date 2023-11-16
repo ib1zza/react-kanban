@@ -27,7 +27,6 @@ type SelectProps = {
 const Select = memo((props : SelectProps) => {
     const {
         placeholder,
-        selected,
         onChange,
         onClose,
         options,

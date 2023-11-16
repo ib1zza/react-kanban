@@ -1,5 +1,4 @@
 import { NotificationsSchema } from 'entities/Notifications';
-// local
 import { UserInfoSchema } from 'features/users/model/types/UserInfoSchema';
 import { LoginSchema } from 'features/auth/login';
 import { SignupSchema } from 'features/auth/signup';

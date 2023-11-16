@@ -13,8 +13,6 @@ export const getNotifications = createAsyncThunk<NotificationItem[], string, { r
                 await createNotificationsRecord(userId);
                 return [];
             }
-            console.log(response);
-            console.log(Object.values(response));
             return Object.values(response);
         } catch (e) {
             console.log(e);

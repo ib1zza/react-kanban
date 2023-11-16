@@ -54,7 +54,6 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                 boardId={boardId}
                 columnId={column.uid}
                 tasks={column.tasks}
-                // rerender={()}
             />
             <div className={s.fill} />
         </div>

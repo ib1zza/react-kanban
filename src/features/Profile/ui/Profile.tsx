@@ -53,16 +53,7 @@ const Profile = memo(() => {
         uploadImage.on(
             'state_changed',
             (snapshot) => {
-                // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                // console.log(`Image upload is ${progress}% done`);
-                switch (snapshot.state) {
-                case 'paused':
-                    // console.log('Upload is paused');
-                    break;
-                case 'running':
-                    // console.log('Upload is running');
-                    break;
-                }
+
             },
             (error) => {
                 // console.log(error);
@@ -70,9 +61,7 @@ const Profile = memo(() => {
             () => {
                 getDownloadURL(uploadImage.snapshot.ref).then(async (downloadURL) => {
                     await updateDocument('users', user.uid, { photoURL: downloadURL });
-                    // await updateProfile(user, {
-                    //     photoURL: downloadURL,
-                    // });
+
                     refetch();
                     fetchUserInfo();
                 });

@@ -1,5 +1,5 @@
 import React, {
-    Suspense, useCallback, useEffect, useState,
+    Suspense, useEffect, useState,
 } from 'react';
 import { faBell as faSolidBell } from '@fortawesome/free-solid-svg-icons';
 import { faBell as faRegularBell } from '@fortawesome/free-regular-svg-icons';
@@ -9,7 +9,6 @@ import { subscribeToUserNotifications } from 'entities/Notifications/model/servi
 import { notificationsActions } from 'entities/Notifications/model/slice/notificationSlice';
 import { readNotificationsRt } from 'entities/Notifications/model/services/API/readNotificationsRt';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './OpenNotificationsButton.module.scss';
 import Notification from '../Notification';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
@@ -25,20 +24,10 @@ const OpenNotificationsButton = () => {
     const unreadCount = useAppSelector(getUnreadNotificationsCount);
     const [open, setOpen] = useState(false);
 
-    // useEffect(() => {
-    // async function getNotifs() {
-    //     if (!user?.uid) return;
-    //     dispatch(getNotifications(user.uid));
-    // }
-    //
-    // getNotifs();
-    // }, [user?.uid]);
-
     useEffect(() => {
         const unsub = subscribeToUserNotifications(
             user.uid,
             (data) => {
-                console.log(data);
                 if (data) {
                     dispatch(notificationsActions.setNotifications(Object.values(data)));
                 }
@@ -74,8 +63,6 @@ const OpenNotificationsButton = () => {
             }, 50);
         }
     }, [open]);
-
-    console.log(notifications);
 
     return (
         <Button className={s.button}>

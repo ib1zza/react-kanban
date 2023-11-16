@@ -9,9 +9,7 @@ const MainRouter = () => (
         <Route
             path="/board/:boardId"
             element={(
-                // <Suspense fallback={<div />}>
                 <BoardPage />
-                // </Suspense>
             )}
         />
         <Route

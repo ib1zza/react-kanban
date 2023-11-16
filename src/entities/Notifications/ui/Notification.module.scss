@@ -4,11 +4,6 @@
     background-color: transparent;
     color: var(--black);
 
-
-    //&.read {
-    //    opacity: 0.6;
-    //}
-
     &:hover {
         background: rgba(3, 3, 3, 0.13);
         box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.31);
@@ -19,20 +14,10 @@
     display: flex;
     .avatarContainer {
         margin-right: 12px;
-        //img {
-        //    margin-right: 10px;
-        //    width: 30px;
-        //    height: 30px;
-        //    border-radius: 50%;
-        //    object-fit: cover;
-        //}
     }
 
 
     .messageInfo {
-        //display: flex;
-        //align-items: center;
-        //flex-direction: column;
         .text {
             text-align: left;
             font-size: 14px;
@@ -58,21 +43,6 @@
                 fill: #FA5D55;
             }
         }
-        //button {
-        //    padding: 4px 10px;
-        //    font-size: 14px;
-        //    display: flex;
-        //    justify-content: center;
-        //    align-items: center;
-        //    gap: 7px;
-        //
-        //
-        //
-        //    svg {
-        //        transition: all 0.2s linear;
-        //        width: 17px;
-        //    }
-        //}
     }
 }
 

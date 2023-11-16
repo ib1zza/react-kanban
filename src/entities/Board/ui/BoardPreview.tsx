@@ -53,7 +53,6 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
                 </Modal>
             )}
             <h3 className={s.heading}>
-                {/* <span onClick={onClick}>{board.title.slice(0, 5)}</span> */}
                 <div className={s.info}>
                     <span className={s.title} onClick={onClick}>{board.title.slice(0)}</span>
                     <p>

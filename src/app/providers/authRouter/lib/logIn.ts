@@ -16,10 +16,5 @@ export const loginByEmailPass = async (email: string, password: string, remember
     } else {
         await getAuth().setPersistence(inMemoryPersistence).catch((error) => reject(-1));
     }
-    signInWithEmailAndPassword(auth, email, password).then(async (userCredential) => {
-        // Signed in
-        // const { user } = userCredential;
-        // return user;
-        console.log(userCredential);
-    }).catch((error) => error);
+    signInWithEmailAndPassword(auth, email, password).catch((error) => error);
 });

@@ -5,8 +5,6 @@ import { LoginForm } from 'features/auth/login';
 import { SignupForm } from 'features/auth/signup';
 import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/ui/LangSwitcher';
-import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
-import { useAppSelector } from 'app/providers/StoreProvider';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import s from './AuthPage.module.scss';
@@ -21,7 +19,6 @@ const AuthPage = () => {
 
     useEffect(() => {
         if (user?.uid) {
-            console.log('navigate');
             navigate('/');
         }
     }, [user]);
