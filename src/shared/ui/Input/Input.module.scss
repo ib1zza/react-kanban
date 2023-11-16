@@ -17,11 +17,6 @@
 
     }
 
-    //input:hover {
-    //    outline: solid #808080;
-    //}
-
-
     input::placeholder {
         color: var(--InputPlaceholder);
     }
@@ -83,11 +78,3 @@
     }
 }
 
-
-// .error {
-//     input {
-//         border: none;
-//         outline: none;
-//         color: red;
-//     }
-// }

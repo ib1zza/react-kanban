@@ -15,7 +15,6 @@
 
     .info {
         width: calc(100% - 30px);
-        //flex-basis: calc(100% - 30px);
         flex-shrink: 1;
         flex-grow: 0;
         font: var(--font-m);
@@ -53,7 +52,6 @@
 }
 
 .share_button {
-    //margin-right: 5px;
     color: var(--altWbText);
     padding: 0;
 }

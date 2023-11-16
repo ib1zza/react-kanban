@@ -56,8 +56,6 @@ export const signUpEmailPass = async (
                             boardIds: [],
                             boardInvitedIds: [],
                             select,
-                            // TODO unreadNotifications:
-                            // unreadNotifications: ,
                         });
                     });
                 },

@@ -107,30 +107,3 @@ export const withTextAndHeadingAndAvatarDark: Story = {
 };
 
 withTextAndHeadingAndAvatarDark.decorators = [ThemeDecorator(Theme.DARK)];
-
-// export const PrimaryDark: Story = {
-//     args: {
-//         label: 'label',
-//         value: 'Text',
-//         theme: InputTheme.PRIMARY,
-//         placeholder: 'placeholder',
-//     },
-// };
-// PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];
-// export const Clear: Story = {
-//     args: {
-//
-//         value: 'Text',
-//         theme: InputTheme.CLEAR,
-//         placeholder: 'placeholder',
-//     },
-// };
-// export const ClearDark: Story = {
-//     args: {
-//
-//         value: 'Text',
-//         theme: InputTheme.CLEAR,
-//         placeholder: 'placeholder',
-//     },
-// };
-// ClearDark.decorators = [ThemeDecorator(Theme.DARK)];

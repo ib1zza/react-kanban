@@ -1,5 +1,4 @@
 import { ITask } from 'app/types/IBoard';
-import { updateDocument } from 'shared/API/updateDocument';
 import { ref, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
 

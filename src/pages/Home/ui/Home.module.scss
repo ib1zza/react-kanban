@@ -1,6 +1,5 @@
 .blocks__container {
     min-width: calc(100% - 50px);
-    //margin-right: 15px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     align-items: start;
@@ -14,7 +13,6 @@
 
 .buttons {
     margin: 20px 0;
-    //marg in-bottom: 10px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -26,8 +24,6 @@
         border-radius: 15px;
         padding: 4px;
         font-size: 16px;
-        //width: 42px;
-        //height: 42px;
     }
 }
 

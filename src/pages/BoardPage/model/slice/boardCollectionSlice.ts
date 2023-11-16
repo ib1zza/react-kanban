@@ -34,17 +34,12 @@ export const boardCollectionSlice = createSlice({
             state.selectedColumnId = Object.values(state.selectedBoard.columns).find(
                 (col: any) => Object.keys(col.tasks).includes(action.payload.uid),
             )?.uid || '';
-            console.log(state.selectedBoard);
         },
         updateSelectedTask: (state, action: PayloadAction<string>) => {
             const id = action.payload;
             if (!state.selectedBoard) return;
-            console.log('update task', id);
             const task = state.selectedBoard.columns[state.selectedColumnId].tasks[id];
             state.selectedTask = task;
-
-            // state.selectedTask = state.selectedBoard.columns[state.selectedColumnId].tasks[action.payload.uid];
-            // state.selectedBoard.columns[state.selectedColumnId].tasks[action.payload.uid] = action.payload;
         },
         removeSelectedTask: (state) => {
             state.selectedTask = null;

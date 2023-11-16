@@ -120,7 +120,6 @@ const SignupForm = memo(({ onSwitch }: props) => {
     return (
         <form onSubmit={formik.handleSubmit} className={s.signup}>
             <div className={s.title_wrapper}>
-                {/* <Arrow /> */}
                 <div>
                     <h1 className={s.title}>{t('Регистрация')}</h1>
                     <p className={s.linkArea}>
@@ -236,7 +235,6 @@ const SignupForm = memo(({ onSwitch }: props) => {
                             />
                             <label htmlFor="file">
                                 <MemoizedFontAwesomeIcon icon={faImage} />
-                                {/* <img src={Add} alt="" /> */}
                                 <span>{t('Загрузить аватар')}</span>
                             </label>
                         </div>

@@ -1,8 +1,5 @@
-import { arrayRemove } from 'firebase/firestore';
-import { updateDocument } from 'shared/API/updateDocument';
-import { ref, remove, set } from 'firebase/database';
+import { ref, remove } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
-import { deleteNotification } from './deleteNotification';
 
 export async function declineInviteNotification(
     notificationId: string,
@@ -13,14 +10,8 @@ export async function declineInviteNotification(
         // если пользователь отклоняет приглашение, то
         // удаляем уведомление и удаляем его из списка гостей
 
-        remove(ref(rtdb, `boards/${boardId}/users/${userId}`));
-        remove(ref(rtdb, `usersNotifications/${userId}/${notificationId}`));
-
-        // await deleteNotification(userId, notificationId);
-        // await updateDocument('boards', boardId, {
-        //     guestsAllowed: arrayRemove(userId),
-        //     usersAllowed: arrayRemove(userId),
-        // });
+        await remove(ref(rtdb, `boards/${boardId}/users/${userId}`));
+        await remove(ref(rtdb, `usersNotifications/${userId}/${notificationId}`));
     } catch (e) {
         console.log(e);
         return false;

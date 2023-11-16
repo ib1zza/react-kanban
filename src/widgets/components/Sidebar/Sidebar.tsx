@@ -49,11 +49,9 @@ const Sidebar = () => {
                         {
                             linkedUsers.length > 0 && (
                                 <div className={s.linkedUsers}>
-                                    {linkedUsers.map((user: IUserInfo, key) => (
-                                        // eslint-disable-next-line react/no-array-index-key
-                                        <div key={key} className={s.space_team}>
-                                            <Avatar key={user.uid} src={user.photoURL} alt={user.displayName} />
-
+                                    {linkedUsers.map((user: IUserInfo) => (
+                                        <div key={user.uid} className={s.space_team}>
+                                            <Avatar src={user.photoURL} alt={user.displayName} />
                                             <p>{`${user.email.substring(0, 10)}...`}</p>
                                         </div>
                                     ))}

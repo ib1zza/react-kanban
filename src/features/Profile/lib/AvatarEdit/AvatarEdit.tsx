@@ -12,7 +12,6 @@ interface AvatarEditProps {
 const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit }) => {
     const [file, setFile] = React.useState<File | null>(null);
     const [loading, setLoading] = React.useState(false);
-    // console.log(avatar);
     const handleUpdateAvatar = useCallback(
         async () => {
             if (file && !loading) {
@@ -26,8 +25,6 @@ const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit }) => {
 
     useEffect(() => {
         handleUpdateAvatar().finally(() => setLoading(false));
-
-        // console.log('work');
     }, [file, handleUpdateAvatar]);
     return (
         <div className={s.profile__avatar}>

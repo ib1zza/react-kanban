@@ -7,7 +7,6 @@ export const getBoardsRt = (ids: string[]) => {
 
     const getOneBoardInfo = (id: string) => get(child(dbRef, `boards/${id}`)).then((snapshot) => {
         if (snapshot.exists()) {
-            console.log(snapshot.val());
             return snapshot.val();
         }
         console.log('No data available');

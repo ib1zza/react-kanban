@@ -29,11 +29,6 @@ export const notificationSlice = createSlice({
             // @ts-ignore
             notif.payload.isAccepted = true;
         },
-        // readAllNotifications: (state) => {
-        //     state.notifications = state.notifications.map(
-        //         (notification) => ({ ...notification, read: true }),
-        //     );
-        // },
     },
     extraReducers: (builder) => {
         builder

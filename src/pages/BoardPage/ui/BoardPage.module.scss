@@ -14,7 +14,6 @@
     height: 100%;
     gap: 15px;
     flex-basis: 100%;
-    //max-width: min-content;
     flex-grow: 0;
     flex-wrap: nowrap;
     overflow-y: auto;
@@ -53,7 +52,6 @@
     .buttons>*:not(:last-child) {
         margin-bottom: 6px;
     }
-    //!
 }
 
 

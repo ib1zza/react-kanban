@@ -41,13 +41,7 @@ const NotificationMessageInvited = ({ data, notificationId, isAccepted }: Props)
     const acceptHandler = () => {
         if (!user || !board) return;
         addUserToBoardRt(user.uid, board.uid, data.invitedRole || LinkedUserType.USER);
-
         dispatch(notificationsActions.acceptNotification(notificationId));
-        // acceptInviteNotification(notificationId, user.uid, board.uid).then(
-        //     () => {
-        //         dispatch(notificationsActions.acceptNotification(notificationId));
-        //     },
-        // );
     };
     const declineHandler = () => {
         if (!user || !board) return;
@@ -60,7 +54,6 @@ const NotificationMessageInvited = ({ data, notificationId, isAccepted }: Props)
 
     if (!userFrom || !board) return <></>;
 
-    console.log(data, userFrom, board);
     return (
         <div className={s.messageContainer}>
             <div className={s.avatarContainer}>

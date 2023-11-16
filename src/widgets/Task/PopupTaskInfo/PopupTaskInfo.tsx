@@ -35,7 +35,6 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
     const [userInfo, setUserInfo] = useState<any>();
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
-    // const userAvatar = useSelector(getUserAvatar);
     const { t } = useTranslation('buttons');
     if (!task) return null;
     const onDeleteTask = async () => {
