@@ -33,13 +33,13 @@ const Sidebar = () => {
                         {t('Projects')}
                     </span>
                 </div>
-                <div className={s.nav_button}>
-                    <MemoizedFontAwesomeIcon icon={faGear} className={s.svg} />
-                    <span>
+                {/* <div className={s.nav_button}> */}
+                {/*    <MemoizedFontAwesomeIcon icon={faGear} className={s.svg} /> */}
+                {/*    <span> */}
 
-                        {t('Settings')}
-                    </span>
-                </div>
+                {/*        {t('Settings')} */}
+                {/*    </span> */}
+                {/* </div> */}
             </div>
             <hr />
             {location.pathname !== '/'

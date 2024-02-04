@@ -92,8 +92,8 @@
 
 @media screen and (max-width: 750px) {
         .shareButtons{
-            flex-basis: 100%;
-            justify-content: flex-end;
+            //flex-basis: 100%;
+            //justify-content: flex-end;
         }
 }
 
@@ -111,16 +111,17 @@
     .shareButtons{
         flex-direction: column;
         height: 52px;
-       
+
     }
     .second {
+        flex-direction: column;
         .shareButtons {
             .share{
-                padding: 0px 2px 0px 10px;
-  
+                //padding: 0px 2px 0px 10px;
+
             }
             .members{
-                padding: 0px 2px 0px 10px;
+                //padding: 0px 2px 0px 10px;
             }
         }
         button {

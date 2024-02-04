@@ -20,7 +20,9 @@
     border-right: 2px solid var(--altWbText);
 }
 .nav_buttons{
-
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
 }
 .nav_button {
     font: var(--font-m);
@@ -30,15 +32,16 @@
     text-transform: uppercase;
     font-weight: 600;
     cursor: pointer;
-}
-.nav_button:first-child{
-        margin-bottom: 21px;
-}
-.svg {
-    margin-right: 10px;
 
-    fill: #ffff;
+  & > svg {
+    margin-right: 10px;
+  }
 }
+//.svg {
+//    margin-right: 10px;
+//
+//    fill: #ffff;
+//}
 
 hr{
     margin: 20px 0;
@@ -53,10 +56,10 @@ hr{
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-   
+
 }
 
-.space_team{  
+.space_team{
     margin-top: 6px;
     display: flex;
     flex-direction: row;
