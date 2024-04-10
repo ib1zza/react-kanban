@@ -185,7 +185,7 @@
   .profile {
     margin-left: 20px;
     @include btn-border-slide(white, var(--HeaderBg), 2px, 0.8s);
-    :first-child {
+    &>:first-child {
         display: flex;
         flex-direction: row;
         align-items: center;

@@ -7,7 +7,7 @@ import React, {
     useState,
 } from 'react';
 import {
-    signOut, User, onAuthStateChanged,
+    signOut, User, onAuthStateChanged, UserCredential,
 } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { auth } from 'shared/config/firebase/firebase';
@@ -30,14 +30,15 @@ interface IAuthContext {
 
     logIn: (
         email: string,
-        password: string, rememberMe: boolean
-    ) => Promise<User>;
+        password: string,
+        rememberMe: boolean
+    ) => Promise<UserCredential>;
     logOut: () => void;
     refetch: () => void;
     user?: any ;
 }
 
-const AuthContext = createContext<any>({
+const AuthContext = createContext<IAuthContext>({
     logIn: () => {
     },
     signUp: () => {
@@ -60,8 +61,9 @@ export const AuthContextProvider: React.FC<PropsWithChildren> = ({
     const logIn = loginByEmailPass;
     const dispatch = useDispatch();
 
-    function logOut() {
-        return signOut(auth).then((res) => dispatch(userInfoActions.clearUserInfo()));
+    async function logOut() {
+        const res = await signOut(auth);
+        return dispatch(userInfoActions.clearUserInfo());
     }
 
     async function refetch() {

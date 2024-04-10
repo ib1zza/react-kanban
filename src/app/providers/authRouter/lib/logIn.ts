@@ -4,11 +4,11 @@ import {
     browserLocalPersistence,
     getAuth,
     inMemoryPersistence,
-    signInWithEmailAndPassword,
+    signInWithEmailAndPassword, UserCredential,
 } from 'firebase/auth';
 
 // eslint-disable-next-line no-async-promise-executor
-export const loginByEmailPass = async (email: string, password: string, remember: boolean) => new Promise(async (resolve, reject) => {
+export const loginByEmailPass = async (email: string, password: string, remember: boolean): Promise<UserCredential> => new Promise(async (resolve, reject) => {
     const auth = getAuth();
 
     if (remember) {
@@ -16,5 +16,5 @@ export const loginByEmailPass = async (email: string, password: string, remember
     } else {
         await getAuth().setPersistence(inMemoryPersistence).catch((error) => reject(-1));
     }
-    signInWithEmailAndPassword(auth, email, password).catch((error) => error);
+    resolve(await signInWithEmailAndPassword(auth, email, password).catch((error) => error));
 });

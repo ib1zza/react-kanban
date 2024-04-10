@@ -75,7 +75,7 @@ const Profile = memo(() => {
         <div>
             <div className={s.profile}>
                 <div className={s.profile__avatar}>
-                    <AvatarEdit onEdit={onAvatarUpdate} avatar={userInfo.photoURL} />
+                    <AvatarEdit onEdit={onAvatarUpdate} avatar={userInfo.photoURL} alt={userInfo.displayName} />
                 </div>
                 <div>
                     <div className={s.profile__name}>

@@ -30,7 +30,7 @@ const LoginForm = ({ onSwitch }: props) => {
             });
             dispatch(fetchByIdStatus({ email: data.email, password: data.password, remember: data.rememberMe }) as any);
         } else {
-            dispatch(loginActions.setError('Какое-то поле незаполнено'));
+            dispatch(loginActions.setError('Какое-то поле не заполнено'));
         }
     }, [dispatch, logIn, navigate]);
 
@@ -51,7 +51,6 @@ const LoginForm = ({ onSwitch }: props) => {
             handleSubmit(values);
         },
     });
-    console.log(error);
     return (
         <form
             onSubmit={formik.handleSubmit}
@@ -115,16 +114,19 @@ const LoginForm = ({ onSwitch }: props) => {
             />
 
             <div className={s.remember}>
-                <div>
-                    <Input
-                        checked={formik.values.rememberMe}
-                        onChange={formik.handleChange}
-                        type="checkbox"
-                        id="rememberMe"
-                        name="rememberMe"
-                    />
+                <Input
+                    checked={formik.values.rememberMe}
+                    onChange={formik.handleChange}
+                    type="checkbox"
+                    id="rememberMe"
+                    name="rememberMe"
+                />
+                <label
+                    htmlFor="rememberMe"
+                    className={s.labelRemember}
+                >
                     {t('Запомнить меня')}
-                </div>
+                </label>
             </div>
             <div className={s.btn_wrapper}>
                 <button type="submit" className={s.btn}>

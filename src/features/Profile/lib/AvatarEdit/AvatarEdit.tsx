@@ -1,15 +1,15 @@
-import React, {
-    FC, useCallback, useEffect,
-} from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { ReactSVG } from 'react-svg';
+import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import s from './AvatarEdit.module.scss';
 
 interface AvatarEditProps {
   avatar: string;
   onEdit: (file: File) => void;
+    alt: string;
 }
 
-const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit }) => {
+const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit, alt }) => {
     const [file, setFile] = React.useState<File | null>(null);
     const [loading, setLoading] = React.useState(false);
     const handleUpdateAvatar = useCallback(
@@ -28,11 +28,7 @@ const AvatarEdit: FC<AvatarEditProps> = ({ avatar, onEdit }) => {
     }, [file, handleUpdateAvatar]);
     return (
         <div className={s.profile__avatar}>
-            {avatar ? (
-                <img src={avatar} alt="avatar" />
-            ) : (
-                <ReactSVG src="../../../../assets/images/noAvatar.svg" />
-            )}
+            <Avatar size={AvatarSize.xl} alt={alt} src={avatar} />
 
             <label className={s.profile__avatar__edit} htmlFor="changeAva">
                 <input
