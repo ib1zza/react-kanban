@@ -4,6 +4,8 @@
     border-radius: 20px;
     border: 2px solid var(--altWbText);
     padding: 12px;
+    //flex-basis: 300px;
+    min-width: 300px;
     //max-width: 400px;
    // min-width: 290px;
     height: 100%;
@@ -37,4 +39,10 @@
     font-size: 18px;
     color: var(#{--taskTextColor});
     margin-bottom: 7px;
+}
+
+@media screen and (max-width: 550px) {
+    .container {
+        min-width: 100%;
+    }
 }

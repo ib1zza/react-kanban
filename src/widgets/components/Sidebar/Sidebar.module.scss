@@ -27,15 +27,13 @@
 .nav_button {
     font: var(--font-m);
     display: flex;
+  gap: 10px;
     align-items: center;
     letter-spacing: 2px;;
     text-transform: uppercase;
     font-weight: 600;
     cursor: pointer;
 
-   svg {
-    margin-right: 10px;
-  }
 }
 
 hr{
@@ -83,6 +81,7 @@ hr{
 
 @media screen and (max-width: 1200px){
   .logo {
+    margin-left: 5px;
     writing-mode: vertical-lr;
     text-orientation: upright;
   }
@@ -101,23 +100,10 @@ hr{
     justify-content: center;
   }
 
-  .nav_button > svg {
-    margin: 0;
-  }
-
   .nav_button span {
     display: none;
   }
-  .space {
-    span {
-      display: none;
-    }
-    .space_team{
-      p{
-        display: none;
-      }
-    }
-  }
+
   .sidebar {
     width: auto;
     padding: 0 15px

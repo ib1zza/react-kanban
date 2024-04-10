@@ -1,0 +1,42 @@
+
+.title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font: var(--font-m);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.linkedUsers {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.space_member{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font: var(--font-s);
+  gap: 10px;
+}
+
+@media screen and (max-width: 1200px){
+    .title span {
+      display: none;
+    }
+
+  .title {
+    justify-content: center;
+  }
+
+    .space_member{
+      p {
+        display: none;
+      }
+    }
+}

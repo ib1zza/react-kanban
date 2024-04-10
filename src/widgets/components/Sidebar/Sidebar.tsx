@@ -9,13 +9,13 @@ import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { Avatar } from 'shared/ui/Avatar';
+import Space from 'widgets/components/Sidebar/components/Space';
 import s from './Sidebar.module.scss';
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { t } = useTranslation();
-    const linkedUsers = useAppSelector(getLinkedUsers);
 
     return (
         <div className={s.sidebar}>
@@ -33,32 +33,11 @@ const Sidebar = () => {
                         {t('Projects')}
                     </span>
                 </div>
-                {/* <div className={s.nav_button}> */}
-                {/*    <MemoizedFontAwesomeIcon icon={faGear} className={s.svg} /> */}
-                {/*    <span> */}
-
-                {/*        {t('Settings')} */}
-                {/*    </span> */}
-                {/* </div> */}
             </div>
             <hr />
             {location.pathname !== '/'
                 && (
-                    <div className={s.space}>
-                        <span>{t('My space')}</span>
-                        {
-                            linkedUsers.length > 0 && (
-                                <div className={s.linkedUsers}>
-                                    {linkedUsers.map((user: IUserInfo) => (
-                                        <div key={user.uid} className={s.space_team}>
-                                            <Avatar src={user.photoURL} alt={user.displayName} />
-                                            <p>{`${user.email.substring(0, 10)}...`}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            )
-                        }
-                    </div>
+                    <Space />
                 )}
 
             <div className={s.bottom}>
@@ -66,7 +45,6 @@ const Sidebar = () => {
                     <ThemeSwitcher />
                     <LangSwitcher />
                 </div>
-
             </div>
         </div>
     );
