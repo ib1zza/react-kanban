@@ -1,14 +1,15 @@
 .BoardPageHeader{
-    position: relative;
+    //position: relative;
+    margin-top: 10px;
 }
 
 .title {
-    position: absolute;
-    top: -60px;
+    //position: absolute;
+    //top: -60px;
     height: 47px;
     display: flex;
-    margin-left: 10px;
-    font: 14px;
+    //margin-left: 10px;
+    //font: 14px;
     align-items: center;
     color: white;
 
@@ -80,6 +81,34 @@
     color: white;
     border-radius: 15px;
     cursor: pointer;
+}
+
+.contentWrapper {
+    min-width: 280px;
+    width: 300px;
+    max-width: 100%;
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 20px;
+    .label {
+        text-align: left;
+        font-size: 14px;
+        font-weight: 600;
+        color: black;
+    }
+
+    .inputContainer {
+        display: flex;
+        gap: 5px;
+
+        .input {
+            flex-basis: 100%;
+        }
+    }
 }
 
 @media screen and (max-width: 1350px) {

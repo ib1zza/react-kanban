@@ -58,6 +58,7 @@ const BoardPage = memo(() => {
 
     const handleEditTitle = useCallback((newTitle: string) => {
         if (!boardId) return;
+        console.log(boardId, newTitle);
         editBoard(boardId, { title: newTitle });
     }, [boardId]);
 

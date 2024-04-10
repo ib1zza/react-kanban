@@ -17,6 +17,7 @@ import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { useTranslation } from 'react-i18next';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import Modal from 'shared/ui/Modal/Modal';
 import s from './BoardPageHeader.module.scss';
 
 interface Props {
@@ -45,6 +46,14 @@ const BoardPageHeader: React.FC<Props> = memo(({
         dispatch(boardCollectionActions.setShareStatus(true));
     }, [dispatch]);
 
+    const handleOpenModal = () => {
+        setEditing(true);
+    };
+
+    const handleCloseModal = () => {
+        setEditing(false);
+    };
+
     const onEditHandler = useCallback(() => {
         const len = editingTitle.trim().length;
         if (len > 3 && len < 30) {
@@ -68,53 +77,27 @@ const BoardPageHeader: React.FC<Props> = memo(({
     const handleCreateStatus = useCallback((value: boolean) => {
         setIsCreating(value);
     }, [setIsCreating]);
+
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
                 {!isEditing && (
                     <>
-                        <span>{editingTitle}</span>
+                        <span>
+                            {t('project')}
+                            :
+                            {' '}
+                            {editingTitle}
+                        </span>
                         <Button
                             disabled={isEnabled}
                             size={ButtonSize.M}
                             theme={ButtonTheme.WHITE}
                             noBorder
                             className={s.button}
-                            onClick={handleEdit}
+                            onClick={handleOpenModal}
                         >
                             <MemoizedFontAwesomeIcon icon={faPenToSquare} />
-                        </Button>
-                        <Button
-                            disabled={isEnabled}
-                            size={ButtonSize.M}
-                            theme={ButtonTheme.WHITE}
-                            noBorder
-                            className={s.button}
-                            onClick={handleDelete}
-                        >
-                            <MemoizedFontAwesomeIcon icon={faTrash} />
-                        </Button>
-                    </>
-                )}
-                {isEditing && (
-                    <>
-                        <Input
-                            disabled={isEnabled}
-                            className={s.input}
-                            maxLength={40}
-                            type="text"
-                            value={editingTitle}
-                            onChange={(e) => handleEditText(e.target.value)}
-                        />
-                        <Button
-                            disabled={isEnabled}
-                            size={ButtonSize.M}
-                            theme={ButtonTheme.WHITE}
-                            noBorder
-                            className={s.button}
-                            onClick={onEditHandler}
-                        >
-                            <MemoizedFontAwesomeIcon icon={faCircleCheck} />
                         </Button>
                     </>
                 )}
@@ -133,6 +116,43 @@ const BoardPageHeader: React.FC<Props> = memo(({
 
                 </div>
             </div>
+            {isEditing && (
+                <Modal onClose={handleCloseModal} title={t('editProject')}>
+                    <div className={s.contentWrapper}>
+                        <div className={s.inputWrapper}>
+                            <label className={s.label}>{t('Название')}</label>
+                            <div className={s.inputContainer}>
+                                <Input
+                                    disabled={isEnabled}
+                                    className={s.input}
+                                    maxLength={40}
+                                    type="text"
+                                    value={editingTitle}
+                                    onChange={(e) => handleEditText(e.target.value)}
+                                />
+                                <Button
+                                    disabled={isEnabled}
+                                    size={ButtonSize.M}
+                                    theme={ButtonTheme.WHITE}
+                                    noBorder
+                                    className={s.button}
+                                    onClick={onEditHandler}
+                                >
+                                    <MemoizedFontAwesomeIcon icon={faCircleCheck} />
+                                </Button>
+                            </div>
+                        </div>
+                        <Button
+                            onClick={handleDelete}
+                            theme={ButtonTheme.RED}
+                            size={ButtonSize.M}
+                            className={s.logout}
+                        >
+                            {t('Удалить проект')}
+                        </Button>
+                    </div>
+                </Modal>
+            )}
         </div>
     );
 });

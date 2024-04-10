@@ -2,10 +2,12 @@
     "Профиль":"Profile",
     "Выйти":"Log out",
     "Войти":"Login",
+    "Удалить проект":"Delete project",
     "Зарегистрироваться":"Sign in",
     "Язык":"En",
     "Загрузка":"Loading...",
     "Заголовок":"Title",
+    "Название":"Name",
     "Описание":"Description",
     "Редактирование": "Editing",
     "Добавлен":"User is added",
@@ -22,5 +24,7 @@
     "Исполнитель": "Attached",
     "Пользователь не прикреплен": "User not attached",
     "Выберите цвет": "Choose color",
-    "add": "Add column"
+    "add": "Add column",
+    "project": "Project",
+    "editProject": "Edit project"
 }

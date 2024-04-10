@@ -41,6 +41,8 @@ const EditTaskForm = memo(({
         withAvatar: true,
     })), [linkedUsers]);
 
+    console.log(linkedUsers);
+
     const editHandler = useCallback(() => {
         if (title === '') return onAbort();
         const editedData : EditedData = {};
@@ -91,7 +93,7 @@ const EditTaskForm = memo(({
                         placeholder={t('Описание')}
                     />
                 </div>
-                {linkedUsers.length > 1
+                {linkedUsers.length > 0
                     && (
                         <div className={s.selectWrapper}>
                             <Select

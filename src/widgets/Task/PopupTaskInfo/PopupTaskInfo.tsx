@@ -11,6 +11,7 @@ import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { getUserInfo } from 'features/users';
+import { classNames } from 'shared/lib/classNames/classNames';
 import s from './PopupTaskInfo.module.scss';
 
 interface Props {
@@ -59,6 +60,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
         }
     };
     const linkedUser = linkedUsersInfo.find((user: IUserInfo) => user.uid === task.attachedUser);
+
     useEffect(() => {
         fetchUserInfo();
     }, [task.creatorId]);
@@ -80,9 +82,9 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
             {!isEditing && (
                 <>
                     <p className={s.description}>
-                        {task.description || `${t('Нет описания')}`}
+                        {task.description ? `${t('Описание')}: ${task.description}` : t('Нет описания')}
                     </p>
-                    <div className={s.linkedUserInfo}>
+                    <div className={classNames(s.linkedUserInfo, { [s.marginBottom]: !!linkedUser })}>
                         {
                             linkedUser
                                 ? (
@@ -94,7 +96,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                                         <Avatar
                                             alt={linkedUser.displayName}
                                             src={linkedUser.photoURL}
-                                            size={AvatarSize.S}
+                                            className={s.linkedUserInfo__avatar}
                                         />
                                         {linkedUser.displayName}
                                     </>
@@ -103,8 +105,16 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                         }
                     </div>
                     <div className={s.descr}>
-                        Attached:
-                        {userInfo && <Avatar src={userInfo.photoURL} />}
+
+                        {t('Создано')}
+                        :
+                        {userInfo && (
+                            <>
+                                <Avatar src={userInfo.photoURL} />
+                                {userInfo.displayName}
+                            </>
+                        )}
+
                     </div>
 
                     <div className={s.buttons}>

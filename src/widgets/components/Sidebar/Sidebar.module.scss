@@ -33,15 +33,10 @@
     font-weight: 600;
     cursor: pointer;
 
-  & > svg {
+   svg {
     margin-right: 10px;
   }
 }
-//.svg {
-//    margin-right: 10px;
-//
-//    fill: #ffff;
-//}
 
 hr{
     margin: 20px 0;
@@ -104,6 +99,10 @@ hr{
 
   .nav_button {
     justify-content: center;
+  }
+
+  .nav_button > svg {
+    margin: 0;
   }
 
   .nav_button span {
