@@ -4,9 +4,10 @@
     border: 2px solid var(--altWbText);
     border-radius: 20px;
     padding: 36px;
-    margin: auto;
+    margin: auto 20px;
     width: 500px;
 }
+
 .title_wrapper{
     position: relative;
     display: flex;
@@ -17,7 +18,6 @@
         left: -10px;
         top: 10px;
     }
-   
 }
 .title {
     text-align: center;
@@ -35,12 +35,17 @@
     color: var(--altWbText);
 }
 
+.stepCounter {
+    margin-bottom: 10px;
+}
+
 .body {
     display: flex;
     flex-direction: column;
 }
+
 .label {
-    margin-top: 30px;
+    margin-top: 20px;
     color: var(--altWbText);
     font-style: normal;
     font-weight: 700;
@@ -51,7 +56,7 @@
 
 .input {
     margin-top: 8px;
-   margin-bottom: 12px;
+   //margin-bottom: 12px;
 }
 .btn_wrapper{
     display: flex;
@@ -62,10 +67,10 @@
     background-color: var(--LRbtnbgColor);
     border-radius: 10px;
     border: none;
-    color: var(--LRbtnColor);
+    color: var(--white);
     margin-top: 4px;
     padding: 8px;
-    width:140px;
+    //width:140px;
     height: 50px;
     text-align: center;
     flex-shrink: 0;
@@ -74,9 +79,8 @@
     letter-spacing: 2.8px;
     text-transform: uppercase;
     &:hover{
-        border: 1px solid white;
+        opacity: .8;
     }
-    
 }
 
 
@@ -84,25 +88,30 @@
     color: rgba(255, 68, 0, 0.643);
 }
 
-.linkArea span {
-    text-decoration: underline;
-    color: var( --taskTextColor);
-    font-weight: bold;
-    font-size: 12px;
-    line-height: normal;
-    letter-spacing: 2.8px;
-    text-transform: uppercase;
-    cursor: pointer;
+.linkArea {
+    text-align: center;
 
+    span {
+        text-decoration: underline;
+        color: var( --taskTextColor);
+        font-weight: bold;
+        font-size: 12px;
+        line-height: normal;
+        letter-spacing: 2.8px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
 }
+
 .input {
-    input {
-    margin-top: 8px;
     margin-bottom: 12px;
+
+    input {
+    //margin-top: 8px;
+    //margin-bottom: 12px;
     padding: 14px;
     border: 1px solid black;
     }
-
 }
 
 @media screen and (width <= 800px) {
@@ -116,7 +125,7 @@
     .signup {
         margin-left: auto;
         margin-top: 1px;
-      
+
         width: 90%;
         border-radius: 30px;
         padding: 28px;
@@ -142,7 +151,7 @@
     .progress {
         margin-top: 4px;
         height: 40px;
-    
+
         color: var(--altWbText);
         font-size: 12px;
     }

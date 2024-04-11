@@ -1,0 +1,95 @@
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding-left: 30vw;;
+  width: 50%;
+  height: 100%;
+
+
+}
+
+.center {
+  position: relative;
+  background-color: black;
+  transform: skewY(15deg);
+  transition: 0.5s;
+}
+
+.center:hover {
+  transform: skewY(0deg);
+}
+
+.center h1 span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 4rem;
+  color: #fff;
+  transform-style: preserve-3d;
+  transition: 0.8s;
+}
+
+.center h1 span:nth-child(1) {
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.center h1 span:nth-child(2) {
+  color: var(#{--taskTextColor});
+  transform: translate(-50%, -50%) skewX(-60deg);
+  left: -25px;
+  clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%);
+}
+
+.center h1 span:nth-child(3) {
+  transform: translate(-50%, -50%) skewY(0deg);
+  left: -50px;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+.center:hover h1 span:nth-child(2),
+.center:hover h1 span:nth-child(3) {
+  transform: translate(-50%, -50%) skewX(0deg);
+  left: 0;
+  color: #fff;
+}
+
+@media screen and (width >= 800px) and (width <= 1100px) {
+  .center h1 span {
+    font-size: 3rem;
+  }
+
+  .center h1 span:nth-child(2) {
+    left: -19px;
+  }
+
+  .center h1 span:nth-child(3) {
+    left: -38px;
+  }
+}
+
+@media screen and (width <= 800px) {
+  .center h1 span {
+    font-size: 1.5rem;
+  }
+
+  .logo {
+    display: flex;
+    width: 75%;
+    justify-content: center;
+    height: 30%;
+  }
+
+  .center h1 span:nth-child(2) {
+    left: -9px;
+  }
+
+  .center h1 span:nth-child(3) {
+    left: -18px;
+  }
+}
+

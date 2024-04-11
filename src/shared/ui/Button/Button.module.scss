@@ -20,28 +20,24 @@
 }
 
 .full {
-    background-color: var(#{--ButtonBg});
+    background-color: var(--LRtitleColor);
+    color: var(--wbText);
     position: relative;
     font: var(--font-m);
     cursor: pointer;
     padding: 8px;
     border-radius: 10px;
-    border: 1px solid transparent;
-
+    border: 1px solid rgba(128, 128, 128, 0);
 
     &:hover {
         background-color: var(--ButtonBorderHover);
         color: var(--ButtonColorHover);
         border: 1px solid rgba(128, 128, 128, 0.259);
-
     }
     &:disabled {
         cursor: default;
         background: var(--ButtonBg);
-
-
     }
-
 }
 
 .loading {

@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { memo } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';

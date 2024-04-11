@@ -1,6 +1,8 @@
 import React, {
-    InputHTMLAttributes, memo, useCallback,
+    InputHTMLAttributes, memo, useCallback, useState,
 } from 'react';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import s from './Input.module.scss';
 import { classNames } from '../../lib/classNames/classNames';
 
@@ -41,6 +43,14 @@ export const Input = memo((props: InputProps) => {
         [s[theme]]: true,
 
     };
+
+    const [isShowingPassword, setIsShowingPassword] = useState(false);
+
+    const handleShowPass = () => {
+        setIsShowingPassword((prev) => !prev);
+    };
+
+    const typeToShow = type === 'password' ? (isShowingPassword ? 'text' : 'password') : type;
     return (
         <div
             style={{ width: `${width}` }}
@@ -59,13 +69,22 @@ export const Input = memo((props: InputProps) => {
                 )
             )}
             <input
-                type={type}
+                type={typeToShow}
                 value={value}
                 onChange={onChange}
                 className={classNames(s.input, {}, [])}
                 placeholder={placeholder}
                 {...otherProps}
             />
+
+            {
+                type === 'password' && !!value.length && (
+                    <button className={s.showPass} type="button" onClick={handleShowPass}>
+                        {/* <FontAwesomeIcon icon={faEye} /> */}
+                        <MemoizedFontAwesomeIcon icon={isShowingPassword ? faEyeSlash : faEye} />
+                    </button>
+                )
+            }
 
         </div>
 

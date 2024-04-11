@@ -21,7 +21,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
     const navigate = useNavigate();
     const { t } = useTranslation('auth');
     const { signUp } = useAuth();
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(2);
     const dispatch = useDispatch();
     const {
         error, isLoading, progress,
@@ -30,6 +30,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
     useEffect(() => {
         dispatch(signupActions.setProgress((step / 3) * 100));
     }, [step]);
+
     const onSubmit = async (data: any) => {
         try {
             const file = data?.file[0] || undefined;
@@ -77,14 +78,14 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 break;
             }
             case 2: {
-                if (!values.password) {
+                if (!values.password || values.password.length < 6) {
                     errors.password = 'Required';
                 }
                 if (!values.secondPassword) {
                     errors.secondPassword = 'Required';
                 }
                 if (values.password !== values.secondPassword) {
-                    errors.password = t('Пароли должны совпадать');
+                    errors.secondPassword = t('Пароли должны совпадать');
                 }
                 break;
             }
@@ -99,7 +100,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 if (!values.displayName) {
                     errors.displayName = 'Required';
                 } else if (
-                    /^[a-z0-9_]+$/.test(values.displayName)
+                    /^[A-Z0-9_]+$/.test(values.displayName)
                 ) {
                     errors.displayName = 'Invalid secondPassword address';
                 }
@@ -117,6 +118,8 @@ const SignupForm = memo(({ onSwitch }: props) => {
             handleContinue(values);
         },
     });
+
+    console.log(formik.errors);
     return (
         <form onSubmit={formik.handleSubmit} className={s.signup}>
             <div className={s.title_wrapper}>
@@ -133,17 +136,13 @@ const SignupForm = memo(({ onSwitch }: props) => {
             </div>
             <div className={s.body}>
                 <div className={s.progress}>
-                    <div className="">
-                        {t('Шаг')}
-                        {' '}
-                        {step}
-                        {' '}
-                        из 3
+                    <div className={s.stepCounter}>
+                        {`${t('Шаг')} ${step} ${t('из')} 3`}
                     </div>
                     <ProgressBar
                         completed={progress}
                         isLabelVisible={false}
-                        bgColor="#710080"
+                        bgColor="var(--LRtitleColor)"
                     />
                 </div>
                 {step === 1 && (
@@ -198,7 +197,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                                 {t('Пароль должен включать в себя латинские буквы, включая заглавные и состоять из 6-15 символов')}
                             </p>
                         )}
-                        <div className="">{t(error)}</div>
+                        {/* <div className="">{t(error)}</div> */}
                         <Input
                             className={s.input}
                             type="password"

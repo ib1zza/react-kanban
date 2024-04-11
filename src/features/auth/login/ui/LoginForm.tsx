@@ -97,7 +97,6 @@ const LoginForm = ({ onSwitch }: props) => {
                 className={s.label}
             >
                 {t('Пароль')}
-
             </label>
             {formik.errors.password && (
                 <p className={s.error}>{t('Проверьте поле')}</p>

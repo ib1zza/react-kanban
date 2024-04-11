@@ -1,6 +1,7 @@
 .InputWrapper{
     display: flex;
     flex-direction: column;
+    position: relative;
     label {
         font: var(--font-m);
         color: var(--altWbText);
@@ -22,6 +23,20 @@
     }
 
 
+}
+
+.showPass {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    width: 45px;
+    color: var(--altWbText);
+    cursor: pointer;
+    justify-content: center;
 }
 
 .clear {
