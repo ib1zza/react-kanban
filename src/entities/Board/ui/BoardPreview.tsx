@@ -21,7 +21,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
 }) => {
     const navigate = useNavigate();
     const [username, setUsername] = React.useState<string>('');
-    const [shareStatus, setShareStatus] = React.useState(false);
+    const [isSharing, setIsSharing] = React.useState(false);
     const { t } = useTranslation();
 
     const onClick = useCallback(() => {
@@ -35,16 +35,16 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
     }, [board.ownerId]);
 
     const onCloseShare = useCallback(() => {
-        setShareStatus(false);
+        setIsSharing(false);
     }, []);
 
     const onOpenShare = useCallback(() => {
-        setShareStatus(true);
+        setIsSharing(true);
     }, []);
 
     return (
         <div className={s.container}>
-            {shareStatus && (
+            {isSharing && (
                 <Modal
                     onClose={onCloseShare}
                     title={t('Share board')}

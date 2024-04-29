@@ -21,7 +21,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
     const navigate = useNavigate();
     const { t } = useTranslation('auth');
     const { signUp } = useAuth();
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     const dispatch = useDispatch();
     const {
         error, isLoading, progress,
@@ -119,7 +119,6 @@ const SignupForm = memo(({ onSwitch }: props) => {
         },
     });
 
-    console.log(formik.errors);
     return (
         <form onSubmit={formik.handleSubmit} className={s.signup}>
             <div className={s.title_wrapper}>

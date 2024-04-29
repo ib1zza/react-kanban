@@ -26,8 +26,8 @@ const Space = ({ className } : SpaceProps) => {
                     <div className={s.linkedUsers}>
                         {linkedUsers.map((user: IUserInfo) => (
                             <div key={user.uid} className={s.space_member}>
-                                <Avatar src={user.photoURL} alt={user.displayName} />
-                                <p>{`${user.email.substring(0, 12)}...`}</p>
+                                <Avatar className={s.userAvatar} src={user.photoURL} alt={user.displayName} />
+                                <p className={s.userName}>{user.email}</p>
                             </div>
                         ))}
                     </div>

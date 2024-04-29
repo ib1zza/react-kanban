@@ -1,5 +1,5 @@
 .blocks__container {
-    min-width: calc(100% - 50px);
+    //min-width: calc(100% - 50px);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
     align-items: start;

@@ -50,6 +50,7 @@ export const Input = memo((props: InputProps) => {
         setIsShowingPassword((prev) => !prev);
     };
 
+    // eslint-disable-next-line no-nested-ternary
     const typeToShow = type === 'password' ? (isShowingPassword ? 'text' : 'password') : type;
     return (
         <div

@@ -25,6 +25,18 @@
   gap: 10px;
 }
 
+.userAvatar {
+  flex-shrink: 0;
+}
+
+.userName {
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: calc(100% - 50px);
+}
+
 @media screen and (max-width: 1200px){
     .title span {
       display: none;

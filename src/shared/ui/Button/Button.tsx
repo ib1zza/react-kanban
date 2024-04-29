@@ -65,7 +65,10 @@ const Button: React.FC<ButtonProps> = ({
             <div className={s.content + (loading ? ` ${s.invisible}` : '')}>
                 {Icon && (
                     <div className={s.icon} style={iconStyles}>
-                        <MemoizedFontAwesomeIcon icon={Icon as IconDefinition} style={iconColor ? { color: iconColor } : {}} />
+                        <MemoizedFontAwesomeIcon
+                            icon={Icon as IconDefinition}
+                            style={iconColor ? { color: iconColor } : {}}
+                        />
                     </div>
                 )}
                 { children }
