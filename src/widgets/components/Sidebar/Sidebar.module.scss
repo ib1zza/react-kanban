@@ -90,6 +90,8 @@ hr {
     margin-left: 5px;
     writing-mode: vertical-lr;
     text-orientation: upright;
+    height: 115px;
+    flex-shrink: 0;
   }
 
   .app_buttons {
