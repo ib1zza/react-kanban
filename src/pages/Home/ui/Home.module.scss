@@ -7,7 +7,7 @@
     justify-content: space-between;
 
     overflow-y: auto;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 20px);
     padding-bottom: 10px;
 }
 
@@ -31,6 +31,7 @@
 .boardPageContainer {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 @media screen and (max-width: 450px) {
