@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +12,8 @@ import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedF
 import { getUserFromEmail } from '../../../users';
 import s from './SignupForm.module.scss';
 import { getSignupState } from '../model/selectors/getSignupState';
+import Button, {ButtonTheme} from "shared/ui/Button/Button";
+import {classNames} from "shared/lib/classNames/classNames";
 
 interface props {
     onSwitch: () => void
@@ -99,6 +100,8 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 }
                 if (!values.displayName) {
                     errors.displayName = 'Required';
+                } else if (values.displayName.length < 3) {
+                    errors.displayName = 'Must be 3 characters or more';
                 } else if (
                     /^[A-Z0-9_]+$/.test(values.displayName)
                 ) {
@@ -124,13 +127,11 @@ const SignupForm = memo(({ onSwitch }: props) => {
             <div className={s.title_wrapper}>
                 <div>
                     <h1 className={s.title}>{t('Регистрация')}</h1>
-                    <p className={s.linkArea}>
-                        <span
-                            onClick={onSwitch}
-                        >
+                    <div className={s.linkArea}>
+                        <Button theme={ButtonTheme.CLEAR} onClick={onSwitch} className={s.linkArea_link}>
                             {t('У меня есть аккаунт')}
-                        </span>
-                    </p>
+                        </Button>
+                    </div>
                 </div>
             </div>
             <div className={s.body}>
@@ -223,6 +224,9 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 {step === 3 && (
                     <>
                         <div className={s.avatar__block}>
+                            <div className={s.label}>
+                                {t('Загрузить аватар')}
+                            </div>
                             <Input
                                 type="file"
                                 className={s.avatar__fileInput}
@@ -231,9 +235,9 @@ const SignupForm = memo(({ onSwitch }: props) => {
                                 onChange={formik.handleChange}
                                 value={formik.values.file}
                             />
-                            <label htmlFor="file">
-                                <MemoizedFontAwesomeIcon icon={faImage} />
-                                <span>{t('Загрузить аватар')}</span>
+                            <label htmlFor="file" className={s.label_avatar}>
+                                <MemoizedFontAwesomeIcon icon={faImage}/>
+                                <span>{t('Выбрать фото')}</span>
                             </label>
                         </div>
                         <div className={s.label}>
@@ -241,7 +245,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                             ?
                         </div>
                         <select
-                            className={s.input}
+                            className={classNames(s.input,  {}, [s.select])}
                             defaultValue="practice"
                             id="select"
                             name="select"

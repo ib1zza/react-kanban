@@ -7,7 +7,6 @@ import { useCallback } from 'react';
 import { useFormik } from 'formik';
 import { Input } from 'shared/ui/Input/Input';
 import s from './LoginForm.module.scss';
-import Arrow from '../../../../shared/assets/images/Arrow 1.svg';
 import { getLoginState, loginActions } from '..';
 import { fetchByIdStatus } from '../model/services/loginThunk/fetchByIdStatus';
 
