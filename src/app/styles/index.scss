@@ -58,3 +58,12 @@ body,
 
 }
 
+@media (max-width: 767px) {
+    body {
+        position:fixed;
+    }
+}
+
+@viewport {
+    user-zoom: fixed;
+}
