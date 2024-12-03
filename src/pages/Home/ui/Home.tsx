@@ -5,7 +5,7 @@ import React, {
     useEffect,
 } from 'react';
 import { addUserToBoard } from 'features/boards';
-import { IBoard, LinkedUserType } from 'app/types/IBoard';
+import {IBoard, IBoardSmallInfo, LinkedUserType} from 'app/types/IBoard';
 import { BoardPreview } from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
@@ -84,7 +84,7 @@ const Home = memo(() => {
                             )}
                         </Suspense>
                         <Suspense>
-                            { boards.map((item: IBoard) => (
+                            { boards.map((item: IBoardSmallInfo) => (
                                 <BoardPreview
                                     key={item.uid}
                                     board={item}

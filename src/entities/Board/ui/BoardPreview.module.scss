@@ -38,6 +38,11 @@
     }
 }
 
+.owner {
+    display: flex;
+    gap: 5px;
+}
+
 .share__header {
     font-size: 18px;
     font-weight: bold;
@@ -61,7 +66,6 @@
 
 @media screen and (max-width: 460px) {
     .container {
-        min-width: auto;
         padding: 10px;
     }
     .heading{

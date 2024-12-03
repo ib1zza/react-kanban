@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IBoard } from 'app/types/IBoard';
 import { HomeSchema } from '../types/homeSchema';
+import {IUserInfo} from "app/types/IUserInfo";
 
 const initialState: HomeSchema = {
     boards: [],
+    usersLoaded: [],
     addBoardStatus: false,
     linkBoardStatus: false,
 };
@@ -21,6 +23,13 @@ export const HomeSlice = createSlice({
         setLinkBoardStatus: (state, action: PayloadAction<boolean>) => {
             state.addBoardStatus = action.payload;
         },
+        addUsers: (state, action: PayloadAction<IUserInfo | IUserInfo[]>) => {
+            if (Array.isArray(action.payload)) {
+                state.usersLoaded.push(...action.payload);
+            } else {
+                state.usersLoaded.push(action.payload);
+            }
+        }
     },
 });
 

@@ -30,15 +30,31 @@ export interface IColumn {
   color: string;
 }
 
+export interface IBoardSmallInfo {
+  uid: string;
+  ownerId: string;
+  title: string;
+  timeCreated: string;
+  timeUpdated: string;
+  users?: {
+    [userId: string]: {
+      role: LinkedUserType;
+      dateInvited: number;
+      joined: boolean;
+    };
+  }
+}
+
+
 export interface IBoard {
   uid: string;
   chatId?: string;
   columns: { [columnId: string]: IColumn };
-  guestPermissions: GuestPermission[];
-  guestsAllowed: string[];
+  guestPermissions?: GuestPermission[];
+  guestsAllowed?: string[];
   ownerId: string;
   title: string;
-  usersAllowed: string[];
+  usersAllowed?: string[];
   timeCreated: string;
   timeUpdated: string;
   users?: {

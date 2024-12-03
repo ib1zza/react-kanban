@@ -4,7 +4,7 @@ import React, {
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import { IBoard, LinkedUserType } from 'app/types/IBoard';
+import {IBoard, IBoardSmallInfo, LinkedUserType} from 'app/types/IBoard';
 import { deleteUserFromBoard } from 'features/boards';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
@@ -12,7 +12,7 @@ import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedF
 import s from './ShareBoard.module.scss';
 
 interface Props {
-  board: IBoard;
+  board: IBoardSmallInfo | IBoard;
 }
 
 const GuestsList = memo(({ board }: Props) => {

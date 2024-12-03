@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { Input, InputTheme } from 'shared/ui/Input/Input';
 import { getUserFromEmail } from 'features/users';
-import { IBoard, LinkedUserType } from 'app/types/IBoard';
+import {IBoard, IBoardSmallInfo, LinkedUserType} from 'app/types/IBoard';
 import { sendNotificationInvite } from 'entities/Notifications';
 import Button from 'shared/ui/Button/Button';
 import { addUserToBoard } from 'features/boards';
 import s from './ShareBoard.module.scss';
 
 interface Props {
-  board: IBoard;
+  board: IBoardSmallInfo | IBoard;
 }
 
 const InviteUserForm = memo(({ board }: Props) => {

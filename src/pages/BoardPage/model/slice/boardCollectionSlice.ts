@@ -3,7 +3,6 @@ import { IBoard, ITask } from 'app/types/IBoard';
 
 import { IUserInfo } from 'app/types/IUserInfo';
 import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
-import { getBoardThunk } from '../services/getBoardThunk/getBoardThunk';
 
 const initialState: BoardCollectionSchema = {
     selectedBoardId: '',

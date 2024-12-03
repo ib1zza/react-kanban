@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
-import { IBoard } from 'app/types/IBoard';
+import {IBoard, IBoardSmallInfo} from 'app/types/IBoard';
 import s from './ShareBoard.module.scss';
 import GuestsList from './GuestsList';
 import InviteUserForm from './InviteUserForm';
 
 interface IShareBoard {
-  board: IBoard;
+  board: IBoardSmallInfo | IBoard;
 }
 
 const ShareBoard = memo(({ board }: IShareBoard) => (

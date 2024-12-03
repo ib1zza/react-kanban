@@ -15,12 +15,8 @@ export const Primary: Story = {
     args: {
         board: {
             uid: '123',
-            columns: {},
-            guestPermissions: [],
-            guestsAllowed: [],
             ownerId: '123',
             title: 'title',
-            usersAllowed: [],
             timeCreated: '',
             timeUpdated: '',
         },
@@ -30,12 +26,8 @@ export const PrimaryDark: Story = {
     args: {
         board: {
             uid: '123',
-            columns: {},
-            guestPermissions: [],
-            guestsAllowed: [],
             ownerId: '123',
             title: 'title',
-            usersAllowed: [],
             timeCreated: '',
             timeUpdated: '',
         },
