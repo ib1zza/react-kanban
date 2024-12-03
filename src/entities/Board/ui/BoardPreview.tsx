@@ -14,6 +14,7 @@ import {getAllUsers} from "pages/Home/model/selectors/getAllUsers";
 import {homeActions} from "pages/Home/model/slice/HomeSlice";
 import {IUserInfo} from "app/types/IUserInfo";
 import {Avatar, AvatarSize} from "shared/ui/Avatar";
+import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface IBoardPreviewProps {
   userId: string;
@@ -25,29 +26,13 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
     board,
 }) => {
     const navigate = useNavigate();
-    const [assignedUserInfo, setAssignedUserInfo] = React.useState<IUserInfo | null>(null);
     const [isSharing, setIsSharing] = React.useState(false);
     const { t } = useTranslation('');
-    const loadedUsers = useAppSelector(getAllUsers);
+    const [assignedUserInfo] = useUserInfo(board.ownerId);
     const onClick = useCallback(() => {
         navigate(`/board/${board.uid}`);
     }, [board.uid, navigate]);
 
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        const user = loadedUsers.find((u) => u.uid === board.ownerId);
-        if (user) {
-            console.log("userfound", user);
-
-            setAssignedUserInfo(user);
-        } else {
-            getUserInfo(board.ownerId).then((res) => {
-                setAssignedUserInfo(res);
-                dispatch(homeActions.addUsers(res));
-            });
-        }
-    }, [board.ownerId]);
 
     const onCloseShare = useCallback(() => {
         setIsSharing(false);
