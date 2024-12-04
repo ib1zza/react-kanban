@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AppRoute } from 'app/providers/router/lib/AppRoute';
 import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
-import {faBarsProgress, faTableList} from '@fortawesome/free-solid-svg-icons';
+import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/ui/LangSwitcher';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import Space from 'widgets/components/Sidebar/components/Space';
@@ -33,7 +33,11 @@ const Sidebar = () => {
             <hr />
             {location.pathname !== '/'
                 && (
-                    <Space />
+                    <>
+                        <Space />
+                        <hr />
+                    </>
+
                 )}
             <div className={s.bottom}>
                 <div className={s.app_buttons}>

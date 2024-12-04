@@ -40,6 +40,7 @@
     }
 }
 
+
 .loading {
     display: flex;
     position: absolute;
@@ -178,6 +179,17 @@
 
 .noBorder {
     border: none;
+}
+
+.pure {
+    padding: inherit;
+    margin: inherit;
+    color: inherit;
+
+
+    &:hover {
+        background-color: inherit;
+    }
 }
 
 @media screen and (max-width: 460px) {

@@ -107,14 +107,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
                     <MemoizedFontAwesomeIcon icon={faAdd} />
                     <p>{t('add')}</p>
                 </Button>
-                <div className={s.shareButtons}>
-
-                    <Button className={s.share} disabled={isEnabled} onClick={onShare}>
-                        <MemoizedFontAwesomeIcon icon={faShareAlt} />
-                        <p>{t('share')}</p>
-                    </Button>
-
-                </div>
             </div>
             {isEditing && (
                 <Modal onClose={handleCloseModal} title={t('editProject')}>

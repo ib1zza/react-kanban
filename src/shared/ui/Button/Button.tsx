@@ -14,6 +14,7 @@ export enum ButtonTheme {
     FULL = 'full',
     ACCENT = 'accent',
     NOTIFICATION = 'notification',
+    PURE = 'pure'
 }
 export enum ButtonSize {
     S = 's',
