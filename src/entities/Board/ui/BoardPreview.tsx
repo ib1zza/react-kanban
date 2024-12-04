@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useEffect} from 'react';
-import {faLink} from '@fortawesome/free-solid-svg-icons';
+import {faLink, faShareFromSquare, faShareNodes} from '@fortawesome/free-solid-svg-icons';
 import {useTranslation} from 'react-i18next';
 import {IBoardSmallInfo} from 'app/types/IBoard';
 import {ShareBoard} from 'features/boards';
@@ -47,7 +47,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
                     <ShareBoard board={board} />
                 </Modal>
             )}
-            <h3 className={s.heading}>
+            <div className={s.heading}>
                 <div className={s.info}>
                     <span className={s.title} onClick={onClick}>{board.title.slice(0)}</span>
                     <p className={s.owner}>
@@ -61,10 +61,10 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
                     <Button
                         onClick={onOpenShare}
                         className={s.share_button}
-                        icon={faLink}
+                        icon={faShareNodes}
                     />
                 )}
-            </h3>
+            </div>
 
         </div>
     );
