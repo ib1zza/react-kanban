@@ -17,6 +17,9 @@ import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt
 import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import Modal from 'shared/ui/Modal/Modal';
 import Loader from 'shared/ui/Loader/Loader';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
+import { faAdd } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 import { boardCollectionActions, getBoardCollection } from '..';
@@ -25,14 +28,14 @@ import { getBoardThunk } from '../model/services/getBoardThunk/getBoardThunk';
 const BoardPage = memo(() => {
     const { boardId } = useParams();
     const {
-        selectedBoard, selectedTask, linkedUsersInfo, shareStatus,
+        selectedBoard, selectedTask, linkedUsersInfo, shareStatus, isCreatingColumn,
     } = useAppSelector(
         getBoardCollection,
     );
     const { user } = useAppSelector(getUserState);
-    const [isCreating, setIsCreating] = useState(false);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const { t } = useTranslation();
 
     const refetchTask = useCallback(
         async () => {
@@ -46,7 +49,7 @@ const BoardPage = memo(() => {
     const createColumnAction = useCallback(
         async (title: string, color: string) => {
             if (!boardId) return;
-            setIsCreating(false);
+            handleCreateColumnCancel();
             await createColumnRt(title, color || '#808080', boardId);
         },
         [boardId],
@@ -74,6 +77,14 @@ const BoardPage = memo(() => {
         });
     }, [boardId, navigate, user?.uid]);
 
+    function handleCreateColumnClick() {
+        dispatch(boardCollectionActions.setIsCreatingColumn(true));
+    }
+
+    function handleCreateColumnCancel() {
+        dispatch(boardCollectionActions.setIsCreatingColumn(false));
+    }
+
     return (
         <>
             {selectedBoard && shareStatus && (
@@ -83,10 +94,9 @@ const BoardPage = memo(() => {
             )}
             <div className={s.wrapperContainer}>
                 <BoardPageHeader
-                    isEnabled={!selectedBoard && true}
+                    isEnabled={!!selectedBoard}
                     onEdit={handleEditTitle}
                     title={selectedBoard?.title || 'loading...'}
-                    setIsCreating={setIsCreating}
                     onDelete={handleDeleteBoard}
                 />
                 <div className={s.wrapper}>
@@ -102,12 +112,24 @@ const BoardPage = memo(() => {
                                             boardId={selectedBoard.uid}
                                         />
                                     ))}
+                                    {!isCreatingColumn && (
+                                        <div className={s.addColumn}>
+                                            <Button
+                                                className={s.add}
+                                                onClick={handleCreateColumnClick}
+                                                theme={ButtonTheme.ACCENT}
+                                                icon={faAdd}
+                                            >
+                                                <p>{t('add')}</p>
+                                            </Button>
+                                        </div>
+                                    )}
                                     <Suspense>
-                                        {isCreating && (
+                                        {isCreatingColumn && (
                                             <ActionForm
                                                 status={ActionFormStatus.COLUMN}
                                                 onCreateColumn={createColumnAction}
-                                                onAbort={() => setIsCreating(false)}
+                                                onAbort={handleCreateColumnCancel}
                                             />
                                         )}
                                     </Suspense>

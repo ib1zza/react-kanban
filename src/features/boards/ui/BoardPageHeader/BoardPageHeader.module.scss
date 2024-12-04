@@ -1,15 +1,11 @@
 .BoardPageHeader{
-    //position: relative;
     margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .title {
-    //position: absolute;
-    //top: -60px;
     height: 47px;
     display: flex;
-    //margin-left: 10px;
-    //font: 14px;
     align-items: center;
     color: white;
 
@@ -20,7 +16,6 @@
 
 .input {
     width: 100%;
-    //max-width: 500px;
 }
 
 .linkedUsers {
@@ -111,13 +106,6 @@
     }
 }
 
-@media screen and (max-width: 1350px) {
-    .title {
-        margin-top: 10px;
-        position: static;
-        height: auto;
-    }
-}
 
 @media screen and (max-width: 750px) {
         .shareButtons{

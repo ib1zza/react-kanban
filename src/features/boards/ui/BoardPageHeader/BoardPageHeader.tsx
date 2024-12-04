@@ -25,26 +25,17 @@ interface Props {
     isEnabled: boolean;
     onEdit: (newTitle: string) => void;
     onDelete: () => void;
-    setIsCreating: (value: boolean) => void;
-    // onShare: () => void;
 }
 
 const BoardPageHeader: React.FC<Props> = memo(({
     onEdit,
     onDelete,
     title,
-    setIsCreating,
     isEnabled,
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
-    const linkedUsers = useAppSelector(getLinkedUsers);
     const { t } = useTranslation();
-    const dispatch = useAppDispatch();
-
-    const onShare = useCallback(() => {
-        dispatch(boardCollectionActions.setShareStatus(true));
-    }, [dispatch]);
 
     const handleOpenModal = () => {
         setEditing(true);
@@ -74,9 +65,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
     const handleEdit = useCallback(() => {
         setEditing(true);
     }, []);
-    const handleCreateStatus = useCallback((value: boolean) => {
-        setIsCreating(value);
-    }, [setIsCreating]);
 
     return (
         <div className={s.BoardPageHeader}>
@@ -90,7 +78,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             {editingTitle}
                         </span>
                         <Button
-                            disabled={isEnabled}
                             size={ButtonSize.M}
                             theme={ButtonTheme.WHITE}
                             noBorder
@@ -102,12 +89,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
                     </>
                 )}
             </h1>
-            <div className={s.second}>
-                <Button className={s.add} disabled={isEnabled} onClick={() => handleCreateStatus(true)}>
-                    <MemoizedFontAwesomeIcon icon={faAdd} />
-                    <p>{t('add')}</p>
-                </Button>
-            </div>
+
             {isEditing && (
                 <Modal onClose={handleCloseModal} title={t('editProject')}>
                     <div className={s.contentWrapper}>
