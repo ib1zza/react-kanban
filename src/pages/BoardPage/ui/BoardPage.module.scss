@@ -1,7 +1,7 @@
 .wrapperContainer {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100% - 34px - 24px);
     //position: relative;
     width: 100%;
     //overflow: hidden;
@@ -38,7 +38,7 @@
     overflow: hidden;
     display: flex;
     width: 100%;
-    height: 100%;
+    //height: calc(100% - 24px);
     flex-basis: 100%;
     position: relative;
 
@@ -70,4 +70,10 @@
     }
 }
 
+.addColumn {
+    p {
+    //    без переноса строк
+        white-space: nowrap;
+    }
+}
 

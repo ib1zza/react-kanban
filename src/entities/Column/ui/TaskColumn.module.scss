@@ -5,6 +5,9 @@
     padding: 16px;
     position: relative;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 
     &.withColor {
         padding-top: 29px;
@@ -85,6 +88,12 @@
     span {
         margin-left: 15px;
     }
+}
+
+
+.taskListWrapper {
+    overflow-y: auto;
+    border-radius: 10px;
 }
 
 @media screen and (max-width: 550px) {

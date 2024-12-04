@@ -11,6 +11,7 @@ describe('boardCollectionSlice', () => {
             selectedTask: null,
             linkedUsersInfo: [],
             shareStatus: false,
+            isCreatingColumn: false,
         };
         expect(boardCollectionReducer(
 state as BoardCollectionSchema,
@@ -61,6 +62,7 @@ boardCollectionActions.setCurrentBoard({
             selectedColumnId: '',
             linkedUsersInfo: [],
             shareStatus: false,
+            isCreatingColumn: false,
             selectedBoard: {
                 usersAllowed: [],
                 guestsAllowed: [
@@ -99,6 +101,7 @@ boardCollectionActions.removeSelectedBoard(),
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
             linkedUsersInfo: [],
             shareStatus: false,
+            isCreatingColumn: false,
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {
@@ -267,6 +270,7 @@ boardCollectionActions.setCurrentTask(
             selectedBoardId: 'aa477088-3cd6-452e-a2df-4d3a13f6f668',
             selectedColumnId: '2d7579a2-1d17-4fdb-9560-d894c8d83b0f',
             linkedUsersInfo: [],
+            isCreatingColumn: false,
             selectedBoard: {
                 columns: {
                     'f369fe73-e26a-4ed0-b2e5-9f499582d5cd': {
