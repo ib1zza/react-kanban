@@ -23,12 +23,14 @@ const Task = memo(({
     const dispatch = useAppDispatch();
     const linkedUsers = useAppSelector(getLinkedUsers);
     const openTaskHandler = () => {
+        console.log("clicked on task", task);
         dispatch(boardCollectionActions.setCurrentTask(task));
     };
     const handleComplete = useCallback(() => {
         toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted);
     }, [boardId, columnId, task.isCompleted, task.uid]);
     const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
+
     return (
         <div className={classNames(s.container, { [s.completed]: task.isCompleted })}>
             <div className={s.title}>
