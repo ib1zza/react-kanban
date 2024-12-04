@@ -1,7 +1,7 @@
 .container {
     background-color: var(--BoardBg);
     color: var(#{--taskTextColor});
-    border-radius: 10px;
+    border-radius: var(--borderRadiusPreview);
     padding: 12px;
     min-width: 150px;
     border: 2px solid var(--altWbText);

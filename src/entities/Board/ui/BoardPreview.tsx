@@ -1,18 +1,12 @@
-/* eslint-disable react/prop-types */
 import React, {memo, useCallback, useEffect} from 'react';
 import {faLink} from '@fortawesome/free-solid-svg-icons';
 import {useTranslation} from 'react-i18next';
 import {IBoardSmallInfo} from 'app/types/IBoard';
 import {ShareBoard} from 'features/boards';
-import {getUserInfo} from 'features/users';
 import Modal from 'shared/ui/Modal/Modal';
 import Button from 'shared/ui/Button/Button';
 import {useNavigate} from 'react-router-dom';
 import s from './BoardPreview.module.scss';
-import {useAppDispatch, useAppSelector} from "app/providers/StoreProvider";
-import {getAllUsers} from "pages/Home/model/selectors/getAllUsers";
-import {homeActions} from "pages/Home/model/slice/HomeSlice";
-import {IUserInfo} from "app/types/IUserInfo";
 import {Avatar, AvatarSize} from "shared/ui/Avatar";
 import {useUserInfo} from "features/users/hooks/useUserInfo";
 
