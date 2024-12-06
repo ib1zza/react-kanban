@@ -27,6 +27,7 @@ export const sendNotificationInvite = async (
         });
 
         await set(ref(rtdb, `boards/${boardId}/users/${userToInviteId}`), {
+            notificationUid,
             dateInvited: Date.now(),
             role,
             joined: false,

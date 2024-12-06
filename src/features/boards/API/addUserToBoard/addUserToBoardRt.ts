@@ -2,21 +2,24 @@ import { ref, set, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
 import { LinkedUserType } from 'app/types/IBoard';
 
-export const addUserToBoardRt = (
+export const addUserToBoardRt = async (
     userId: string,
     boardId: string,
     role: LinkedUserType | keyof typeof LinkedUserType,
+    notificationId: string
 ) => {
-    update(ref(rtdb, `usersBoards/${userId}`), {
+    // добавляем доску в userBoards пользователя
+    await update(ref(rtdb, `usersBoards/${userId}`), {
         [boardId]: true,
     });
-    update(ref(rtdb, `boards/${boardId}/users/${userId}`), {
+    await update(ref(rtdb, `boards/${boardId}/users/${userId}`), {
         role,
         dateInvited: Date.now(),
         joined: true,
     });
-    // update(ref(rtdb, `usersNotifications/${userId}/`), userId, {
-    //     [`${notificationId}.payload.isAccepted`]: true,
-    //     [`${notificationId}.read`]: true,
-    // });
+
+    await update(ref(rtdb, `usersNotifications/${userId}/${notificationId}`), {
+        isAccepted: true,
+        read: true,
+    });
 };

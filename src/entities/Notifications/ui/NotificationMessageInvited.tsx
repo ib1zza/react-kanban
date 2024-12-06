@@ -41,7 +41,7 @@ const NotificationMessageInvited = ({ data, notificationId, isAccepted }: Props)
 
     const acceptHandler = () => {
         if (!user || !board) return;
-        addUserToBoardRt(user.uid, board.uid, data.invitedRole || LinkedUserType.USER);
+        addUserToBoardRt(user.uid, board.uid, data.invitedRole || LinkedUserType.USER, notificationId);
         dispatch(notificationsActions.acceptNotification(notificationId));
     };
     const declineHandler = () => {

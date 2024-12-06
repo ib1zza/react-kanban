@@ -22,7 +22,6 @@ import s from './BoardPageHeader.module.scss';
 
 interface Props {
     title: string;
-    isEnabled: boolean;
     onEdit: (newTitle: string) => void;
     onDelete: () => void;
 }
@@ -31,7 +30,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
     onEdit,
     onDelete,
     title,
-    isEnabled,
 }: Props) => {
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
@@ -62,20 +60,15 @@ const BoardPageHeader: React.FC<Props> = memo(({
     const handleDelete = useCallback(() => {
         onDelete();
     }, [onDelete]);
-    const handleEdit = useCallback(() => {
-        setEditing(true);
-    }, []);
 
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
-                {!isEditing && (
-                    <>
                         <span>
                             {t('project')}
                             :
                             {' '}
-                            {editingTitle}
+                            {title}
                         </span>
                         <Button
                             size={ButtonSize.M}
@@ -86,8 +79,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
                         >
                             <MemoizedFontAwesomeIcon icon={faPenToSquare} />
                         </Button>
-                    </>
-                )}
             </h1>
 
             {isEditing && (
@@ -97,7 +88,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             <label className={s.label}>{t('Название')}</label>
                             <div className={s.inputContainer}>
                                 <Input
-                                    disabled={isEnabled}
                                     className={s.input}
                                     maxLength={40}
                                     type="text"
@@ -105,7 +95,6 @@ const BoardPageHeader: React.FC<Props> = memo(({
                                     onChange={(e) => handleEditText(e.target.value)}
                                 />
                                 <Button
-                                    disabled={isEnabled}
                                     size={ButtonSize.M}
                                     theme={ButtonTheme.WHITE}
                                     noBorder

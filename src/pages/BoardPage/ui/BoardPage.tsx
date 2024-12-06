@@ -71,11 +71,11 @@ const BoardPage = memo(() => {
     }, [boardId, dispatch, linkedUsersInfo]);
 
     const handleDeleteBoard = useCallback(async () => {
-        if (!boardId || !user?.uid) return;
-        deleteBoard(boardId, user.uid).then(() => {
+        if (!selectedBoard) return;
+        deleteBoard(selectedBoard).then(() => {
             navigate('/');
         });
-    }, [boardId, navigate, user?.uid]);
+    }, [selectedBoard, boardId, navigate, user?.uid]);
 
     function handleCreateColumnClick() {
         dispatch(boardCollectionActions.setIsCreatingColumn(true));
@@ -94,7 +94,6 @@ const BoardPage = memo(() => {
             )}
             <div className={s.wrapperContainer}>
                 <BoardPageHeader
-                    isEnabled={!!selectedBoard}
                     onEdit={handleEditTitle}
                     title={selectedBoard?.title || 'loading...'}
                     onDelete={handleDeleteBoard}

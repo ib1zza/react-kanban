@@ -62,6 +62,7 @@ export interface IBoard {
       role: LinkedUserType;
       dateInvited: number;
       joined: boolean;
+      notificationUid?: string;
     };
   }
 }
