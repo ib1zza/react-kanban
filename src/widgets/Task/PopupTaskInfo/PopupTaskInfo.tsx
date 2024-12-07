@@ -17,6 +17,7 @@ import s from './PopupTaskInfo.module.scss';
 interface Props {
   onEdit: () => void;
   onDelete: () => void;
+  controlsDisabled: boolean;
 }
 
 export interface EditedData {
@@ -25,7 +26,7 @@ export interface EditedData {
     attachedUser?:string;
 }
 
-const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
+const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete, controlsDisabled }) => {
     const {
         selectedTask: task,
         selectedBoardId,
@@ -117,7 +118,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
 
                     </div>
 
-                    <div className={s.buttons}>
+                    {!controlsDisabled && <div className={s.buttons}>
                         <Button
                             icon={faPenToSquare}
                             onClick={() => setEditing(true)}
@@ -132,7 +133,7 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete }) => {
                         >
                             {t('Удалить')}
                         </Button>
-                    </div>
+                    </div>}
                 </>
             )}
             {isEditing && (

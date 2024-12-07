@@ -10,6 +10,8 @@ import { useCallback } from 'react';
 import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import s from './Space.module.scss';
+import {useUserRole} from "features/boards/hooks/useUserRole";
+import {LinkedUserType} from "app/types/IBoard";
 
 interface SpaceProps {
     className?: string
@@ -24,6 +26,7 @@ const Space = ({ className }: SpaceProps) => {
     }, [dispatch]);
 
     const { selectedBoard } = useAppSelector(getBoardCollection);
+    const role = useUserRole()
 
     const isUserSelected = (user: IUserInfo): boolean => {
         if (!selectedBoard?.users) {
@@ -59,16 +62,16 @@ const Space = ({ className }: SpaceProps) => {
                                 </div>
                             );
                         })}
-                        <Button
+                        {role === LinkedUserType.USER && <Button
                             onClick={onShare}
                             theme={ButtonTheme.PURE}
                             className={classNames(s.space_member, {}, [s.space_add])}
                         >
                             <div className={s.btn}>
-                                <MemoizedFontAwesomeIcon icon={faPlus} />
+                                <MemoizedFontAwesomeIcon icon={faPlus}/>
                             </div>
                             <p>{t('share')}</p>
-                        </Button>
+                        </Button>}
                     </div>
                 )
             }

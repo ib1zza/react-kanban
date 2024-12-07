@@ -23,7 +23,6 @@ const Task = memo(({
     const dispatch = useAppDispatch();
     const linkedUsers = useAppSelector(getLinkedUsers);
     const openTaskHandler = () => {
-        console.log("clicked on task", task);
         dispatch(boardCollectionActions.setCurrentTask(task));
     };
     const handleComplete = useCallback(() => {

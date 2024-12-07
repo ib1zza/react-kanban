@@ -1,24 +1,14 @@
-import React, {
-    memo, useCallback, useEffect, useState,
-} from 'react';
-import {
-    faAdd,
-
-    faPenToSquare,
-    faShareAlt, faTrash,
-    faWalkieTalkie,
-} from '@fortawesome/free-solid-svg-icons';
-import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
-import { Input } from 'shared/ui/Input/Input';
-import Button, { ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
-import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import { Avatar } from 'shared/ui/Avatar';
-import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
-import { IUserInfo } from 'app/types/IUserInfo';
-import { useTranslation } from 'react-i18next';
+import React, {memo, useCallback, useEffect, useState,} from 'react';
+import {faPenToSquare,} from '@fortawesome/free-solid-svg-icons';
+import {faCircleCheck} from '@fortawesome/free-regular-svg-icons';
+import {Input} from 'shared/ui/Input/Input';
+import Button, {ButtonSize, ButtonTheme} from 'shared/ui/Button/Button';
+import {useTranslation} from 'react-i18next';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import Modal from 'shared/ui/Modal/Modal';
 import s from './BoardPageHeader.module.scss';
+import {useUserRole} from "features/boards/hooks/useUserRole";
+import {LinkedUserType} from "app/types/IBoard";
 
 interface Props {
     title: string;
@@ -34,6 +24,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
     const { t } = useTranslation();
+    const userRole = useUserRole();
 
     const handleOpenModal = () => {
         setEditing(true);
@@ -70,18 +61,18 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             {' '}
                             {title}
                         </span>
-                        <Button
-                            size={ButtonSize.M}
-                            theme={ButtonTheme.WHITE}
-                            noBorder
-                            className={s.button}
-                            onClick={handleOpenModal}
-                        >
-                            <MemoizedFontAwesomeIcon icon={faPenToSquare} />
-                        </Button>
+                {userRole === LinkedUserType.USER &&<Button
+                    size={ButtonSize.M}
+                    theme={ButtonTheme.WHITE}
+                    noBorder
+                    className={s.button}
+                    onClick={handleOpenModal}
+                >
+                    <MemoizedFontAwesomeIcon icon={faPenToSquare}/>
+                </Button>}
             </h1>
 
-            {isEditing && (
+            {userRole === LinkedUserType.USER && isEditing && (
                 <Modal onClose={handleCloseModal} title={t('editProject')}>
                     <div className={s.contentWrapper}>
                         <div className={s.inputWrapper}>

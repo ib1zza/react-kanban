@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, {Suspense, memo, useState} from 'react';
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
@@ -13,11 +12,13 @@ import TaskList from '../lib/TaskList/TaskList';
 interface ITaskColumnProps {
     column: IColumn;
     boardId: string;
+    controlsDisabled: boolean;
 }
 
 const TaskColumn: React.FC<ITaskColumnProps> = memo(({
                                                          column,
                                                          boardId,
+                                                         controlsDisabled
                                                      }) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
     const editHandler = async (title: string, color: string) => {
@@ -36,22 +37,24 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
             <hr/>
             <div className={s.titleBlock}>
                 <h6 className={s.title}>{column.title}</h6>
-                <div className={s.columnButtons}>
-                    <Button
+                {!controlsDisabled && <div className={s.columnButtons}>
+                  <Button
                         className={s.editButton}
                         onClick={() => setIsEditColumn(true)}
                         icon={faPenToSquare}
                     />
-                    <Button
+                        <Button
                         className={s.deleteButton}
-                        onClick={() => deleteColumn(boardId, column.uid)}
-                        icon={faTrashCan}
-                    />
+                    onClick={() => deleteColumn(boardId, column.uid)}
+                    icon={faTrashCan}
+                />
                 </div>
+                }
+
             </div>
 
             <div className={s.taskListWrapper}>
-                <AddTaskBlock boardId={boardId} columnId={column.uid}/>
+                {!controlsDisabled && <AddTaskBlock boardId={boardId} columnId={column.uid}/>}
 
                 <TaskList
                     boardId={boardId}
