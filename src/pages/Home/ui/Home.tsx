@@ -5,8 +5,8 @@ import React, {
     useEffect,
 } from 'react';
 import { addUserToBoard } from 'features/boards';
-import {IBoard, IBoardSmallInfo, LinkedUserType} from 'app/types/IBoard';
-import { BoardPreview } from 'entities/Board';
+import {IBoardFromServer, IBoardSmallInfoFromServer, LinkedUserType} from 'app/types/IBoardFromServer';
+import {BoardPreview, mapBoardFromServer} from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { createBoardRt } from 'features/boards/API/createBoard/createBoardRealtime';
@@ -33,7 +33,7 @@ const Home = memo(() => {
                 if (data) {
                     getBoardsRt(Object.keys(data)).then((res) => {
                         if (res) {
-                            dispatch(homeActions.addBoards(Object.values(res)));
+                            dispatch(homeActions.addBoards(res.map(mapBoardFromServer)));
                         }
                     });
                 }
@@ -84,7 +84,7 @@ const Home = memo(() => {
                             )}
                         </Suspense>
                         <Suspense>
-                            { boards.map((item: IBoardSmallInfo) => (
+                            { boards.map((item) => (
                                 <BoardPreview
                                     key={item.uid}
                                     board={item}

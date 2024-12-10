@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Theme } from 'app/providers/theme/lib/ThemeContext';
 import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
-import { LinkedUserType } from 'app/types/IBoard';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
 import Notification from './Notification';
 import { NotificationType } from '../model/types/NotificationsSchema';
 

@@ -1,6 +1,6 @@
-import { IBoard } from 'app/types/IBoard';
+import { IBoardFromServer } from 'app/types/IBoardFromServer';
 import { subscribe } from 'shared/API/subscribe';
 
-export function subscribeToBoardById(id: string, cb: (data: IBoard) => void) {
-    return subscribe<IBoard>(`boards/${id}`, cb);
+export function subscribeToBoardById(id: string, cb: (data: IBoardFromServer) => void) {
+    return subscribe<IBoardFromServer>(`boards/${id}`, cb);
 }

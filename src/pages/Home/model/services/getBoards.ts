@@ -3,7 +3,7 @@ import {
 } from 'firebase/firestore';
 import { User } from 'firebase/auth';
 import { db } from 'shared/config/firebase/firebase';
-import { IBoard } from 'app/types/IBoard';
+import { IBoardFromServer } from 'app/types/IBoardFromServer';
 
 export const getBoards = async (user: User | null) => {
     if (!user) return [];
@@ -17,7 +17,7 @@ export const getBoards = async (user: User | null) => {
     );
 
     const docsSnap = await getDocs(dataRef);
-    const res: IBoard[] = [];
+    const res: IBoardFromServer[] = [];
     docsSnap.forEach((doc) => {
         res.push({
             uid: doc.data().uid,

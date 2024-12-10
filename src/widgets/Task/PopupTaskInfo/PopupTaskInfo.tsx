@@ -1,75 +1,95 @@
-import React, { useEffect, useState } from 'react';
-import { faCircleXmark, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
-import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import { deleteTask, editTask } from 'features/tasks';
+import React, {useEffect, useState} from 'react';
+import {faCircleXmark, faTrashCan} from '@fortawesome/free-regular-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import {useTranslation} from 'react-i18next';
+import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
+import {deleteTask, editTask} from 'features/tasks';
 import Button from 'shared/ui/Button/Button';
 import EditTaskForm from 'entities/Tasks/lib/EditTaskForm';
-import { Avatar, AvatarSize } from 'shared/ui/Avatar';
-import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
-import { IUserInfo } from 'app/types/IUserInfo';
-import { getUserInfo } from 'features/users';
-import { classNames } from 'shared/lib/classNames/classNames';
+import {Avatar, AvatarSize} from 'shared/ui/Avatar';
+import {boardCollectionActions, getBoardCollection} from 'pages/BoardPage';
+import {IUserInfo} from 'app/types/IUserInfo';
+import {getUserInfo} from 'features/users';
+import {classNames} from 'shared/lib/classNames/classNames';
 import s from './PopupTaskInfo.module.scss';
+import {useUserInfo} from "features/users/hooks/useUserInfo";
+import {ITask} from "app/types/IBoardFromServer";
 
 interface Props {
-  onEdit: () => void;
-  onDelete: () => void;
-  controlsDisabled: boolean;
+    controlsDisabled: boolean;
+    selectedTask: ITask;
 }
 
 export interface EditedData {
     title?: string;
-    description?:string;
-    attachedUser?:string;
+    description?: string;
+    attachedUser?: string;
 }
 
-const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete, controlsDisabled }) => {
+interface ITaskUserProps {
+    userId: string;
+}
+
+const TaskUser = ({userId}: ITaskUserProps) => {
+    const [linkedUser] = useUserInfo(userId);
+
+    const {t} = useTranslation();
+    if (!linkedUser) {
+        return null;
+    }
+
+    return (
+        <>
+            <span>
+                {t('Исполнитель')}
+                :
+            </span>
+            <Avatar
+                alt={linkedUser.displayName}
+                src={linkedUser.photoURL}
+                className={s.linkedUserInfo__avatar}
+            />
+            {linkedUser.displayName}
+        </>
+    );
+};
+
+const PopupTaskInfo: React.FC<Props> = ({selectedTask, controlsDisabled}) => {
+    const task = selectedTask;
     const {
-        selectedTask: task,
         selectedBoardId,
         selectedColumnId,
-        linkedUsersInfo,
     } = useAppSelector(getBoardCollection);
     const dispatch = useAppDispatch();
-    const [userInfo, setUserInfo] = useState<any>();
+    const [creatorUserInfo] = useUserInfo(task.creatorId);
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
-    const { t } = useTranslation('buttons');
-    if (!task) return null;
+    const {t} = useTranslation('buttons');
+
     const onDeleteTask = async () => {
         setLoading('delete');
         await deleteTask(selectedBoardId, selectedColumnId, task.uid);
-        onDelete();
+        dispatch(boardCollectionActions.removeSelectedTask());
+        setLoading('');
     };
 
-    const handleEditTask = async (data : EditedData) => {
+    const handleEditTask = async (data: EditedData) => {
         setLoading('edit');
         await editTask(selectedBoardId, selectedColumnId, task.uid, data);
+        dispatch(boardCollectionActions.updateSelectedTask(task.uid));
+
         setLoading('');
         setEditing(false);
-        onEdit();
     };
 
-    // eslint-disable-next-line no-console
-    const fetchUserInfo = async () => {
-        const user = await getUserInfo(task.creatorId);
-        if (user !== undefined) {
-            setUserInfo(user);
-        }
-    };
-    const linkedUser = linkedUsersInfo.find((user: IUserInfo) => user.uid === task.attachedUser);
+    const linkedUser = task.attachedUser;
 
-    useEffect(() => {
-        fetchUserInfo();
-    }, [task.creatorId]);
     return (
         <div className={s.container}>
             <div
                 className={s.headerColor}
-                style={{ backgroundColor: '#weweww' }}
+                style={{backgroundColor: '#weweww'}}
             />
             <div className={s.title}>
                 <p>{isEditing ? t('Редактирование') : task.title}</p>
@@ -85,22 +105,11 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete, controlsDisabled }) 
                     <p className={s.description}>
                         {task.description ? `${t('Описание')}: ${task.description}` : t('Нет описания')}
                     </p>
-                    <div className={classNames(s.linkedUserInfo, { [s.marginBottom]: !!linkedUser })}>
+                    <div className={classNames(s.linkedUserInfo, {[s.marginBottom]: !!linkedUser})}>
                         {
                             linkedUser
                                 ? (
-                                    <>
-                                        <span>
-                                            {t('Исполнитель')}
-                                            :
-                                        </span>
-                                        <Avatar
-                                            alt={linkedUser.displayName}
-                                            src={linkedUser.photoURL}
-                                            className={s.linkedUserInfo__avatar}
-                                        />
-                                        {linkedUser.displayName}
-                                    </>
+                                    <TaskUser userId={linkedUser}/>
                                 )
                                 : `${t('Пользователь не прикреплен')}`
                         }
@@ -109,10 +118,10 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete, controlsDisabled }) 
 
                         {t('Создано')}
                         :
-                        {userInfo && (
+                        {creatorUserInfo && (
                             <>
-                                <Avatar src={userInfo.photoURL} />
-                                {userInfo.displayName}
+                                <Avatar src={creatorUserInfo.photoURL}/>
+                                {creatorUserInfo.displayName}
                             </>
                         )}
 
@@ -148,4 +157,4 @@ const PopupTaskInfo: React.FC<Props> = ({ onEdit, onDelete, controlsDisabled }) 
     );
 };
 
-export { PopupTaskInfo };
+export {PopupTaskInfo};

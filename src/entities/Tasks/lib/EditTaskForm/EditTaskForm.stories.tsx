@@ -21,7 +21,6 @@ export const Primary: Story = {
             isCompleted: true,
             tags: [''],
             creatorId: '',
-            subtasks: {},
         },
     },
 };
@@ -35,7 +34,6 @@ export const PrimaryDark: Story = {
             isCompleted: true,
             tags: [''],
             creatorId: '',
-            subtasks: {},
         },
     },
 };

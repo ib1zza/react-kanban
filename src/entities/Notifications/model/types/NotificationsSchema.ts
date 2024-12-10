@@ -1,4 +1,4 @@
-import { LinkedUserType } from 'app/types/IBoard';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
 
 export enum NotificationType {
     BOARD_INVITED = 'BOARD_INVITED',

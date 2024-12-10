@@ -17,7 +17,7 @@ export const Primary: Story = {
         column: {
             uid: '',
             title: 'title',
-            tasks: {},
+            tasks: [],
             timeCreated: '',
             timeUpdated: '',
             color: '#2e2e2e',
@@ -29,7 +29,7 @@ export const PrimaryDark: Story = {
         column: {
             uid: '',
             title: 'title',
-            tasks: {},
+            tasks: [],
             timeCreated: '',
             timeUpdated: '',
             color: '#2e2e2e',

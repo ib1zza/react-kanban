@@ -1,6 +1,6 @@
 import { ref, set, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
-import { LinkedUserType } from 'app/types/IBoard';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
 
 export const addUserToBoardRt = async (
     userId: string,

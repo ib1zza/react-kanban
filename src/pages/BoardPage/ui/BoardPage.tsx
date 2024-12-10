@@ -4,58 +4,50 @@ import {PopupTaskInfo} from 'widgets';
 import {useAppDispatch, useAppSelector,} from 'app/providers/StoreProvider';
 import {BoardPageHeader, deleteBoard, editBoard, ShareBoard,} from 'features/boards';
 import {TaskColumn} from 'entities/Column';
-import {createColumnRt} from 'features/columns/API/createColumn/createColumnRt';
 import {getUserState} from 'features/users/model/selectors/getUserState/getUserState';
 import Modal from 'shared/ui/Modal/Modal';
 import Loader from 'shared/ui/Loader/Loader';
-import {useTranslation} from 'react-i18next';
 import {getColumnsFromBoard} from '../lib/getColumnsFromBoard';
 import s from './BoardPage.module.scss';
 import {boardCollectionActions, getBoardCollection} from '..';
-import {getBoardThunk} from '../model/services/getBoardThunk/getBoardThunk';
 import {useUserRole} from "features/boards/hooks/useUserRole";
 import {AddColumn} from "features/columns/ui/AddColumn/AddColumn";
-import {LinkedUserType} from "app/types/IBoard";
+import {LinkedUserType} from "app/types/IBoardFromServer";
+import {subscribeToBoardById} from "entities/Board/API/getBoardFromIdRt";
+import {mapBoardFromServer} from "entities/Board";
 
 const BoardPage = memo(() => {
-    const { boardId } = useParams();
+    const {boardId} = useParams();
     const {
-        selectedBoard, selectedTask, linkedUsersInfo, shareStatus,
+        selectedBoard, selectedTask, shareStatus,
     } = useAppSelector(
         getBoardCollection,
     );
 
     const userRole = useUserRole();
-    const { user } = useAppSelector(getUserState);
+    const {user} = useAppSelector(getUserState);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { t } = useTranslation();
 
-    const refetchTask = useCallback(
-        async () => {
-            if (!selectedTask) return;
-
-            dispatch(boardCollectionActions.updateSelectedTask(selectedTask.uid));
-        },
-        [dispatch, selectedTask],
-    );
-
-
-
-    const handleDeleteTask = useCallback(() => {
-        dispatch(boardCollectionActions.removeSelectedTask());
-    }, [dispatch]);
 
     const handleEditTitle = useCallback((newTitle: string) => {
         if (!boardId) return;
         console.log(boardId, newTitle);
-        editBoard(boardId, { title: newTitle });
+        editBoard(boardId, {title: newTitle});
     }, [boardId]);
 
     useEffect(() => {
         if (!boardId) return;
-        dispatch(getBoardThunk({ boardId, linkedUsersInfo }));
-    }, [boardId, dispatch, linkedUsersInfo]);
+
+        // Subscribe to the board and get the unsubscribe function
+        const unsubscribe = subscribeToBoardById(boardId, (board) => {
+            dispatch(boardCollectionActions.setCurrentBoard(mapBoardFromServer(board)));
+        })
+        // Cleanup function to unsubscribe when the component unmounts or boardId changes
+        return () => {
+            unsubscribe();
+        };
+    }, [boardId, dispatch]);
 
     const handleDeleteBoard = useCallback(async () => {
         if (!selectedBoard) return;
@@ -64,11 +56,17 @@ const BoardPage = memo(() => {
         });
     }, [selectedBoard, boardId, navigate, user?.uid]);
 
+    useEffect(() => {
+        return () => {
+            dispatch(boardCollectionActions.removeSelectedBoard());
+        }
+    }, []);
+
     return (
         <>
             {selectedBoard && shareStatus && (
                 <Modal onClose={() => dispatch(boardCollectionActions.setShareStatus(false))}>
-                    <ShareBoard board={selectedBoard} />
+                    <ShareBoard board={selectedBoard}/>
                 </Modal>
             )}
             <div className={s.wrapperContainer}>
@@ -80,7 +78,7 @@ const BoardPage = memo(() => {
                 <div className={s.wrapper}>
                     <div className={s.columnsWrapper}>
                         {!selectedBoard
-                            ? <><Loader /></>
+                            ? <><Loader/></>
                             : (
                                 <>
                                     {getColumnsFromBoard(selectedBoard).map((column) => (
@@ -99,7 +97,8 @@ const BoardPage = memo(() => {
                     </div>
                     <Suspense>
                         {selectedTask && (
-                            <PopupTaskInfo onEdit={refetchTask} onDelete={handleDeleteTask}   controlsDisabled={userRole !== LinkedUserType.USER} />
+                            <PopupTaskInfo selectedTask={selectedTask}
+                                           controlsDisabled={userRole !== LinkedUserType.USER}/>
                         )}
                     </Suspense>
                 </div>

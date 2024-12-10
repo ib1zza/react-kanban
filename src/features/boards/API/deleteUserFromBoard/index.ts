@@ -1,7 +1,7 @@
 import { arrayRemove } from 'firebase/firestore';
 import { ref, remove, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
-import { LinkedUserType } from '../../../../app/types/IBoard';
+import { LinkedUserType } from '../../../../app/types/IBoardFromServer';
 import { updateDocument } from '../../../../shared/API/updateDocument';
 
 export const deleteUserFromBoard = async (

@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { LinkedUserType } from 'app/types/IBoard';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
 import { rtdb } from 'shared/config/firebase/firebase';
 import { ref, set } from 'firebase/database';
 import { NotificationType } from '../../types/NotificationsSchema';

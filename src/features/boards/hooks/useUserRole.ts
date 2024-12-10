@@ -1,5 +1,5 @@
 import {useAppSelector} from "app/providers/StoreProvider";
-import {LinkedUserType} from "app/types/IBoard";
+import {LinkedUserType} from "app/types/IBoardFromServer";
 
 type useUserRoleType = () => LinkedUserType | null
 
@@ -9,7 +9,11 @@ export const useUserRole: useUserRoleType = () => {
 
     if (!user || !board) return null;
 
-    const role = board.users?.[user.uid].role;
+    const userInBoard = board.users?.find(el => el.uid === user.uid);
+
+    if (!userInBoard) return null;
+
+    const role = userInBoard.role;
 
     return role || null;
 }

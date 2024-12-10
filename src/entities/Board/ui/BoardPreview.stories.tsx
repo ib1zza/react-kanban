@@ -19,6 +19,7 @@ export const Primary: Story = {
             title: 'title',
             timeCreated: '',
             timeUpdated: '',
+            columns: [],
         },
     },
 };
@@ -30,6 +31,7 @@ export const PrimaryDark: Story = {
             title: 'title',
             timeCreated: '',
             timeUpdated: '',
+            columns: [],
         },
     },
 };

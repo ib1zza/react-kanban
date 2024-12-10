@@ -2,7 +2,7 @@ import React, {Suspense, memo, useState} from 'react';
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {deleteColumn, editColumn} from 'features/columns';
-import {IColumn} from 'app/types/IBoard';
+import {IColumn, IColumnFromServer} from 'app/types/IBoardFromServer';
 import Button from 'shared/ui/Button/Button';
 import ActionForm, {ActionFormStatus} from 'shared/ui/ActionForm/ui/ActionForm';
 import AddTaskBlock from 'entities/Column/lib/AddTaskForm/AddTaskBlock/AddTaskBlock';

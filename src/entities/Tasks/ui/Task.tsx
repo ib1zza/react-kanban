@@ -1,6 +1,6 @@
 import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
 import { faCircleCheck as iconCheckSolid, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { ITask } from 'app/types/IBoard';
+import {IBoardUserInfo, ITask} from 'app/types/IBoardFromServer';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { toggleTaskComplete } from 'features/tasks';
 import { Avatar } from 'shared/ui/Avatar';
@@ -11,24 +11,40 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, useCallback } from 'react';
 import s from './Task.module.scss';
 import Button from '../../../shared/ui/Button/Button';
+import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface ITaskProps {
   task: ITask;
   boardId: string;
   columnId: string;
 }
+
+interface ITaskUserProps {
+    userId: string;
+}
+
+const TaskUser = ({userId}: ITaskUserProps) => {
+    const [linkedUser] = useUserInfo(userId);
+
+    return (
+        <Avatar
+            src={linkedUser?.photoURL}
+            alt={linkedUser?.displayName}
+            size={AvatarSize.S}
+        />
+    );
+};
+
 const Task = memo(({
     task, boardId, columnId,
 }: ITaskProps) => {
     const dispatch = useAppDispatch();
-    const linkedUsers = useAppSelector(getLinkedUsers);
     const openTaskHandler = () => {
         dispatch(boardCollectionActions.setCurrentTask(task));
     };
     const handleComplete = useCallback(() => {
         toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted);
     }, [boardId, columnId, task.isCompleted, task.uid]);
-    const linkedUser = linkedUsers.find((user: IUserInfo) => user.uid === task.attachedUser);
 
     return (
         <div className={classNames(s.container, { [s.completed]: task.isCompleted })}>
@@ -47,11 +63,7 @@ const Task = memo(({
 
             <div className={s.infoBlock}>
                 {task.attachedUser && (
-                    <Avatar
-                        src={linkedUser?.photoURL}
-                        alt={linkedUser?.displayName}
-                        size={AvatarSize.S}
-                    />
+                   <TaskUser userId={task.attachedUser}/>
                 ) }
                 <Button
                     onClick={

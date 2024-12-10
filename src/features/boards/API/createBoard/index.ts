@@ -1,7 +1,7 @@
 import { arrayUnion, doc, setDoc } from '@firebase/firestore';
 import { v4 as uuid } from 'uuid';
 
-import { GuestPermission } from 'app/types/IBoard';
+import { GuestPermission } from 'app/types/IBoardFromServer';
 import { updateDocument } from 'shared/API/updateDocument';
 import { db } from 'shared/config/firebase/firebase';
 

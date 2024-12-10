@@ -1,4 +1,4 @@
-import { ITask } from 'app/types/IBoard';
+import { ITask } from 'app/types/IBoardFromServer';
 import { ref, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
 

@@ -3,7 +3,7 @@ import React, { SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { getUserInfo } from 'features/users';
-import { IBoard, LinkedUserType } from 'app/types/IBoard';
+import { IBoardFromServer, LinkedUserType } from 'app/types/IBoardFromServer';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
 import { IUserInfo } from 'app/types/IUserInfo';
@@ -27,7 +27,7 @@ interface Props {
 
 const NotificationMessageInvited = ({ data, notificationId, isAccepted }: Props) => {
     const [userFrom] = useUserInfo(data.userInvitedId);
-    const [board, setBoard] = useState<IBoard | undefined>();
+    const [board, setBoard] = useState<IBoardFromServer | undefined>();
     const { t } = useTranslation('notifications');
     const { user } = useAuth();
     const dispatch = useAppDispatch();

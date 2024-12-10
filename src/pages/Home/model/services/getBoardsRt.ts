@@ -1,5 +1,5 @@
 import { child, get, ref } from 'firebase/database';
-import { IBoard } from 'app/types/IBoard';
+import { IBoardFromServer } from 'app/types/IBoardFromServer';
 import { rtdb } from 'shared/config/firebase/firebase';
 
 export const getBoardsRt = (ids: string[]) => {
@@ -14,6 +14,6 @@ export const getBoardsRt = (ids: string[]) => {
     });
 
     return Promise.allSettled(ids.map((id) => getOneBoardInfo(id))).then(
-        (res) => res.map((el) => el.status !== 'rejected' && el.value).filter(Boolean) as IBoard[],
+        (res) => res.map((el) => el.status !== 'rejected' && el.value).filter(Boolean) as IBoardFromServer[],
     );
 };

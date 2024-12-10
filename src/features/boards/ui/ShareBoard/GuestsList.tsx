@@ -4,16 +4,55 @@ import React, {
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
-import {IBoard, IBoardSmallInfo, LinkedUserType} from 'app/types/IBoard';
+import {
+    IBoard,
+    IBoardFromServer,
+    IBoardSmallInfoFromServer,
+    IBoardUserInfo,
+    LinkedUserType
+} from 'app/types/IBoardFromServer';
 import { deleteUserFromBoard } from 'features/boards';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import s from './ShareBoard.module.scss';
+import {IUserInfo} from "app/types/IUserInfo";
+import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface Props {
-  board: IBoardSmallInfo | IBoard;
+  board: IBoard;
 }
+
+interface IGuestItem {
+    userId: string;
+    joined: boolean;
+    handleRemoveUserFromBoard: (userId: string) => void;
+}
+
+const GuestItem = ({ userId, joined, handleRemoveUserFromBoard }: IGuestItem) => {
+    const { t } = useTranslation();
+    const [user] = useUserInfo(userId);
+
+    if (!user) {
+        return null;
+    }
+
+    return (
+        <div key={user.uid} className={s.form__user}>
+            <div>
+                <MemoizedFontAwesomeIcon icon={
+                    joined ? faCheck : faClock
+                }
+                />
+                {' '}
+                {user.displayName}
+            </div>
+            <button onClick={() => handleRemoveUserFromBoard(userId)}>
+                <MemoizedFontAwesomeIcon icon={faXmark} />
+            </button>
+        </div>
+    );
+};
 
 const GuestsList = memo(({ board }: Props) => {
     const [isEditorsOpened, setIsEditorsOpened] = useState(false);
@@ -25,20 +64,18 @@ const GuestsList = memo(({ board }: Props) => {
         );
     }, [board.uid]);
 
-    const visibleUsers = useMemo(() => {
-        if (!board?.users) return [];
+    const visibleUsersIds = useMemo(() => {
+        if (!board?.users || !linkedUsers) return [];
         return linkedUsers.filter(
-            (user) => (board?.users?.[user.uid]?.role
-            === (isEditorsOpened
+            (user) => user.role === (isEditorsOpened
                 ? LinkedUserType.USER
                 : LinkedUserType.GUEST)
-            ),
-        );
+            )
     }, [linkedUsers, board?.users, isEditorsOpened]);
 
     const { t } = useTranslation();
 
-    const checkIsUserJoined = (userId: string) => board.users?.[userId]?.joined;
+    const checkIsUserJoined = (user: IBoardUserInfo) => user.joined;
 
     return (
         <div className={s.form__users}>
@@ -70,26 +107,19 @@ const GuestsList = memo(({ board }: Props) => {
             </div>
             <div>
                 {
-                    !visibleUsers.length && (
+                    !visibleUsersIds.length && (
                         <div>
                             {t('Тут пока никого нет')}
                         </div>
                     )
                 }
-                {visibleUsers.map((user) => (
-                    <div key={user.uid} className={s.form__user}>
-                        <div>
-                            <MemoizedFontAwesomeIcon icon={
-                                checkIsUserJoined(user.uid) ? faCheck : faClock
-                            }
-                            />
-                            {' '}
-                            {user.email}
-                        </div>
-                        <button onClick={() => handleRemoveUserFromBoard(user.uid)}>
-                            <MemoizedFontAwesomeIcon icon={faXmark} />
-                        </button>
-                    </div>
+                {visibleUsersIds.map((user) => (
+                    <GuestItem
+                        key={user.uid}
+                        userId={user.uid}
+                        joined={checkIsUserJoined(user)}
+                        handleRemoveUserFromBoard={handleRemoveUserFromBoard}
+                    />
                 ))}
             </div>
         </div>

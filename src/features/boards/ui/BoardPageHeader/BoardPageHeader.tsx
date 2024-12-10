@@ -8,7 +8,7 @@ import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedF
 import Modal from 'shared/ui/Modal/Modal';
 import s from './BoardPageHeader.module.scss';
 import {useUserRole} from "features/boards/hooks/useUserRole";
-import {LinkedUserType} from "app/types/IBoard";
+import {LinkedUserType} from "app/types/IBoardFromServer";
 
 interface Props {
     title: string;

@@ -1,7 +1,7 @@
 import React, {memo, useCallback, useEffect} from 'react';
 import {faLink, faShareFromSquare, faShareNodes} from '@fortawesome/free-solid-svg-icons';
 import {useTranslation} from 'react-i18next';
-import {IBoardSmallInfo} from 'app/types/IBoard';
+import {IBoard, IBoardSmallInfoFromServer} from 'app/types/IBoardFromServer';
 import {ShareBoard} from 'features/boards';
 import Modal from 'shared/ui/Modal/Modal';
 import Button from 'shared/ui/Button/Button';
@@ -12,7 +12,7 @@ import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface IBoardPreviewProps {
   userId: string;
-  board: IBoardSmallInfo;
+  board: IBoard;
 }
 
 const BoardPreview: React.FC<IBoardPreviewProps> = memo(({

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IBoard } from 'app/types/IBoard';
+import {IBoard, IBoardFromServer} from 'app/types/IBoardFromServer';
 import { HomeSchema } from '../types/homeSchema';
 import {IUserInfo} from "app/types/IUserInfo";
 

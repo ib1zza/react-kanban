@@ -1,12 +1,12 @@
 import React from 'react';
-import { ITask } from 'app/types/IBoard';
+import { ITask } from 'app/types/IBoardFromServer';
 import Task from '../../../Tasks/ui/Task';
 import s from './TaskList.module.scss';
 
 interface ITaskListProps {
   boardId: string;
   columnId: string;
-  tasks: { [key: string]: ITask };
+  tasks: ITask[];
 }
 const TaskList: React.FC<ITaskListProps> = ({
     tasks,
@@ -14,10 +14,10 @@ const TaskList: React.FC<ITaskListProps> = ({
     columnId,
 }) => {
     const getTasksFromColumn = (
-        tasks: { [key: string]: ITask },
-    ): ITask[] => Object
-        .values(tasks)
-        .sort((a, b) => +a.timeCreated - +b.timeCreated);
+        tasks: ITask[]
+    ): ITask[] =>
+        [...tasks].sort((a, b) => +b.timeCreated - +a.timeCreated);
+
 
     return (
         <div className={s.tasks}>

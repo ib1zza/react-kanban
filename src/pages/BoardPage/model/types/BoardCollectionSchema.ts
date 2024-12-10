@@ -1,4 +1,4 @@
-import { IBoard, ITask } from 'app/types/IBoard';
+import {IBoard, IBoardFromServer, ITask} from 'app/types/IBoardFromServer';
 import { IUserInfo } from 'app/types/IUserInfo';
 
 export interface BoardCollectionSchema {
@@ -6,7 +6,6 @@ export interface BoardCollectionSchema {
     selectedColumnId: string;
     selectedBoard: IBoard | null;
     selectedTask: ITask | null;
-    linkedUsersInfo: IUserInfo[],
     shareStatus: boolean;
     isCreatingColumn: boolean;
   }

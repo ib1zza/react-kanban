@@ -3,7 +3,7 @@ import { rtdb } from 'shared/config/firebase/firebase';
 import { v4 as uuid } from 'uuid';
 import { updateDocument } from 'shared/API/updateDocument';
 import { arrayUnion } from '@firebase/firestore';
-import { LinkedUserType } from 'app/types/IBoard';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
 
 export const createBoardRt = async (title: string, userId: string) => {
     try {
