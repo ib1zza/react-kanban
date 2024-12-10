@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useEffect, useState,} from 'react';
-import {faPenToSquare,} from '@fortawesome/free-solid-svg-icons';
+import {faGear, faPenToSquare, faSliders,} from '@fortawesome/free-solid-svg-icons';
 import {faCircleCheck} from '@fortawesome/free-regular-svg-icons';
 import {Input} from 'shared/ui/Input/Input';
 import Button, {ButtonSize, ButtonTheme} from 'shared/ui/Button/Button';
@@ -62,13 +62,13 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             {title}
                         </span>
                 {userRole === LinkedUserType.USER &&<Button
-                    size={ButtonSize.M}
+                    size={ButtonSize.L}
                     theme={ButtonTheme.WHITE}
                     noBorder
                     className={s.button}
                     onClick={handleOpenModal}
                 >
-                    <MemoizedFontAwesomeIcon icon={faPenToSquare}/>
+                    <MemoizedFontAwesomeIcon icon={faGear}/>
                 </Button>}
             </h1>
 
