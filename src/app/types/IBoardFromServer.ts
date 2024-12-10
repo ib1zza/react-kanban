@@ -63,7 +63,6 @@ export interface IBoardSmallInfo {
   users?: IBoardUserInfo[]
 }
 
-
 export interface IBoardFromServer {
   uid: string;
   // chatId?: string;

@@ -1,5 +1,5 @@
-import { IBoardFromServer, LinkedUserType } from 'app/types/IBoardFromServer';
-import { ref, set, update } from 'firebase/database';
+import { IBoardFromServer } from 'app/types/IBoardFromServer';
+import { ref, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
 
 export const editBoard = async (

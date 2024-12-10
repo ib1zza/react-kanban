@@ -1,12 +1,8 @@
-import React, { memo } from 'react';
-
-import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
-import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
-import { useTheme } from 'app/providers/theme/lib/useTheme';
-import { Theme } from 'app/providers/theme/lib/ThemeContext';
-
-import { classNames } from 'shared/lib/classNames/classNames';
-import Button, { ButtonTheme } from '../../Button/Button';
+import React, {memo} from 'react';
+import {faCircleHalfStroke} from '@fortawesome/free-solid-svg-icons';
+import {useTheme} from 'app/providers/theme/lib/useTheme';
+import {classNames} from 'shared/lib/classNames/classNames';
+import Button, {ButtonTheme} from '../../Button/Button';
 
 interface ThemeSwitcherProps{
     className?: string
@@ -14,13 +10,6 @@ interface ThemeSwitcherProps{
 }
 const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
     const { toggleTheme, theme } = useTheme();
-
-    const icon = theme === Theme.LIGHT ? (
-        faSun
-    ) : (
-        faMoon
-    );
-    const icon1 = faCircleHalfStroke;
 
     return (
         <Button
@@ -31,7 +20,7 @@ const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
                 [className as string],
             )}
             onClick={toggleTheme}
-            icon={icon1}
+            icon={faCircleHalfStroke}
         />
     );
 };

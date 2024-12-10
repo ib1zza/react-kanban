@@ -1,14 +1,14 @@
-import React, {memo, useCallback, useEffect} from 'react';
-import {faLink, faShareFromSquare, faShareNodes} from '@fortawesome/free-solid-svg-icons';
-import {useTranslation} from 'react-i18next';
-import {IBoard, IBoardSmallInfoFromServer} from 'app/types/IBoardFromServer';
-import {ShareBoard} from 'features/boards';
+import React, { memo, useCallback, useEffect } from 'react';
+import { faLink, faShareFromSquare, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import { IBoard, IBoardSmallInfoFromServer } from 'app/types/IBoardFromServer';
+import { ShareBoard } from 'features/boards';
 import Modal from 'shared/ui/Modal/Modal';
 import Button from 'shared/ui/Button/Button';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Avatar, AvatarSize } from 'shared/ui/Avatar';
+import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import s from './BoardPreview.module.scss';
-import {Avatar, AvatarSize} from "shared/ui/Avatar";
-import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface IBoardPreviewProps {
   userId: string;
@@ -27,7 +27,6 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
         navigate(`/board/${board.uid}`);
     }, [board.uid, navigate]);
 
-
     const onCloseShare = useCallback(() => {
         setIsSharing(false);
     }, []);
@@ -36,7 +35,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = memo(({
         setIsSharing(true);
     }, []);
 
-    console.log(t('Владелец'))
+    console.log(t('Владелец'));
     return (
         <div className={s.container}>
             {isSharing && (

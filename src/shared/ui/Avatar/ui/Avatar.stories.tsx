@@ -32,16 +32,16 @@ export const PrimaryL: Story = {
         size: AvatarSize.L,
     },
 };
-export const withAltText: Story = {
+export const WithAltText: Story = {
     args: {
         alt: 'Avatar',
     },
 };
 
-export const withAltTextDark: Story = {
+export const WithAltTextDark: Story = {
     args: {
         alt: 'Avatar',
     },
 };
 
-withAltTextDark.decorators = [ThemeDecorator(Theme.DARK)];
+WithAltTextDark.decorators = [ThemeDecorator(Theme.DARK)];

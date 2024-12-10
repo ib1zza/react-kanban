@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import {IBoard, IBoardFromServer, IBoardSmallInfoFromServer} from 'app/types/IBoardFromServer';
+import { IBoard, IBoardFromServer, IBoardSmallInfoFromServer } from 'app/types/IBoardFromServer';
 import s from './ShareBoard.module.scss';
 import GuestsList from './GuestsList';
 import InviteUserForm from './InviteUserForm';

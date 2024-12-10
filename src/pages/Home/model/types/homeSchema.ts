@@ -1,5 +1,5 @@
-import {IBoard, IBoardFromServer, IBoardSmallInfoFromServer} from 'app/types/IBoardFromServer';
-import {IUserInfo} from "app/types/IUserInfo";
+import { IBoard } from 'app/types/IBoardFromServer';
+import { IUserInfo } from 'app/types/IUserInfo';
 
 export interface HomeSchema {
     boards: IBoard[],

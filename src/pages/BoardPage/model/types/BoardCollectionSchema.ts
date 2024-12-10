@@ -1,5 +1,4 @@
-import {IBoard, IBoardFromServer, ITask} from 'app/types/IBoardFromServer';
-import { IUserInfo } from 'app/types/IUserInfo';
+import { IBoard, ITask } from 'app/types/IBoardFromServer';
 
 export interface BoardCollectionSchema {
     selectedBoardId: string;

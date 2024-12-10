@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Theme } from 'app/providers/theme/lib/ThemeContext';
-import { ThemeDecorator } from '../../../../config/Storybook/ThemeDecorator/ThemeDecorator';
-import { OptionType, Select } from './Select';
+import { ThemeDecorator } from 'shared/config/Storybook/ThemeDecorator/ThemeDecorator';
+import { Select } from './Select';
 
 const meta: Meta<typeof Select> = {
     title: 'shared/Select',
@@ -12,7 +12,7 @@ meta.decorators = [ThemeDecorator(Theme.LIGHT)];
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-export const withText: Story = {
+export const WithText: Story = {
     args: {
         options: [
             { text: 'hello', value: 1 },
@@ -23,7 +23,7 @@ export const withText: Story = {
     },
 };
 
-export const withTextAndHeading: Story = {
+export const WithTextAndHeading: Story = {
     args: {
         options: [
             { text: 'hello', heading: 'sample text ', value: 1 },
@@ -34,7 +34,7 @@ export const withTextAndHeading: Story = {
     },
 };
 
-export const withTextAndHeadingAndAvatar: Story = {
+export const WithTextAndHeadingAndAvatar: Story = {
     args: {
         options: [
             {
@@ -57,7 +57,7 @@ export const withTextAndHeadingAndAvatar: Story = {
     },
 };
 
-export const withTextDark: Story = {
+export const WithTextDark: Story = {
     args: {
         options: [
             { text: 'hello', value: 1 },
@@ -68,9 +68,9 @@ export const withTextDark: Story = {
     },
 };
 
-withTextDark.decorators = [ThemeDecorator(Theme.DARK)];
+WithTextDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const withTextAndHeadingDark: Story = {
+export const WithTextAndHeadingDark: Story = {
     args: {
         options: [
             { text: 'hello', heading: 'sample text ', value: 1 },
@@ -81,9 +81,9 @@ export const withTextAndHeadingDark: Story = {
     },
 };
 
-withTextAndHeadingDark.decorators = [ThemeDecorator(Theme.DARK)];
+WithTextAndHeadingDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const withTextAndHeadingAndAvatarDark: Story = {
+export const WithTextAndHeadingAndAvatarDark: Story = {
     args: {
         options: [
             {
@@ -106,4 +106,4 @@ export const withTextAndHeadingAndAvatarDark: Story = {
     },
 };
 
-withTextAndHeadingAndAvatarDark.decorators = [ThemeDecorator(Theme.DARK)];
+WithTextAndHeadingAndAvatarDark.decorators = [ThemeDecorator(Theme.DARK)];

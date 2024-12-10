@@ -1,9 +1,9 @@
-import { getAllUsers } from "pages/Home/model/selectors/getAllUsers";
-import { useAppDispatch, useAppSelector } from "app/providers/StoreProvider";
-import { useCallback, useEffect, useState } from "react";
-import { IUserInfo } from "app/types/IUserInfo";
-import { homeActions } from "pages/Home/model/slice/HomeSlice";
-import { getUserInfo } from "features/users";
+import { getAllUsers } from 'pages/Home/model/selectors/getAllUsers';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
+import { useCallback, useEffect, useState } from 'react';
+import { IUserInfo } from 'app/types/IUserInfo';
+import { homeActions } from 'pages/Home/model/slice/HomeSlice';
+import { getUserInfo } from 'features/users';
 
 type TUseUsersInfo = (userIds: string[]) => [IUserInfo[], () => void];
 

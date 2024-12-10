@@ -1,20 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {faCircleXmark, faTrashCan} from '@fortawesome/free-regular-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import {useTranslation} from 'react-i18next';
-import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
-import {deleteTask, editTask} from 'features/tasks';
+import React, { useState } from 'react';
+import { faCircleXmark, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
+import { deleteTask, editTask } from 'features/tasks';
 import Button from 'shared/ui/Button/Button';
 import EditTaskForm from 'entities/Tasks/lib/EditTaskForm';
-import {Avatar, AvatarSize} from 'shared/ui/Avatar';
-import {boardCollectionActions, getBoardCollection} from 'pages/BoardPage';
-import {IUserInfo} from 'app/types/IUserInfo';
-import {getUserInfo} from 'features/users';
-import {classNames} from 'shared/lib/classNames/classNames';
+import { Avatar } from 'shared/ui/Avatar';
+import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { useUserInfo } from 'features/users/hooks/useUserInfo';
+import { ITask } from 'app/types/IBoardFromServer';
 import s from './PopupTaskInfo.module.scss';
-import {useUserInfo} from "features/users/hooks/useUserInfo";
-import {ITask} from "app/types/IBoardFromServer";
 
 interface Props {
     controlsDisabled: boolean;
@@ -31,10 +29,10 @@ interface ITaskUserProps {
     userId: string;
 }
 
-const TaskUser = ({userId}: ITaskUserProps) => {
+const TaskUser = ({ userId }: ITaskUserProps) => {
     const [linkedUser] = useUserInfo(userId);
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     if (!linkedUser) {
         return null;
     }
@@ -55,7 +53,7 @@ const TaskUser = ({userId}: ITaskUserProps) => {
     );
 };
 
-const PopupTaskInfo: React.FC<Props> = ({selectedTask, controlsDisabled}) => {
+const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
     const task = selectedTask;
     const {
         selectedBoardId,
@@ -65,7 +63,7 @@ const PopupTaskInfo: React.FC<Props> = ({selectedTask, controlsDisabled}) => {
     const [creatorUserInfo] = useUserInfo(task.creatorId);
     const [loading, setLoading] = useState('');
     const [isEditing, setEditing] = useState(false);
-    const {t} = useTranslation('buttons');
+    const { t } = useTranslation('buttons');
 
     const onDeleteTask = async () => {
         setLoading('delete');
@@ -89,7 +87,7 @@ const PopupTaskInfo: React.FC<Props> = ({selectedTask, controlsDisabled}) => {
         <div className={s.container}>
             <div
                 className={s.headerColor}
-                style={{backgroundColor: '#weweww'}}
+                style={{ backgroundColor: '#weweww' }}
             />
             <div className={s.title}>
                 <p>{isEditing ? t('Редактирование') : task.title}</p>
@@ -105,11 +103,11 @@ const PopupTaskInfo: React.FC<Props> = ({selectedTask, controlsDisabled}) => {
                     <p className={s.description}>
                         {task.description ? `${t('Описание')}: ${task.description}` : t('Нет описания')}
                     </p>
-                    <div className={classNames(s.linkedUserInfo, {[s.marginBottom]: !!linkedUser})}>
+                    <div className={classNames(s.linkedUserInfo, { [s.marginBottom]: !!linkedUser })}>
                         {
                             linkedUser
                                 ? (
-                                    <TaskUser userId={linkedUser}/>
+                                    <TaskUser userId={linkedUser} />
                                 )
                                 : `${t('Пользователь не прикреплен')}`
                         }
@@ -120,29 +118,31 @@ const PopupTaskInfo: React.FC<Props> = ({selectedTask, controlsDisabled}) => {
                         :
                         {creatorUserInfo && (
                             <>
-                                <Avatar src={creatorUserInfo.photoURL}/>
+                                <Avatar src={creatorUserInfo.photoURL} />
                                 {creatorUserInfo.displayName}
                             </>
                         )}
 
                     </div>
 
-                    {!controlsDisabled && <div className={s.buttons}>
-                        <Button
-                            icon={faPenToSquare}
-                            onClick={() => setEditing(true)}
-                            loading={loading === 'edit'}
-                        >
-                            {t('Изменить')}
-                        </Button>
-                        <Button
-                            icon={faTrashCan}
-                            onClick={onDeleteTask}
-                            loading={loading === 'delete'}
-                        >
-                            {t('Удалить')}
-                        </Button>
-                    </div>}
+                    {!controlsDisabled && (
+                        <div className={s.buttons}>
+                            <Button
+                                icon={faPenToSquare}
+                                onClick={() => setEditing(true)}
+                                loading={loading === 'edit'}
+                            >
+                                {t('Изменить')}
+                            </Button>
+                            <Button
+                                icon={faTrashCan}
+                                onClick={onDeleteTask}
+                                loading={loading === 'delete'}
+                            >
+                                {t('Удалить')}
+                            </Button>
+                        </div>
+                    )}
                 </>
             )}
             {isEditing && (
@@ -157,4 +157,4 @@ const PopupTaskInfo: React.FC<Props> = ({selectedTask, controlsDisabled}) => {
     );
 };
 
-export {PopupTaskInfo};
+export { PopupTaskInfo };

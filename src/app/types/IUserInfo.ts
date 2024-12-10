@@ -7,4 +7,3 @@ export interface IUserInfo {
     uid: string;
     email: string;
   }
-

@@ -14,10 +14,8 @@ const TaskList: React.FC<ITaskListProps> = ({
     columnId,
 }) => {
     const getTasksFromColumn = (
-        tasks: ITask[]
-    ): ITask[] =>
-        [...tasks].sort((a, b) => +b.timeCreated - +a.timeCreated);
-
+        tasks: ITask[],
+    ): ITask[] => [...tasks].sort((a, b) => +b.timeCreated - +a.timeCreated);
 
     return (
         <div className={s.tasks}>

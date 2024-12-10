@@ -1,4 +1,4 @@
-import { ref, set, update } from 'firebase/database';
+import { ref, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
 import { LinkedUserType } from 'app/types/IBoardFromServer';
 
@@ -6,7 +6,7 @@ export const addUserToBoardRt = async (
     userId: string,
     boardId: string,
     role: LinkedUserType | keyof typeof LinkedUserType,
-    notificationId: string
+    notificationId: string,
 ) => {
     // добавляем доску в userBoards пользователя
     await update(ref(rtdb, `usersBoards/${userId}`), {

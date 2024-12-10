@@ -5,19 +5,19 @@ import { faCircleCheck, faCircleXmark } from '@fortawesome/free-regular-svg-icon
 import { getUserInfo } from 'features/users';
 import { IBoardFromServer, LinkedUserType } from 'app/types/IBoardFromServer';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
-import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
 import { addUserToBoardRt } from 'features/boards/API/addUserToBoard/addUserToBoardRt';
 import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import Button, { ButtonTheme } from 'shared/ui/Button/Button';
+import { getAllUsers } from 'pages/Home/model/selectors/getAllUsers';
+import { homeActions } from 'pages/Home/model/slice/HomeSlice';
+import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import s from './Notification.module.scss';
 import { declineInviteNotification } from '../model/services/API/declineInviteNotification';
 import { NotificationPayloadBoardInvited } from '../model/types/NotificationsSchema';
 import { notificationsActions } from '../model/slice/notificationSlice';
-import {getAllUsers} from "pages/Home/model/selectors/getAllUsers";
-import {homeActions} from "pages/Home/model/slice/HomeSlice";
-import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface Props {
     data: NotificationPayloadBoardInvited;
@@ -33,7 +33,6 @@ const NotificationMessageInvited = ({ data, notificationId, isAccepted }: Props)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-
         getBoardsRt([data.boardId]).then(
             (board) => setBoard(board[0]),
         );

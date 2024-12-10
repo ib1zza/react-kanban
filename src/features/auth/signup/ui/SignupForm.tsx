@@ -5,15 +5,15 @@ import ProgressBar from '@ramonak/react-progress-bar';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Input, InputTheme } from 'shared/ui/Input/Input';
+import { Input } from 'shared/ui/Input/Input';
 import { useAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { signupActions } from 'features/auth/signup';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { getUserFromEmail } from '../../../users';
 import s from './SignupForm.module.scss';
 import { getSignupState } from '../model/selectors/getSignupState';
-import Button, {ButtonTheme} from "shared/ui/Button/Button";
-import {classNames} from "shared/lib/classNames/classNames";
 
 interface props {
     onSwitch: () => void
@@ -30,7 +30,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
 
     useEffect(() => {
         dispatch(signupActions.setProgress((step / 3) * 100));
-    }, [step]);
+    }, [step, dispatch]);
 
     const onSubmit = async (data: any) => {
         try {
@@ -236,7 +236,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                                 value={formik.values.file}
                             />
                             <label htmlFor="file" className={s.label_avatar}>
-                                <MemoizedFontAwesomeIcon icon={faImage}/>
+                                <MemoizedFontAwesomeIcon icon={faImage} />
                                 <span>{t('Выбрать фото')}</span>
                             </label>
                         </div>
@@ -245,7 +245,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                             ?
                         </div>
                         <select
-                            className={classNames(s.input,  {}, [s.select])}
+                            className={classNames(s.input, {}, [s.select])}
                             defaultValue="practice"
                             id="select"
                             name="select"

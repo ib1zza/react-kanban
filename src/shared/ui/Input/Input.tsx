@@ -1,5 +1,5 @@
 import React, {
-    InputHTMLAttributes, memo, useCallback, useState,
+    InputHTMLAttributes, memo, useState,
 } from 'react';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';

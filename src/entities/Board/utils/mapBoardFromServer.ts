@@ -1,8 +1,10 @@
-import {IBoard, IBoardFromServer, IBoardUserInfo, IColumn} from "app/types/IBoardFromServer";
+import {
+    IBoard, IBoardFromServer, IBoardUserInfo, IColumn,
+} from 'app/types/IBoardFromServer';
 
 export function mapBoardFromServer(board: IBoardFromServer): IBoard {
     // Map columns from IColumnFromServer to IColumn
-    const columns: IColumn[] = Object.values(board.columns || {}).map(column => ({
+    const columns: IColumn[] = Object.values(board.columns || {}).map((column) => ({
         uid: column.uid,
         title: column.title,
         tasks: Object.values(column.tasks || {}), // Convert tasks from object to array
@@ -25,7 +27,7 @@ export function mapBoardFromServer(board: IBoardFromServer): IBoard {
     // Return the mapped IBoard object
     return {
         uid: board.uid,
-        columns: columns,
+        columns,
         guestPermissions: board.guestPermissions,
         guestsAllowed: board.guestsAllowed,
         ownerId: board.ownerId,
@@ -33,6 +35,6 @@ export function mapBoardFromServer(board: IBoardFromServer): IBoard {
         usersAllowed: board.usersAllowed,
         timeCreated: board.timeCreated,
         timeUpdated: board.timeUpdated,
-        users: users,
+        users,
     };
 }

@@ -1,6 +1,5 @@
 import { ref, remove } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
-import {IBoardFromServer} from "app/types/IBoardFromServer";
 
 export const leaveFromBoard = async (boardId: string, userId: string) => {
     try {

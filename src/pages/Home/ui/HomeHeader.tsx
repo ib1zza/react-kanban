@@ -3,10 +3,10 @@ import React, { memo, useCallback } from 'react';
 import Button from 'shared/ui/Button/Button';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import { useAppDispatch } from 'app/providers/StoreProvider';
+import { useTranslation } from 'react-i18next';
 import s from './Home.module.scss';
 
 import { homeActions } from '../model/slice/HomeSlice';
-import {useTranslation} from "react-i18next";
 
 const HomeHeader = memo(() => {
     const dispatch = useAppDispatch();

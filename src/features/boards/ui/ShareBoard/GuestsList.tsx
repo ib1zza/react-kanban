@@ -6,18 +6,15 @@ import { useTranslation } from 'react-i18next';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import {
     IBoard,
-    IBoardFromServer,
-    IBoardSmallInfoFromServer,
     IBoardUserInfo,
-    LinkedUserType
+    LinkedUserType,
 } from 'app/types/IBoardFromServer';
 import { deleteUserFromBoard } from 'features/boards';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import s from './ShareBoard.module.scss';
-import {IUserInfo} from "app/types/IUserInfo";
-import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface Props {
   board: IBoard;
@@ -30,7 +27,6 @@ interface IGuestItem {
 }
 
 const GuestItem = ({ userId, joined, handleRemoveUserFromBoard }: IGuestItem) => {
-    const { t } = useTranslation();
     const [user] = useUserInfo(userId);
 
     if (!user) {
@@ -69,8 +65,8 @@ const GuestsList = memo(({ board }: Props) => {
         return linkedUsers.filter(
             (user) => user.role === (isEditorsOpened
                 ? LinkedUserType.USER
-                : LinkedUserType.GUEST)
-            )
+                : LinkedUserType.GUEST),
+        );
     }, [linkedUsers, board?.users, isEditorsOpened]);
 
     const { t } = useTranslation();

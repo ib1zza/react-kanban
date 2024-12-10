@@ -5,8 +5,8 @@ import React, {
     useEffect,
 } from 'react';
 import { addUserToBoard } from 'features/boards';
-import {IBoardFromServer, IBoardSmallInfoFromServer, LinkedUserType} from 'app/types/IBoardFromServer';
-import {BoardPreview, mapBoardFromServer} from 'entities/Board';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
+import { BoardPreview, mapBoardFromServer } from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { createBoardRt } from 'features/boards/API/createBoard/createBoardRealtime';

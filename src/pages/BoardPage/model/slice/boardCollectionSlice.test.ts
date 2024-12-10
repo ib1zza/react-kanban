@@ -1,6 +1,6 @@
-import {GuestPermission, ITask} from 'app/types/IBoardFromServer';
-import {boardCollectionActions, boardCollectionReducer} from './boardCollectionSlice';
-import {BoardCollectionSchema} from '../types/BoardCollectionSchema';
+import { GuestPermission, ITask } from 'app/types/IBoardFromServer';
+import { boardCollectionActions, boardCollectionReducer } from './boardCollectionSlice';
+import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
 
 describe('boardCollectionSlice', () => {
     test('setCurrentBoard action', () => {

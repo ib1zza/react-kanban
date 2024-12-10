@@ -1,5 +1,4 @@
 import { IColumnFromServer } from 'app/types/IBoardFromServer';
-import { updateDocument } from 'shared/API/updateDocument';
 import { ref, update } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
 
@@ -17,5 +16,5 @@ export async function editColumn(
     );
 
     // return updateDocument('boards', boardId, updatedData);
-    update(ref(rtdb, `boards/${boardId}`), updatedData);
+    return await update(ref(rtdb, `boards/${boardId}`), updatedData);
 }

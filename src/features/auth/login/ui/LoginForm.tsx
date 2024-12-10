@@ -20,7 +20,7 @@ const LoginForm = ({ onSwitch }: props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {
-        error, isLoading,
+        error,
     } = useSelector(getLoginState);
     const handleSubmit = useCallback((data: any) => {
         if (data.email !== '' && data.password !== '') {
@@ -60,7 +60,7 @@ const LoginForm = ({ onSwitch }: props) => {
                     <div className={s.title}>{t('Вход')}</div>
                     <div className={s.linkArea}>
                         <span className={s.linkArea_descr}>{t('Новенький')}</span>
-                        <Button type={"button"} theme={ButtonTheme.CLEAR} onClick={onSwitch} className={s.linkArea_link}>
+                        <Button type="button" theme={ButtonTheme.CLEAR} onClick={onSwitch} className={s.linkArea_link}>
                             {t('Зарегистрироваться')}
                             ?
                         </Button>

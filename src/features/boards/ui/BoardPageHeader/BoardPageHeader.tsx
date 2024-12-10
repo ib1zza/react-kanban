@@ -1,14 +1,16 @@
-import React, {memo, useCallback, useEffect, useState,} from 'react';
-import {faGear, faPenToSquare, faSliders,} from '@fortawesome/free-solid-svg-icons';
-import {faCircleCheck} from '@fortawesome/free-regular-svg-icons';
-import {Input} from 'shared/ui/Input/Input';
-import Button, {ButtonSize, ButtonTheme} from 'shared/ui/Button/Button';
-import {useTranslation} from 'react-i18next';
+import React, {
+    memo, useCallback, useEffect, useState,
+} from 'react';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
+import { Input } from 'shared/ui/Input/Input';
+import Button, { ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
+import { useTranslation } from 'react-i18next';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import Modal from 'shared/ui/Modal/Modal';
+import { useUserRole } from 'features/boards/hooks/useUserRole';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
 import s from './BoardPageHeader.module.scss';
-import {useUserRole} from "features/boards/hooks/useUserRole";
-import {LinkedUserType} from "app/types/IBoardFromServer";
 
 interface Props {
     title: string;
@@ -55,21 +57,23 @@ const BoardPageHeader: React.FC<Props> = memo(({
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
-                        <span>
-                            {t('project')}
-                            :
-                            {' '}
-                            {title}
-                        </span>
-                {userRole === LinkedUserType.USER &&<Button
-                    size={ButtonSize.L}
-                    theme={ButtonTheme.WHITE}
-                    noBorder
-                    className={s.button}
-                    onClick={handleOpenModal}
-                >
-                    <MemoizedFontAwesomeIcon icon={faGear}/>
-                </Button>}
+                <span>
+                    {t('project')}
+                    :
+                    {' '}
+                    {title}
+                </span>
+                {userRole === LinkedUserType.USER && (
+                    <Button
+                        size={ButtonSize.L}
+                        theme={ButtonTheme.WHITE}
+                        noBorder
+                        className={s.button}
+                        onClick={handleOpenModal}
+                    >
+                        <MemoizedFontAwesomeIcon icon={faGear} />
+                    </Button>
+                )}
             </h1>
 
             {userRole === LinkedUserType.USER && isEditing && (

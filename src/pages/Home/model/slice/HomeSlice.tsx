@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {IBoard, IBoardFromServer} from 'app/types/IBoardFromServer';
+import { IBoard } from 'app/types/IBoardFromServer';
+import { IUserInfo } from 'app/types/IUserInfo';
 import { HomeSchema } from '../types/homeSchema';
-import {IUserInfo} from "app/types/IUserInfo";
 
 const initialState: HomeSchema = {
     boards: [],
@@ -29,7 +29,7 @@ export const HomeSlice = createSlice({
             } else {
                 state.usersLoaded.push(action.payload);
             }
-        }
+        },
     },
 });
 

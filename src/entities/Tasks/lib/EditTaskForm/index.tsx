@@ -9,8 +9,8 @@ import { OptionType, Select } from 'shared/ui/Select';
 import ConfirmButtons from 'shared/ui/ConfirmButtons/ConfirmButtons';
 import { getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
+import { useUsersInfo } from 'features/users/hooks/useUsersInfo';
 import s from './EditTaskForm.module.scss';
-import {useUsersInfo} from "features/users/hooks/useUsersInfo";
 
 interface Props {
   onEdit: (data: EditedData) => void;
@@ -18,7 +18,6 @@ interface Props {
   prevTask: ITask;
   loading: boolean;
 }
-
 
 const EditTaskForm = memo(({
     onEdit,
@@ -30,7 +29,7 @@ const EditTaskForm = memo(({
     const [description, setDescription] = useState(prevTask.description);
     const linkedUsersInfo = useAppSelector(getLinkedUsers);
 
-    const [linkedUsers] = useUsersInfo(linkedUsersInfo?.map(el => el.uid) || []);
+    const [linkedUsers] = useUsersInfo(linkedUsersInfo?.map((el) => el.uid) || []);
     const { t } = useTranslation();
 
     const [linkedUserId, setLinkedUserId] = useState(prevTask.attachedUser);

@@ -1,6 +1,6 @@
 import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
 import { faCircleCheck as iconCheckSolid, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import {IBoardUserInfo, ITask} from 'app/types/IBoardFromServer';
+import { IBoardUserInfo, ITask } from 'app/types/IBoardFromServer';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { toggleTaskComplete } from 'features/tasks';
 import { Avatar } from 'shared/ui/Avatar';
@@ -9,9 +9,9 @@ import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, useCallback } from 'react';
+import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import s from './Task.module.scss';
 import Button from '../../../shared/ui/Button/Button';
-import {useUserInfo} from "features/users/hooks/useUserInfo";
 
 interface ITaskProps {
   task: ITask;
@@ -23,7 +23,7 @@ interface ITaskUserProps {
     userId: string;
 }
 
-const TaskUser = ({userId}: ITaskUserProps) => {
+const TaskUser = ({ userId }: ITaskUserProps) => {
     const [linkedUser] = useUserInfo(userId);
 
     return (
@@ -63,7 +63,7 @@ const Task = memo(({
 
             <div className={s.infoBlock}>
                 {task.attachedUser && (
-                   <TaskUser userId={task.attachedUser}/>
+                    <TaskUser userId={task.attachedUser} />
                 ) }
                 <Button
                     onClick={
