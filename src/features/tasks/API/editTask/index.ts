@@ -16,9 +16,9 @@ export async function editTask(
             acc[`columns/${columnId}/tasks/${taskId}/${key}`] = newData[key as keyof ITask];
             return acc;
         },
-        {} as any,
+        {} as Record<string, any>,
     );
 
     // return updateDocument('boards', boardId, updatedData);
-    update(ref(rtdb, `boards/${boardId}`), updatedData);
+    return await update(ref(rtdb, `boards/${boardId}`), updatedData);
 }

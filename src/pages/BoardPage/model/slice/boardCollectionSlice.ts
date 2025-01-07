@@ -3,6 +3,7 @@ import { IBoard, IBoardFromServer, ITask } from 'app/types/IBoardFromServer';
 
 import { IUserInfo } from 'app/types/IUserInfo';
 import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
+import {createTaskThunk} from "pages/BoardPage/model/services/createTask/createTask";
 
 const initialState: BoardCollectionSchema = {
     selectedBoardId: '',
@@ -11,6 +12,7 @@ const initialState: BoardCollectionSchema = {
     selectedTask: null,
     shareStatus: false,
     isCreatingColumn: false,
+    draggedTask: null,
 };
 
 export const boardCollectionSlice = createSlice({
@@ -38,6 +40,16 @@ export const boardCollectionSlice = createSlice({
                         t.uid === action.payload.uid)
             )?.uid || '';
         },
+        setDraggedTask: (state, action: PayloadAction<ITask>) => {
+            state.draggedTask = action.payload;
+            if (!state.selectedBoard) return;
+            console.log(Object.values(state.selectedBoard.columns));
+            state.selectedColumnId = state.selectedBoard.columns.find(
+                (col) =>
+                    col.tasks && col.tasks.find((t) =>
+                        t.uid === action.payload.uid)
+            )?.uid || '';
+        },
         updateSelectedTask: (state, action: PayloadAction<string>) => {
             const id = action.payload;
             if (!state.selectedBoard || !state.selectedColumnId) return;
@@ -47,8 +59,26 @@ export const boardCollectionSlice = createSlice({
             if (!foundTask) return;
             state.selectedTask = foundTask;
         },
+        dragTask: (state, action: PayloadAction<string>) => {
+            console.log(state.selectedBoard, state.selectedColumnId, state.draggedTask)
+            const newColumnId = action.payload;
+            console.log(state.selectedBoard, state.selectedColumnId, state.draggedTask)
+            if (!state.selectedBoard || !state.selectedColumnId || !state.draggedTask) return;
+            const foundColumn = state.selectedBoard.columns.find((col) => col.uid === state.selectedColumnId);
+            console.log(foundColumn)
+
+            if (!foundColumn) return;
+            // @ts-ignore
+            foundColumn.tasks = foundColumn.tasks.filter((t) => t.uid !== state.draggedTask.uid);
+            console.log("pushing task")
+            state.selectedBoard.columns.find(el => el.uid === newColumnId)?.tasks.push(state.draggedTask);
+        },
         removeSelectedTask: (state) => {
             state.selectedTask = null;
+            state.selectedColumnId = '';
+        },
+        removeDraggedTask: (state) => {
+            state.draggedTask = null;
             state.selectedColumnId = '';
         },
         setShareStatus: (state, action: PayloadAction<boolean>) => {
@@ -58,6 +88,13 @@ export const boardCollectionSlice = createSlice({
             state.isCreatingColumn = action.payload;
         },
     },
+    extraReducers: builder => {
+
+        builder.addCase(
+            createTaskThunk.fulfilled, (state, action) => {
+
+            })
+    }
 
 });
 

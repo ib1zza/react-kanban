@@ -13,6 +13,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import { ITask } from 'app/types/IBoardFromServer';
 import s from './PopupTaskInfo.module.scss';
+import {deleteTaskThunk} from "pages/BoardPage/model/services/dragTask/deleteTask/deleteTask";
 
 interface Props {
     controlsDisabled: boolean;
@@ -67,7 +68,12 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
 
     const onDeleteTask = async () => {
         setLoading('delete');
-        await deleteTask(selectedBoardId, selectedColumnId, task.uid);
+        dispatch(deleteTaskThunk({
+            taskId: task.uid,
+            columnId: selectedColumnId,
+            displayId: task.displayId,
+        }))
+
         dispatch(boardCollectionActions.removeSelectedTask());
         setLoading('');
     };

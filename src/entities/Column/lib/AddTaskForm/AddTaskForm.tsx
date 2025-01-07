@@ -11,6 +11,9 @@ import { UserAuth } from 'app/providers/authRouter/ui/AuthContext';
 import { createTaskRt } from 'features/tasks/API/createTask/createTaskRt';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import s from './AddTaskForm.module.scss';
+import {boardCollectionActions} from "pages/BoardPage";
+import {createTaskThunk} from "pages/BoardPage/model/services/createTask/createTask";
+import {useAppDispatch} from "app/providers/StoreProvider";
 
 interface Props {
   onAbort: () => void;
@@ -30,17 +33,21 @@ const AddTaskForm: React.FC<Props> = ({
     const { user } = UserAuth();
     const { t } = useTranslation();
 
+    const dispatch = useAppDispatch();
+
     const handler = useCallback(
-        () => createTaskRt(
-            {
-                title,
-                description,
-                creatorId: user?.uid as string,
-                tags: [],
-            },
-            boardId,
-            columnId,
-        ).then(onSubmit),
+        () => dispatch(
+            createTaskThunk(
+                {
+                    title,
+                    description,
+                    creatorId: user?.uid as string,
+                    tags: [],
+                    boardId,
+                    columnId
+                }
+            )
+        ).unwrap().then(onSubmit),
         [title, description],
     );
 

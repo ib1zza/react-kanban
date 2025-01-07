@@ -7,7 +7,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    //overflow: hidden;
 
     &.withColor {
         padding-top: 29px;
@@ -93,7 +93,13 @@
 
 .taskListWrapper {
     overflow-y: auto;
+    //overflow-x: auto;
     border-radius: 10px;
+    flex-grow: 1;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 550px) {

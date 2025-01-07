@@ -20,6 +20,7 @@ export interface ITask {
   creatorId: string;
   // subtasks: { [id: string]: any };
   attachedUser?: string;
+  displayId: number;
 }
 export interface IColumnFromServer {
   uid: string;

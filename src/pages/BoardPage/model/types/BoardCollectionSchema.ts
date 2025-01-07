@@ -7,4 +7,6 @@ export interface BoardCollectionSchema {
     selectedTask: ITask | null;
     shareStatus: boolean;
     isCreatingColumn: boolean;
+    draggedTask: ITask | null;
   }
+

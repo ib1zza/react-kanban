@@ -1,8 +1,20 @@
 .tasks > * {
-    margin-bottom: 1rem;
+    //margin-bottom: 1rem;
 }
 
 .tasks {
     margin-top: 15px;
+    height: 100%;
 }
 
+.indicator {
+    height: 6px;
+    background: var(--HeaderBg);
+    opacity: 0;
+    //transition: opacity 0.2s ease-in-out;
+}
+.tasks.active {
+    .indicator {
+        //opacity: 1;
+    }
+}
