@@ -21,6 +21,7 @@ export const Primary: Story = {
             isCompleted: true,
             tags: [''],
             creatorId: '',
+            displayId: 1,
         },
     },
 };
@@ -34,6 +35,7 @@ export const PrimaryDark: Story = {
             isCompleted: true,
             tags: [''],
             creatorId: '',
+            displayId: 1,
         },
     },
 };
