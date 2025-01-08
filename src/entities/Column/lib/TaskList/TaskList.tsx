@@ -29,7 +29,6 @@ export const TaskDragIndicator = ({taskBeforeId, columnId}: ITaskDragIndicatorPr
 }
 
 
-
 const getNearestIndicator = (e: DragEvent, indicators: HTMLElement[]) => {
     const DISTANCE_OFFSET = 50;
 
@@ -40,7 +39,7 @@ const getNearestIndicator = (e: DragEvent, indicators: HTMLElement[]) => {
             const offset = e.clientY - (box.top + DISTANCE_OFFSET);
 
             if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
+                return {offset: offset, element: child};
             } else {
                 return closest;
             }
@@ -53,7 +52,6 @@ const getNearestIndicator = (e: DragEvent, indicators: HTMLElement[]) => {
 
     return el;
 };
-
 
 
 const TaskList: React.FC<ITaskListProps> = ({
@@ -117,7 +115,7 @@ const TaskList: React.FC<ITaskListProps> = ({
 
         clearHighlights();
         const indicators = getIndicators();
-        const { element } = getNearestIndicator(e, indicators);
+        const {element} = getNearestIndicator(e, indicators);
 
         console.log(columnId);
         dispatch(dragTaskThunk({
@@ -158,10 +156,15 @@ const TaskList: React.FC<ITaskListProps> = ({
         [s.active]: active
     })
     return (
-        <div className={cls} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} onDragEnd={handleDragEnd}>
+        <motion.div layout
+                    // layoutId={columnId}
+                    className={cls} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
+                    onDragEnd={handleDragEnd}>
             {tasks
                 && getTasksFromColumn(tasks).map((el: ITask) => (
-                    <div key={el.uid}>
+                    <motion.div key={el.uid}
+                        // layoutId={columnId}
+                                layout>
                         <TaskDragIndicator taskBeforeId={el.displayId} columnId={columnId}/>
                         <Task
                             boardId={boardId}
@@ -169,10 +172,10 @@ const TaskList: React.FC<ITaskListProps> = ({
                             task={el}
                             key={el.uid}
                         />
-                    </div>
+                    </motion.div>
                 ))}
             <TaskDragIndicator taskBeforeId={'-1'} columnId={columnId}/>
-        </div>
+        </motion.div>
     );
 };
 

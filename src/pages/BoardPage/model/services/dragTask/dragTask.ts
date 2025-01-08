@@ -112,13 +112,6 @@ export const dragTaskThunk = createAsyncThunk<any, ITaskForDragInfo, { rejectVal
                 await deleteTask(selectedBoard.uid, prevColumnId, draggedTask.uid);
 
 
-                await createTaskRt({
-                    ...draggedTask,
-                    columnId: newColumnId,
-                    boardId: selectedBoard.uid,
-                    displayId: newDisplayId === -1 ? newColumn.tasks.length : newDisplayId,
-                })
-
                 if (newDisplayId !== -1) {
 
                     await Promise.allSettled(newColumn.tasks
@@ -128,6 +121,14 @@ export const dragTaskThunk = createAsyncThunk<any, ITaskForDragInfo, { rejectVal
                             displayId: task.displayId + 1,
                         })));
                 }
+
+                await createTaskRt({
+                    ...draggedTask,
+                    columnId: newColumnId,
+                    boardId: selectedBoard.uid,
+                    displayId: newDisplayId === -1 ? newColumn.tasks.length : newDisplayId,
+                })
+
 
 
             }
