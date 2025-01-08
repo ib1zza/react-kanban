@@ -156,14 +156,15 @@ const TaskList: React.FC<ITaskListProps> = ({
         [s.active]: active
     })
     return (
-        <motion.div layout
-                    // layoutId={columnId}
-                    className={cls} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
-                    onDragEnd={handleDragEnd}>
+        <motion.div
+            layout
+            // layoutId={columnId}
+            className={cls} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
+            onDragEnd={handleDragEnd}>
             {tasks
                 && getTasksFromColumn(tasks).map((el: ITask) => (
                     <motion.div key={el.uid}
-                        // layoutId={columnId}
+                                layoutId={el.uid}
                                 layout>
                         <TaskDragIndicator taskBeforeId={el.displayId} columnId={columnId}/>
                         <Task

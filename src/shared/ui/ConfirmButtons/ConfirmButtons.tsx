@@ -11,9 +11,11 @@ interface Props {
 }
 
 const ConfirmButtons = memo(({ onConfirm, onAbort, disabled }: Props) => {
-    const { t } = useTranslation('Buttons');
+    const { t } = useTranslation();
+
     return (
         <div className={s.buttons}>
+
             <Button
                 theme={ButtonTheme.GREEN}
                 onClick={onConfirm}

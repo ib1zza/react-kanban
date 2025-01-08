@@ -53,7 +53,6 @@ const AddColumn = ({ className } : AddColumnProps) => {
                     </Button>
                 </div>
             )}
-            <Suspense>
                 {isCreatingColumn && (
                     <ActionForm
                         status={ActionFormStatus.COLUMN}
@@ -61,7 +60,6 @@ const AddColumn = ({ className } : AddColumnProps) => {
                         onAbort={handleCreateColumnCancel}
                     />
                 )}
-            </Suspense>
         </div>
     );
 };

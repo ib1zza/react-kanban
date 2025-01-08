@@ -1,13 +1,18 @@
-import React, { Suspense, memo, useState } from 'react';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { deleteColumn, editColumn } from 'features/columns';
-import { IColumn, IColumnFromServer } from 'app/types/IBoardFromServer';
+import React, {useState, useCallback} from 'react';
+import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
+import {deleteColumn, editColumn} from 'features/columns';
+import {IColumn, IColumnFromServer} from 'app/types/IBoardFromServer';
 import Button from 'shared/ui/Button/Button';
-import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import AddTaskBlock from 'entities/Column/lib/AddTaskForm/AddTaskBlock/AddTaskBlock';
 import s from './TaskColumn.module.scss';
 import TaskList from '../lib/TaskList/TaskList';
+import {motion, MotionProps} from "framer-motion";
+import {useTranslation} from "react-i18next";
+import {Input, InputTheme} from "shared/ui/Input/Input";
+import ColorPicker from "shared/ui/ColorPicker/ColorPicker";
+import ConfirmButtons from "shared/ui/ConfirmButtons/ConfirmButtons";
+import AddTaskForm from "entities/Column/lib/AddTaskForm/AddTaskForm";
 
 interface ITaskColumnProps {
     column: IColumn;
@@ -15,11 +20,14 @@ interface ITaskColumnProps {
     controlsDisabled: boolean;
 }
 
-const TaskColumn: React.FC<ITaskColumnProps> = memo(({
-    column,
-    boardId,
-    controlsDisabled,
-}) => {
+
+const TaskColumn = ({
+                                                                                    column,
+                                                                                    boardId,
+                                                                                    controlsDisabled,
+                                                                                }: ITaskColumnProps) => {
+    // const {t} = useTranslation('buttons');
+
     const [isEditColumn, setIsEditColumn] = useState(false);
     const editHandler = async (title: string, color: string) => {
         const res = await editColumn(boardId, column.uid, {
@@ -28,59 +36,111 @@ const TaskColumn: React.FC<ITaskColumnProps> = memo(({
         });
         setIsEditColumn(false);
     };
-    const Column = (
-        <div className={`${s.container} ${s.withColor}`}>
+
+    const [title, setTitle] = useState<string>(column.title);
+    const [error, setError] = useState<string>('');
+    const [color, setColor] = useState<string>(column.color);
+
+
+    const handleEdit = useCallback(() => {
+        editHandler(title, color);
+    }, [color, editHandler, title]);
+
+
+    const handler = (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        if (!title) {
+            setError('Пустой заголовок');
+            return null;
+        }
+        handleEdit();
+    };
+
+    const onAbort = () => {
+        setIsEditColumn(false);
+    }
+
+    return (
+        <motion.div
+            key={column.uid}
+            variants={{hidden: {opacity: 0}, visible: {opacity: 1}}}
+            className={`${s.container} ${s.withColor}`}>
             <div
                 className={s.headerColor}
-                style={{ backgroundColor: column.color }}
+                style={{backgroundColor: color}}
             />
-            <hr />
-            <div className={s.titleBlock}>
-                <h6 className={s.title}>{column.title}</h6>
-                {!controlsDisabled && (
-                    <div className={s.columnButtons}>
-                        <Button
-                            className={s.editButton}
-                            onClick={() => setIsEditColumn(true)}
-                            icon={faPenToSquare}
-                        />
-                        <Button
-                            className={s.deleteButton}
-                            onClick={() => deleteColumn(boardId, column.uid)}
-                            icon={faTrashCan}
-                        />
-                    </div>
-                )}
+            <hr/>
 
-            </div>
+            {
+                isEditColumn ? (
+                        <div>
+                            <div className={s.title}>
+                                <Input
+                                    autoFocus
+                                    theme={InputTheme.WHITE}
+                                    // placeholder={t('Название')}
+                                    /*TODO*/
+                                    // label={t('Название')}
+                                    // className={s.createColumnTitle}
+                                    error={error}
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                />
+                            </div>
+                            <ColorPicker color={color} onChange={setColor}/>
+                            <ConfirmButtons
+                                disabled={error !== ''}
+                                onConfirm={(e: { preventDefault: () => void; }) => handler(e)}
+                                onAbort={onAbort}
+                            />
+                        </div>
+                    )
+                    :
+                    (
+                        <>
+                            <div className={s.titleBlock}>
+                                <h6 className={s.title}>{column.title}</h6>
+                                {!controlsDisabled && (
+                                    <div className={s.columnButtons}>
+                                        <Button
+                                            className={s.editButton}
+                                            onClick={() => setIsEditColumn(true)}
+                                            icon={faPenToSquare}
+                                        />
+                                        <Button
+                                            className={s.deleteButton}
+                                            onClick={() => deleteColumn(boardId, column.uid)}
+                                            icon={faTrashCan}
+                                        />
+                                    </div>
+                                )}
 
-            <div className={s.taskListWrapper}>
-                {!controlsDisabled && <AddTaskBlock boardId={boardId} columnId={column.uid} />}
+                            </div>
 
-                <TaskList
-                    boardId={boardId}
-                    columnId={column.uid}
-                    tasks={column.tasks}
-                />
-            </div>
-        </div>
-    );
+                            <motion.div
+                                layout={
+                                "position"
+                                }
+                                className={s.taskListWrapper}
+                            >
+                                {!controlsDisabled && <AddTaskForm
+                                    boardId={boardId}
+                                    columnId={column.uid}
+                                />}
 
-    return isEditColumn ? (
-        <Suspense fallback={Column}>
-            <ActionForm
-                status={ActionFormStatus.EDIT}
-                title={column.title}
-                color={column.color}
-                onEdit={editHandler}
-                onAbort={() => setIsEditColumn(false)}
-            />
-        </Suspense>
-    ) : (
-        <Suspense>
-            {Column}
-        </Suspense>
-    );
-});
+                                <TaskList
+                                    boardId={boardId}
+                                    columnId={column.uid}
+                                    tasks={column.tasks}
+                                />
+                            </motion.div>
+                        </>
+                    )
+            }
+
+
+        </motion.div>)
+
+};
 
 export default TaskColumn;

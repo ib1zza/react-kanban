@@ -1,8 +1,7 @@
 .wrapper {
     background-color: var(--white);
     color: var(--black);
-    border: 2px solid var(--altWbText);
-    padding: 6px 10px;
+    //border: 2px solid var(--altWbText);
     border-radius: 10px;
     font-size: 16px;
 
@@ -57,4 +56,18 @@
     margin-top: -16px;
     display: flex;
     justify-content: space-between;
+}
+
+.addButton {
+    border-radius: 10px;
+    font-size: 16px;
+    width: 100%;
+
+    &:hover {
+        border: 2px solid var(--altWbText);
+    }
+
+    span {
+        margin-left: 15px;
+    }
 }

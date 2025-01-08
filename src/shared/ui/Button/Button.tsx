@@ -4,6 +4,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import s from './Button.module.scss';
 import { classNames, Mods } from '../../lib/classNames/classNames';
 import MemoizedFontAwesomeIcon from '../MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import {motion} from "framer-motion";
 
 export enum ButtonTheme {
     WHITE = 'white',
@@ -32,6 +33,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   sharp?: boolean;
   noBorder?: boolean;
     iconColor?: string;
+    layout?: boolean
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -46,6 +48,7 @@ const Button: React.FC<ButtonProps> = ({
     sharp,
     noBorder,
     iconColor,
+    layout = false,
     ...props
 }) => {
     const mods: Mods = {
@@ -58,7 +61,10 @@ const Button: React.FC<ButtonProps> = ({
     };
 
     return (
-        <button
+        // @ts-ignore
+
+        <motion.button
+            layout={layout}
             className={classNames(s.button, mods, [className as string])}
             disabled={loading}
             {...props}
@@ -85,7 +91,7 @@ const Button: React.FC<ButtonProps> = ({
                     />
                 </div>
             )}
-        </button>
+        </motion.button>
     );
 };
 

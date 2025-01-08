@@ -1,27 +1,28 @@
 import React, {
     memo, Suspense, useCallback, useEffect,
 } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { PopupTaskInfo } from 'widgets';
-import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
+import {useNavigate, useParams} from 'react-router-dom';
+import {PopupTaskInfo} from 'widgets';
+import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
 import {
     BoardPageHeader, deleteBoard, editBoard, ShareBoard,
 } from 'features/boards';
-import { TaskColumn } from 'entities/Column';
-import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
+import {TaskColumn} from 'entities/Column';
+import {getUserState} from 'features/users/model/selectors/getUserState/getUserState';
 import Modal from 'shared/ui/Modal/Modal';
 import Loader from 'shared/ui/Loader/Loader';
-import { useUserRole } from 'features/boards/hooks/useUserRole';
-import { AddColumn } from 'features/columns/ui/AddColumn/AddColumn';
-import { LinkedUserType } from 'app/types/IBoardFromServer';
-import { subscribeToBoardById } from 'entities/Board/API/getBoardFromIdRt';
-import { mapBoardFromServer } from 'entities/Board';
-import { boardCollectionActions, getBoardCollection } from '..';
+import {useUserRole} from 'features/boards/hooks/useUserRole';
+import {AddColumn} from 'features/columns/ui/AddColumn/AddColumn';
+import {LinkedUserType} from 'app/types/IBoardFromServer';
+import {subscribeToBoardById} from 'entities/Board/API/getBoardFromIdRt';
+import {mapBoardFromServer} from 'entities/Board';
+import {boardCollectionActions, getBoardCollection} from '..';
 import s from './BoardPage.module.scss';
-import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
+import {getColumnsFromBoard} from '../lib/getColumnsFromBoard';
+import {motion} from "framer-motion";
 
 const BoardPage = memo(() => {
-    const { boardId } = useParams();
+    const {boardId} = useParams();
     const {
         selectedBoard, selectedTask, shareStatus,
     } = useAppSelector(
@@ -29,14 +30,14 @@ const BoardPage = memo(() => {
     );
 
     const userRole = useUserRole();
-    const { user } = useAppSelector(getUserState);
+    const {user} = useAppSelector(getUserState);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const handleEditTitle = useCallback((newTitle: string) => {
         if (!boardId) return;
         console.log(boardId, newTitle);
-        editBoard(boardId, { title: newTitle });
+        editBoard(boardId, {title: newTitle});
     }, [boardId]);
 
     useEffect(() => {
@@ -67,7 +68,7 @@ const BoardPage = memo(() => {
         <>
             {selectedBoard && shareStatus && (
                 <Modal onClose={() => dispatch(boardCollectionActions.setShareStatus(false))}>
-                    <ShareBoard board={selectedBoard} />
+                    <ShareBoard board={selectedBoard}/>
                 </Modal>
             )}
             <div className={s.wrapperContainer}>
@@ -77,33 +78,39 @@ const BoardPage = memo(() => {
                     onDelete={handleDeleteBoard}
                 />
                 <div className={s.wrapper}>
-                    <div className={s.columnsWrapper}>
-                        {!selectedBoard
-                            ? <><Loader /></>
-                            : (
-                                <>
-                                    {getColumnsFromBoard(selectedBoard).map((column) => (
-                                        <TaskColumn
-                                            key={column.uid}
-                                            column={column}
-                                            boardId={selectedBoard.uid}
-                                            controlsDisabled={userRole !== LinkedUserType.USER}
 
-                                        />
-                                    ))}
-                                    {userRole === LinkedUserType.USER && <AddColumn />}
-                                </>
-                            )}
+                    {!selectedBoard
+                        ? <><Loader/></>
+                        : (
+                            <motion.div
+                                variants={{
+                                    visible: {
+                                        transition: {staggerChildren: 0.2,},
+                                    },
+                                }}
+                                initial="hidden"
+                                animate="visible"
+                                className={s.columnsWrapper}
+                            >
+                                {getColumnsFromBoard(selectedBoard).map((column) => (
+                                    <TaskColumn
+                                        key={column.uid}
+                                        column={column}
+                                        boardId={selectedBoard.uid}
+                                        controlsDisabled={userRole !== LinkedUserType.USER}
 
-                    </div>
-                    <Suspense>
-                        {selectedTask && (
-                            <PopupTaskInfo
-                                selectedTask={selectedTask}
-                                controlsDisabled={userRole !== LinkedUserType.USER}
-                            />
+                                    />
+                                ))}
+                                {userRole === LinkedUserType.USER && <AddColumn/>}
+                            </motion.div>
                         )}
-                    </Suspense>
+
+                    {selectedTask && (
+                        <PopupTaskInfo
+                            selectedTask={selectedTask}
+                            controlsDisabled={userRole !== LinkedUserType.USER}
+                        />
+                    )}
                 </div>
 
             </div>

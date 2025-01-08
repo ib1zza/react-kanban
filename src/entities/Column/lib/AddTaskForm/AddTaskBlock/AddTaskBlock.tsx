@@ -10,31 +10,13 @@ interface Props {
 }
 
 const AddTaskBlock = memo(({ boardId, columnId }: Props) => {
-    const [isAddingTask, setIsAddingTask] = useState(false);
 
     return (
         <div>
-            {!isAddingTask && (
-                <Button
-                    theme={ButtonTheme.ACCENT}
-                    className={s.addButton}
-                    onClick={() => setIsAddingTask(true)}
-                    icon={faPlus}
-                />
-            )}
-
-            {isAddingTask && (
                 <AddTaskForm
-                    onAbort={() => {
-                        setIsAddingTask(false);
-                    }}
-                    onSubmit={() => {
-                        setIsAddingTask(false);
-                    }}
                     boardId={boardId}
                     columnId={columnId}
                 />
-            )}
         </div>
     );
 });
