@@ -14,6 +14,7 @@ import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import { ITask } from 'app/types/IBoardFromServer';
 import s from './PopupTaskInfo.module.scss';
 import {deleteTaskThunk} from "pages/BoardPage/model/services/dragTask/deleteTask/deleteTask";
+import {motion} from "framer-motion";
 
 interface Props {
     controlsDisabled: boolean;
@@ -90,7 +91,24 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
     const linkedUser = task.attachedUser;
 
     return (
-        <div className={s.container}>
+        <motion.div className={s.container}
+        variants={{
+            open: {
+                x: '0%',
+                opacity: 1,
+                transition: {
+                    type: 'tween',
+                    ease: "easeInOut",
+                },
+            },
+            closed: {
+                x: "100%",
+                opacity: 0,
+            },
+        }}
+        initial={"closed"}
+        animate={"open"}
+        exit={"closed"}>
             <div
                 className={s.headerColor}
                 style={{ backgroundColor: '#weweww' }}
@@ -159,7 +177,7 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
                     onAbort={() => setEditing(false)}
                 />
             )}
-        </div>
+        </motion.div>
     );
 };
 

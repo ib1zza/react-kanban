@@ -33,7 +33,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   sharp?: boolean;
   noBorder?: boolean;
     iconColor?: string;
-    layout?: boolean
+    layout?: boolean;
+    layoutId?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -49,6 +50,7 @@ const Button: React.FC<ButtonProps> = ({
     noBorder,
     iconColor,
     layout = false,
+    layoutId,
     ...props
 }) => {
     const mods: Mods = {
@@ -64,6 +66,7 @@ const Button: React.FC<ButtonProps> = ({
         // @ts-ignore
 
         <motion.button
+            layoutId={layoutId}
             layout={layout}
             className={classNames(s.button, mods, [className as string])}
             disabled={loading}

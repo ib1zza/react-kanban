@@ -15,7 +15,7 @@ import {boardCollectionActions} from "pages/BoardPage";
 import {createTaskThunk} from "pages/BoardPage/model/services/createTask/createTask";
 import {useAppDispatch} from "app/providers/StoreProvider";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 
 interface Props {
     boardId: string;
@@ -69,10 +69,17 @@ const AddTaskForm: React.FC<Props> = ({
     return (
         <motion.div
             layout
-            className={s.wrapper}>
+            className={s.wrapper + ' ' + (isAddingTask ? s.open : '')}
+            transition={{
+                backgroundColor: {
+                    duration: 0,
+                }
+            }}
+        >
             {
                 !isAddingTask &&
                 <Button
+                    // layoutId={"button"}
                     layout
                     theme={ButtonTheme.ACCENT}
                     className={s.addButton}
@@ -80,9 +87,11 @@ const AddTaskForm: React.FC<Props> = ({
                     icon={faPlus}
                 />
             }
+            {/*<AnimatePresence>*/}
             {isAddingTask &&
                 <motion.div
                     style={{padding: '10px'}}
+                    // layoutId={"button"}
                 >
                     <form>
                         <div className={s.inputBlock}>
@@ -141,6 +150,7 @@ const AddTaskForm: React.FC<Props> = ({
                     </div>
                 </motion.div>
             }
+            {/*</AnimatePresence>*/}
         </motion.div>
     );
 };

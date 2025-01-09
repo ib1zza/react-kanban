@@ -1,9 +1,13 @@
 .wrapper {
-    background-color: var(--white);
     color: var(--black);
     //border: 2px solid var(--altWbText);
     border-radius: 10px;
     font-size: 16px;
+    background-color: var(--HeaderBg);
+
+    &.open {
+        background-color: var(--white);
+    }
 
     .inputBlock {
         margin-bottom: 10px;
@@ -16,7 +20,7 @@
             font-weight: 500;
             line-height: normal;
 
-            letter-spacing: 3.6px;
+            letter-spacing: 1.6px;
         }
 
         input {

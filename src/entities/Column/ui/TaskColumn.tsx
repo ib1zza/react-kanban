@@ -7,7 +7,7 @@ import Button from 'shared/ui/Button/Button';
 import AddTaskBlock from 'entities/Column/lib/AddTaskForm/AddTaskBlock/AddTaskBlock';
 import s from './TaskColumn.module.scss';
 import TaskList from '../lib/TaskList/TaskList';
-import {motion, MotionProps} from "framer-motion";
+import {LayoutGroup, motion, MotionProps} from "framer-motion";
 import {useTranslation} from "react-i18next";
 import {Input, InputTheme} from "shared/ui/Input/Input";
 import ColorPicker from "shared/ui/ColorPicker/ColorPicker";
@@ -22,10 +22,10 @@ interface ITaskColumnProps {
 
 
 const TaskColumn = ({
-                                                                                    column,
-                                                                                    boardId,
-                                                                                    controlsDisabled,
-                                                                                }: ITaskColumnProps) => {
+                        column,
+                        boardId,
+                        controlsDisabled,
+                    }: ITaskColumnProps) => {
     // const {t} = useTranslation('buttons');
 
     const [isEditColumn, setIsEditColumn] = useState(false);
@@ -119,20 +119,22 @@ const TaskColumn = ({
 
                             <motion.div
                                 layout={
-                                "position"
+                                    "position"
                                 }
                                 className={s.taskListWrapper}
                             >
-                                {!controlsDisabled && <AddTaskForm
-                                    boardId={boardId}
-                                    columnId={column.uid}
-                                />}
+                                <LayoutGroup>
+                                    {!controlsDisabled && <AddTaskForm
+                                        boardId={boardId}
+                                        columnId={column.uid}
+                                    />}
 
-                                <TaskList
-                                    boardId={boardId}
-                                    columnId={column.uid}
-                                    tasks={column.tasks}
-                                />
+                                    <TaskList
+                                        boardId={boardId}
+                                        columnId={column.uid}
+                                        tasks={column.tasks}
+                                    />
+                                </LayoutGroup>
                             </motion.div>
                         </>
                     )

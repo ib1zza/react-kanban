@@ -19,7 +19,7 @@ import {mapBoardFromServer} from 'entities/Board';
 import {boardCollectionActions, getBoardCollection} from '..';
 import s from './BoardPage.module.scss';
 import {getColumnsFromBoard} from '../lib/getColumnsFromBoard';
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 
 const BoardPage = memo(() => {
     const {boardId} = useParams();
@@ -104,13 +104,18 @@ const BoardPage = memo(() => {
                                 {userRole === LinkedUserType.USER && <AddColumn/>}
                             </motion.div>
                         )}
+                    <AnimatePresence>
 
-                    {selectedTask && (
-                        <PopupTaskInfo
-                            selectedTask={selectedTask}
-                            controlsDisabled={userRole !== LinkedUserType.USER}
-                        />
-                    )}
+                        {selectedTask && (
+                            <Suspense>
+                                <PopupTaskInfo
+                                    selectedTask={selectedTask}
+                                    controlsDisabled={userRole !== LinkedUserType.USER}
+                                />
+                            </Suspense>
+                        )}
+                    </AnimatePresence>
+
                 </div>
 
             </div>
