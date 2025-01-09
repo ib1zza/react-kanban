@@ -95,7 +95,6 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
         variants={{
             open: {
                 x: '0%',
-                opacity: 1,
                 transition: {
                     type: 'tween',
                     ease: "easeInOut",
@@ -103,7 +102,10 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
             },
             closed: {
                 x: "100%",
-                opacity: 0,
+                transition: {
+                    type: 'tween',
+                    ease: "easeInOut",
+                },
             },
         }}
         initial={"closed"}

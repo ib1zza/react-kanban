@@ -1,25 +1,27 @@
-import { classNames } from 'shared/lib/classNames/classNames';
-import Button, { ButtonTheme } from 'shared/ui/Button/Button';
-import { faAdd } from '@fortawesome/free-solid-svg-icons';
-import React, { Suspense, useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
-import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt';
-import { useTranslation } from 'react-i18next';
-import ActionForm, { ActionFormStatus } from '../../../../shared/ui/ActionForm/ui/ActionForm';
+import {classNames} from 'shared/lib/classNames/classNames';
+import Button, {ButtonTheme} from 'shared/ui/Button/Button';
+import {faAdd} from '@fortawesome/free-solid-svg-icons';
+import React, {Suspense, useCallback} from 'react';
+import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
+import {boardCollectionActions, getBoardCollection} from 'pages/BoardPage';
+import {createColumnRt} from 'features/columns/API/createColumn/createColumnRt';
+import {useTranslation} from 'react-i18next';
+import ActionForm, {ActionFormStatus} from '../../../../shared/ui/ActionForm/ui/ActionForm';
 import s from './AddColumn.module.scss';
+import {AnimatePresence, motion} from "framer-motion";
 
 interface AddColumnProps {
     className?: string
 }
-const AddColumn = ({ className } : AddColumnProps) => {
+
+const AddColumn = ({className}: AddColumnProps) => {
     const {
         isCreatingColumn, selectedBoard,
     } = useAppSelector(
         getBoardCollection,
     );
 
-    const { t } = useTranslation();
+    const {t} = useTranslation();
     const dispatch = useAppDispatch();
 
     const createColumnAction = useCallback(
@@ -40,10 +42,12 @@ const AddColumn = ({ className } : AddColumnProps) => {
     }
 
     return (
-        <div className={classNames(s.AddColumn, {}, [className])}>
+        <motion.div variants={{hidden: {opacity: 0}, visible: {opacity: 1}}}
+                    className={classNames(s.AddColumn, {}, [className])}>
             {!isCreatingColumn && (
                 <div className={s.addColumn}>
                     <Button
+                        layout
                         className={s.add}
                         onClick={handleCreateColumnClick}
                         theme={ButtonTheme.ACCENT}
@@ -53,15 +57,19 @@ const AddColumn = ({ className } : AddColumnProps) => {
                     </Button>
                 </div>
             )}
-                {isCreatingColumn && (
-                    <ActionForm
-                        status={ActionFormStatus.COLUMN}
-                        onCreateColumn={createColumnAction}
-                        onAbort={handleCreateColumnCancel}
-                    />
-                )}
-        </div>
+            <AnimatePresence>
+                <Suspense>
+                    {isCreatingColumn && (
+                        <ActionForm
+                            status={ActionFormStatus.COLUMN}
+                            onCreateColumn={createColumnAction}
+                            onAbort={handleCreateColumnCancel}
+                        />
+                    )}
+                </Suspense>
+            </AnimatePresence>
+        </motion.div>
     );
 };
 
-export { AddColumn };
+export {AddColumn};

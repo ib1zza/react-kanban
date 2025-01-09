@@ -62,8 +62,17 @@ const TaskColumn = ({
 
     return (
         <motion.div
+            layout
             key={column.uid}
-            variants={{hidden: {opacity: 0}, visible: {opacity: 1}}}
+            variants={{
+                hidden: {opacity: 0, y: 30}, visible: {
+                    opacity: 1, y: 0, transition: {
+                        type: 'tween',
+                        ease: 'easeInOut',
+                        duration: 0.2,
+                    }
+                }
+            }}
             className={`${s.container} ${s.withColor}`}>
             <div
                 className={s.headerColor}
@@ -117,10 +126,7 @@ const TaskColumn = ({
 
                             </div>
 
-                            <motion.div
-                                layout={
-                                    "position"
-                                }
+                            <div
                                 className={s.taskListWrapper}
                             >
                                 <LayoutGroup>
@@ -135,7 +141,7 @@ const TaskColumn = ({
                                         tasks={column.tasks}
                                     />
                                 </LayoutGroup>
-                            </motion.div>
+                            </div>
                         </>
                     )
             }

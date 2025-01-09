@@ -7,7 +7,6 @@
     justify-content: space-between;
     cursor: pointer;
     position: relative;
-    z-index: 100;
 
     &.completed {
         background-color: var(--completed);

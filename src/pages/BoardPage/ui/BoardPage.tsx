@@ -85,12 +85,13 @@ const BoardPage = memo(() => {
                             <motion.div
                                 variants={{
                                     visible: {
-                                        transition: {staggerChildren: 0.2,},
+                                        transition: {staggerChildren: 0.1,},
                                     },
                                 }}
                                 initial="hidden"
                                 animate="visible"
                                 className={s.columnsWrapper}
+                                layout
                             >
                                 {getColumnsFromBoard(selectedBoard).map((column) => (
                                     <TaskColumn
@@ -101,7 +102,7 @@ const BoardPage = memo(() => {
 
                                     />
                                 ))}
-                                {userRole === LinkedUserType.USER && <AddColumn/>}
+                                {userRole === LinkedUserType.USER && <AddColumn key={'addColumn'}/>}
                             </motion.div>
                         )}
                     <AnimatePresence>
