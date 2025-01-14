@@ -1,12 +1,12 @@
 import React from 'react';
-import {ITask} from 'app/types/IBoardFromServer';
-import Task from '../../../Tasks/ui/Task';
+import { ITask } from 'app/types/IBoardFromServer';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { motion } from 'framer-motion';
+import { boardCollectionActions } from 'pages/BoardPage';
+import { useAppDispatch } from 'app/providers/StoreProvider';
+import { dragTaskThunk } from 'pages/BoardPage/model/services/dragTask/dragTask';
 import s from './TaskList.module.scss';
-import {classNames} from "shared/lib/classNames/classNames";
-import {motion} from "framer-motion";
-import {boardCollectionActions} from "pages/BoardPage";
-import {useAppDispatch} from "app/providers/StoreProvider";
-import {dragTaskThunk} from "pages/BoardPage/model/services/dragTask/dragTask";
+import Task from '../../../Tasks/ui/Task';
 
 interface ITaskListProps {
     boardId: string;
@@ -19,15 +19,13 @@ interface ITaskDragIndicatorProps {
     columnId: string;
 }
 
-export const TaskDragIndicator = ({taskBeforeId, columnId}: ITaskDragIndicatorProps) => {
-    return (
-        <div className={s.indicator}
-             data-before={taskBeforeId}
-             data-column={columnId}
-        />
-    )
-}
-
+export const TaskDragIndicator = ({ taskBeforeId, columnId }: ITaskDragIndicatorProps) => (
+    <div
+        className={s.indicator}
+        data-before={taskBeforeId}
+        data-column={columnId}
+    />
+);
 
 const getNearestIndicator = (e: DragEvent, indicators: HTMLElement[]) => {
     const DISTANCE_OFFSET = 50;
@@ -39,63 +37,56 @@ const getNearestIndicator = (e: DragEvent, indicators: HTMLElement[]) => {
             const offset = e.clientY - (box.top + DISTANCE_OFFSET);
 
             if (offset < 0 && offset > closest.offset) {
-                return {offset: offset, element: child};
-            } else {
-                return closest;
+                return { offset, element: child };
             }
+            return closest;
         },
         {
             offset: Number.NEGATIVE_INFINITY,
             element: indicators[indicators.length - 1],
-        }
+        },
     );
 
     return el;
 };
 
-
 const TaskList: React.FC<ITaskListProps> = ({
-                                                tasks,
-                                                boardId,
-                                                columnId,
-                                            }) => {
+    tasks,
+    boardId,
+    columnId,
+}) => {
     const getTasksFromColumn = (
         tasks: ITask[],
-    ): ITask[] => {
-        return [...tasks].sort((a, b) => a.displayId - b.displayId)
-    };
+    ): ITask[] => [...tasks].sort((a, b) => a.displayId - b.displayId);
 
     const dispatch = useAppDispatch();
 
     const [active, setActive] = React.useState(false);
     const handleDragOver = (e: any) => {
         e.preventDefault();
-        console.log("drag over")
+        console.log('drag over');
         highlightIndicator(e);
         setActive(true);
     };
 
     const handleDragLeave = (e: any) => {
         e.preventDefault();
-        console.log("drag leave")
+        console.log('drag leave');
         setActive(false);
         clearHighlights();
-    }
-
-    const getIndicators = () => {
-        return Array.from(
-            document.querySelectorAll(
-                `[data-column="${columnId}"]`
-            ) as unknown as HTMLElement[]
-        );
     };
 
+    const getIndicators = () => Array.from(
+            document.querySelectorAll(
+                `[data-column="${columnId}"]`,
+            ) as unknown as HTMLElement[],
+    );
 
     const clearHighlights = (els?: HTMLElement[]) => {
         const indicators = els || getIndicators();
 
         indicators.forEach((i) => {
-            i.style.opacity = "0";
+            i.style.opacity = '0';
         });
     };
 
@@ -106,7 +97,7 @@ const TaskList: React.FC<ITaskListProps> = ({
 
         const el = getNearestIndicator(e, indicators);
 
-        el.element.style.opacity = "1";
+        el.element.style.opacity = '1';
     };
 
     const handleDrop = (e: any) => {
@@ -115,14 +106,13 @@ const TaskList: React.FC<ITaskListProps> = ({
 
         clearHighlights();
         const indicators = getIndicators();
-        const {element} = getNearestIndicator(e, indicators);
+        const { element } = getNearestIndicator(e, indicators);
 
         console.log(columnId);
         dispatch(dragTaskThunk({
             newColumnId: columnId,
-            newDisplayId: +(element.dataset.before || -1)
+            newDisplayId: +(element.dataset.before || -1),
         }));
-
 
         // if (before !== cardId) {
         //     let copy = [...cards];
@@ -143,18 +133,17 @@ const TaskList: React.FC<ITaskListProps> = ({
         //
         //         copy.splice(insertAtIndex, 0, cardToTransfer);
         //     }
-        console.log("drag drop");
-    }
+        console.log('drag drop');
+    };
 
     const handleDragEnd = () => {
-        console.log("drag end");
+        console.log('drag end');
         clearHighlights();
-
-    }
+    };
 
     const cls = classNames(s.tasks, {
-        [s.active]: active
-    })
+        [s.active]: active,
+    });
     return (
         <motion.div
             layout
@@ -163,13 +152,16 @@ const TaskList: React.FC<ITaskListProps> = ({
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            onDragEnd={handleDragEnd}>
+            onDragEnd={handleDragEnd}
+        >
             {tasks
                 && getTasksFromColumn(tasks).map((el: ITask) => (
-                    <motion.div key={el.uid}
-                                layoutId={el.uid}
-                                layout>
-                        <TaskDragIndicator taskBeforeId={el.displayId} columnId={columnId}/>
+                    <motion.div
+                        key={el.uid}
+                        layoutId={el.uid}
+                        layout
+                    >
+                        <TaskDragIndicator taskBeforeId={el.displayId} columnId={columnId} />
                         <Task
                             boardId={boardId}
                             columnId={columnId}
@@ -178,7 +170,7 @@ const TaskList: React.FC<ITaskListProps> = ({
                         />
                     </motion.div>
                 ))}
-            <TaskDragIndicator taskBeforeId={'-1'} columnId={columnId}/>
+            <TaskDragIndicator taskBeforeId="-1" columnId={columnId} />
         </motion.div>
     );
 };

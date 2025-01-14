@@ -1,28 +1,28 @@
 import React, {
     memo, Suspense, useCallback, useEffect,
 } from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
-import {PopupTaskInfo} from 'widgets';
-import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
+import { useNavigate, useParams } from 'react-router-dom';
+import { PopupTaskInfo } from 'widgets';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import {
     BoardPageHeader, deleteBoardRt, editBoard, ShareBoard,
 } from 'features/boards';
-import {TaskColumn} from 'entities/Column';
-import {getUserState} from 'features/users/model/selectors/getUserState/getUserState';
+import { TaskColumn } from 'entities/Column';
+import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import Modal from 'shared/ui/Modal/Modal';
 import Loader from 'shared/ui/Loader/Loader';
-import {useUserRole} from 'features/boards/hooks/useUserRole';
-import {AddColumn} from 'features/columns/ui/AddColumn/AddColumn';
-import {LinkedUserType} from 'app/types/IBoardFromServer';
-import {subscribeToBoardById} from 'entities/Board/API/getBoardFromIdRt';
-import {mapBoardFromServer} from 'entities/Board';
-import {boardCollectionActions, getBoardCollection} from '..';
+import { useUserRole } from 'features/boards/hooks/useUserRole';
+import { AddColumn } from 'features/columns/ui/AddColumn/AddColumn';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
+import { subscribeToBoardById } from 'entities/Board/API/getBoardFromIdRt';
+import { mapBoardFromServer } from 'entities/Board';
+import { AnimatePresence, motion } from 'framer-motion';
+import { boardCollectionActions, getBoardCollection } from '..';
 import s from './BoardPage.module.scss';
-import {getColumnsFromBoard} from '../lib/getColumnsFromBoard';
-import {AnimatePresence, motion} from "framer-motion";
+import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 
 const BoardPage = memo(() => {
-    const {boardId} = useParams();
+    const { boardId } = useParams();
     const {
         selectedBoard, selectedTask, shareStatus,
     } = useAppSelector(
@@ -30,14 +30,14 @@ const BoardPage = memo(() => {
     );
 
     const userRole = useUserRole();
-    const {user} = useAppSelector(getUserState);
+    const { user } = useAppSelector(getUserState);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const handleEditTitle = useCallback((newTitle: string) => {
         if (!boardId) return;
         console.log(boardId, newTitle);
-        editBoard(boardId, {title: newTitle});
+        editBoard(boardId, { title: newTitle });
     }, [boardId]);
 
     useEffect(() => {
@@ -68,7 +68,7 @@ const BoardPage = memo(() => {
         <>
             {selectedBoard && shareStatus && (
                 <Modal onClose={() => dispatch(boardCollectionActions.setShareStatus(false))}>
-                    <ShareBoard board={selectedBoard}/>
+                    <ShareBoard board={selectedBoard} />
                 </Modal>
             )}
             <div className={s.wrapperContainer}>
@@ -80,12 +80,12 @@ const BoardPage = memo(() => {
                 <div className={s.wrapper}>
 
                     {!selectedBoard
-                        ? <><Loader/></>
+                        ? <><Loader /></>
                         : (
                             <motion.div
                                 variants={{
                                     visible: {
-                                        transition: {staggerChildren: 0.1,},
+                                        transition: { staggerChildren: 0.1 },
                                     },
                                 }}
                                 initial="hidden"
@@ -102,7 +102,7 @@ const BoardPage = memo(() => {
 
                                     />
                                 ))}
-                                {userRole === LinkedUserType.USER && <AddColumn key={'addColumn'}/>}
+                                {userRole === LinkedUserType.USER && <AddColumn key="addColumn" />}
                             </motion.div>
                         )}
                     <AnimatePresence>

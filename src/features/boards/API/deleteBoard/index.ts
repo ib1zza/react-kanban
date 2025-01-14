@@ -13,12 +13,12 @@ export const deleteBoardRt = async (board: IBoard) => {
     }
 
     try {
-        for (const user of users) {
+        await Promise.all(users.map(async (user) => {
             await remove(ref(rtdb, `usersBoards/${user.uid}/${board.uid}`));
             if (user?.notificationUid) {
                 await remove(ref(rtdb, `usersNotifications/${user.uid}/${user.notificationUid}`));
             }
-        }
+        }));
     } catch (e) {
         console.log(e);
         return false;

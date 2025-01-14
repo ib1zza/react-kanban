@@ -18,6 +18,7 @@ import { getSignupState } from '../model/selectors/getSignupState';
 interface props {
     onSwitch: () => void
 }
+
 const SignupForm = memo(({ onSwitch }: props) => {
     const navigate = useNavigate();
     const { t } = useTranslation('auth');
@@ -79,37 +80,41 @@ const SignupForm = memo(({ onSwitch }: props) => {
                 break;
             }
             case 2: {
-                if (!values.password || values.password.length < 6) {
-                    errors.password = 'Required';
+                if (!values.password.trim()) {
+                    errors.password = 'Обязательное поле';
                 }
-                if (!values.secondPassword) {
-                    errors.secondPassword = 'Required';
+
+                if (values.password.trim() && values.password.trim().length < 6) {
+                    errors.password = 'Ошибка в пароле';
                 }
+
+                if (!values.secondPassword && values.password.trim()) {
+                    errors.secondPassword = 'Обязательное поле';
+                }
+
                 if (values.password !== values.secondPassword) {
-                    errors.secondPassword = t('Пароли должны совпадать');
+                    errors.secondPassword = 'Пароли должны совпадать';
                 }
+
                 break;
             }
             case 1: {
-                if (!values.email) {
-                    errors.email = 'Required';
+                if (!values.email.trim()) {
+                    errors.email = 'Обязательное поле';
                 } else if (
                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
-                    errors.email = 'Invalid email address';
+                    errors.email = 'Запишите в формате почты';
                 }
-                if (!values.displayName) {
-                    errors.displayName = 'Required';
-                } else if (values.displayName.length < 3) {
-                    errors.displayName = 'Must be 3 characters or more';
-                } else if (
-                    /^[A-Z0-9_]+$/.test(values.displayName)
-                ) {
-                    errors.displayName = 'Invalid secondPassword address';
+                if (!values.displayName.trim()) {
+                    errors.displayName = 'Обязательное поле';
+                } else if (values.displayName.length < 3 || !/^[a-z_]{3,20}$/.test(values.displayName)) {
+                    errors.displayName = 'Ошибка в логине';
                 }
+
                 const res = await getUserFromEmail(values.email);
                 if (res) {
-                    errors.email = t('Пользователь с такой почтой уже существует');
+                    errors.email = 'Пользователь с такой почтой уже существует';
                 }
 
                 break;
@@ -154,7 +159,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
 
                         {formik.errors.email && (
                             <p className={s.label_error}>
-                                {t('Запишите в формате почты')}
+                                {t(formik.errors.email)}
                             </p>
                         )}
 
@@ -175,7 +180,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
 
                         {formik.errors.displayName && (
                             <p className={s.label_error}>
-                                {t('Допускается только латиница в нижнем регистре и нижнee подчеркивание. Минимальное количество символов 3, максимальное - 20.')}
+                                {t(formik.errors.displayName)}
                             </p>
                         )}
                         <Input
@@ -194,7 +199,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                         <div className={s.label}>{t('Придумайте пароль')}</div>
                         {formik.errors.password && (
                             <p className={s.label_error}>
-                                {t('Пароль должен включать в себя латинские буквы, включая заглавные и состоять из 6-15 символов')}
+                                {t(formik.errors.password)}
                             </p>
                         )}
                         {/* <div className="">{t(error)}</div> */}
@@ -208,7 +213,7 @@ const SignupForm = memo(({ onSwitch }: props) => {
                             value={formik.values.password}
                         />
                         {formik.errors.secondPassword && (
-                            <p className={s.label_error}>{t('Пароль не совпадает')}</p>
+                            <p className={s.label_error}>{t(formik.errors.secondPassword)}</p>
                         )}
                         <Input
                             className={s.input}

@@ -14,6 +14,7 @@
   background-color: black;
   transform: skewY(15deg);
   transition: 0.5s;
+  user-select: none;
 }
 
 .center:hover {

@@ -12,9 +12,9 @@ import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import { ITask } from 'app/types/IBoardFromServer';
+import { deleteTaskThunk } from 'pages/BoardPage/model/services/dragTask/deleteTask/deleteTask';
+import { motion } from 'framer-motion';
 import s from './PopupTaskInfo.module.scss';
-import {deleteTaskThunk} from "pages/BoardPage/model/services/dragTask/deleteTask/deleteTask";
-import {motion} from "framer-motion";
 
 interface Props {
     controlsDisabled: boolean;
@@ -73,7 +73,7 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
             taskId: task.uid,
             columnId: selectedColumnId,
             displayId: task.displayId,
-        }))
+        }));
 
         dispatch(boardCollectionActions.removeSelectedTask());
         setLoading('');
@@ -91,26 +91,28 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
     const linkedUser = task.attachedUser;
 
     return (
-        <motion.div className={s.container}
-        variants={{
-            open: {
-                x: '0%',
-                transition: {
-                    type: 'tween',
-                    ease: "easeInOut",
+        <motion.div
+            className={s.container}
+            variants={{
+                open: {
+                    x: '0%',
+                    transition: {
+                        type: 'tween',
+                        ease: 'easeInOut',
+                    },
                 },
-            },
-            closed: {
-                x: "100%",
-                transition: {
-                    type: 'tween',
-                    ease: "easeInOut",
+                closed: {
+                    x: '100%',
+                    transition: {
+                        type: 'tween',
+                        ease: 'easeInOut',
+                    },
                 },
-            },
-        }}
-        initial={"closed"}
-        animate={"open"}
-        exit={"closed"}>
+            }}
+            initial="closed"
+            animate="open"
+            exit="closed"
+        >
             <div
                 className={s.headerColor}
                 style={{ backgroundColor: '#weweww' }}

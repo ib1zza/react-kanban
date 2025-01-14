@@ -10,8 +10,6 @@ export const deleteTask = async (
 ) => {
     try {
         await remove(ref(rtdb, `boards/${boardId}/columns/${columnId}/tasks/${taskId}`));
-
-
     } catch (e) {
         console.log(e);
         return false;

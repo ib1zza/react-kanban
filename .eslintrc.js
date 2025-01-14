@@ -31,6 +31,7 @@ module.exports = {
         'react/jsx-no-bind': 'off',
         'react/function-component-definition': 'off',
         'no-shadow': 'off',
+        'no-return-await': 'off',
         'import/extensions': 'off',
         'import/no-extraneous-dependencies': 'off',
         'no-underscore-dangle': 'off',

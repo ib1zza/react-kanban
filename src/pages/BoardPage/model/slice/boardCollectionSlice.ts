@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IBoard, IBoardFromServer, ITask } from 'app/types/IBoardFromServer';
 
 import { IUserInfo } from 'app/types/IUserInfo';
+import { createTaskThunk } from 'pages/BoardPage/model/services/createTask/createTask';
 import { BoardCollectionSchema } from '../types/BoardCollectionSchema';
-import {createTaskThunk} from "pages/BoardPage/model/services/createTask/createTask";
 
 const initialState: BoardCollectionSchema = {
     selectedBoardId: '',
@@ -35,9 +35,7 @@ export const boardCollectionSlice = createSlice({
             if (!state.selectedBoard) return;
             console.log(Object.values(state.selectedBoard.columns));
             state.selectedColumnId = state.selectedBoard.columns.find(
-                (col) =>
-                    col.tasks && col.tasks.find((t) =>
-                        t.uid === action.payload.uid)
+                (col) => col.tasks && col.tasks.find((t) => t.uid === action.payload.uid),
             )?.uid || '';
         },
         setDraggedTask: (state, action: PayloadAction<ITask>) => {
@@ -45,9 +43,7 @@ export const boardCollectionSlice = createSlice({
             if (!state.selectedBoard) return;
             console.log(Object.values(state.selectedBoard.columns));
             state.selectedColumnId = state.selectedBoard.columns.find(
-                (col) =>
-                    col.tasks && col.tasks.find((t) =>
-                        t.uid === action.payload.uid)
+                (col) => col.tasks && col.tasks.find((t) => t.uid === action.payload.uid),
             )?.uid || '';
         },
         updateSelectedTask: (state, action: PayloadAction<string>) => {
@@ -60,18 +56,18 @@ export const boardCollectionSlice = createSlice({
             state.selectedTask = foundTask;
         },
         dragTask: (state, action: PayloadAction<string>) => {
-            console.log(state.selectedBoard, state.selectedColumnId, state.draggedTask)
+            console.log(state.selectedBoard, state.selectedColumnId, state.draggedTask);
             const newColumnId = action.payload;
-            console.log(state.selectedBoard, state.selectedColumnId, state.draggedTask)
+            console.log(state.selectedBoard, state.selectedColumnId, state.draggedTask);
             if (!state.selectedBoard || !state.selectedColumnId || !state.draggedTask) return;
             const foundColumn = state.selectedBoard.columns.find((col) => col.uid === state.selectedColumnId);
-            console.log(foundColumn)
+            console.log(foundColumn);
 
             if (!foundColumn) return;
             // @ts-ignore
             foundColumn.tasks = foundColumn.tasks.filter((t) => t.uid !== state.draggedTask.uid);
-            console.log("pushing task")
-            state.selectedBoard.columns.find(el => el.uid === newColumnId)?.tasks.push(state.draggedTask);
+            console.log('pushing task');
+            state.selectedBoard.columns.find((el) => el.uid === newColumnId)?.tasks.push(state.draggedTask);
         },
         removeSelectedTask: (state) => {
             state.selectedTask = null;
@@ -88,13 +84,11 @@ export const boardCollectionSlice = createSlice({
             state.isCreatingColumn = action.payload;
         },
     },
-    extraReducers: builder => {
+    extraReducers: (builder) => {
+        builder.addCase(createTaskThunk.fulfilled, (state, action) => {
 
-        builder.addCase(
-            createTaskThunk.fulfilled, (state, action) => {
-
-            })
-    }
+        });
+    },
 
 });
 

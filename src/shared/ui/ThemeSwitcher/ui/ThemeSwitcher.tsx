@@ -1,8 +1,8 @@
-import React, {memo} from 'react';
-import {faCircleHalfStroke} from '@fortawesome/free-solid-svg-icons';
-import {useTheme} from 'app/providers/theme/lib/useTheme';
-import {classNames} from 'shared/lib/classNames/classNames';
-import Button, {ButtonTheme} from '../../Button/Button';
+import React, { memo } from 'react';
+import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
+import { useTheme } from 'app/providers/theme/lib/useTheme';
+import { classNames } from 'shared/lib/classNames/classNames';
+import Button, { ButtonTheme } from '../../Button/Button';
 
 interface ThemeSwitcherProps{
     className?: string

@@ -1,18 +1,18 @@
-import {faCircleCheck as iconCheckRegular} from '@fortawesome/free-regular-svg-icons';
-import {faCircleCheck as iconCheckSolid, faEllipsisVertical} from '@fortawesome/free-solid-svg-icons';
-import {IBoardUserInfo, ITask} from 'app/types/IBoardFromServer';
-import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
-import {toggleTaskComplete} from 'features/tasks';
-import {Avatar} from 'shared/ui/Avatar';
-import {AvatarSize} from 'shared/ui/Avatar/ui/Avatar';
-import {boardCollectionActions, getLinkedUsers} from 'pages/BoardPage';
-import {IUserInfo} from 'app/types/IUserInfo';
-import {classNames} from 'shared/lib/classNames/classNames';
-import {memo, useCallback} from 'react';
-import {useUserInfo} from 'features/users/hooks/useUserInfo';
+import { faCircleCheck as iconCheckRegular } from '@fortawesome/free-regular-svg-icons';
+import { faCircleCheck as iconCheckSolid, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { IBoardUserInfo, ITask } from 'app/types/IBoardFromServer';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
+import { toggleTaskComplete } from 'features/tasks';
+import { Avatar } from 'shared/ui/Avatar';
+import { AvatarSize } from 'shared/ui/Avatar/ui/Avatar';
+import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
+import { IUserInfo } from 'app/types/IUserInfo';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { memo, useCallback } from 'react';
+import { useUserInfo } from 'features/users/hooks/useUserInfo';
+import { motion } from 'framer-motion';
 import s from './Task.module.scss';
 import Button from '../../../shared/ui/Button/Button';
-import {motion} from 'framer-motion';
 
 interface ITaskProps {
     task: ITask;
@@ -24,7 +24,7 @@ interface ITaskUserProps {
     userId: string;
 }
 
-const TaskUser = ({userId}: ITaskUserProps) => {
+const TaskUser = ({ userId }: ITaskUserProps) => {
     const [linkedUser] = useUserInfo(userId);
 
     return (
@@ -36,10 +36,9 @@ const TaskUser = ({userId}: ITaskUserProps) => {
     );
 };
 
-
 const Task = memo(({
-                       task, boardId, columnId,
-                   }: ITaskProps) => {
+    task, boardId, columnId,
+}: ITaskProps) => {
     const dispatch = useAppDispatch();
     const openTaskHandler = () => {
         dispatch(boardCollectionActions.setCurrentTask(task));
@@ -49,42 +48,43 @@ const Task = memo(({
     }, [boardId, columnId, task.isCompleted, task.uid]);
 
     const handleStartDrag = (event: React.DragEvent) => {
-        console.log("start", task)
+        console.log('start', task);
         event.dataTransfer.setDragImage(event.currentTarget, 0, 0);
         console.log(event.currentTarget);
         dispatch(boardCollectionActions.setDraggedTask(task));
-    }
+    };
     return (
         <>
 
             <div
-                className={classNames(s.container,
+                className={classNames(
+                    s.container,
                     {
                         [s.completed]:
-                        task.isCompleted
-                    }
-                )
-                }
-                draggable={true} onDragStart={handleStartDrag}>
+                        task.isCompleted,
+                    },
+                )}
+                draggable
+                onDragStart={handleStartDrag}
+            >
                 <div
-                    className={s.title}>
+                    className={s.title}
+                >
                     <Button
                         className={s.icon}
                         onClick={handleComplete}
-                        icon={!
-                            task.isCompleted ? (
+                        icon={!task.isCompleted ? (
                             iconCheckRegular
                         ) : (
                             iconCheckSolid
-                        )
-                        }
+                        )}
                     />
                     <span>{task.title}</span>
                 </div>
 
                 <div className={s.infoBlock}>
                     {task.attachedUser && (
-                        <TaskUser userId={task.attachedUser}/>
+                        <TaskUser userId={task.attachedUser} />
                     )}
                     <Button
                         onClick={
@@ -96,8 +96,7 @@ const Task = memo(({
                 </div>
             </div>
         </>
-    )
-        ;
+    );
 });
 
 export default Task;

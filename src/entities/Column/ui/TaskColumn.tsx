@@ -1,18 +1,18 @@
-import React, {useState, useCallback, memo} from 'react';
-import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
-import {deleteColumn, editColumn} from 'features/columns';
-import {IColumn, IColumnFromServer} from 'app/types/IBoardFromServer';
+import React, { useState, useCallback, memo } from 'react';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { deleteColumn, editColumn } from 'features/columns';
+import { IColumn, IColumnFromServer } from 'app/types/IBoardFromServer';
 import Button from 'shared/ui/Button/Button';
 import AddTaskBlock from 'entities/Column/lib/AddTaskForm/AddTaskBlock/AddTaskBlock';
-import s from './TaskColumn.module.scss';
+import { LayoutGroup, motion, MotionProps } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { Input, InputTheme } from 'shared/ui/Input/Input';
+import ColorPicker from 'shared/ui/ColorPicker/ColorPicker';
+import ConfirmButtons from 'shared/ui/ConfirmButtons/ConfirmButtons';
+import AddTaskForm from 'entities/Column/lib/AddTaskForm/AddTaskForm';
 import TaskList from '../lib/TaskList/TaskList';
-import {LayoutGroup, motion, MotionProps} from "framer-motion";
-import {useTranslation} from "react-i18next";
-import {Input, InputTheme} from "shared/ui/Input/Input";
-import ColorPicker from "shared/ui/ColorPicker/ColorPicker";
-import ConfirmButtons from "shared/ui/ConfirmButtons/ConfirmButtons";
-import AddTaskForm from "entities/Column/lib/AddTaskForm/AddTaskForm";
+import s from './TaskColumn.module.scss';
 
 interface ITaskColumnProps {
     column: IColumn;
@@ -20,12 +20,11 @@ interface ITaskColumnProps {
     controlsDisabled: boolean;
 }
 
-
 const TaskColumn = ({
-                        column,
-                        boardId,
-                        controlsDisabled,
-                    }: ITaskColumnProps) => {
+    column,
+    boardId,
+    controlsDisabled,
+}: ITaskColumnProps) => {
     // const {t} = useTranslation('buttons');
 
     const [isEditColumn, setIsEditColumn] = useState(false);
@@ -33,8 +32,6 @@ const TaskColumn = ({
     const [title, setTitle] = useState<string>(column.title);
     const [error, setError] = useState<string>('');
     const [color, setColor] = useState<string>(column.color);
-
-
 
     const handleEditMemoized = useCallback(async (e: any) => {
         e.preventDefault();
@@ -47,7 +44,7 @@ const TaskColumn = ({
             color,
         });
         setIsEditColumn(false);
-    }, [title, color])
+    }, [title, color]);
 
     const onAbortMemoized = useCallback(() => {
         setIsEditColumn(false);
@@ -64,47 +61,50 @@ const TaskColumn = ({
             layout
             key={column.uid}
             variants={{
-                hidden: {opacity: 0, y: 30}, visible: {
-                    opacity: 1, y: 0, transition: {
+                hidden: { opacity: 0, y: 30 },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
                         type: 'tween',
                         ease: 'easeInOut',
                         duration: 0.2,
-                    }
-                }
+                    },
+                },
             }}
-            className={`${s.container} ${s.withColor}`}>
+            className={`${s.container} ${s.withColor}`}
+        >
             <div
                 className={s.headerColor}
-                style={{backgroundColor: color}}
+                style={{ backgroundColor: color }}
             />
-            <hr/>
+            <hr />
 
             {
                 isEditColumn ? (
-                        <div>
-                            <div className={s.title}>
-                                <Input
-                                    autoFocus
-                                    theme={InputTheme.WHITE}
-                                    // placeholder={t('Название')}
-                                    /*TODO*/
-                                    // label={t('Название')}
-                                    // className={s.createColumnTitle}
-                                    error={error}
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                            </div>
-                            <ColorPicker color={color} onChange={setColor}/>
-                            <ConfirmButtons
-                                disabled={error !== ''}
-                                onConfirm={handleEditMemoized}
-                                onAbort={onAbortMemoized}
+                    <div>
+                        <div className={s.title}>
+                            <Input
+                                autoFocus
+                                theme={InputTheme.WHITE}
+                                // placeholder={t('Название')}
+                                /* TODO */
+                                // label={t('Название')}
+                                // className={s.createColumnTitle}
+                                error={error}
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
-                    )
-                    :
-                    (
+                        <ColorPicker color={color} onChange={setColor} />
+                        <ConfirmButtons
+                            disabled={error !== ''}
+                            onConfirm={handleEditMemoized}
+                            onAbort={onAbortMemoized}
+                        />
+                    </div>
+                )
+                    : (
                         <>
                             <div className={s.titleBlock}>
                                 <h6 className={s.title}>{column.title}</h6>
@@ -129,10 +129,12 @@ const TaskColumn = ({
                                 className={s.taskListWrapper}
                             >
                                 <LayoutGroup>
-                                    {!controlsDisabled && <AddTaskForm
-                                        boardId={boardId}
-                                        columnId={column.uid}
-                                    />}
+                                    {!controlsDisabled && (
+                                        <AddTaskForm
+                                            boardId={boardId}
+                                            columnId={column.uid}
+                                        />
+                                    )}
 
                                     <TaskList
                                         boardId={boardId}
@@ -145,9 +147,8 @@ const TaskColumn = ({
                     )
             }
 
-
-        </motion.div>)
-
+        </motion.div>
+    );
 };
 
 export default memo(TaskColumn);

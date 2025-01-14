@@ -1,7 +1,7 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import {StateSchema} from "app/providers/StoreProvider";
-import {deleteTask, editTask} from "features/tasks";
-import {IColumn} from "app/types/IBoardFromServer";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { StateSchema } from 'app/providers/StoreProvider';
+import { deleteTask, editTask } from 'features/tasks';
+import { IColumn } from 'app/types/IBoardFromServer';
 
 export interface ITaskForDeleteInfo {
     columnId: string;
@@ -14,13 +14,13 @@ export const deleteTaskThunk = createAsyncThunk<any, ITaskForDeleteInfo, {
     getState: StateSchema
 }>(
     'board/deleteTask',
-    async (info, {getState, rejectWithValue}) => {
+    async (info, { getState, rejectWithValue }) => {
         // return;
         try {
-            const { columnId, taskId, displayId} = info;
+            const { columnId, taskId, displayId } = info;
 
             // get selected board
-            const selectedBoard = (getState() as StateSchema).boardCollection.selectedBoard;
+            const { selectedBoard } = (getState() as StateSchema).boardCollection;
 
             if (!selectedBoard) {
                 return rejectWithValue('Error while creating task. No such board find');
@@ -28,17 +28,17 @@ export const deleteTaskThunk = createAsyncThunk<any, ITaskForDeleteInfo, {
 
             const prevColumnId: string = (getState() as StateSchema).boardCollection.selectedColumnId;
 
-            const prevColumn: IColumn | undefined = selectedBoard.columns.find(el => el.uid === columnId);
+            const prevColumn: IColumn | undefined = selectedBoard.columns.find((el) => el.uid === columnId);
 
             if (!prevColumnId || !prevColumn) {
                 return rejectWithValue('Error while creating task. No such column find');
             }
 
             console.log(displayId, prevColumn.tasks
-                .filter(t => t.displayId > displayId), taskId)
+                .filter((t) => t.displayId > displayId), taskId);
             // remove task from old column
             await Promise.allSettled(prevColumn.tasks
-                .filter(t => t.displayId > displayId)
+                .filter((t) => t.displayId > displayId)
                 .map((task) => editTask(selectedBoard.uid, columnId, task.uid, {
                     displayId: task.displayId - 1,
                 })));

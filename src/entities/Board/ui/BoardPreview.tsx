@@ -1,28 +1,28 @@
-import React, {memo, useCallback, useEffect} from 'react';
-import {faLink, faShareFromSquare, faShareNodes} from '@fortawesome/free-solid-svg-icons';
-import {useTranslation} from 'react-i18next';
-import {IBoard, IBoardSmallInfoFromServer} from 'app/types/IBoardFromServer';
-import {ShareBoard} from 'features/boards';
+import React, { memo, useCallback, useEffect } from 'react';
+import { faLink, faShareFromSquare, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import { IBoard, IBoardSmallInfoFromServer } from 'app/types/IBoardFromServer';
+import { ShareBoard } from 'features/boards';
 import Modal from 'shared/ui/Modal/Modal';
 import Button from 'shared/ui/Button/Button';
-import {useNavigate} from 'react-router-dom';
-import {Avatar, AvatarSize} from 'shared/ui/Avatar';
-import {useUserInfo} from 'features/users/hooks/useUserInfo';
+import { useNavigate } from 'react-router-dom';
+import { Avatar, AvatarSize } from 'shared/ui/Avatar';
+import { useUserInfo } from 'features/users/hooks/useUserInfo';
+import { motion } from 'framer-motion';
 import s from './BoardPreview.module.scss';
-import {motion} from "framer-motion";
 
 interface IBoardPreviewProps {
     userId: string;
     board: IBoard;
 }
 
-const BoardPreview: React.FC<IBoardPreviewProps> =({
-                                                             userId,
-                                                             board,
-                                                         }) => {
+const BoardPreview: React.FC<IBoardPreviewProps> = ({
+    userId,
+    board,
+}) => {
     const navigate = useNavigate();
     const [isSharing, setIsSharing] = React.useState(false);
-    const {t} = useTranslation('');
+    const { t } = useTranslation('');
     const [assignedUserInfo] = useUserInfo(board.ownerId);
     const onClick = useCallback(() => {
         navigate(`/board/${board.uid}`);
@@ -38,24 +38,26 @@ const BoardPreview: React.FC<IBoardPreviewProps> =({
 
     console.log(t('Владелец'));
     return (
-        <motion.div variants={{
-            visible: {
-                opacity: 1,
-                y: 0
-            },
-            hidden: {
-                opacity: 0,
-                y: -30
-            }
-        }}
-                    key={board.uid}
-                    className={s.container}>
+        <motion.div
+            variants={{
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                },
+                hidden: {
+                    opacity: 0,
+                    y: -30,
+                },
+            }}
+            key={board.uid}
+            className={s.container}
+        >
             {isSharing && (
                 <Modal
                     onClose={onCloseShare}
                     title={t('Share board')}
                 >
-                    <ShareBoard board={board}/>
+                    <ShareBoard board={board} />
                 </Modal>
             )}
             <div className={s.heading}>
@@ -64,8 +66,11 @@ const BoardPreview: React.FC<IBoardPreviewProps> =({
                     <p className={s.owner}>
                         {t('Владелец')}
                         {' '}
-                        <Avatar size={AvatarSize.S} src={assignedUserInfo?.photoURL}
-                                alt={assignedUserInfo?.displayName}/>
+                        <Avatar
+                            size={AvatarSize.S}
+                            src={assignedUserInfo?.photoURL}
+                            alt={assignedUserInfo?.displayName}
+                        />
                         {assignedUserInfo?.displayName || `${t('Загрузка')}`}
                     </p>
                 </div>

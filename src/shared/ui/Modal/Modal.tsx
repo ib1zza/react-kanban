@@ -14,7 +14,7 @@ const Modal = memo((props: IModal) => {
     const { onClose, children, title } = props;
     return (
         createPortal(
-    <div>
+            <div>
                 <div className={s.darkBG} onClick={() => onClose()} />
                 <div className={s.centered}>
                     <div className={s.modal}>
@@ -28,7 +28,8 @@ const Modal = memo((props: IModal) => {
                     </div>
                 </div>
             </div>,
-            document.body)
+            document.body,
+        )
     );
 });
 

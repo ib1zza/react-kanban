@@ -9,16 +9,13 @@ interface Props {
     columnId: string;
 }
 
-const AddTaskBlock = memo(({ boardId, columnId }: Props) => {
-
-    return (
-        <div>
-                <AddTaskForm
-                    boardId={boardId}
-                    columnId={columnId}
-                />
-        </div>
-    );
-});
+const AddTaskBlock = memo(({ boardId, columnId }: Props) => (
+    <div>
+        <AddTaskForm
+            boardId={boardId}
+            columnId={columnId}
+        />
+    </div>
+));
 
 export default AddTaskBlock;

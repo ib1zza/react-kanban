@@ -9,4 +9,3 @@ export interface BoardCollectionSchema {
     isCreatingColumn: boolean;
     draggedTask: ITask | null;
   }
-

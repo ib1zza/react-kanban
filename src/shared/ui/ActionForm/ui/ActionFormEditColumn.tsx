@@ -1,11 +1,11 @@
 import React, {
     memo, useCallback, useState,
 } from 'react';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import s from './ActionForm.module.scss';
 import ColorPicker from '../../ColorPicker/ColorPicker';
 import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
-import {Input, InputTheme} from '../../Input/Input';
+import { Input, InputTheme } from '../../Input/Input';
 
 interface Props {
     title?: string;
@@ -24,13 +24,11 @@ const ActionFormEditColumn = memo((props: Props) => {
     const [title, setTitle] = useState<string>(initTitle as string);
     const [error, setError] = useState<string>('');
     const [color, setColor] = useState<string>(initColor as string);
-    const {t} = useTranslation('buttons');
-
+    const { t } = useTranslation('buttons');
 
     const handleEdit = useCallback(() => {
         onEdit && onEdit(title, color);
     }, [color, onEdit, title]);
-
 
     const handler = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
@@ -43,8 +41,8 @@ const ActionFormEditColumn = memo((props: Props) => {
     return (
         <form className={`${s.container} ${s.withColor}`}>
 
-            <div className={s.headerColor} style={{backgroundColor: color}}/>
-            <hr/>
+            <div className={s.headerColor} style={{ backgroundColor: color }} />
+            <hr />
             <div className={s.title}>
                 <Input
                     autoFocus
@@ -57,7 +55,7 @@ const ActionFormEditColumn = memo((props: Props) => {
                     onChange={(e) => setTitle(e.target.value)}
                 />
             </div>
-            <ColorPicker color={color} onChange={setColor}/>
+            <ColorPicker color={color} onChange={setColor} />
             <ConfirmButtons
                 disabled={error !== ''}
                 onConfirm={(e: { preventDefault: () => void; }) => handler(e)}

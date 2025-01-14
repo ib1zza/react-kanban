@@ -1,6 +1,6 @@
-import {ref, update} from 'firebase/database';
-import {rtdb} from 'shared/config/firebase/firebase';
-import {v4 as uuid} from 'uuid';
+import { ref, update } from 'firebase/database';
+import { rtdb } from 'shared/config/firebase/firebase';
+import { v4 as uuid } from 'uuid';
 
 export interface ITaskForCreate {
     title: string;
@@ -48,4 +48,3 @@ export const createTaskRt = async (
     };
     return await update(ref(rtdb), updates);
 };
-

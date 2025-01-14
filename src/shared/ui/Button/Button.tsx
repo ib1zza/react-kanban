@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
 import s from './Button.module.scss';
 import { classNames, Mods } from '../../lib/classNames/classNames';
 import MemoizedFontAwesomeIcon from '../MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
-import {motion} from "framer-motion";
 
 export enum ButtonTheme {
     WHITE = 'white',
@@ -63,7 +63,7 @@ const Button: React.FC<ButtonProps> = ({
     };
 
     return (
-        // @ts-ignore
+    // @ts-ignore
 
         <motion.button
             layoutId={layoutId}

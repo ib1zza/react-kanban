@@ -12,8 +12,25 @@ export const useUsersInfo: TUseUsersInfo = (userIds) => {
     const [foundUsersInfo, setFoundUsersInfo] = useState<IUserInfo[]>([]);
     const dispatch = useAppDispatch();
 
+    const refetch = useCallback(() => {
+        const fetchPromises = userIds.map((userId) => getUserInfo(userId).then((res) => {
+            dispatch(homeActions.addUsers(res));
+        }));
+
+        // Wait for all fetch promises to resolve
+        Promise.all(fetchPromises).then(() => {
+            // After fetching, update the found users info
+            const updatedUsersInfo = userIds.map(
+                (userId) => allUsers.find((u) => u.uid === userId),
+            ).filter(Boolean) as IUserInfo[];
+            setFoundUsersInfo(updatedUsersInfo);
+        });
+    }, [userIds, dispatch, allUsers]);
+
     useEffect(() => {
-        const usersInfo = userIds.map((userId) => allUsers.find((u) => u.uid === userId)).filter(Boolean) as IUserInfo[];
+        const usersInfo = userIds.map(
+            (userId) => allUsers.find((u) => u.uid === userId),
+        ).filter(Boolean) as IUserInfo[];
 
         if (usersInfo.length === userIds.length) {
             // All users found in the state
@@ -23,20 +40,7 @@ export const useUsersInfo: TUseUsersInfo = (userIds) => {
 
         // If not all users are found, refetch
         refetch();
-    }, [allUsers, userIds]);
-
-    const refetch = useCallback(() => {
-        const fetchPromises = userIds.map((userId) => getUserInfo(userId).then((res) => {
-            dispatch(homeActions.addUsers(res));
-        }));
-
-        // Wait for all fetch promises to resolve
-        Promise.all(fetchPromises).then(() => {
-            // After fetching, update the found users info
-            const updatedUsersInfo = userIds.map((userId) => allUsers.find((u) => u.uid === userId)).filter(Boolean) as IUserInfo[];
-            setFoundUsersInfo(updatedUsersInfo);
-        });
-    }, [userIds, dispatch]);
+    }, [allUsers, refetch, userIds]);
 
     return [foundUsersInfo, refetch];
 };

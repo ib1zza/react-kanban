@@ -4,22 +4,22 @@ import React, {
     useCallback,
     useEffect,
 } from 'react';
-import {BoardPreview, mapBoardFromServer} from 'entities/Board';
-import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
-import ActionForm, {ActionFormStatus} from 'shared/ui/ActionForm/ui/ActionForm';
-import {createBoardRt} from 'features/boards';
-import {subscribeToUserBoards} from 'pages/Home/model/services/subscribeToUserBoards';
-import {getBoardsRt} from 'pages/Home/model/services/getBoardsRt';
+import { BoardPreview, mapBoardFromServer } from 'entities/Board';
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
+import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
+import { createBoardRt } from 'features/boards';
+import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUserBoards';
+import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
 import Loader from 'shared/ui/Loader/Loader';
-import {homeActions} from '../model/slice/HomeSlice';
-import {getHomeBoards} from '../model/selectors/getHomeBoards';
+import { motion } from 'framer-motion';
+import { homeActions } from '../model/slice/HomeSlice';
+import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
-import {getAddBoardStatus, getLinkBoardStatus} from '../model/selectors/getButtonStatus';
+import { getAddBoardStatus, getLinkBoardStatus } from '../model/selectors/getButtonStatus';
 import HomeHeader from './HomeHeader';
-import {motion} from "framer-motion";
 
 const Home = memo(() => {
-    const {user} = useAppSelector((state) => state.userInfo);
+    const { user } = useAppSelector((state) => state.userInfo);
     const addBoardStatus = useAppSelector(getAddBoardStatus);
     const linkBoardStatus = useAppSelector(getLinkBoardStatus);
     const boards = useAppSelector(getHomeBoards);
@@ -61,11 +61,10 @@ const Home = memo(() => {
     );
     return (
         <div className={s.boardPageContainer}>
-            <HomeHeader/>
-            {!user?.uid  ? <Loader/> : (
+            <HomeHeader />
+            {!user?.uid ? <Loader /> : (
                 <>
                     <Suspense>
-
 
                         {addBoardStatus && (
                             <ActionForm
@@ -82,25 +81,28 @@ const Home = memo(() => {
                             />
                         )}
                         {
-                            boards.length > 0 && <motion.div className={s.blocks__container}
-                                                         variants={{
-                                                             visible: {
-                                                                 transition: {
-                                                                     staggerChildren: 0.1
-                                                                 }
-                                                             }
-                                                         }}
-                                                         initial="hidden"
-                                                         animate="visible"
-                            >
-                                {boards.map((item) => (
-                                    <BoardPreview
-                                        key={item.uid}
-                                        board={item}
-                                        userId={user.uid}
-                                    />
-                                ))}
-                            </motion.div>
+                            boards.length > 0 && (
+                                <motion.div
+                                    className={s.blocks__container}
+                                    variants={{
+                                        visible: {
+                                            transition: {
+                                                staggerChildren: 0.1,
+                                            },
+                                        },
+                                    }}
+                                    initial="hidden"
+                                    animate="visible"
+                                >
+                                    {boards.map((item) => (
+                                        <BoardPreview
+                                            key={item.uid}
+                                            board={item}
+                                            userId={user.uid}
+                                        />
+                                    ))}
+                                </motion.div>
+                            )
                         }
 
                     </Suspense>
