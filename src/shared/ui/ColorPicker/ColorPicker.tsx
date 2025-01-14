@@ -7,7 +7,7 @@ interface IProps {
     color: string;
     onChange: (color: string) => void;
 }
-const ColorPicker = memo(({ onChange, color }: IProps) => {
+const ColorPicker = ({ onChange, color }: IProps) => {
     const { t } = useTranslation();
 
     return (
@@ -26,6 +26,6 @@ const ColorPicker = memo(({ onChange, color }: IProps) => {
             />
         </div>
     );
-});
+};
 
-export default ColorPicker;
+export default memo(ColorPicker);

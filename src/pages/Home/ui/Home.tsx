@@ -4,12 +4,10 @@ import React, {
     useCallback,
     useEffect,
 } from 'react';
-import {addUserToBoard} from 'features/boards';
-import {LinkedUserType} from 'app/types/IBoardFromServer';
 import {BoardPreview, mapBoardFromServer} from 'entities/Board';
 import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
 import ActionForm, {ActionFormStatus} from 'shared/ui/ActionForm/ui/ActionForm';
-import {createBoardRt} from 'features/boards/API/createBoard/createBoardRealtime';
+import {createBoardRt} from 'features/boards';
 import {subscribeToUserBoards} from 'pages/Home/model/services/subscribeToUserBoards';
 import {getBoardsRt} from 'pages/Home/model/services/getBoardsRt';
 import Loader from 'shared/ui/Loader/Loader';
@@ -56,7 +54,8 @@ const Home = memo(() => {
     const handleLinkBoard = useCallback(
         async (id: string) => {
             dispatch(homeActions.setAddBoardStatus(false));
-            await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
+            // TODO: add user
+            // await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
         },
         [dispatch, user?.uid],
     );

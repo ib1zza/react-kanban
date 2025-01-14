@@ -1,7 +1,7 @@
 import { ref, remove } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
 
-export const deleteUserFromBoard = async (
+export const deleteUserFromBoardRt = async (
     boardId: string,
     userId: string,
 ) => {

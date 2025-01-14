@@ -69,10 +69,10 @@ export interface IBoardFromServer {
   // chatId?: string;
   columns: { [columnId: string]: IColumnFromServer };
   guestPermissions?: GuestPermission[];
-  guestsAllowed?: string[];
+  // guestsAllowed?: string[];
   ownerId: string;
   title: string;
-  usersAllowed?: string[];
+  // usersAllowed?: string[];
   timeCreated: string;
   timeUpdated: string;
   users?: {
@@ -98,10 +98,10 @@ export interface IBoard {
   // chatId?: string;
   columns: IColumn[];
   guestPermissions?: GuestPermission[];
-  guestsAllowed?: string[];
+  // guestsAllowed?: string[];
   ownerId: string;
   title: string;
-  usersAllowed?: string[];
+  // usersAllowed?: string[];
   timeCreated: string;
   timeUpdated: string;
   users?: IBoardUserInfo[]

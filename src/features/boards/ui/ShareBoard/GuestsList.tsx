@@ -9,7 +9,7 @@ import {
     IBoardUserInfo,
     LinkedUserType,
 } from 'app/types/IBoardFromServer';
-import { deleteUserFromBoard } from 'features/boards';
+import { deleteUserFromBoardRt } from 'features/boards';
 import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
@@ -54,7 +54,7 @@ const GuestsList = memo(({ board }: Props) => {
     const [isEditorsOpened, setIsEditorsOpened] = useState(false);
     const linkedUsers = useAppSelector(getLinkedUsers);
     const handleRemoveUserFromBoard = useCallback(async (userId: string) => {
-        await deleteUserFromBoard(
+        await deleteUserFromBoardRt(
             board.uid,
             userId,
         );

@@ -10,7 +10,7 @@ interface Props {
   disabled?: boolean;
 }
 
-const ConfirmButtons = memo(({ onConfirm, onAbort, disabled }: Props) => {
+const ConfirmButtons = ({ onConfirm, onAbort, disabled }: Props) => {
     const { t } = useTranslation();
 
     return (
@@ -36,6 +36,6 @@ const ConfirmButtons = memo(({ onConfirm, onAbort, disabled }: Props) => {
             </Button>
         </div>
     );
-});
+};
 
 export default memo(ConfirmButtons);

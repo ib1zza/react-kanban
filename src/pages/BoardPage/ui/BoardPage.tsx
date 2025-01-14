@@ -5,7 +5,7 @@ import {useNavigate, useParams} from 'react-router-dom';
 import {PopupTaskInfo} from 'widgets';
 import {useAppDispatch, useAppSelector} from 'app/providers/StoreProvider';
 import {
-    BoardPageHeader, deleteBoard, editBoard, ShareBoard,
+    BoardPageHeader, deleteBoardRt, editBoard, ShareBoard,
 } from 'features/boards';
 import {TaskColumn} from 'entities/Column';
 import {getUserState} from 'features/users/model/selectors/getUserState/getUserState';
@@ -55,7 +55,7 @@ const BoardPage = memo(() => {
 
     const handleDeleteBoard = useCallback(async () => {
         if (!selectedBoard) return;
-        deleteBoard(selectedBoard).then(() => {
+        deleteBoardRt(selectedBoard).then(() => {
             navigate('/');
         });
     }, [selectedBoard]);

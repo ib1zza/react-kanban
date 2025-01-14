@@ -10,7 +10,6 @@ import {
 } from 'app/types/IBoardFromServer';
 import { sendNotificationInvite } from 'entities/Notifications';
 import Button from 'shared/ui/Button/Button';
-import { addUserToBoard } from 'features/boards';
 import s from './ShareBoard.module.scss';
 
 interface Props {
@@ -32,7 +31,7 @@ const InviteUserForm = memo(({ board }: Props) => {
         if (!userToInviteId || !user?.uid) return false;
 
         await sendNotificationInvite(userToInviteId, user.uid, board.uid, valueStatus);
-        await addUserToBoard(board.uid, userToInviteId, valueStatus);
+        // await addUserToBoard(board.uid, userToInviteId, valueStatus);
 
         return true;
     }, [board.uid, user.uid, valueStatus]);

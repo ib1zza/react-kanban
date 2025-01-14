@@ -1,9 +1,8 @@
 import { ref, remove } from 'firebase/database';
 import { rtdb } from 'shared/config/firebase/firebase';
-import { IBoard, IBoardFromServer } from 'app/types/IBoardFromServer';
-import { leaveFromBoard } from 'features/boards';
+import { IBoard } from 'app/types/IBoardFromServer';
 
-export const deleteBoard = async (board: IBoard) => {
+export const deleteBoardRt = async (board: IBoard) => {
     await remove(ref(rtdb, `boards/${board.uid}`));
 
     // Remove users from the board
@@ -15,7 +14,7 @@ export const deleteBoard = async (board: IBoard) => {
 
     try {
         for (const user of users) {
-            await leaveFromBoard(board.uid, user.uid);
+            await remove(ref(rtdb, `usersBoards/${user.uid}/${board.uid}`));
             if (user?.notificationUid) {
                 await remove(ref(rtdb, `usersNotifications/${user.uid}/${user.notificationUid}`));
             }

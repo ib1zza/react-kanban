@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, memo} from 'react';
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {deleteColumn, editColumn} from 'features/columns';
@@ -29,36 +29,35 @@ const TaskColumn = ({
     // const {t} = useTranslation('buttons');
 
     const [isEditColumn, setIsEditColumn] = useState(false);
-    const editHandler = async (title: string, color: string) => {
-        const res = await editColumn(boardId, column.uid, {
-            title,
-            color,
-        });
-        setIsEditColumn(false);
-    };
 
     const [title, setTitle] = useState<string>(column.title);
     const [error, setError] = useState<string>('');
     const [color, setColor] = useState<string>(column.color);
 
 
-    const handleEdit = useCallback(() => {
-        editHandler(title, color);
-    }, [color, editHandler, title]);
 
-
-    const handler = (event: { preventDefault: () => void; }) => {
-        event.preventDefault();
+    const handleEditMemoized = useCallback(async (e: any) => {
+        e.preventDefault();
         if (!title) {
             setError('Пустой заголовок');
             return null;
         }
-        handleEdit();
-    };
-
-    const onAbort = () => {
+        const res = await editColumn(boardId, column.uid, {
+            title,
+            color,
+        });
         setIsEditColumn(false);
-    }
+    }, [title, color])
+
+    const onAbortMemoized = useCallback(() => {
+        setIsEditColumn(false);
+    }, []);
+
+    // const onAbort = () => {
+    //     setIsEditColumn(false);
+    // }
+
+    //
 
     return (
         <motion.div
@@ -99,8 +98,8 @@ const TaskColumn = ({
                             <ColorPicker color={color} onChange={setColor}/>
                             <ConfirmButtons
                                 disabled={error !== ''}
-                                onConfirm={(e: { preventDefault: () => void; }) => handler(e)}
-                                onAbort={onAbort}
+                                onConfirm={handleEditMemoized}
+                                onAbort={onAbortMemoized}
                             />
                         </div>
                     )
@@ -151,4 +150,4 @@ const TaskColumn = ({
 
 };
 
-export default TaskColumn;
+export default memo(TaskColumn);

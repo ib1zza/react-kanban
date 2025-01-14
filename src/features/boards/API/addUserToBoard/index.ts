@@ -1,21 +1,25 @@
-import { arrayUnion } from '@firebase/firestore';
-import { LinkedUserType } from '../../../../app/types/IBoardFromServer';
-import { updateDocument } from '../../../../shared/API/updateDocument';
+import { ref, update } from 'firebase/database';
+import { rtdb } from 'shared/config/firebase/firebase';
+import { LinkedUserType } from 'app/types/IBoardFromServer';
 
-export const addUserToBoard = async (
-    boardId: string,
+export const addUserToBoardRt = async (
     userId: string,
-    userPermission: LinkedUserType,
+    boardId: string,
+    role: LinkedUserType | keyof typeof LinkedUserType,
+    notificationId: string,
 ) => {
-    try {
-        await updateDocument('boards', boardId, {
-            [userPermission === LinkedUserType.USER
-                ? 'usersAllowed'
-                : 'guestsAllowed']: arrayUnion(userId),
-        });
-    } catch (e) {
-        console.log(e);
-        return false;
-    }
-    return true;
+    // добавляем доску в userBoards пользователя
+    await update(ref(rtdb, `usersBoards/${userId}`), {
+        [boardId]: true,
+    });
+    await update(ref(rtdb, `boards/${boardId}/users/${userId}`), {
+        role,
+        dateInvited: Date.now(),
+        joined: true,
+    });
+
+    await update(ref(rtdb, `usersNotifications/${userId}/${notificationId}`), {
+        isAccepted: true,
+        read: true,
+    });
 };

@@ -48,8 +48,10 @@ const Task = memo(({
         toggleTaskComplete(task.uid, columnId, boardId, !task.isCompleted);
     }, [boardId, columnId, task.isCompleted, task.uid]);
 
-    const handleStartDrag = () => {
+    const handleStartDrag = (event: React.DragEvent) => {
         console.log("start", task)
+        event.dataTransfer.setDragImage(event.currentTarget, 0, 0);
+        console.log(event.currentTarget);
         dispatch(boardCollectionActions.setDraggedTask(task));
     }
     return (
