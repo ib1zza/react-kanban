@@ -3,6 +3,7 @@
     flex-direction: column;
     width: 320px;
     max-width: 100%;
+    padding-top: 20px;
 }
 
 .profile__name {
@@ -32,7 +33,6 @@
     //}
 }
 .profile__avatar {
-    margin-top: 20px;
     width: 100%;
 
     display: flex;

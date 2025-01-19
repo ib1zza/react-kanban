@@ -8,10 +8,10 @@
 }
 
 .indicator {
+    border-radius: 2px;
     height: 6px;
     background: var(--HeaderBg);
     opacity: 0;
-    //transition: opacity 0.2s ease-in-out;
 }
 .tasks.active {
     .indicator {

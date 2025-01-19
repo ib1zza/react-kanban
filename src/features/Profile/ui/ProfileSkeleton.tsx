@@ -7,20 +7,21 @@ import s from './Profile.module.scss';
 const Profile = () => (
     <div>
         <div className={s.profile}>
-            <Skeleton circle height={90} width={90} />
+            <Skeleton circle height={150} width={150} />
             <div>
                 <div className={s.profile__name}>
-                    <Skeleton width={140} />
+                    <Skeleton width={140} height={36} />
                 </div>
                 <div className={s.profile__email}>
-                    <Skeleton width={200} />
+                    <Skeleton width={200} height={36} />
                 </div>
-                <div>
-                    <Skeleton width={200} />
+                <div className={s.profile__descr}>
+                    <Skeleton width={200} height={40} />
                 </div>
-                <Button>
-                    <Skeleton width={60} />
-                </Button>
+                <div className={s.buttons}>
+                    <Skeleton width={60} height={30} />
+                    <Skeleton width={60} height={30} />
+                </div>
             </div>
         </div>
     </div>

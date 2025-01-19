@@ -9,6 +9,7 @@ import { getUserState } from 'features/users/model/selectors/getUserState/getUse
 import Modal from 'shared/ui/Modal/Modal';
 import { Profile } from 'features/Profile';
 import { useTranslation } from 'react-i18next';
+import ProfileSkeleton from 'features/Profile/ui/ProfileSkeleton';
 import s from './Header.module.scss';
 
 const Header = memo(() => {
@@ -22,7 +23,7 @@ const Header = memo(() => {
         <header className={s.header}>
             {isShowProfile && (
                 <Modal title={t('Profile')} onClose={() => handleShowProfile(false)}>
-                    <Suspense>
+                    <Suspense fallback={<ProfileSkeleton />}>
                         <Profile />
                     </Suspense>
                 </Modal>
