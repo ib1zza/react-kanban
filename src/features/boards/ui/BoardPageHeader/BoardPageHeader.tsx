@@ -57,12 +57,12 @@ const BoardPageHeader: React.FC<Props> = memo(({
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
-                <span>
+                <div className={s.title__text}>
                     {t('project')}
                     :
                     {' '}
                     {title}
-                </span>
+                </div>
                 {userRole === LinkedUserType.USER && (
                     <Button
                         size={ButtonSize.L}
