@@ -86,7 +86,7 @@ const TaskList: React.FC<ITaskListProps> = ({
         const indicators = els || getIndicators();
 
         indicators.forEach((i) => {
-            i.style.opacity = '0';
+            i.classList.toggle(s.indicator__active, false);
         });
     };
 
@@ -96,8 +96,7 @@ const TaskList: React.FC<ITaskListProps> = ({
         clearHighlights(indicators);
 
         const el = getNearestIndicator(e, indicators);
-
-        el.element.style.opacity = '1';
+        el.element.classList.toggle(s.indicator__active, true);
     };
 
     const handleDrop = (e: any) => {

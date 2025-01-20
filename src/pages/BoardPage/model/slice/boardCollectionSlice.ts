@@ -31,9 +31,13 @@ export const boardCollectionSlice = createSlice({
             state.selectedColumnId = '';
         },
         setCurrentTask: (state, action: PayloadAction<ITask>) => {
+            if (state.selectedTask?.uid === action.payload.uid) {
+                state.selectedTask = null;
+                state.selectedColumnId = '';
+                return;
+            }
             state.selectedTask = action.payload;
             if (!state.selectedBoard) return;
-            console.log(Object.values(state.selectedBoard.columns));
             state.selectedColumnId = state.selectedBoard.columns.find(
                 (col) => col.tasks && col.tasks.find((t) => t.uid === action.payload.uid),
             )?.uid || '';
@@ -41,7 +45,6 @@ export const boardCollectionSlice = createSlice({
         setDraggedTask: (state, action: PayloadAction<ITask>) => {
             state.draggedTask = action.payload;
             if (!state.selectedBoard) return;
-            console.log(Object.values(state.selectedBoard.columns));
             state.selectedColumnId = state.selectedBoard.columns.find(
                 (col) => col.tasks && col.tasks.find((t) => t.uid === action.payload.uid),
             )?.uid || '';

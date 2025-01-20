@@ -12,6 +12,12 @@
     height: 6px;
     background: var(--HeaderBg);
     opacity: 0;
+    transition: 0.05s;
+
+    &__active {
+        transition: 0s;
+        opacity: 1;
+    }
 }
 .tasks.active {
     .indicator {
