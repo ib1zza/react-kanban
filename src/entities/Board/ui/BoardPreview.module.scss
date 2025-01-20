@@ -67,6 +67,10 @@
     color: #e32400;
 }
 
+.skeleton {
+    height: 82px;
+}
+
 @media screen and (max-width: 460px) {
     .container {
         padding: 10px;
@@ -75,5 +79,8 @@
         .info {
             font: var(--font-s);
         }
+    }
+    .skeleton {
+        height: 78px;
     }
 }

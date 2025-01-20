@@ -12,6 +12,7 @@ import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUser
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
 import Loader from 'shared/ui/Loader/Loader';
 import { motion } from 'framer-motion';
+import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
@@ -59,12 +60,23 @@ const Home = memo(() => {
         },
         [dispatch, user?.uid],
     );
+
+    const Loader = (
+        <div className={s.blocks__container}>
+            {[1, 2, 3].map((el) => (
+                <BoardPreviewSkeleton
+                    key={`skeleton${el}`}
+                />
+            ))}
+        </div>
+    );
+
     return (
         <div className={s.boardPageContainer}>
             <HomeHeader />
-            {!user?.uid ? <Loader /> : (
+            {!user?.uid ? Loader : (
                 <>
-                    <Suspense>
+                    <Suspense fallback={Loader}>
 
                         {addBoardStatus && (
                             <ActionForm
