@@ -1,10 +1,11 @@
-import React from 'react';
-import { ITask } from 'app/types/IBoardFromServer';
+import React, { useMemo } from 'react';
+import { ITask, LinkedUserType } from 'app/types/IBoardFromServer';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { motion } from 'framer-motion';
 import { boardCollectionActions } from 'pages/BoardPage';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { dragTaskThunk } from 'pages/BoardPage/model/services/dragTask/dragTask';
+import { useUserRole } from 'features/boards/hooks/useUserRole';
 import s from './TaskList.module.scss';
 import Task from '../../../Tasks/ui/Task';
 
@@ -55,6 +56,8 @@ const TaskList: React.FC<ITaskListProps> = ({
     boardId,
     columnId,
 }) => {
+    const userRole = useUserRole();
+
     const getTasksFromColumn = (
         tasks: ITask[],
     ): ITask[] => [...tasks].sort((a, b) => a.displayId - b.displayId);
@@ -112,26 +115,6 @@ const TaskList: React.FC<ITaskListProps> = ({
             newColumnId: columnId,
             newDisplayId: +(element.dataset.before || -1),
         }));
-
-        // if (before !== cardId) {
-        //     let copy = [...cards];
-        //
-        //     let cardToTransfer = copy.find((c) => c.id === cardId);
-        //     if (!cardToTransfer) return;
-        //     cardToTransfer = { ...cardToTransfer, column };
-        //
-        //     copy = copy.filter((c) => c.id !== cardId);
-        //
-        //     const moveToBack = before === "-1";
-        //
-        //     if (moveToBack) {
-        //         copy.push(cardToTransfer);
-        //     } else {
-        //         const insertAtIndex = copy.findIndex((el) => el.id === before);
-        //         if (insertAtIndex === undefined) return;
-        //
-        //         copy.splice(insertAtIndex, 0, cardToTransfer);
-        //     }
         console.log('drag drop');
     };
 
@@ -143,6 +126,9 @@ const TaskList: React.FC<ITaskListProps> = ({
     const cls = classNames(s.tasks, {
         [s.active]: active,
     });
+
+    const controlsDisabled = useMemo(() => userRole !== LinkedUserType.USER, [userRole]);
+
     return (
         <motion.div
             layout
@@ -166,10 +152,11 @@ const TaskList: React.FC<ITaskListProps> = ({
                             columnId={columnId}
                             task={el}
                             key={el.uid}
+                            draggable={!controlsDisabled}
                         />
                     </motion.div>
                 ))}
-            <TaskDragIndicator taskBeforeId="-1" columnId={columnId} />
+            {!controlsDisabled && <TaskDragIndicator taskBeforeId="-1" columnId={columnId} />}
         </motion.div>
     );
 };

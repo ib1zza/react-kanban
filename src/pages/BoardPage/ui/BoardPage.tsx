@@ -1,5 +1,5 @@
 import React, {
-    memo, Suspense, useCallback, useEffect,
+    memo, Suspense, useCallback, useEffect, useMemo,
 } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PopupTaskInfo } from 'widgets';
@@ -64,6 +64,8 @@ const BoardPage = memo(() => {
         dispatch(boardCollectionActions.removeSelectedBoard());
     }, [dispatch]);
 
+    const controlsDisabled = useMemo(() => userRole !== LinkedUserType.USER, [userRole]);
+
     return (
         <>
             {selectedBoard && shareStatus && (
@@ -98,11 +100,11 @@ const BoardPage = memo(() => {
                                         key={column.uid}
                                         column={column}
                                         boardId={selectedBoard.uid}
-                                        controlsDisabled={userRole !== LinkedUserType.USER}
+                                        controlsDisabled={controlsDisabled}
 
                                     />
                                 ))}
-                                {userRole === LinkedUserType.USER && <AddColumn key="addColumn" />}
+                                {!controlsDisabled && <AddColumn key="addColumn" />}
                             </motion.div>
                         )}
                     <AnimatePresence>
@@ -111,7 +113,7 @@ const BoardPage = memo(() => {
                             <Suspense>
                                 <PopupTaskInfo
                                     selectedTask={selectedTask}
-                                    controlsDisabled={userRole !== LinkedUserType.USER}
+                                    controlsDisabled={controlsDisabled}
                                 />
                             </Suspense>
                         )}

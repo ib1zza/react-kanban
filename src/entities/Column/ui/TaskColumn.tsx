@@ -25,8 +25,6 @@ const TaskColumn = ({
     boardId,
     controlsDisabled,
 }: ITaskColumnProps) => {
-    // const {t} = useTranslation('buttons');
-
     const [isEditColumn, setIsEditColumn] = useState(false);
 
     const [title, setTitle] = useState<string>(column.title);
@@ -49,12 +47,6 @@ const TaskColumn = ({
     const onAbortMemoized = useCallback(() => {
         setIsEditColumn(false);
     }, []);
-
-    // const onAbort = () => {
-    //     setIsEditColumn(false);
-    // }
-
-    //
 
     return (
         <motion.div

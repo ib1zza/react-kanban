@@ -18,6 +18,7 @@ interface ITaskProps {
     task: ITask;
     boardId: string;
     columnId: string;
+    draggable: boolean;
 }
 
 interface ITaskUserProps {
@@ -37,7 +38,7 @@ const TaskUser = ({ userId }: ITaskUserProps) => {
 };
 
 const Task = memo(({
-    task, boardId, columnId,
+    task, boardId, columnId, draggable,
 }: ITaskProps) => {
     const dispatch = useAppDispatch();
     const openTaskHandler = () => {
@@ -64,7 +65,7 @@ const Task = memo(({
                         task.isCompleted,
                     },
                 )}
-                draggable
+                draggable={draggable}
                 onDragStart={handleStartDrag}
             >
                 <div
