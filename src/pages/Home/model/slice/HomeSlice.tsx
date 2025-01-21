@@ -15,7 +15,7 @@ export const HomeSlice = createSlice({
     initialState,
     reducers: {
         addBoards: (state, action: PayloadAction<IBoard[]>) => {
-            state.boards = action.payload;
+            state.boards = action.payload.sort((a, b) => +b.timeCreated - +a.timeCreated);
         },
         setAddBoardStatus: (state, action: PayloadAction<boolean>) => {
             state.addBoardStatus = action.payload;

@@ -28,5 +28,6 @@
     "add": "Add column",
     "project": "Project",
     "editProject": "Edit project",
-    "Владелец": "Owner:"
+    "Владелец": "Owner:",
+    "Создать доску": "Create board"
 }

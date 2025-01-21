@@ -39,18 +39,6 @@ export const ColumnDark: Story = {
 };
 ColumnDark.decorators = [ThemeDecorator(Theme.DARK)];
 
-export const Edit: Story = {
-    args: {
-        status: ActionFormStatus.EDIT,
-    },
-};
-
-export const EditDark: Story = {
-    args: {
-        status: ActionFormStatus.EDIT,
-    },
-};
-EditDark.decorators = [ThemeDecorator(Theme.DARK)];
 export const Link: Story = {
     args: {
         status: ActionFormStatus.LINK,

@@ -1,9 +1,11 @@
 .selectWrapper {
-
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
   label {
-    font: var(--font-m);
+    font-size: 14px;
     color: var(--InputText);
-    padding: calc(var(--InputPadding) - 4px);
+    padding-left: calc(0px);
   }
 
   .selectButton {
@@ -12,10 +14,10 @@
     align-items: center;
     cursor: pointer;
     padding: var(--InputPadding);
-    background-color: var(--InputBg);
+    background-color: var(--taskBg);
     color: var(--InputText);
     border-radius: var(--InputRadius);
-    font: var(--font-m);
+    font: var(--font-s);
     .placeholder {
 
     }

@@ -11,7 +11,6 @@ import { Input, InputTheme } from '../../Input/Input';
 export enum ActionFormStatus {
     COLUMN = 'COLUMN',
     BOARD = 'BOARD',
-    EDIT = 'EDIT',
     LINK = 'LINK',
 }
 interface Props {
@@ -21,7 +20,6 @@ interface Props {
   status: ActionFormStatus,
   onCreateColumn?: (title: string, color: string) => void;
   onCreateBoard?: (title: string) => void;
-  onEdit?: (title: string, color: string) => void;
   onLink?: (title: string, color: string) => void;
 }
 
@@ -31,7 +29,6 @@ const ActionForm = memo((props: Props) => {
         color: initColor,
         onAbort,
         status,
-        onEdit,
         onLink,
         onCreateColumn,
         onCreateBoard,
@@ -50,10 +47,6 @@ const ActionForm = memo((props: Props) => {
         onCreateColumn && onCreateColumn(title, color);
     }, [color, onCreateColumn, title]);
 
-    const handleEdit = useCallback(() => {
-        onEdit && onEdit(title, color);
-    }, [color, onEdit, title]);
-
     const handleLink = useCallback(() => {
         onLink && onLink(title, color);
     }, [color, onLink, title]);
@@ -70,9 +63,6 @@ const ActionForm = memo((props: Props) => {
             break;
         case ActionFormStatus.COLUMN:
             addColumn();
-            break;
-        case ActionFormStatus.EDIT:
-            handleEdit();
             break;
         case ActionFormStatus.LINK:
             handleLink();

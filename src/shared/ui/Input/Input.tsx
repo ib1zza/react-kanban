@@ -24,6 +24,16 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
     value?: string;
 }
 
+interface TextareaProps extends InputHTMLAttributes<HTMLTextAreaElement>{
+    className?: string;
+    theme?: InputTheme;
+    autofocus?: boolean;
+    label?: string;
+    width?: string;
+    error?: string;
+    value?: string;
+}
+
 export const Input = memo((props: InputProps) => {
     const {
         className,
@@ -86,8 +96,53 @@ export const Input = memo((props: InputProps) => {
                     </button>
                 )
             }
-
         </div>
+    );
+});
 
+export const Textarea = memo((props: TextareaProps) => {
+    const {
+        className,
+        error,
+        value = '',
+        onChange,
+        theme = InputTheme.PRIMARY,
+        placeholder,
+        autofocus,
+        width,
+        label,
+        ...otherProps
+    } = props;
+
+    const mods: Record<string, boolean> = {
+        [s[theme]]: true,
+
+    };
+
+    return (
+        <div
+            style={{ width: `${width}` }}
+            className={classNames(s.InputWrapper, mods, [className as string])}
+        >
+
+            {error ? (
+                <p className={s.error}>
+                    {error}
+                </p>
+            ) : (
+                label && (
+                    <label>
+                        {label}
+                    </label>
+                )
+            )}
+            <textarea
+                value={value}
+                onChange={onChange}
+                className={classNames(s.input, {}, [])}
+                placeholder={placeholder}
+                {...otherProps}
+            />
+        </div>
     );
 });

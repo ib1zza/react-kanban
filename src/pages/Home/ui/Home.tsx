@@ -13,6 +13,11 @@ import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
 import Loader from 'shared/ui/Loader/Loader';
 import { motion } from 'framer-motion';
 import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
+import Modal from 'shared/ui/Modal/Modal';
+import ProfileSkeleton from 'features/Profile/ui/ProfileSkeleton';
+import { Profile } from 'features/Profile';
+import ActionFormCreateBoard from 'shared/ui/ActionForm/ui/ActionFormCreateBoard';
+import { useTranslation } from 'react-i18next';
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
@@ -71,6 +76,8 @@ const Home = memo(() => {
         </div>
     );
 
+    const { t } = useTranslation();
+
     return (
         <div className={s.boardPageContainer}>
             <HomeHeader />
@@ -79,11 +86,19 @@ const Home = memo(() => {
                     <Suspense fallback={Loader}>
 
                         {addBoardStatus && (
-                            <ActionForm
-                                status={ActionFormStatus.BOARD}
-                                onCreateBoard={handleCreateBoard}
-                                onAbort={() => dispatch(homeActions.setAddBoardStatus(false))}
-                            />
+                            <Modal
+                                title={t('Создать доску')}
+                                onClose={() => dispatch(homeActions.setAddBoardStatus(false))}
+                            >
+                                <ActionFormCreateBoard
+                                    onCreate={handleCreateBoard}
+                                />
+                                {/* <ActionForm */}
+                                {/*    status={ActionFormStatus.BOARD} */}
+                                {/*    onCreateBoard={handleCreateBoard} */}
+                                {/*    onAbort={() => dispatch(homeActions.setAddBoardStatus(false))} */}
+                                {/* /> */}
+                            </Modal>
                         )}
                         {linkBoardStatus && (
                             <ActionForm
@@ -99,7 +114,7 @@ const Home = memo(() => {
                                     variants={{
                                         visible: {
                                             transition: {
-                                                staggerChildren: 0.1,
+                                                staggerChildren: 0.05,
                                             },
                                         },
                                     }}

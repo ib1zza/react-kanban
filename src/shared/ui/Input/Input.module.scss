@@ -2,20 +2,27 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    gap: 3px;
+
     label {
-        font: var(--font-m);
+        font-size: 14px;
         color: var(--altWbText);
-        padding: calc(var(--InputPadding) - 4px);
+        padding-left: calc(0px);
+        text-align: left;
     }
-    input {
+    input, textarea {
         border: none;
         padding: var(--InputPadding);
-        background-color: var(--InputBg);
+        //background-color: var(--InputBg);
         color: var(--InputText);
         border-radius: var(--InputRadius);
-        font: var(--font-m);
+        font: var(--font-s);
+        background-color: var(--taskBg);
+        resize: none;
 
-
+        &:focus {
+            outline: none;
+        }
     }
 
     input::placeholder {
@@ -67,10 +74,10 @@
     input {
         border: none;
         padding: var(--InputPadding);
-        background-color: var(--InputBg);
+        background-color: var(--taskBg);
         color: var(--InputText);
         border-radius: var(--InputRadius);
-        font: var(--font-m);
+        font: var(--font-s);
     }
 }
 

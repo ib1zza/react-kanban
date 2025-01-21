@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import s from './modal.module.scss';
 import Button from '../Button/Button';
 import MemoizedFontAwesomeIcon from '../MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import Element = React.JSX.Element;
 
 interface IModal {
   onClose: () => void;
@@ -28,7 +29,7 @@ const Modal = memo((props: IModal) => {
                     </div>
                 </div>
             </div>,
-            document.body,
+            document.body.querySelector('.app') as globalThis.Element,
         )
     );
 });

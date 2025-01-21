@@ -15,6 +15,7 @@
     left: calc(50% - 10px);
     transform: translate(-50%, -50%);
     z-index: 100;
+    min-width: 300px;
     max-width: calc(100% - 20px);
     margin: 10px;
 }
@@ -54,12 +55,14 @@
     font-size: 14px;
     color: #2c3e50;
     text-align: center;
+    position: relative;
+    z-index: 101;
 }
 .header {
     display: flex;
     justify-content: center;
     width: 100%;
-    position: relative;
+    //position: relative;
     p {
         color: #000;
 
@@ -72,11 +75,14 @@
     }
 }
 .closeBtn {
+    $marginFromSides: 10px;
     position: absolute;
-    right: 0;
+    right: $marginFromSides;
+    top: $marginFromSides;
     cursor: pointer;
     padding: 4px 6.25px;
     color: black;
+    z-index: 102;
     transition: all 0.25s ease;
     box-shadow: 0 5px 20px 0 rgb(0 0 0 / 6%);
     border-radius: 10px;

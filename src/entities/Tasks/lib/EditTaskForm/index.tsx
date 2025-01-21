@@ -10,6 +10,7 @@ import ConfirmButtons from 'shared/ui/ConfirmButtons/ConfirmButtons';
 import { getLinkedUsers } from 'pages/BoardPage';
 import { IUserInfo } from 'app/types/IUserInfo';
 import { useUsersInfo } from 'features/users/hooks/useUsersInfo';
+import { Input, Textarea } from 'shared/ui/Input/Input';
 import s from './EditTaskForm.module.scss';
 
 interface Props {
@@ -29,7 +30,9 @@ const EditTaskForm = memo(({
     const [description, setDescription] = useState(prevTask.description);
     const linkedUsersInfo = useAppSelector(getLinkedUsers);
 
-    const [linkedUsers] = useUsersInfo(linkedUsersInfo?.map((el) => el.uid) || []);
+    const usersIds = useMemo(() => linkedUsersInfo?.map((el) => el.uid) || [], [linkedUsersInfo]);
+
+    const [linkedUsers] = useUsersInfo(usersIds);
     const { t } = useTranslation();
 
     const [linkedUserId, setLinkedUserId] = useState(prevTask.attachedUser);
@@ -76,22 +79,19 @@ const EditTaskForm = memo(({
         <div>
             <div className={s.form}>
                 <div>
-                    <label htmlFor="titleInput">{t('Заголовок')}</label>
-                    <input
+                    <Input
                         value={title}
-                        id="titleInput"
-                        type="text"
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder={t('Заголовок')}
+                        label={t('Заголовок')}
                     />
                 </div>
                 <div>
-                    <label htmlFor="descriptionInput">{t('Описание')}</label>
-                    <textarea
+                    <Textarea
                         value={description}
-                        id="descriptionInput"
                         onChange={(e) => setDescription(e.target.value)}
                         placeholder={t('Описание')}
+                        label={t('Описание')}
                     />
                 </div>
                 {linkedUsers.length > 0
