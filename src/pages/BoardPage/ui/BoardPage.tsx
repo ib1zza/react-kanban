@@ -95,13 +95,14 @@ const BoardPage = memo(() => {
                                 className={s.columnsWrapper}
                                 layout
                             >
-                                {getColumnsFromBoard(selectedBoard).map((column) => (
+                                {selectedBoard.columns.map((column, index) => (
                                     <TaskColumn
                                         key={column.uid}
                                         column={column}
                                         boardId={selectedBoard.uid}
                                         controlsDisabled={controlsDisabled}
-
+                                        canMoveLeft={index !== 0}
+                                        canMoveRight={index !== selectedBoard.columns.length - 1}
                                     />
                                 ))}
                                 {!controlsDisabled && <AddColumn key="addColumn" />}

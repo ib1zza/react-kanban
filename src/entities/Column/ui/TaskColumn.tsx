@@ -1,5 +1,5 @@
 import React, { useState, useCallback, memo } from 'react';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCaretLeft, faCaretRight, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { deleteColumn, editColumn } from 'features/columns';
 import { IColumn, IColumnFromServer } from 'app/types/IBoardFromServer';
@@ -11,6 +11,7 @@ import { Input, InputTheme } from 'shared/ui/Input/Input';
 import ColorPicker from 'shared/ui/ColorPicker/ColorPicker';
 import ConfirmButtons from 'shared/ui/ConfirmButtons/ConfirmButtons';
 import AddTaskForm from 'entities/Column/lib/AddTaskForm/AddTaskForm';
+import { classNames } from 'shared/lib/classNames/classNames';
 import TaskList from '../lib/TaskList/TaskList';
 import s from './TaskColumn.module.scss';
 
@@ -18,12 +19,16 @@ interface ITaskColumnProps {
     column: IColumn;
     boardId: string;
     controlsDisabled: boolean;
+    canMoveLeft: boolean;
+    canMoveRight: boolean;
 }
 
 const TaskColumn = ({
     column,
     boardId,
     controlsDisabled,
+    canMoveRight,
+    canMoveLeft,
 }: ITaskColumnProps) => {
     const [isEditColumn, setIsEditColumn] = useState(false);
 
@@ -48,6 +53,14 @@ const TaskColumn = ({
         setIsEditColumn(false);
     }, []);
 
+    const handleMoveColumnRight = () => {
+        // TODO
+    };
+
+    const handleMoveColumnLeft = () => {
+        // TODO
+    };
+
     return (
         <motion.div
             layout
@@ -64,12 +77,46 @@ const TaskColumn = ({
                     },
                 },
             }}
+            whileHover="columnHover"
             className={`${s.container} ${s.withColor}`}
         >
             <div
                 className={s.headerColor}
                 style={{ backgroundColor: color }}
-            />
+            >
+                {
+                    !controlsDisabled
+                    && (
+                        <motion.div
+                            variants={{
+                                visible: {
+                                    opacity: 0,
+                                },
+                                columnHover: {
+                                    opacity: 1,
+                                },
+                            }}
+                            className={s.columnButtons}
+                        >
+                            {canMoveLeft && (
+                                <Button
+                                    className={classNames(s.moveColumnButton, {}, [s.left])}
+                                    icon={faCaretLeft}
+                                    onClick={handleMoveColumnLeft}
+                                />
+                            )}
+                            {canMoveRight && (
+                                <Button
+                                    className={classNames(s.moveColumnButton, {}, [s.right])}
+                                    icon={faCaretRight}
+                                    onClick={handleMoveColumnRight}
+                                />
+                            )}
+                        </motion.div>
+                    )
+                }
+            </div>
+
             <hr />
 
             {
