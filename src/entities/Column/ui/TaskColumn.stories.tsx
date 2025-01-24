@@ -21,6 +21,7 @@ export const Primary: Story = {
             timeCreated: '',
             timeUpdated: '',
             color: '#2e2e2e',
+            displayIndex: 0,
         },
     },
 };
@@ -33,6 +34,7 @@ export const PrimaryDark: Story = {
             timeCreated: '',
             timeUpdated: '',
             color: '#2e2e2e',
+            displayIndex: 0,
         },
     },
 };
