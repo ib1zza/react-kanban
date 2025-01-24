@@ -29,6 +29,7 @@ export interface IColumnFromServer {
   timeCreated: string;
   timeUpdated: string;
   color: string;
+  displayIndex: number;
 }
 
 export interface IColumn {
@@ -38,6 +39,7 @@ export interface IColumn {
   timeCreated: string;
   timeUpdated: string;
   color: string;
+  displayIndex: number;
 }
 
 export interface IBoardSmallInfoFromServer {

@@ -11,7 +11,8 @@ export function mapBoardFromServer(board: IBoardFromServer): IBoard {
         timeCreated: column.timeCreated,
         timeUpdated: column.timeUpdated,
         color: column.color,
-    }));
+        displayIndex: column.displayIndex,
+    })).sort((a, b) => a.displayIndex - b.displayIndex);
 
     // Map users from the server format to the board format
     const users: IBoardUserInfo[] | undefined = board.users

@@ -36,9 +36,9 @@ const AddColumn = ({ className }: AddColumnProps) => {
         async (title: string, color: string) => {
             if (!selectedBoard?.uid) return;
             handleCreateColumnCancel();
-            await createColumnRt(title, color || '#808080', selectedBoard.uid);
+            await createColumnRt(title, color || '#808080', selectedBoard.uid, selectedBoard.columns.length);
         },
-        [selectedBoard?.uid],
+        [selectedBoard?.uid, selectedBoard?.columns.length],
     );
 
     return (

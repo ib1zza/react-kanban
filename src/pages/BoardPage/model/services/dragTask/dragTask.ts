@@ -69,7 +69,6 @@ export const dragTaskThunk = createAsyncThunk<any, ITaskForDragInfo, { rejectVal
                         return;
                     }
 
-                    console.log('there');
                     await Promise.allSettled(prevColumn.tasks
                         .filter((t) => t.uid !== draggedTask.uid
                             && t.displayId > draggedTask.displayId && t.displayId < newDisplayId)
@@ -87,8 +86,6 @@ export const dragTaskThunk = createAsyncThunk<any, ITaskForDragInfo, { rejectVal
                 }
 
                 if (newDisplayId < draggedTask.displayId) {
-                    console.log('hello');
-
                     await Promise.allSettled(prevColumn.tasks
                         .filter((t) => t.uid !== draggedTask.uid && t.displayId >= newDisplayId
                             && t.displayId < draggedTask.displayId)
@@ -130,7 +127,6 @@ export const dragTaskThunk = createAsyncThunk<any, ITaskForDragInfo, { rejectVal
                 });
             }
         } catch (e) {
-            console.log(e);
             return rejectWithValue('error while getting notifications');
         }
     },

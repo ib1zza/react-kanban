@@ -12,6 +12,9 @@ import ColorPicker from 'shared/ui/ColorPicker/ColorPicker';
 import ConfirmButtons from 'shared/ui/ConfirmButtons/ConfirmButtons';
 import AddTaskForm from 'entities/Column/lib/AddTaskForm/AddTaskForm';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { useAppDispatch } from 'app/providers/StoreProvider';
+import { moveColumnThunk } from 'pages/BoardPage/model/services/moveColumn/moveColumn';
+import { deleteColumnThunk } from 'pages/BoardPage/model/services/deleteColumn/deleteColumn';
 import TaskList from '../lib/TaskList/TaskList';
 import s from './TaskColumn.module.scss';
 
@@ -30,6 +33,7 @@ const TaskColumn = ({
     canMoveRight,
     canMoveLeft,
 }: ITaskColumnProps) => {
+    const dispatch = useAppDispatch();
     const [isEditColumn, setIsEditColumn] = useState(false);
 
     const [title, setTitle] = useState<string>(column.title);
@@ -54,11 +58,28 @@ const TaskColumn = ({
     }, []);
 
     const handleMoveColumnRight = () => {
+        dispatch(moveColumnThunk({
+            colId: column.uid,
+            direction: 'right',
+            prevDisplayIndex: column.displayIndex,
+        }));
         // TODO
     };
 
     const handleMoveColumnLeft = () => {
         // TODO
+        dispatch(moveColumnThunk({
+            colId: column.uid,
+            direction: 'left',
+            prevDisplayIndex: column.displayIndex,
+        }));
+    };
+
+    const handleDeleteColumn = () => {
+        dispatch(deleteColumnThunk({
+            columnId: column.uid,
+            displayId: column.displayIndex,
+        }));
     };
 
     return (
@@ -156,7 +177,7 @@ const TaskColumn = ({
                                         />
                                         <Button
                                             className={s.deleteButton}
-                                            onClick={() => deleteColumn(boardId, column.uid)}
+                                            onClick={handleDeleteColumn}
                                             icon={faTrashCan}
                                         />
                                     </div>

@@ -12,7 +12,7 @@ import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useUserInfo } from 'features/users/hooks/useUserInfo';
 import { ITask } from 'app/types/IBoardFromServer';
-import { deleteTaskThunk } from 'pages/BoardPage/model/services/dragTask/deleteTask/deleteTask';
+import { deleteTaskThunk } from 'pages/BoardPage/model/services/deleteTask/deleteTask';
 import { motion } from 'framer-motion';
 import s from './PopupTaskInfo.module.scss';
 

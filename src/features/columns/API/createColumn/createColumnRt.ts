@@ -6,6 +6,7 @@ export const createColumnRt = async (
     title: string,
     color: string,
     boardId: string,
+    displayIndex: number,
 ) => {
     const newColumnId = uuid();
 
@@ -17,6 +18,7 @@ export const createColumnRt = async (
             timeCreated: Date.now(),
             timeUpdated: Date.now(),
             color,
+            displayIndex,
         },
     };
     return update(ref(rtdb), updates);

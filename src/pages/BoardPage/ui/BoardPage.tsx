@@ -64,6 +64,10 @@ const BoardPage = memo(() => {
         dispatch(boardCollectionActions.removeSelectedBoard());
     }, [dispatch]);
 
+    // console.log(selectedBoard?.columns.map((c) => ({
+    //     title: c.title,
+    //     displayId: c.displayIndex,
+    // })));
     const controlsDisabled = useMemo(() => userRole !== LinkedUserType.USER, [userRole]);
 
     return (
