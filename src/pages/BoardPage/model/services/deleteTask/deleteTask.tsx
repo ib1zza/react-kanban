@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers/StoreProvider';
 import { deleteTask, editTask } from 'features/tasks';
 import { IColumn } from 'app/types/IBoardFromServer';
+import { boardCollectionActions } from 'pages/BoardPage';
 
 export interface ITaskForDeleteInfo {
     columnId: string;
@@ -14,13 +15,13 @@ export const deleteTaskThunk = createAsyncThunk<any, ITaskForDeleteInfo, {
     getState: StateSchema
 }>(
     'board/deleteTask',
-    async (info, { getState, rejectWithValue }) => {
+    async (info, { getState, rejectWithValue, dispatch }) => {
         // return;
         try {
             const { columnId, taskId, displayId } = info;
 
             // get selected board
-            const { selectedBoard } = (getState() as StateSchema).boardCollection;
+            const { selectedBoard, selectedTask } = (getState() as StateSchema).boardCollection;
 
             if (!selectedBoard) {
                 return rejectWithValue('Error while creating task. No such board find');
@@ -44,6 +45,10 @@ export const deleteTaskThunk = createAsyncThunk<any, ITaskForDeleteInfo, {
                 })));
 
             await deleteTask(selectedBoard.uid, columnId, taskId);
+
+            if (taskId === selectedTask?.uid) {
+                dispatch(boardCollectionActions.removeSelectedTask());
+            }
         } catch (e) {
             console.log(e);
             return rejectWithValue('error while getting notifications');

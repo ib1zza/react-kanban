@@ -3,6 +3,7 @@ import { StateSchema } from 'app/providers/StoreProvider';
 import { deleteTask, editTask } from 'features/tasks';
 import { IColumn } from 'app/types/IBoardFromServer';
 import { deleteColumn, editColumn } from 'features/columns';
+import { boardCollectionActions } from 'pages/BoardPage';
 
 export interface IColumnForDeleteInfo {
     columnId: string;
@@ -14,13 +15,13 @@ export const deleteColumnThunk = createAsyncThunk<any, IColumnForDeleteInfo, {
     getState: StateSchema
 }>(
     'board/deleteColumn',
-    async (info, { getState, rejectWithValue }) => {
+    async (info, { getState, rejectWithValue, dispatch }) => {
         // return;
         try {
             const { columnId, displayId } = info;
 
             // get selected board
-            const { selectedBoard } = (getState() as StateSchema).boardCollection;
+            const { selectedBoard, selectedTask, selectedColumnId } = (getState() as StateSchema).boardCollection;
 
             if (!selectedBoard) {
                 return rejectWithValue('Error while creating task. No such board find');
@@ -33,6 +34,10 @@ export const deleteColumnThunk = createAsyncThunk<any, IColumnForDeleteInfo, {
                     .map((col) => editColumn(selectedBoard.uid, col.uid, {
                         displayIndex: col.displayIndex - 1,
                     })));
+            }
+
+            if (selectedColumnId === columnId) {
+                dispatch(boardCollectionActions.removeSelectedTask());
             }
 
             await deleteColumn(selectedBoard.uid, columnId);
