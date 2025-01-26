@@ -10,6 +10,7 @@ import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedF
 import Modal from 'shared/ui/Modal/Modal';
 import { useUserRole } from 'features/boards/hooks/useUserRole';
 import { LinkedUserType } from 'app/types/IBoardFromServer';
+import WarningForm from 'shared/ui/WarningForm/WarningForm';
 import s from './BoardPageHeader.module.scss';
 
 interface Props {
@@ -23,6 +24,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
     onDelete,
     title,
 }: Props) => {
+    const [isDeleting, setDeleting] = useState(false);
     const [isEditing, setEditing] = useState(false);
     const [editingTitle, setEditingTitle] = useState(title);
     const { t } = useTranslation();
@@ -50,9 +52,21 @@ const BoardPageHeader: React.FC<Props> = memo(({
     const handleEditText = useCallback((value: React.SetStateAction<string>) => {
         setEditingTitle(value);
     }, []);
-    const handleDelete = useCallback(() => {
-        onDelete();
+    const handleDeleteStart = useCallback(() => {
+        setEditing(false);
+        setDeleting(true);
     }, [onDelete]);
+
+    const handleDeleteAbort = useCallback(() => {
+        setDeleting(false);
+    }, [isDeleting]);
+
+    const handleDeleteConfirm = useCallback(() => {
+        if (isDeleting) {
+            onDelete();
+            setDeleting(false);
+        }
+    }, [isDeleting, onDelete]);
 
     return (
         <div className={s.BoardPageHeader}>
@@ -101,7 +115,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
                             </div>
                         </div>
                         <Button
-                            onClick={handleDelete}
+                            onClick={handleDeleteStart}
                             theme={ButtonTheme.RED}
                             size={ButtonSize.M}
                             className={s.logout}
@@ -111,6 +125,18 @@ const BoardPageHeader: React.FC<Props> = memo(({
                     </div>
                 </Modal>
             )}
+            {
+                isDeleting && (
+                    <Modal onClose={handleDeleteAbort}>
+                        <WarningForm
+                            onCancel={handleDeleteAbort}
+                            onConfirm={handleDeleteConfirm}
+                            title={t('Удаление проекта')}
+                            text={t('Вы действительно хотите удалить проект?')}
+                        />
+                    </Modal>
+                )
+            }
         </div>
     );
 });

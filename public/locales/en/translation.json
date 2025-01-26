@@ -31,5 +31,7 @@
     "Владелец": "Owner:",
     "Создать доску": "Create board",
     "Удаление колонки": "Delete column",
-    "Уверены что хотите удалить колонку?": "Are you sure you want to delete the column? It will also delete all related tasks."
+    "Уверены что хотите удалить колонку?": "Are you sure you want to delete the column? It will also delete all related tasks.",
+    "Удаление проекта": "Delete project",
+    "Вы действительно хотите удалить проект?": "Are you sure you want to delete the project? This action cannot be undone."
 }
