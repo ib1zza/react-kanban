@@ -98,7 +98,7 @@
     cursor: pointer;
     //border: 2px solid;
     &:hover {
-        background-color: rgb(68 68 68 / 14%);
+        background-color: var(--btnHoverBg);
     }
 }
 

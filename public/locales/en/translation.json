@@ -29,5 +29,7 @@
     "project": "Project",
     "editProject": "Edit project",
     "Владелец": "Owner:",
-    "Создать доску": "Create board"
+    "Создать доску": "Create board",
+    "Удаление колонки": "Delete column",
+    "Уверены что хотите удалить колонку?": "Are you sure you want to delete the column? It will also delete all related tasks."
 }

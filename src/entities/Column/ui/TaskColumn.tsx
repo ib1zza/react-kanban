@@ -15,8 +15,10 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { moveColumnThunk } from 'pages/BoardPage/model/services/moveColumn/moveColumn';
 import { deleteColumnThunk } from 'pages/BoardPage/model/services/deleteColumn/deleteColumn';
-import TaskList from '../lib/TaskList/TaskList';
+import WarningForm from 'shared/ui/WarningForm/WarningForm';
+import Modal from 'shared/ui/Modal/Modal';
 import s from './TaskColumn.module.scss';
+import TaskList from '../lib/TaskList/TaskList';
 
 interface ITaskColumnProps {
     column: IColumn;
@@ -34,6 +36,7 @@ const TaskColumn = ({
     canMoveLeft,
 }: ITaskColumnProps) => {
     const dispatch = useAppDispatch();
+    const [isDeleting, setIsDeleting] = useState(false);
     const [isEditColumn, setIsEditColumn] = useState(false);
 
     const [title, setTitle] = useState<string>(column.title);
@@ -76,11 +79,21 @@ const TaskColumn = ({
     };
 
     const handleDeleteColumn = () => {
+        setIsDeleting(true);
+    };
+
+    const onDeleteAbort = () => {
+        setIsDeleting(false);
+    };
+
+    const onDeleteConfirm = async () => {
         dispatch(deleteColumnThunk({
             columnId: column.uid,
             displayId: column.displayIndex,
         }));
     };
+
+    const { t } = useTranslation();
 
     return (
         <motion.div
@@ -206,6 +219,16 @@ const TaskColumn = ({
                         </>
                     )
             }
+            {isDeleting && (
+                <Modal onClose={onDeleteAbort}>
+                    <WarningForm
+                        title={t('Удаление колонки')}
+                        text={t('Уверены что хотите удалить колонку?')}
+                        onCancel={onDeleteAbort}
+                        onConfirm={onDeleteConfirm}
+                    />
+                </Modal>
+            )}
 
         </motion.div>
     );
