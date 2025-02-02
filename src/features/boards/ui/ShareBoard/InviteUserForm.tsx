@@ -61,6 +61,11 @@ const InviteUserForm = memo(({ board }: Props) => {
         }, 2000);
     }, [error, success]);
 
+    const handleCopyPublicLink = useCallback(() => {
+        console.log(window.location.href);
+        navigator.clipboard.writeText(window.location.href);
+    }, []);
+
     return (
         <div className={s.form__share}>
             <div className={s.form__title}>
@@ -102,11 +107,21 @@ const InviteUserForm = memo(({ board }: Props) => {
                 onChange={(e) => setEmail(e.target.value)}
             />
             <Button
-                onClick={() => handleSubmit()}
+                onClick={handleSubmit}
             >
                 {t('Добавить')}
 
             </Button>
+
+            {board.public
+                && (
+                    <Button
+                        onClick={handleCopyPublicLink}
+                    >
+                        {t('Скопировать ссылку')}
+
+                    </Button>
+                )}
             <div className={s.form__success}>{success}</div>
         </div>
     );

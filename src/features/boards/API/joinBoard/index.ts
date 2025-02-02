@@ -31,7 +31,18 @@ export const checkIfBoardIsPublic = async (
     }
 };
 
-export const joinBoardRt = async (userId: string, boardId: string) => {
+export const joinBoardRt = async (userId: string, id: string) => {
+    // http://localhost:3000/board/5bfd279f-838c-4f49-98a1-da2c6adabb0c
+
+    const parseBoardId = (id: string) => {
+        if (id.startsWith('http')) {
+            return id.split('/').pop() as string;
+        }
+        return id;
+    };
+
+    const boardId = parseBoardId(id);
+
     const board = await checkIfBoardIsPublic(boardId);
 
     if (!board) {

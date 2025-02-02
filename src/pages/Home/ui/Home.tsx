@@ -59,10 +59,12 @@ const Home = memo(() => {
         async (id: string) => {
             dispatch(homeActions.setAddBoardStatus(false));
             // TODO: add user
-            const res = await joinBoardRt(id, user?.uid as string);
+            const res = await joinBoardRt(user?.uid as string, id);
 
             if (!res) {
                 dispatch(errorActions.setError('Не удалось присоединиться к доске'));
+            } else {
+                dispatch(homeActions.setLinkBoardStatus(false));
             }
         },
         [dispatch, user?.uid],
