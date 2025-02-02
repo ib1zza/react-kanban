@@ -18,7 +18,6 @@ export const Primary: Story = {
         board: {
             uid: '',
             columns: [],
-
             guestPermissions: [],
             // guestsAllowed: [],
             ownerId: '',
@@ -26,6 +25,7 @@ export const Primary: Story = {
             // usersAllowed: [],
             timeCreated: '',
             timeUpdated: '',
+            public: true,
         },
     },
 };
@@ -42,8 +42,8 @@ export const PrimaryDark: Story = {
             // usersAllowed: [],
             timeCreated: '',
             timeUpdated: '',
+            public: true,
         },
-
     },
 };
 PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];

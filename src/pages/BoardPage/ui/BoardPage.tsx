@@ -78,11 +78,13 @@ const BoardPage = memo(() => {
                 </Modal>
             )}
             <div className={s.wrapperContainer}>
-                <BoardPageHeader
-                    onEdit={handleEditTitle}
-                    title={selectedBoard?.title || 'loading...'}
-                    onDelete={handleDeleteBoard}
-                />
+                {selectedBoard && (
+                    <BoardPageHeader
+                        onEdit={handleEditTitle}
+                        board={selectedBoard}
+                        onDelete={handleDeleteBoard}
+                    />
+                )}
                 <div className={s.wrapper}>
 
                     {!selectedBoard

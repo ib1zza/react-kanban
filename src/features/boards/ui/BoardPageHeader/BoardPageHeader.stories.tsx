@@ -15,12 +15,32 @@ export default meta;
 type Story = StoryObj<typeof BoardPageHeader>;
 export const Primary: Story = {
     args: {
-        title: 'title',
+        board: {
+            title: 'title',
+            public: true,
+            columns: [],
+            uid: 'uid',
+            timeUpdated: '0',
+            timeCreated: '0',
+            users: [],
+            guestPermissions: [],
+            ownerId: 'uid',
+        },
     },
 };
 export const PrimaryDark: Story = {
     args: {
-        title: 'title',
+        board: {
+            title: 'title',
+            public: true,
+            columns: [],
+            uid: 'uid',
+            timeUpdated: '0',
+            timeCreated: '0',
+            users: [],
+            guestPermissions: [],
+            ownerId: 'uid',
+        },
     },
 };
 PrimaryDark.decorators = [ThemeDecorator(Theme.DARK)];

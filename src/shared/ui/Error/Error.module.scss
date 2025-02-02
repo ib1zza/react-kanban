@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 300px;
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .text {
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    .delete {
+      color: var(--red);
+    }
+  }
+}

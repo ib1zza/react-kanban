@@ -6,18 +6,16 @@ import React, {
 } from 'react';
 import { BoardPreview, mapBoardFromServer } from 'entities/Board';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import ActionForm, { ActionFormStatus } from 'shared/ui/ActionForm/ui/ActionForm';
 import { createBoardRt } from 'features/boards';
 import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUserBoards';
 import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
-import Loader from 'shared/ui/Loader/Loader';
 import { motion } from 'framer-motion';
 import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
 import Modal from 'shared/ui/Modal/Modal';
-import ProfileSkeleton from 'features/Profile/ui/ProfileSkeleton';
-import { Profile } from 'features/Profile';
 import ActionFormAddBoard from 'shared/ui/ActionForm/ui/ActionFormAddBoard';
 import { useTranslation } from 'react-i18next';
+import { joinBoardRt } from 'features/boards/API/joinBoard';
+import { errorActions } from 'entities/Error/model/slice/ErrorSlice';
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
 import s from './Home.module.scss';
@@ -61,7 +59,11 @@ const Home = memo(() => {
         async (id: string) => {
             dispatch(homeActions.setAddBoardStatus(false));
             // TODO: add user
-            // await addUserToBoard(id, user?.uid as string, LinkedUserType.USER);
+            const res = await joinBoardRt(id, user?.uid as string);
+
+            if (!res) {
+                dispatch(errorActions.setError('Не удалось присоединиться к доске'));
+            }
         },
         [dispatch, user?.uid],
     );

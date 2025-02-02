@@ -91,26 +91,63 @@
     min-width: 280px;
     width: 300px;
     max-width: 100%;
+    text-align: right;
 }
 
-.inputWrapper {
+.form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
     margin-bottom: 20px;
     .label {
         text-align: left;
         font-size: 14px;
-        font-weight: 600;
         color: black;
     }
 
     .inputContainer {
         display: flex;
         gap: 5px;
+        align-items: flex-end;
 
         .input {
             flex-basis: 100%;
+        }
+
+        .button {
+            height: 43px;
+        }
+    }
+
+    .radioContainer {
+        text-align: left;
+
+        .radioButtons {
+            display: flex;
+            gap: 4px;
+            flex-direction: column;
+            margin-top: 4px;
+
+            .radioWrapper {
+                display: flex;
+                gap: 4px;
+                align-items: flex-start;
+
+                input {
+                    margin-top: 2px;
+                    width: 14px;
+                    height: 14px;
+                    flex-shrink: 0;
+                }
+            }
+
+            .radioTitle {
+                margin-right: 4px;
+            }
+
+            .radioDesc {
+                opacity: 0.8;
+            }
         }
     }
 }

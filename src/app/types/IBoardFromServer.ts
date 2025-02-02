@@ -77,6 +77,7 @@ export interface IBoardFromServer {
   // usersAllowed?: string[];
   timeCreated: string;
   timeUpdated: string;
+  public: boolean;
   users?: {
     [userId: string]: {
       role: LinkedUserType;
@@ -107,4 +108,5 @@ export interface IBoard {
   timeCreated: string;
   timeUpdated: string;
   users?: IBoardUserInfo[]
+  public: boolean;
 }

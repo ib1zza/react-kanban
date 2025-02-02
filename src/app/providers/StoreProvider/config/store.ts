@@ -6,6 +6,7 @@ import { notificationReducer } from 'entities/Notifications';
 import { userInfoReducer } from 'features/users/model/slice/userInfoSlice';
 import { loginReducer } from 'features/auth/login';
 import { signupReducer } from 'features/auth/signup';
+import { errorReducer } from 'entities/Error/model/slice/ErrorSlice';
 import { StateSchema } from './StateSchema';
 
 export function createReduxStore(initialState?: StateSchema) {
@@ -17,6 +18,7 @@ export function createReduxStore(initialState?: StateSchema) {
             login: loginReducer,
             signup: signupReducer,
             home: homeReducer,
+            error: errorReducer,
         },
         preloadedState: initialState,
     });
@@ -29,9 +31,8 @@ export const store = configureStore({
         login: loginReducer,
         signup: signupReducer,
         home: homeReducer,
-
+        error: errorReducer,
     },
-
 });
 
 type RootState = ReturnType<typeof store.getState>

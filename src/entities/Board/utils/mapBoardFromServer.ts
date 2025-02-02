@@ -37,5 +37,6 @@ export function mapBoardFromServer(board: IBoardFromServer): IBoard {
         timeCreated: board.timeCreated,
         timeUpdated: board.timeUpdated,
         users,
+        public: board.public,
     };
 }

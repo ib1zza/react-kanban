@@ -1,6 +1,5 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import { BoardPage } from 'pages/BoardPage';
 import { Home } from '../../../../pages/Home';
 
@@ -18,7 +17,6 @@ const MainRouter = () => (
                 <Home />
             )}
         />
-
     </Routes>
 );
 

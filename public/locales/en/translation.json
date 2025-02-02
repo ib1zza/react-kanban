@@ -36,5 +36,15 @@
     "Вы действительно хотите удалить проект?": "Are you sure you want to delete the project? This action cannot be undone.",
     "Введите название": "Enter board name",
     "Присоединиться к доске": "Join board",
-    "Введите ccылку": "Enter link"
+    "Введите ccылку": "Enter link",
+    "Error occurred": "An error occurred",
+    "Close": "Close",
+    "Cancel": "Cancel",
+    "Delete": "Delete",
+    "Не удалось присоединиться к доске": "Failed to join board. It may be private.",
+    "Access level": "Access level",
+    "Public": "Public",
+    "Private": "Private",
+    "Only users that you invite via email can see": "Only users that you invite via email can see",
+    "Everyone with link can see": "Everyone with link can see"
 }

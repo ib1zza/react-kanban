@@ -9,12 +9,13 @@ import { useTranslation } from 'react-i18next';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import Modal from 'shared/ui/Modal/Modal';
 import { useUserRole } from 'features/boards/hooks/useUserRole';
-import { LinkedUserType } from 'app/types/IBoardFromServer';
+import { IBoard, LinkedUserType } from 'app/types/IBoardFromServer';
 import WarningForm from 'shared/ui/WarningForm/WarningForm';
+import { editBoard } from 'features/boards';
 import s from './BoardPageHeader.module.scss';
 
 interface Props {
-    title: string;
+    board: IBoard;
     onEdit: (newTitle: string) => void;
     onDelete: () => void;
 }
@@ -22,11 +23,12 @@ interface Props {
 const BoardPageHeader: React.FC<Props> = memo(({
     onEdit,
     onDelete,
-    title,
+    board,
 }: Props) => {
     const [isDeleting, setDeleting] = useState(false);
     const [isEditing, setEditing] = useState(false);
-    const [editingTitle, setEditingTitle] = useState(title);
+    const [editingTitle, setEditingTitle] = useState(board.title);
+    const [isPublic, setIsPublic] = useState(board.public);
     const { t } = useTranslation();
     const userRole = useUserRole();
 
@@ -47,19 +49,19 @@ const BoardPageHeader: React.FC<Props> = memo(({
     }, [editingTitle, onEdit]);
 
     useEffect(() => {
-        setEditingTitle(title);
-    }, [title]);
+        setEditingTitle(board.title);
+    }, [board.title]);
     const handleEditText = useCallback((value: React.SetStateAction<string>) => {
         setEditingTitle(value);
     }, []);
     const handleDeleteStart = useCallback(() => {
         setEditing(false);
         setDeleting(true);
-    }, [onDelete]);
+    }, []);
 
     const handleDeleteAbort = useCallback(() => {
         setDeleting(false);
-    }, [isDeleting]);
+    }, []);
 
     const handleDeleteConfirm = useCallback(() => {
         if (isDeleting) {
@@ -68,6 +70,17 @@ const BoardPageHeader: React.FC<Props> = memo(({
         }
     }, [isDeleting, onDelete]);
 
+    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value === 'public';
+
+        if (newValue !== isPublic) {
+            setIsPublic(newValue);
+            editBoard(board.uid, {
+                public: newValue,
+            });
+        }
+    };
+
     return (
         <div className={s.BoardPageHeader}>
             <h1 className={s.title}>
@@ -75,7 +88,7 @@ const BoardPageHeader: React.FC<Props> = memo(({
                     {t('project')}
                     :
                     {' '}
-                    {title}
+                    {board.title}
                 </div>
                 {userRole === LinkedUserType.USER && (
                     <Button
@@ -93,13 +106,14 @@ const BoardPageHeader: React.FC<Props> = memo(({
             {userRole === LinkedUserType.USER && isEditing && (
                 <Modal onClose={handleCloseModal} title={t('editProject')}>
                     <div className={s.contentWrapper}>
-                        <div className={s.inputWrapper}>
-                            <label className={s.label}>{t('Название')}</label>
+                        <form className={s.form}>
                             <div className={s.inputContainer}>
                                 <Input
                                     className={s.input}
                                     maxLength={40}
                                     type="text"
+                                    label={t('Название')}
+                                    placeholder={t('Название')}
                                     value={editingTitle}
                                     onChange={(e) => handleEditText(e.target.value)}
                                 />
@@ -113,12 +127,61 @@ const BoardPageHeader: React.FC<Props> = memo(({
                                     <MemoizedFontAwesomeIcon icon={faCircleCheck} />
                                 </Button>
                             </div>
-                        </div>
+                            <div className={s.radioContainer}>
+                                <p className={s.label}>
+                                    {t('Access level')}
+                                </p>
+
+                                <div className={s.radioButtons}>
+                                    <div className={s.radioWrapper}>
+                                        <input
+                                            type="radio"
+                                            id="public"
+                                            name="access"
+                                            checked={isPublic}
+                                            value="public"
+                                            onChange={handleRadioChange}
+
+                                        />
+                                        <label htmlFor="public">
+                                            <span className={s.radioTitle}>{t('Public')}</span>
+
+                                            <span className={s.radioDesc}>
+                                                (
+                                                {t('Everyone with link can see')}
+                                                )
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div className={s.radioWrapper}>
+                                        <input
+                                            type="radio"
+                                            id="private"
+                                            name="access"
+                                            checked={!isPublic}
+                                            value="private"
+                                            onChange={handleRadioChange}
+
+                                        />
+                                        <label htmlFor="private">
+                                            <span className={s.radioTitle}>{t('Private')}</span>
+
+                                            <span className={s.radioDesc}>
+                                                (
+                                                {t('Only users that you invite via email can see')}
+                                                )
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
                         <Button
                             onClick={handleDeleteStart}
                             theme={ButtonTheme.RED}
                             size={ButtonSize.M}
-                            className={s.logout}
+                            className={s.deleteProject}
                         >
                             {t('Удалить проект')}
                         </Button>
