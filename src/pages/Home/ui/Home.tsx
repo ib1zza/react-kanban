@@ -16,7 +16,7 @@ import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
 import Modal from 'shared/ui/Modal/Modal';
 import ProfileSkeleton from 'features/Profile/ui/ProfileSkeleton';
 import { Profile } from 'features/Profile';
-import ActionFormCreateBoard from 'shared/ui/ActionForm/ui/ActionFormCreateBoard';
+import ActionFormAddBoard from 'shared/ui/ActionForm/ui/ActionFormAddBoard';
 import { useTranslation } from 'react-i18next';
 import { homeActions } from '../model/slice/HomeSlice';
 import { getHomeBoards } from '../model/selectors/getHomeBoards';
@@ -90,22 +90,22 @@ const Home = memo(() => {
                                 title={t('Создать доску')}
                                 onClose={() => dispatch(homeActions.setAddBoardStatus(false))}
                             >
-                                <ActionFormCreateBoard
-                                    onCreate={handleCreateBoard}
+                                <ActionFormAddBoard
+                                    onSubmit={handleCreateBoard}
+                                    label={t('Введите название')}
                                 />
-                                {/* <ActionForm */}
-                                {/*    status={ActionFormStatus.BOARD} */}
-                                {/*    onCreateBoard={handleCreateBoard} */}
-                                {/*    onAbort={() => dispatch(homeActions.setAddBoardStatus(false))} */}
-                                {/* /> */}
                             </Modal>
                         )}
                         {linkBoardStatus && (
-                            <ActionForm
-                                status={ActionFormStatus.BOARD}
-                                onCreateBoard={handleLinkBoard}
-                                onAbort={() => dispatch(homeActions.setLinkBoardStatus(false))}
-                            />
+                            <Modal
+                                title={t('Присоединиться к доске')}
+                                onClose={() => dispatch(homeActions.setLinkBoardStatus(false))}
+                            >
+                                <ActionFormAddBoard
+                                    onSubmit={handleLinkBoard}
+                                    label={t('Введите ccылку')}
+                                />
+                            </Modal>
                         )}
                         {
                             boards.length > 0 && (

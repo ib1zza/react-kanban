@@ -21,7 +21,7 @@ export const HomeSlice = createSlice({
             state.addBoardStatus = action.payload;
         },
         setLinkBoardStatus: (state, action: PayloadAction<boolean>) => {
-            state.addBoardStatus = action.payload;
+            state.linkBoardStatus = action.payload;
         },
         addUsers: (state, action: PayloadAction<IUserInfo | IUserInfo[]>) => {
             if (Array.isArray(action.payload)) {

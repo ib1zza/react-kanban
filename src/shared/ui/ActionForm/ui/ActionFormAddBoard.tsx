@@ -8,12 +8,14 @@ import s from './ActionForm.module.scss';
 import { Input, InputTheme } from '../../Input/Input';
 
 interface Props {
-    onCreate: (title: string) => void;
+    onSubmit: (title: string) => void;
+    label: string;
 }
 
-const ActionFormCreateBoard = memo((props: Props) => {
+const ActionFormAddBoard = memo((props: Props) => {
     const {
-        onCreate,
+        onSubmit,
+        label,
     } = props;
     const [title, setTitle] = useState<string>('');
 
@@ -22,7 +24,7 @@ const ActionFormCreateBoard = memo((props: Props) => {
     const handler = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         if (!title.trim()) return;
-        onCreate(title);
+        onSubmit(title);
     };
 
     return (
@@ -31,9 +33,9 @@ const ActionFormCreateBoard = memo((props: Props) => {
                 <Input
                     autoFocus
                     // theme={InputTheme.WHITE}
-                    placeholder={t('Название')}
-                    label={t('Название')}
-                    title={t('Название')}
+                    placeholder={label}
+                    label={label}
+                    title={label}
                     className={s.createColumnTitle}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -53,4 +55,4 @@ const ActionFormCreateBoard = memo((props: Props) => {
     );
 });
 
-export default ActionFormCreateBoard;
+export default ActionFormAddBoard;
