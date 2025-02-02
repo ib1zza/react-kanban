@@ -1,7 +1,7 @@
 import React, {
-    memo, useCallback, useMemo, useState,
+    memo, useCallback, useMemo,
 } from 'react';
-import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -14,6 +14,7 @@ import { useAppSelector } from 'app/providers/StoreProvider';
 import { getLinkedUsers } from 'pages/BoardPage';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import { useUserInfo } from 'features/users/hooks/useUserInfo';
+import { getUserState } from 'features/users/model/selectors/getUserState/getUserState';
 import s from './ShareBoard.module.scss';
 
 interface Props {
@@ -21,14 +22,18 @@ interface Props {
 }
 
 interface IGuestItem {
+    role: LinkedUserType;
     userId: string;
     joined: boolean;
     handleRemoveUserFromBoard: (userId: string) => void;
+    self: boolean;
 }
 
-const GuestItem = ({ userId, joined, handleRemoveUserFromBoard }: IGuestItem) => {
+const GuestItem = ({
+    userId, joined, handleRemoveUserFromBoard, role, self,
+}: IGuestItem) => {
     const [user] = useUserInfo(userId);
-
+    console.log(user?.displayName, role);
     if (!user) {
         return null;
     }
@@ -36,22 +41,33 @@ const GuestItem = ({ userId, joined, handleRemoveUserFromBoard }: IGuestItem) =>
     return (
         <div key={user.uid} className={s.form__user}>
             <div>
-                <MemoizedFontAwesomeIcon icon={
-                    joined ? faCheck : faClock
-                }
-                />
+                {!joined && (
+                    <MemoizedFontAwesomeIcon
+                        className={s.icon}
+                        icon={faClock}
+                    />
+                )}
                 {' '}
                 {user.displayName}
+
+                {
+                    self && (
+                        <span>(You)</span>
+                    )
+                }
             </div>
-            <button onClick={() => handleRemoveUserFromBoard(userId)}>
-                <MemoizedFontAwesomeIcon icon={faXmark} />
-            </button>
+            {!self && (
+                <button onClick={() => handleRemoveUserFromBoard(userId)}>
+                    <MemoizedFontAwesomeIcon icon={faXmark} />
+                </button>
+            )}
         </div>
     );
 };
 
 const GuestsList = memo(({ board }: Props) => {
-    const [isEditorsOpened, setIsEditorsOpened] = useState(false);
+    const { user: currentUser } = useAppSelector(getUserState);
+    // const [isEditorsOpened, setIsEditorsOpened] = useState(false);
     const linkedUsers = useAppSelector(getLinkedUsers);
     const handleRemoveUserFromBoard = useCallback(async (userId: string) => {
         await deleteUserFromBoardRt(
@@ -62,12 +78,8 @@ const GuestsList = memo(({ board }: Props) => {
 
     const visibleUsersIds = useMemo(() => {
         if (!board?.users || !linkedUsers) return [];
-        return linkedUsers.filter(
-            (user) => user.role === (isEditorsOpened
-                ? LinkedUserType.USER
-                : LinkedUserType.GUEST),
-        );
-    }, [linkedUsers, board?.users, isEditorsOpened]);
+        return linkedUsers;
+    }, [linkedUsers, board?.users]);
 
     const { t } = useTranslation();
 
@@ -79,29 +91,29 @@ const GuestsList = memo(({ board }: Props) => {
                 {t('Кто добавлен')}
                 ?
             </div>
-            <div className={s.form__categoris}>
-                <button
-                    onClick={() => {
-                        setIsEditorsOpened(false);
-                    }}
-                    className={
-                        isEditorsOpened ? s.form__category : s.form__category__active
-                    }
-                >
-                    {t('Гость')}
-                </button>
-                <button
-                    onClick={() => {
-                        setIsEditorsOpened(true);
-                    }}
-                    className={
-                        !isEditorsOpened ? s.form__category : s.form__category__active
-                    }
-                >
-                    {t('Редактор')}
-                </button>
-            </div>
-            <div>
+            {/* <div className={s.form__categoris}> */}
+            {/*    <button */}
+            {/*        onClick={() => { */}
+            {/*            setIsEditorsOpened(false); */}
+            {/*        }} */}
+            {/*        className={ */}
+            {/*            isEditorsOpened ? s.form__category : s.form__category__active */}
+            {/*        } */}
+            {/*    > */}
+            {/*        {t('Гость')} */}
+            {/*    </button> */}
+            {/*    <button */}
+            {/*        onClick={() => { */}
+            {/*            setIsEditorsOpened(true); */}
+            {/*        }} */}
+            {/*        className={ */}
+            {/*            !isEditorsOpened ? s.form__category : s.form__category__active */}
+            {/*        } */}
+            {/*    > */}
+            {/*        {t('Редактор')} */}
+            {/*    </button> */}
+            {/* </div> */}
+            <div className={s.form__users__list}>
                 {
                     !visibleUsersIds.length && (
                         <div>
@@ -111,6 +123,8 @@ const GuestsList = memo(({ board }: Props) => {
                 }
                 {visibleUsersIds.map((user) => (
                     <GuestItem
+                        self={currentUser?.uid === user.uid}
+                        role={user.role}
                         key={user.uid}
                         userId={user.uid}
                         joined={checkIsUserJoined(user)}

@@ -69,7 +69,7 @@ const InviteUserForm = memo(({ board }: Props) => {
 
             <div className={s.form__checkboxes}>
                 <p style={{ marginRight: '4px' }}>
-                    {t('Статус')}
+                    {t('Роль')}
                     :
                 </p>
                 <label style={{ marginRight: '10px' }}>
