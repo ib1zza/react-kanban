@@ -12,26 +12,23 @@ import ProtectedRoute from '../lib/ProtectedRoute';
 import Sidebar from '../../../../widgets/components/Sidebar/Sidebar';
 import s from '../../../styles/App.module.scss';
 
-const AppRouter = () => {
-    const error = useAppSelector(getError);
-    const dispatch = useAppDispatch();
-    const handleCloseErrorModal = () => {
-        dispatch(errorActions.clearError());
-    };
+const AppRouter = () => (
 
-    const children = useMemo(() => (
+    <>
         <Routes>
             <Route
                 path="/*"
                 element={(
                     <ProtectedRoute>
-                        <div className={s.home}>
-                            <Sidebar />
-                            <div className={s.body}>
-                                <Header />
-                                <MainRouter />
+                        <Suspense>
+                            <div className={s.home}>
+                                <Sidebar />
+                                <div className={s.body}>
+                                    <Header />
+                                    <MainRouter />
+                                </div>
                             </div>
-                        </div>
+                        </Suspense>
                     </ProtectedRoute>
 
                 )}
@@ -45,18 +42,8 @@ const AppRouter = () => {
                 )}
             />
         </Routes>
-    ), []);
-    return (
-
-        <>
-            {children}
-            {error && (
-                <Modal onClose={handleCloseErrorModal}>
-                    <Error onConfirm={handleCloseErrorModal} text={error} />
-                </Modal>
-            )}
-        </>
-    );
-};
+        <Error />
+    </>
+);
 
 export default AppRouter;

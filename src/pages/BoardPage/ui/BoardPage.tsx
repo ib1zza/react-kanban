@@ -17,9 +17,10 @@ import { LinkedUserType } from 'app/types/IBoardFromServer';
 import { subscribeToBoardById } from 'entities/Board/API/getBoardFromIdRt';
 import { mapBoardFromServer } from 'entities/Board';
 import { AnimatePresence, motion } from 'framer-motion';
+import { connectToBoardRt } from 'features/boards/API/joinBoard';
+import { errorActions } from 'entities/Error/model/slice/ErrorSlice';
 import { boardCollectionActions, getBoardCollection } from '..';
 import s from './BoardPage.module.scss';
-import { getColumnsFromBoard } from '../lib/getColumnsFromBoard';
 
 const BoardPage = memo(() => {
     const { boardId } = useParams();
@@ -43,15 +44,29 @@ const BoardPage = memo(() => {
     useEffect(() => {
         if (!boardId) return;
 
-        // Subscribe to the board and get the unsubscribe function
-        const unsubscribe = subscribeToBoardById(boardId, (board) => {
-            dispatch(boardCollectionActions.setCurrentBoard(mapBoardFromServer(board)));
-        });
+        let unsubscribe: () => void = () => {};
+
+        async function connectToBoard() {
+            if (!boardId || !user?.uid) return;
+
+            const res = await connectToBoardRt(user.uid, boardId);
+            console.log(res);
+            if (res) {
+                unsubscribe = subscribeToBoardById(boardId, (board) => {
+                    dispatch(boardCollectionActions.setCurrentBoard(mapBoardFromServer(board)));
+                });
+            } else {
+                dispatch(errorActions.setError('Board not found or private'));
+            }
+        }
+
+        connectToBoard();
+
         // Cleanup function to unsubscribe when the component unmounts or boardId changes
         return () => {
             unsubscribe();
         };
-    }, [boardId, dispatch]);
+    }, [boardId, dispatch, user?.uid]);
 
     const handleDeleteBoard = useCallback(async () => {
         if (!selectedBoard) return;
@@ -64,10 +79,6 @@ const BoardPage = memo(() => {
         dispatch(boardCollectionActions.removeSelectedBoard());
     }, [dispatch]);
 
-    // console.log(selectedBoard?.columns.map((c) => ({
-    //     title: c.title,
-    //     displayId: c.displayIndex,
-    // })));
     const controlsDisabled = useMemo(() => userRole !== LinkedUserType.USER, [userRole]);
 
     return (
