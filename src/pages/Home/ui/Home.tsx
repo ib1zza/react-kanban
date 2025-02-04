@@ -112,7 +112,7 @@ const Home = memo(() => {
                             </Modal>
                         )}
                         {
-                            boards.length > 0 && (
+                            boards.length > 0 ? (
                                 <motion.div
                                     className={s.blocks__container}
                                     variants={{
@@ -134,6 +134,11 @@ const Home = memo(() => {
                                     ))}
                                 </motion.div>
                             )
+                                : (
+                                    <div className={s.noBoards}>
+                                        <p>{t('У вас еще нет проектов')}</p>
+                                    </div>
+                                )
                         }
 
                     </Suspense>

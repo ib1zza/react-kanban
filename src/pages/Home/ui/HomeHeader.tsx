@@ -10,7 +10,7 @@ import { homeActions } from '../model/slice/HomeSlice';
 
 const HomeHeader = memo(() => {
     const dispatch = useAppDispatch();
-    const { t } = useTranslation('buttons');
+    const { t } = useTranslation();
     const handleAddBoardStatus = useCallback(() => {
         dispatch(homeActions.setAddBoardStatus(true));
     }, [dispatch]);
@@ -29,6 +29,8 @@ const HomeHeader = memo(() => {
             </Button>
             <Button onClick={handleLinkBoardStatus} className={s.share_button}>
                 <MemoizedFontAwesomeIcon icon={faLink} />
+
+                {t('Присоединиться к проекту')}
             </Button>
 
         </div>

@@ -11,6 +11,11 @@
     padding-bottom: 10px;
 }
 
+.noBoards {
+    color: white;
+    font-size: 18px;
+}
+
 .buttons {
     margin: 20px 0;
     display: flex;
@@ -34,9 +39,17 @@
     overflow-y: auto;
 }
 
+@media screen and (max-width: 550px) {
+
+
+    .buttons {
+        flex-direction: column;
+    }
+
+}
+
 @media screen and (max-width: 450px) {
     .blocks__container {
         grid-template-columns: 1fr;
     }
-
 }
