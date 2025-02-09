@@ -1,27 +1,34 @@
 .colorPicker {
     padding-bottom: 15px;
-    
+
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     flex-flow: column wrap;
     position: relative;
 
 
     .pickerBlock {
-        margin-top: -14px !important;
-        display: flex;
-        width: 257px;
-      padding: 20px;
-      
+        --circleSize: 28px;
+        //margin-top: -14px !important;
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr);
+        justify-items: center;
+        grid-auto-rows: calc(var(--circleSize) + 10px);
+        //width: 257px;
+        width: 100% !important;
+      //padding: 20px;
+      //  padding: 10px 0;
+
         flex: 0 1 calc(20% - 8px);
 
     }
 
     p {
-        text-align: center;
-        font-size: 18px;
+        align-self: stretch;
         color: var(#{--taskTextColor});
         margin-bottom: 12px;
+        font-weight: 500;
+        font-size: 14px;
     }
 }

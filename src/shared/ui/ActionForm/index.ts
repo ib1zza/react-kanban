@@ -1,3 +1,3 @@
-import ActionForm from './ui/ActionForm';
+import ActionFormCreateColumn from './ui/ActionFormCreateColumn';
 
-export { ActionForm };
+export { ActionFormCreateColumn };

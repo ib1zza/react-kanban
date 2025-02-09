@@ -6,13 +6,11 @@ import { toggleTaskComplete } from 'features/tasks';
 import { Avatar } from 'shared/ui/Avatar';
 import { AvatarSize } from 'shared/ui/Avatar/ui/Avatar';
 import { boardCollectionActions, getLinkedUsers } from 'pages/BoardPage';
-import { IUserInfo } from 'app/types/IUserInfo';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, useCallback } from 'react';
 import { useUserInfo } from 'features/users/hooks/useUserInfo';
-import { motion } from 'framer-motion';
 import s from './Task.module.scss';
-import Button from '../../../shared/ui/Button/Button';
+import Button, { ButtonTheme } from '../../../shared/ui/Button/Button';
 
 interface ITaskProps {
     task: ITask;
@@ -88,6 +86,8 @@ const Task = memo(({
                         <TaskUser userId={task.attachedUser} />
                     )}
                     <Button
+                        className={s.icon}
+                        theme={ButtonTheme.ICON}
                         onClick={
                             openTaskHandler
                         }

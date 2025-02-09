@@ -65,24 +65,10 @@ const TaskList: React.FC<ITaskListProps> = ({
     const dispatch = useAppDispatch();
 
     const [active, setActive] = React.useState(false);
-    const handleDragOver = (e: any) => {
-        e.preventDefault();
-        console.log('drag over');
-        highlightIndicator(e);
-        setActive(true);
-    };
-
-    const handleDragLeave = (e: any) => {
-        e.preventDefault();
-        console.log('drag leave');
-        setActive(false);
-        clearHighlights();
-    };
-
     const getIndicators = () => Array.from(
-            document.querySelectorAll(
-                `[data-column="${columnId}"]`,
-            ) as unknown as HTMLElement[],
+        document.querySelectorAll(
+            `[data-column="${columnId}"]`,
+        ) as unknown as HTMLElement[],
     );
 
     const clearHighlights = (els?: HTMLElement[]) => {
@@ -100,6 +86,20 @@ const TaskList: React.FC<ITaskListProps> = ({
 
         const el = getNearestIndicator(e, indicators);
         el.element.classList.toggle(s.indicator__active, true);
+    };
+
+    const handleDragOver = (e: any) => {
+        e.preventDefault();
+        console.log('drag over');
+        highlightIndicator(e);
+        setActive(true);
+    };
+
+    const handleDragLeave = (e: any) => {
+        e.preventDefault();
+        console.log('drag leave');
+        setActive(false);
+        clearHighlights();
     };
 
     const handleDrop = (e: any) => {

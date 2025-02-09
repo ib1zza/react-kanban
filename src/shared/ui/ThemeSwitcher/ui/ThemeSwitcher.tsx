@@ -9,7 +9,7 @@ interface ThemeSwitcherProps{
     auth?: boolean
 }
 const ThemeSwitcher = ({ className, auth } : ThemeSwitcherProps) => {
-    const { toggleTheme, theme } = useTheme();
+    const { toggleTheme } = useTheme();
 
     return (
         <Button

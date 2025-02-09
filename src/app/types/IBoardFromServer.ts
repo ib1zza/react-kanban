@@ -56,6 +56,13 @@ export interface IBoardSmallInfoFromServer {
     };
   }
 }
+export interface IBoardUserInfo {
+  uid: string;
+  role: LinkedUserType;
+  dateInvited: number;
+  joined: boolean;
+  notificationUid?: string;
+}
 
 export interface IBoardSmallInfo {
   uid: string;
@@ -86,14 +93,6 @@ export interface IBoardFromServer {
       notificationUid?: string;
     };
   }
-}
-
-export interface IBoardUserInfo {
-  uid: string;
-  role: LinkedUserType;
-  dateInvited: number;
-  joined: boolean;
-  notificationUid?: string;
 }
 
 export interface IBoard {

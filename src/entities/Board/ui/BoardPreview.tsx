@@ -1,10 +1,10 @@
-import React, { memo, useCallback, useEffect } from 'react';
-import { faLink, faShareFromSquare, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import React, { useCallback } from 'react';
+import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
-import { IBoard, IBoardSmallInfoFromServer } from 'app/types/IBoardFromServer';
+import { IBoard } from 'app/types/IBoardFromServer';
 import { ShareBoard } from 'features/boards';
 import Modal from 'shared/ui/Modal/Modal';
-import Button from 'shared/ui/Button/Button';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarSize } from 'shared/ui/Avatar';
 import { useUserInfo } from 'features/users/hooks/useUserInfo';
@@ -76,6 +76,7 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
                 </div>
                 {userId === board.ownerId && (
                     <Button
+                        theme={ButtonTheme.ICON}
                         onClick={onOpenShare}
                         className={s.share_button}
                         icon={faShareNodes}

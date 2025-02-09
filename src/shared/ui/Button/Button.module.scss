@@ -110,6 +110,15 @@
 
 }
 
+.iconTheme {
+    padding: 5px;
+    color: var(--iconColor);
+
+    &:hover {
+        color: var(--iconColorHover);
+    }
+}
+
 .accent {
     cursor: pointer;
     background-color: var(--HeaderBg);

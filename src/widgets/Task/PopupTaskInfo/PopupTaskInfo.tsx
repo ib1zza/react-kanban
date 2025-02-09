@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import { deleteTask, editTask } from 'features/tasks';
+import { editTask } from 'features/tasks';
 import Button from 'shared/ui/Button/Button';
 import EditTaskForm from 'entities/Tasks/lib/EditTaskForm';
 import { Avatar } from 'shared/ui/Avatar';
@@ -163,6 +163,7 @@ const PopupTaskInfo: React.FC<Props> = ({ selectedTask, controlsDisabled }) => {
                                 {t('Изменить')}
                             </Button>
                             <Button
+                                className={s.buttonDelete}
                                 icon={faTrashCan}
                                 onClick={onDeleteTask}
                                 loading={loading === 'delete'}

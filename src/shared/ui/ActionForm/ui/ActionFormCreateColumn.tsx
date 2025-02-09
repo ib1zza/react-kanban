@@ -1,5 +1,5 @@
 import React, {
-    memo, useCallback, useState,
+    memo, useState,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { colorsForColumns } from 'shared/constants/colorsForColumns';
@@ -9,27 +9,27 @@ import ConfirmButtons from '../../ConfirmButtons/ConfirmButtons';
 import { Input, InputTheme } from '../../Input/Input';
 
 interface Props {
-    title?: string;
-    color?: string;
-    onAbort: () => void;
-    onEdit?: (title: string, color: string) => void;
+  title?: string;
+  onAbort: () => void;
+  onCreateColumn: (title: string, color: string) => void;
 }
 
-const ActionFormEditColumn = memo((props: Props) => {
+function getRandomColor() {
+    const i = Math.floor(Math.random() * colorsForColumns.length);
+    return colorsForColumns[i];
+}
+
+const ActionFormCreateColumn = memo((props: Props) => {
     const {
         title: initTitle,
-        color: initColor,
         onAbort,
-        onEdit,
+        onCreateColumn,
     } = props;
     const [title, setTitle] = useState<string>(initTitle as string);
-    const [error, setError] = useState<string>('');
-    const [color, setColor] = useState<string>(() => initColor as string);
-    const { t } = useTranslation('buttons');
 
-    const handleEdit = useCallback(() => {
-        onEdit && onEdit(title, color);
-    }, [color, onEdit, title]);
+    const [error, setError] = useState<string>('');
+    const [color, setColor] = useState<string>(() => getRandomColor());
+    const { t } = useTranslation('buttons');
 
     const handler = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
@@ -37,20 +37,17 @@ const ActionFormEditColumn = memo((props: Props) => {
             setError('Пустой заголовок');
             return null;
         }
-        handleEdit();
+        onCreateColumn(title, color);
     };
     return (
         <form className={`${s.container} ${s.withColor}`}>
-
             <div className={s.headerColor} style={{ backgroundColor: color }} />
             <hr />
             <div className={s.title}>
                 <Input
                     autoFocus
                     theme={InputTheme.WHITE}
-                    // placeholder={t('Название')}
                     label={t('Название')}
-                    // className={s.createColumnTitle}
                     error={error}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -66,4 +63,4 @@ const ActionFormEditColumn = memo((props: Props) => {
     );
 });
 
-export default ActionFormEditColumn;
+export default ActionFormCreateColumn;

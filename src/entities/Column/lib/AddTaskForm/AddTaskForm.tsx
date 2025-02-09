@@ -34,6 +34,14 @@ const AddTaskForm: React.FC<Props> = ({
 
     const dispatch = useAppDispatch();
 
+    const onAbort = () => {
+        setIsAddingTask(false);
+    };
+
+    const onSubmit = () => {
+        setIsAddingTask(false);
+    };
+
     const handler = useCallback(
         () => dispatch(
             createTaskThunk(
@@ -51,19 +59,11 @@ const AddTaskForm: React.FC<Props> = ({
     );
 
     useEffect(() => {
-        if (!isAddingTask && title || description) {
+        if (!isAddingTask && (title || description)) {
             setTitle('');
             setDescription('');
         }
     }, [isAddingTask]);
-
-    const onAbort = () => {
-        setIsAddingTask(false);
-    };
-
-    const onSubmit = () => {
-        setIsAddingTask(false);
-    };
 
     return (
         <motion.div

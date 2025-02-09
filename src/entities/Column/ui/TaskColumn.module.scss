@@ -71,20 +71,12 @@
 
     .columnButtons {
         display: flex;
-        gap: 10px;
+        gap: 6px;
     }
 
-    .editButton,
     .deleteButton {
-        svg {
-            width: 20px;
-        }
-
-        padding: 5px;
-        color: var(#{--iconColor});
-
         &:hover {
-            color: var(#{--iconColorHover});
+            color: var(--red);
         }
     }
 
@@ -103,6 +95,7 @@
 
 
 .taskListWrapper {
+    margin-top: 5px;
     overflow-y: auto;
     //overflow-x: auto;
     border-radius: 10px;

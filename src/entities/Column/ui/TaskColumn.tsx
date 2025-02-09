@@ -1,11 +1,10 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { faCaretLeft, faCaretRight, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { deleteColumn, editColumn } from 'features/columns';
-import { IColumn, IColumnFromServer } from 'app/types/IBoardFromServer';
-import Button from 'shared/ui/Button/Button';
-import AddTaskBlock from 'entities/Column/lib/AddTaskForm/AddTaskBlock/AddTaskBlock';
-import { LayoutGroup, motion, MotionProps } from 'framer-motion';
+import { editColumn } from 'features/columns';
+import { IColumn } from 'app/types/IBoardFromServer';
+import Button, { ButtonTheme } from 'shared/ui/Button/Button';
+import { LayoutGroup, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Input, InputTheme } from 'shared/ui/Input/Input';
 import ColorPicker from 'shared/ui/ColorPicker/ColorPicker';
@@ -160,9 +159,9 @@ const TaskColumn = ({
                             <Input
                                 autoFocus
                                 theme={InputTheme.WHITE}
-                                // placeholder={t('Название')}
+                                placeholder={t('Название')}
                                 /* TODO */
-                                // label={t('Название')}
+                                label={t('Название')}
                                 // className={s.createColumnTitle}
                                 error={error}
                                 value={title}
@@ -184,11 +183,13 @@ const TaskColumn = ({
                                 {!controlsDisabled && (
                                     <div className={s.columnButtons}>
                                         <Button
+                                            theme={ButtonTheme.ICON}
                                             className={s.editButton}
                                             onClick={() => setIsEditColumn(true)}
                                             icon={faPenToSquare}
                                         />
                                         <Button
+                                            theme={ButtonTheme.ICON}
                                             className={s.deleteButton}
                                             onClick={handleDeleteColumn}
                                             icon={faTrashCan}
@@ -198,24 +199,29 @@ const TaskColumn = ({
 
                             </div>
 
-                            <div
-                                className={s.taskListWrapper}
-                            >
-                                <LayoutGroup>
-                                    {!controlsDisabled && (
-                                        <AddTaskForm
-                                            boardId={boardId}
-                                            columnId={column.uid}
-                                        />
-                                    )}
+                            <LayoutGroup>
 
-                                    <TaskList
+                                {!controlsDisabled && (
+                                    <AddTaskForm
                                         boardId={boardId}
                                         columnId={column.uid}
-                                        tasks={column.tasks}
                                     />
-                                </LayoutGroup>
-                            </div>
+                                )}
+
+                                <div
+                                    className={s.taskListWrapper}
+                                >
+                                    <LayoutGroup>
+
+                                        <TaskList
+                                            boardId={boardId}
+                                            columnId={column.uid}
+                                            tasks={column.tasks}
+                                        />
+                                    </LayoutGroup>
+                                </div>
+                            </LayoutGroup>
+
                         </>
                     )
             }

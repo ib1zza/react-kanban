@@ -7,6 +7,7 @@ import { classNames, Mods } from '../../lib/classNames/classNames';
 import MemoizedFontAwesomeIcon from '../MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 
 export enum ButtonTheme {
+    ICON = 'iconTheme',
     WHITE = 'white',
     BLACK = 'black',
     RED = 'red',
@@ -69,7 +70,7 @@ const Button: React.FC<ButtonProps> = ({
             layoutId={layoutId}
             layout={layout}
             className={classNames(s.button, mods, [className as string])}
-            disabled={loading}
+            disabled={loading || props.disabled}
             {...props}
         >
             <div className={s.content + (loading ? ` ${s.invisible}` : '')}>

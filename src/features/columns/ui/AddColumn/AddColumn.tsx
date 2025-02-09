@@ -7,7 +7,7 @@ import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt';
 import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
-import ActionForm, { ActionFormStatus } from '../../../../shared/ui/ActionForm/ui/ActionForm';
+import ActionFormCreateColumn from 'shared/ui/ActionForm/ui/ActionFormCreateColumn';
 import s from './AddColumn.module.scss';
 
 interface AddColumnProps {
@@ -62,8 +62,7 @@ const AddColumn = ({ className }: AddColumnProps) => {
             <AnimatePresence>
                 <Suspense>
                     {isCreatingColumn && (
-                        <ActionForm
-                            status={ActionFormStatus.COLUMN}
+                        <ActionFormCreateColumn
                             onCreateColumn={createColumnAction}
                             onAbort={handleCreateColumnCancel}
                         />
