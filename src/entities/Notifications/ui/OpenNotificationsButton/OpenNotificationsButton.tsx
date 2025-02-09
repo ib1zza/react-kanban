@@ -9,6 +9,9 @@ import { subscribeToUserNotifications } from 'entities/Notifications/model/servi
 import { notificationsActions } from 'entities/Notifications/model/slice/notificationSlice';
 import { readNotificationsRt } from 'entities/Notifications/model/services/API/readNotificationsRt';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
+import {
+    deleteAllNotificationsRt,
+} from 'entities/Notifications/model/services/API/deleteAllNotificationsRt';
 import s from './OpenNotificationsButton.module.scss';
 import Notification from '../Notification';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
@@ -64,6 +67,13 @@ const OpenNotificationsButton = () => {
         }
     }, [open]);
 
+    console.log('notifications', notifications);
+
+    const handleDeleteAll = () => {
+        deleteAllNotificationsRt(user.uid, notifications.map((el) => el.uid));
+        dispatch(notificationsActions.setNotifications([]));
+    };
+
     return (
         <Button className={s.button}>
             <MemoizedFontAwesomeIcon onClick={toggler} icon={unreadCount ? faSolidBell : faRegularBell} />
@@ -88,7 +98,7 @@ const OpenNotificationsButton = () => {
 
                     </svg>
                     {notifications.length ? '' : 'Нет уведомлений'}
-                    {!!notifications.length && <div className={s.deleteAll}>Удалить все</div>}
+                    {!!notifications.length && <button onClick={handleDeleteAll} className={s.deleteAll}>Удалить все</button>}
                     <Suspense fallback={<></>}>
                         {notifications.map((notif: NotificationItem) => (
                             <Notification data={notif} key={notif.uid} />
