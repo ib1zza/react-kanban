@@ -67,8 +67,6 @@ const OpenNotificationsButton = () => {
         }
     }, [open]);
 
-    console.log('notifications', notifications);
-
     const handleDeleteAll = () => {
         deleteAllNotificationsRt(user.uid, notifications.map((el) => el.uid));
         dispatch(notificationsActions.setNotifications([]));
@@ -98,7 +96,8 @@ const OpenNotificationsButton = () => {
 
                     </svg>
                     {notifications.length ? '' : 'Нет уведомлений'}
-                    {!!notifications.length && <button onClick={handleDeleteAll} className={s.deleteAll}>Удалить все</button>}
+                    {!!notifications.length
+                        && <button onClick={handleDeleteAll} className={s.deleteAll}>Удалить все</button>}
                     <Suspense fallback={<></>}>
                         {notifications.map((notif: NotificationItem) => (
                             <Notification data={notif} key={notif.uid} />

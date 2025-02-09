@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { ITask, LinkedUserType } from 'app/types/IBoardFromServer';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { motion } from 'framer-motion';
@@ -161,4 +161,4 @@ const TaskList: React.FC<ITaskListProps> = ({
     );
 };
 
-export default TaskList;
+export default memo(TaskList);

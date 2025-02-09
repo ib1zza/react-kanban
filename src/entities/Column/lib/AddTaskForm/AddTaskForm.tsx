@@ -15,6 +15,7 @@ import { createTaskThunk } from 'pages/BoardPage/model/services/createTask/creat
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useFormik } from 'formik';
 import s from './AddTaskForm.module.scss';
 
 interface Props {
@@ -42,26 +43,42 @@ const AddTaskForm: React.FC<Props> = ({
         setIsAddingTask(false);
     };
 
-    const handler = useCallback(
-        () => dispatch(
-            createTaskThunk(
-                {
-                    title,
-                    description,
-                    creatorId: user?.uid as string,
-                    tags: [],
-                    boardId,
-                    columnId,
-                },
-            ),
-        ).unwrap().then(onSubmit),
-        [title, description],
+    const formik = useFormik(
+        {
+            initialValues: {
+                title: '',
+                description: '',
+            },
+            validate: (values) => {
+                const errors: any = {};
+
+                if (!values.title.trim()) {
+                    errors.title = t('Заголовок не может быть пустым');
+                }
+
+                return errors;
+            },
+            onSubmit: (values) => {
+                dispatch(
+                    createTaskThunk(
+                        {
+                            title: values.title,
+                            description: values.description,
+                            creatorId: user?.uid as string,
+                            tags: [],
+                            boardId,
+                            columnId,
+                        },
+                    ),
+                ).unwrap().then(onSubmit);
+            },
+
+        },
     );
 
     useEffect(() => {
-        if (!isAddingTask && (title || description)) {
-            setTitle('');
-            setDescription('');
+        if (!isAddingTask) {
+            formik.resetForm();
         }
     }, [isAddingTask]);
 
@@ -88,21 +105,23 @@ const AddTaskForm: React.FC<Props> = ({
                     />
                 )
             }
-            {/* <AnimatePresence> */}
             {isAddingTask
                 && (
                     <motion.div
                         style={{ padding: '10px' }}
                     >
-                        <form>
+                        <form onSubmit={formik.handleSubmit}>
                             <div className={s.inputBlock}>
                                 <label htmlFor={t('Заголовок')}>{t('Заголовок')}</label>
                                 <textarea
-                                // eslint-disable-next-line jsx-a11y/no-autofocus
+                                    // eslint-disable-next-line jsx-a11y/no-autofocus
                                     autoFocus
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
+                                    // value={title}
+                                    // onChange={(e) => setTitle(e.target.value)}
                                     className={s.min}
+                                    name="title"
+                                    value={formik.values.title}
+                                    onChange={formik.handleChange}
                                     id={t('Заголовок')}
                                     placeholder={`%${t('Заголовок')}%`}
                                     maxLength={50}
@@ -115,43 +134,47 @@ const AddTaskForm: React.FC<Props> = ({
                                     (optional):
                                 </label>
                                 <textarea
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
+                                    // value={description}
+                                    // onChange={(e) => setDescription(e.target.value)}
                                     id={t('Описание')}
                                     placeholder={`%${t('Описание')}%`}
+                                    name="description"
+                                    value={formik.values.description}
+                                    onChange={formik.handleChange}
                                     maxLength={200}
                                 />
                             </div>
-                        </form>
-                        <hr className={s.hr} />
-                        <div className={s.createColumnButtons}>
-                            <Button
-                                onClick={handler}
-                            >
-                                <MemoizedFontAwesomeIcon
-                                    iconColor="#5CD43E"
-                                    icon={
-                                        faCircleCheck
-                                    }
-                                />
-                                Confirm
-                            </Button>
+                            <hr className={s.hr} />
+                            <div className={s.createColumnButtons}>
+                                <Button
+                                    type="submit"
+                                >
+                                    <MemoizedFontAwesomeIcon
+                                        iconColor="#5CD43E"
+                                        icon={
+                                            faCircleCheck
+                                        }
+                                    />
+                                    Confirm
+                                </Button>
 
-                            <Button
-                                onClick={onAbort}
-                            >
-                                <MemoizedFontAwesomeIcon
-                                    iconColor="#DE2525"
-                                    icon={(
-                                        faCircleXmark
-                                    )}
-                                />
-                                Cancel
-                            </Button>
-                        </div>
+                                <Button
+                                    type="reset"
+                                    onClick={onAbort}
+                                >
+                                    <MemoizedFontAwesomeIcon
+                                        iconColor="#DE2525"
+                                        icon={(
+                                            faCircleXmark
+                                        )}
+                                    />
+                                    Cancel
+                                </Button>
+                            </div>
+                        </form>
+
                     </motion.div>
                 )}
-            {/* </AnimatePresence> */}
         </motion.div>
     );
 };
