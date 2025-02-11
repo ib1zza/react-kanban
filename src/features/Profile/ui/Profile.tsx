@@ -20,7 +20,7 @@ import ProfileSkeleton from './ProfileSkeleton';
 
 const Profile = memo(() => {
     const { user } = useAppSelector(getUserState);
-    const { refetch } = UserAuth();
+    const { refetch, user: user1 } = UserAuth();
     const [editStatus, setEditStatus] = useState(false);
     const [name, setName] = useState<string>('');
     const { t } = useTranslation('profile');
@@ -33,6 +33,8 @@ const Profile = memo(() => {
             setName(res?.displayName || '');
         });
     }, [user?.uid]);
+
+    console.log('user', user, user1.metadata.createdAt);
 
     useEffect(() => {
         fetchUserInfo();
@@ -117,7 +119,8 @@ const Profile = memo(() => {
                             <br />
                             {t('Joined')}
                             :
-                            DATA
+                            {` ${(new Date(+user1.metadata.createdAt))
+                                .toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}
                         </p>
                     </div>
                     <div className={s.buttons}>

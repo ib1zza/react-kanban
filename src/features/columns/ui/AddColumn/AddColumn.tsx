@@ -1,7 +1,7 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import Button, { ButtonTheme } from 'shared/ui/Button/Button';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
-import React, { Suspense, useCallback } from 'react';
+import React, { memo, Suspense, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
 import { boardCollectionActions, getBoardCollection } from 'pages/BoardPage';
 import { createColumnRt } from 'features/columns/API/createColumn/createColumnRt';
@@ -73,4 +73,4 @@ const AddColumn = ({ className }: AddColumnProps) => {
     );
 };
 
-export { AddColumn };
+export default memo(AddColumn);

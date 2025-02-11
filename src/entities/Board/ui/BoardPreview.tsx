@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { IBoard } from 'app/types/IBoardFromServer';
@@ -88,4 +88,4 @@ const BoardPreview: React.FC<IBoardPreviewProps> = ({
     );
 };
 
-export default BoardPreview;
+export default memo(BoardPreview);

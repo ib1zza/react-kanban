@@ -12,20 +12,21 @@ import { getUserState } from 'features/users/model/selectors/getUserState/getUse
 import Modal from 'shared/ui/Modal/Modal';
 import Loader from 'shared/ui/Loader/Loader';
 import { useUserRole } from 'features/boards/hooks/useUserRole';
-import { AddColumn } from 'features/columns/ui/AddColumn/AddColumn';
+import AddColumn from 'features/columns/ui/AddColumn/AddColumn';
 import { LinkedUserType } from 'app/types/IBoardFromServer';
 import { subscribeToBoardById } from 'entities/Board/API/getBoardFromIdRt';
 import { mapBoardFromServer } from 'entities/Board';
 import { AnimatePresence, motion } from 'framer-motion';
 import { connectToBoardRt } from 'features/boards/API/joinBoard';
 import { errorActions } from 'entities/Error/model/slice/ErrorSlice';
+import ModalShareBoard from 'features/boards/ui/ModalShareBoard/ModalShareBoard';
 import { boardCollectionActions, getBoardCollection } from '..';
 import s from './BoardPage.module.scss';
 
-const BoardPage = memo(() => {
+const BoardPage = () => {
     const { boardId } = useParams();
     const {
-        selectedBoard, selectedTask, shareStatus,
+        selectedBoard, selectedTask,
     } = useAppSelector(
         getBoardCollection,
     );
@@ -83,11 +84,7 @@ const BoardPage = memo(() => {
 
     return (
         <>
-            {selectedBoard && shareStatus && (
-                <Modal onClose={() => dispatch(boardCollectionActions.setShareStatus(false))}>
-                    <ShareBoard board={selectedBoard} />
-                </Modal>
-            )}
+            <ModalShareBoard />
             <div className={s.wrapperContainer}>
                 {selectedBoard && (
                     <BoardPageHeader
@@ -122,7 +119,7 @@ const BoardPage = memo(() => {
                                         canMoveRight={index !== selectedBoard.columns.length - 1}
                                     />
                                 ))}
-                                {!controlsDisabled && <AddColumn key="addColumn" />}
+                                {!controlsDisabled && <AddColumn />}
                             </motion.div>
                         )}
                     <AnimatePresence>
@@ -142,6 +139,6 @@ const BoardPage = memo(() => {
             </div>
         </>
     );
-});
+};
 
-export default BoardPage;
+export default memo(BoardPage);
