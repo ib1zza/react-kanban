@@ -17,10 +17,10 @@
 }
 
 .buttons {
-    margin: 20px 0;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    //justify-content: flex-end;
     align-items: stretch;
     gap: 10px;
     button {

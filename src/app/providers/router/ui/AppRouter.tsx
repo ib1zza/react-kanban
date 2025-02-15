@@ -24,7 +24,6 @@ const AppRouter = () => (
                             <div className={s.home}>
                                 <Sidebar />
                                 <div className={s.body}>
-                                    <Header />
                                     <MainRouter />
                                 </div>
                             </div>

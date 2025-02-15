@@ -12,6 +12,9 @@ import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedF
 import {
     deleteAllNotificationsRt,
 } from 'entities/Notifications/model/services/API/deleteAllNotificationsRt';
+import Modal from 'shared/ui/Modal/Modal';
+import ProfileSkeleton from 'features/Profile/ui/ProfileSkeleton';
+import { Profile } from 'features/Profile';
 import s from './OpenNotificationsButton.module.scss';
 import Notification from '../Notification';
 import { NotificationItem } from '../../model/types/NotificationsSchema';
@@ -73,40 +76,33 @@ const OpenNotificationsButton = () => {
     };
 
     return (
-        <Button className={s.button}>
-            <MemoizedFontAwesomeIcon onClick={toggler} icon={unreadCount ? faSolidBell : faRegularBell} />
-            {!!unreadCount && <div className={s.count}>{unreadCount}</div>}
+        <>
+            <Button className={s.button}>
+                <MemoizedFontAwesomeIcon onClick={toggler} icon={faSolidBell} />
+                {!!unreadCount && <div className={s.count}>{unreadCount}</div>}
 
+            </Button>
             {open && (
-                <div className={s.notificationsContainer} onClick={(e) => e.stopPropagation()}>
-                    <svg
-                        className={s.trio}
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="35"
-                        height="19"
-                        viewBox="0 0 35 19"
-                        fill="none"
-                    >
-                        <path
-                            d="M17.5 2L32.6554 17H2.34456L17.5 2Z"
-                            fill="#F6F6F6"
-                            fillOpacity="0.6"
-                            shapeRendering="crispEdges"
-                        />
+                <Modal onClose={() => setOpen(false)}>
+                    {/* TODO: add skeleton */}
+                    <Suspense fallback={null}>
+                        <div className={s.notificationsContainer} onClick={(e) => e.stopPropagation()}>
 
-                    </svg>
-                    {notifications.length ? '' : 'Нет уведомлений'}
-                    {!!notifications.length
-                        && <button onClick={handleDeleteAll} className={s.deleteAll}>Удалить все</button>}
-                    <Suspense fallback={<></>}>
-                        {notifications.map((notif: NotificationItem) => (
-                            <Notification data={notif} key={notif.uid} />
-                        ))}
+                            {notifications.length ? '' : 'Нет уведомлений'}
+                            {!!notifications.length
+                                && <button onClick={handleDeleteAll} className={s.deleteAll}>Удалить все</button>}
+                            <Suspense fallback={<></>}>
+                                {notifications.map((notif: NotificationItem) => (
+                                    <Notification data={notif} key={notif.uid} />
+                                ))}
+                            </Suspense>
+
+                        </div>
                     </Suspense>
+                </Modal>
 
-                </div>
             )}
-        </Button>
+        </>
     );
 };
 

@@ -6,6 +6,9 @@ import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/ui/LangSwitcher';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
 import Space from 'widgets/components/Sidebar/components/Space';
+import { ProfileOpenButton } from 'shared/ui/ProfileOpenButton/ProfileOpenButton';
+import OpenNotificationsButton from 'entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
+import React from 'react';
 import s from './Sidebar.module.scss';
 
 const Sidebar = () => {
@@ -43,6 +46,8 @@ const Sidebar = () => {
                 <div className={s.app_buttons}>
                     <ThemeSwitcher />
                     <LangSwitcher />
+                    <ProfileOpenButton />
+                    <OpenNotificationsButton />
                 </div>
             </div>
         </div>

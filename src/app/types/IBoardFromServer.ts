@@ -16,9 +16,7 @@ export interface ITask {
   timeCreated: string;
   isCompleted: boolean;
   tags: string[];
-  // chatId?: string;
   creatorId: string;
-  // subtasks: { [id: string]: any };
   attachedUser?: string;
   displayId: number;
 }
