@@ -5,13 +5,13 @@ import ThemeSwitcher from 'shared/ui/ThemeSwitcher/ui/ThemeSwitcher';
 import { faTableList } from '@fortawesome/free-solid-svg-icons';
 import { LangSwitcher } from 'shared/ui/LangSwitcher/ui/LangSwitcher';
 import MemoizedFontAwesomeIcon from 'shared/ui/MemoizedFontAwesomeIcon/MemoizedFontAwesomeIcon';
-import Space from 'widgets/components/Sidebar/components/Space';
 import { ProfileOpenButton } from 'shared/ui/ProfileOpenButton/ProfileOpenButton';
 import OpenNotificationsButton from 'entities/Notifications/ui/OpenNotificationsButton/OpenNotificationsButton';
 import React from 'react';
+import { Space } from 'widgets/Sidebar/ui/components/Space';
 import s from './Sidebar.module.scss';
 
-const Sidebar = () => {
+export const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { t } = useTranslation();
@@ -53,5 +53,3 @@ const Sidebar = () => {
         </div>
     );
 };
-
-export default Sidebar;
