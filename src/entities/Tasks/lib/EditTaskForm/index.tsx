@@ -4,7 +4,7 @@ import React, {
 import { useTranslation } from 'react-i18next';
 import { ITask } from 'app/types/IBoardFromServer';
 import { useAppSelector } from 'app/providers/StoreProvider';
-import { EditedData } from 'widgets/Task/PopupTaskInfo/PopupTaskInfo';
+import { EditedData } from 'widgets/PopupTaskInfo/ui/PopupTaskInfo';
 import { OptionType, Select } from 'shared/ui/Select';
 import ConfirmButtons from 'shared/ui/ConfirmButtons/ConfirmButtons';
 import { getLinkedUsers } from 'pages/BoardPage';

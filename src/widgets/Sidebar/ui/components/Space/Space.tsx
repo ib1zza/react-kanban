@@ -43,7 +43,7 @@ const SpaceUser = ({ userInfoSmall }: SpaceUserProps) => {
     );
 };
 
-const Space = ({ className }: SpaceProps) => {
+export const Space = ({ className }: SpaceProps) => {
     const { t } = useTranslation();
     const linkedUsers = useAppSelector(getLinkedUsers);
     const dispatch = useAppDispatch();
@@ -82,5 +82,3 @@ const Space = ({ className }: SpaceProps) => {
         </div>
     );
 };
-
-export default Space;

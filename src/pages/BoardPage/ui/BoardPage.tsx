@@ -1,7 +1,7 @@
 import React, {
     memo, Suspense,
 } from 'react';
-import { PopupTaskInfo } from 'widgets';
+import { PopupTaskInfo } from 'widgets/PopupTaskInfo';
 import {
     BoardPageHeader,
 } from 'features/boards';
