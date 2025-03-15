@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import ProfileSkeleton from 'features/Profile/ui/ProfileSkeleton';
 import s from './Header.module.scss';
 
-const Header = memo(() => {
+export const Header = memo(() => {
     const { user } = useAppSelector(getUserState);
     const [isShowProfile, setIsShownProfile] = useState(false);
     const { t } = useTranslation();
@@ -32,12 +32,15 @@ const Header = memo(() => {
                 <OpenNotificationsButton />
                 <div onClick={() => handleShowProfile(true)} className={s.profile}>
                     <span>
-                        <p className={s.nickname}>{user ? user?.email : <Skeleton width={200} duration={1} />}</p>
+                        <p className={s.nickname}>
+                            {user ? user?.email : <Skeleton width={200} duration={1} />}
+                        </p>
                         <div className={s.avatar}>
-                            {
-                                user ? <Avatar src={user?.photoURL} alt={user?.displayName} />
-                                    : <Skeleton circle width={38} height={38} duration={1} />
-                            }
+                            {user ? (
+                                <Avatar src={user?.photoURL} alt={user?.displayName} />
+                            ) : (
+                                <Skeleton circle width={38} height={38} duration={1} />
+                            )}
                         </div>
                     </span>
                 </div>
@@ -45,5 +48,3 @@ const Header = memo(() => {
         </header>
     );
 });
-
-export default Header;

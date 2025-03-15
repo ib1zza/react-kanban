@@ -85,7 +85,7 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "typecheck": "tsc -b",
+    "typecheck": "tsc --noEmit",
     "start": "webpack serve --env port=3000",
     "build": "webpack  --env mode=production",
     "test": "jest --config ./config/jest/jest.config.ts",
