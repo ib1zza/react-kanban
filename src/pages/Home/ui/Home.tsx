@@ -1,54 +1,29 @@
 import React, {
     Suspense,
     memo,
-    useEffect,
 } from 'react';
-import { BoardPreview, mapBoardFromServer } from 'entities/Board';
-import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider';
-import { subscribeToUserBoards } from 'pages/Home/model/services/subscribeToUserBoards';
-import { getBoardsRt } from 'pages/Home/model/services/getBoardsRt';
+import { BoardPreview } from 'entities/Board';
 import { motion } from 'framer-motion';
 import BoardPreviewSkeleton from 'entities/Board/ui/BoardPreviewSkeleton';
 import { useTranslation } from 'react-i18next';
 import ModalCreateBoard from 'features/boards/ui/ModalCreateBoard/ModalCreateBoard';
 import ModalLinkBoard from 'features/boards/ui/ModalLinkBoard/ModalLinkBoard';
-import { homeActions } from '../model/slice/HomeSlice';
-import { getHomeBoards } from '../model/selectors/getHomeBoards';
+import { useLogic } from 'pages/Home/hooks/useLogic';
 import s from './Home.module.scss';
 import HomeHeader from './HomeHeader';
 
-const Home = () => {
-    const { user } = useAppSelector((state) => state.userInfo);
-    const boards = useAppSelector(getHomeBoards);
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        if (!user?.uid) return;
-        const unsub = subscribeToUserBoards(
-            user.uid,
-            (data) => {
-                if (data) {
-                    getBoardsRt(Object.keys(data)).then((res) => {
-                        if (res) {
-                            dispatch(homeActions.addBoards(res.map(mapBoardFromServer)));
-                        }
-                    });
-                }
-            },
-        );
-        return () => {
-            unsub();
-        };
-    }, [dispatch, user?.uid]);
+const Loader = (
+    <div className={s.blocks__container}>
+        {[1, 2, 3].map((el) => (
+            <BoardPreviewSkeleton
+                key={`skeleton${el}`}
+            />
+        ))}
+    </div>
+);
 
-    const Loader = (
-        <div className={s.blocks__container}>
-            {[1, 2, 3].map((el) => (
-                <BoardPreviewSkeleton
-                    key={`skeleton${el}`}
-                />
-            ))}
-        </div>
-    );
+const Home = () => {
+    const { user, boards } = useLogic();
 
     const { t } = useTranslation();
 
@@ -58,7 +33,6 @@ const Home = () => {
             {!user?.uid ? Loader : (
                 <>
                     <Suspense fallback={Loader}>
-
                         <ModalCreateBoard />
                         <ModalLinkBoard />
                         {
@@ -90,13 +64,10 @@ const Home = () => {
                                     </div>
                                 )
                         }
-
                     </Suspense>
                 </>
             )}
-
         </div>
-
     );
 };
 
